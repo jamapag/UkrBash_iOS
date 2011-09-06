@@ -1,0 +1,286 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2DB0FAB21416C8CF00EFD6BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */; };
+		2DB0FAB41416C8CF00EFD6BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */; };
+		2DB0FAB61416C8CF00EFD6BC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB51416C8CF00EFD6BC /* CoreGraphics.framework */; };
+		2DB0FAB81416C8CF00EFD6BC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB71416C8CF00EFD6BC /* CoreData.framework */; };
+		2DB0FABE1416C8CF00EFD6BC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DB0FABC1416C8CF00EFD6BC /* InfoPlist.strings */; };
+		2DB0FAC11416C8CF00EFD6BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB0FAC01416C8CF00EFD6BC /* main.m */; };
+		2DB0FAC41416C8CF00EFD6BC /* UkrBashAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB0FAC31416C8CF00EFD6BC /* UkrBashAppDelegate.m */; };
+		2DB0FAC71416C8CF00EFD6BC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB0FAC51416C8CF00EFD6BC /* MainWindow.xib */; };
+		2DB0FACA1416C8CF00EFD6BC /* UkrBash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DB0FAC81416C8CF00EFD6BC /* UkrBash.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2DB0FAAD1416C8CF00EFD6BC /* UkrBash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UkrBash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2DB0FAB51416C8CF00EFD6BC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2DB0FAB71416C8CF00EFD6BC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2DB0FABB1416C8CF00EFD6BC /* UkrBash-Info.plist */ = {isa = PBXFileReference; path = "UkrBash-Info.plist"; sourceTree = "<group>"; };
+		2DB0FABD1416C8CF00EFD6BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2DB0FABF1416C8CF00EFD6BC /* UkrBash-Prefix.pch */ = {isa = PBXFileReference; path = "UkrBash-Prefix.pch"; sourceTree = "<group>"; };
+		2DB0FAC01416C8CF00EFD6BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2DB0FAC21416C8CF00EFD6BC /* UkrBashAppDelegate.h */ = {isa = PBXFileReference; path = UkrBashAppDelegate.h; sourceTree = "<group>"; };
+		2DB0FAC31416C8CF00EFD6BC /* UkrBashAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkrBashAppDelegate.m; sourceTree = "<group>"; };
+		2DB0FAC61416C8CF00EFD6BC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		2DB0FAC91416C8CF00EFD6BC /* UkrBash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UkrBash.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2DB0FAAA1416C8CF00EFD6BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DB0FAB21416C8CF00EFD6BC /* UIKit.framework in Frameworks */,
+				2DB0FAB41416C8CF00EFD6BC /* Foundation.framework in Frameworks */,
+				2DB0FAB61416C8CF00EFD6BC /* CoreGraphics.framework in Frameworks */,
+				2DB0FAB81416C8CF00EFD6BC /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2DB0FAA21416C8CF00EFD6BC = {
+			isa = PBXGroup;
+			children = (
+				2DB0FAB91416C8CF00EFD6BC /* UkrBash */,
+				2DB0FAB01416C8CF00EFD6BC /* Frameworks */,
+				2DB0FAAE1416C8CF00EFD6BC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2DB0FAAE1416C8CF00EFD6BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2DB0FAAD1416C8CF00EFD6BC /* UkrBash.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2DB0FAB01416C8CF00EFD6BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */,
+				2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */,
+				2DB0FAB51416C8CF00EFD6BC /* CoreGraphics.framework */,
+				2DB0FAB71416C8CF00EFD6BC /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2DB0FAB91416C8CF00EFD6BC /* UkrBash */ = {
+			isa = PBXGroup;
+			children = (
+				2DB0FAC21416C8CF00EFD6BC /* UkrBashAppDelegate.h */,
+				2DB0FAC31416C8CF00EFD6BC /* UkrBashAppDelegate.m */,
+				2DB0FAC51416C8CF00EFD6BC /* MainWindow.xib */,
+				2DB0FAC81416C8CF00EFD6BC /* UkrBash.xcdatamodeld */,
+				2DB0FABA1416C8CF00EFD6BC /* Supporting Files */,
+			);
+			path = UkrBash;
+			sourceTree = "<group>";
+		};
+		2DB0FABA1416C8CF00EFD6BC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2DB0FABB1416C8CF00EFD6BC /* UkrBash-Info.plist */,
+				2DB0FABC1416C8CF00EFD6BC /* InfoPlist.strings */,
+				2DB0FABF1416C8CF00EFD6BC /* UkrBash-Prefix.pch */,
+				2DB0FAC01416C8CF00EFD6BC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2DB0FAAC1416C8CF00EFD6BC /* UkrBash */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2DB0FACD1416C8CF00EFD6BC /* Build configuration list for PBXNativeTarget "UkrBash" */;
+			buildPhases = (
+				2DB0FAA91416C8CF00EFD6BC /* Sources */,
+				2DB0FAAA1416C8CF00EFD6BC /* Frameworks */,
+				2DB0FAAB1416C8CF00EFD6BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UkrBash;
+			productName = UkrBash;
+			productReference = 2DB0FAAD1416C8CF00EFD6BC /* UkrBash.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2DB0FAA41416C8CF00EFD6BC /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 2DB0FAA71416C8CF00EFD6BC /* Build configuration list for PBXProject "UkrBash" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2DB0FAA21416C8CF00EFD6BC;
+			productRefGroup = 2DB0FAAE1416C8CF00EFD6BC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2DB0FAAC1416C8CF00EFD6BC /* UkrBash */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2DB0FAAB1416C8CF00EFD6BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DB0FABE1416C8CF00EFD6BC /* InfoPlist.strings in Resources */,
+				2DB0FAC71416C8CF00EFD6BC /* MainWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2DB0FAA91416C8CF00EFD6BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DB0FAC11416C8CF00EFD6BC /* main.m in Sources */,
+				2DB0FAC41416C8CF00EFD6BC /* UkrBashAppDelegate.m in Sources */,
+				2DB0FACA1416C8CF00EFD6BC /* UkrBash.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2DB0FABC1416C8CF00EFD6BC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2DB0FABD1416C8CF00EFD6BC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2DB0FAC51416C8CF00EFD6BC /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2DB0FAC61416C8CF00EFD6BC /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2DB0FACB1416C8CF00EFD6BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2DB0FACC1416C8CF00EFD6BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		2DB0FACE1416C8CF00EFD6BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
+				INFOPLIST_FILE = "UkrBash/UkrBash-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2DB0FACF1416C8CF00EFD6BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
+				INFOPLIST_FILE = "UkrBash/UkrBash-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2DB0FAA71416C8CF00EFD6BC /* Build configuration list for PBXProject "UkrBash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2DB0FACB1416C8CF00EFD6BC /* Debug */,
+				2DB0FACC1416C8CF00EFD6BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2DB0FACD1416C8CF00EFD6BC /* Build configuration list for PBXNativeTarget "UkrBash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2DB0FACE1416C8CF00EFD6BC /* Debug */,
+				2DB0FACF1416C8CF00EFD6BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2DB0FAC81416C8CF00EFD6BC /* UkrBash.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2DB0FAC91416C8CF00EFD6BC /* UkrBash.xcdatamodel */,
+			);
+			currentVersion = 2DB0FAC91416C8CF00EFD6BC /* UkrBash.xcdatamodel */;
+			path = UkrBash.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 2DB0FAA41416C8CF00EFD6BC /* Project object */;
+}
