@@ -24,11 +24,11 @@
 		2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2DB0FAB51416C8CF00EFD6BC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2DB0FAB71416C8CF00EFD6BC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		2DB0FABB1416C8CF00EFD6BC /* UkrBash-Info.plist */ = {isa = PBXFileReference; path = "UkrBash-Info.plist"; sourceTree = "<group>"; };
+		2DB0FABB1416C8CF00EFD6BC /* UkrBash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UkrBash-Info.plist"; sourceTree = "<group>"; };
 		2DB0FABD1416C8CF00EFD6BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2DB0FABF1416C8CF00EFD6BC /* UkrBash-Prefix.pch */ = {isa = PBXFileReference; path = "UkrBash-Prefix.pch"; sourceTree = "<group>"; };
+		2DB0FABF1416C8CF00EFD6BC /* UkrBash-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UkrBash-Prefix.pch"; sourceTree = "<group>"; };
 		2DB0FAC01416C8CF00EFD6BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2DB0FAC21416C8CF00EFD6BC /* UkrBashAppDelegate.h */ = {isa = PBXFileReference; path = UkrBashAppDelegate.h; sourceTree = "<group>"; };
+		2DB0FAC21416C8CF00EFD6BC /* UkrBashAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkrBashAppDelegate.h; sourceTree = "<group>"; };
 		2DB0FAC31416C8CF00EFD6BC /* UkrBashAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkrBashAppDelegate.m; sourceTree = "<group>"; };
 		2DB0FAC61416C8CF00EFD6BC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		2DB0FAC91416C8CF00EFD6BC /* UkrBash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UkrBash.xcdatamodel; sourceTree = "<group>"; };
