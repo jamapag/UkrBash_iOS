@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D144DDA1419073B009E1DBA /* UBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D144DD91419073B009E1DBA /* UBRequest.m */; };
 		2DB0FAB21416C8CF00EFD6BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */; };
 		2DB0FAB41416C8CF00EFD6BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */; };
 		2DB0FAB61416C8CF00EFD6BC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB51416C8CF00EFD6BC /* CoreGraphics.framework */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D144DD81419073B009E1DBA /* UBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRequest.h; sourceTree = "<group>"; };
+		2D144DD91419073B009E1DBA /* UBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRequest.m; sourceTree = "<group>"; };
 		2DB0FAAD1416C8CF00EFD6BC /* UkrBash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UkrBash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -75,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D144DD71419071D009E1DBA /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				2D144DD81419073B009E1DBA /* UBRequest.h */,
+				2D144DD91419073B009E1DBA /* UBRequest.m */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
 		2DB0FAA21416C8CF00EFD6BC = {
 			isa = PBXGroup;
 			children = (
@@ -106,8 +118,9 @@
 		2DB0FAB91416C8CF00EFD6BC /* UkrBash */ = {
 			isa = PBXGroup;
 			children = (
+				2D144DD71419071D009E1DBA /* Requests */,
 				2DB323F11417C9C1001440B7 /* Controllers */,
-				2DB323DE1417B19A001440B7 /* Parser */,
+				2DB323DE1417B19A001440B7 /* Parsers */,
 				2DB323D91417A1BD001440B7 /* GDataXML */,
 				2DB0FAC21416C8CF00EFD6BC /* UkrBashAppDelegate.h */,
 				2DB0FAC31416C8CF00EFD6BC /* UkrBashAppDelegate.m */,
@@ -138,7 +151,7 @@
 			name = GDataXML;
 			sourceTree = "<group>";
 		};
-		2DB323DE1417B19A001440B7 /* Parser */ = {
+		2DB323DE1417B19A001440B7 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
 				2DB323DF1417BA02001440B7 /* UBParser.h */,
@@ -154,7 +167,7 @@
 				2DB323EE1417BC70001440B7 /* UBErrorsParser.h */,
 				2DB323EF1417BC70001440B7 /* UBErrorsParser.m */,
 			);
-			name = Parser;
+			name = Parsers;
 			sourceTree = "<group>";
 		};
 		2DB323F11417C9C1001440B7 /* Controllers */ = {
@@ -238,6 +251,7 @@
 				2DB323ED1417BC4E001440B7 /* UBSiteGetTagsParser.m in Sources */,
 				2DB323F01417BC71001440B7 /* UBErrorsParser.m in Sources */,
 				2DB323FD1417CAA4001440B7 /* UBMainMenuController.m in Sources */,
+				2D144DDA1419073B009E1DBA /* UBRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
