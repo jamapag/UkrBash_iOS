@@ -17,6 +17,14 @@
 		2DB0FAC71416C8CF00EFD6BC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB0FAC51416C8CF00EFD6BC /* MainWindow.xib */; };
 		2DB0FACA1416C8CF00EFD6BC /* UkrBash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DB0FAC81416C8CF00EFD6BC /* UkrBash.xcdatamodeld */; };
 		2DB323DD1417A1FA001440B7 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323DC1417A1FA001440B7 /* GDataXMLNode.m */; };
+		2DB323E11417BA02001440B7 /* UBParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323E01417BA02001440B7 /* UBParser.m */; };
+		2DB323E41417BBAD001440B7 /* UBQuotesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323E31417BBAD001440B7 /* UBQuotesParser.m */; };
+		2DB323E71417BBEC001440B7 /* UBPicturesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323E61417BBEC001440B7 /* UBPicturesParser.m */; };
+		2DB323EA1417BC1E001440B7 /* UBSiteGetInfoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323E91417BC1E001440B7 /* UBSiteGetInfoParser.m */; };
+		2DB323ED1417BC4E001440B7 /* UBSiteGetTagsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323EC1417BC4E001440B7 /* UBSiteGetTagsParser.m */; };
+		2DB323F01417BC71001440B7 /* UBErrorsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323EF1417BC70001440B7 /* UBErrorsParser.m */; };
+		2DB323FD1417CAA4001440B7 /* UBMainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323FB1417CAA4001440B7 /* UBMainMenuController.m */; };
+		2DB323FE1417CAA4001440B7 /* UBMainMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB323FC1417CAA4001440B7 /* UBMainMenuController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +43,21 @@
 		2DB0FAC91416C8CF00EFD6BC /* UkrBash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UkrBash.xcdatamodel; sourceTree = "<group>"; };
 		2DB323DB1417A1FA001440B7 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		2DB323DC1417A1FA001440B7 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		2DB323DF1417BA02001440B7 /* UBParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBParser.h; sourceTree = "<group>"; };
+		2DB323E01417BA02001440B7 /* UBParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBParser.m; sourceTree = "<group>"; };
+		2DB323E21417BBAD001440B7 /* UBQuotesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesParser.h; sourceTree = "<group>"; };
+		2DB323E31417BBAD001440B7 /* UBQuotesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesParser.m; sourceTree = "<group>"; };
+		2DB323E51417BBEC001440B7 /* UBPicturesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesParser.h; sourceTree = "<group>"; };
+		2DB323E61417BBEC001440B7 /* UBPicturesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesParser.m; sourceTree = "<group>"; };
+		2DB323E81417BC1E001440B7 /* UBSiteGetInfoParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBSiteGetInfoParser.h; sourceTree = "<group>"; };
+		2DB323E91417BC1E001440B7 /* UBSiteGetInfoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSiteGetInfoParser.m; sourceTree = "<group>"; };
+		2DB323EB1417BC4E001440B7 /* UBSiteGetTagsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBSiteGetTagsParser.h; sourceTree = "<group>"; };
+		2DB323EC1417BC4E001440B7 /* UBSiteGetTagsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSiteGetTagsParser.m; sourceTree = "<group>"; };
+		2DB323EE1417BC70001440B7 /* UBErrorsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBErrorsParser.h; sourceTree = "<group>"; };
+		2DB323EF1417BC70001440B7 /* UBErrorsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBErrorsParser.m; sourceTree = "<group>"; };
+		2DB323FA1417CAA4001440B7 /* UBMainMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMainMenuController.h; sourceTree = "<group>"; };
+		2DB323FB1417CAA4001440B7 /* UBMainMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMainMenuController.m; sourceTree = "<group>"; };
+		2DB323FC1417CAA4001440B7 /* UBMainMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UBMainMenuController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +106,8 @@
 		2DB0FAB91416C8CF00EFD6BC /* UkrBash */ = {
 			isa = PBXGroup;
 			children = (
+				2DB323F11417C9C1001440B7 /* Controllers */,
+				2DB323DE1417B19A001440B7 /* Parser */,
 				2DB323D91417A1BD001440B7 /* GDataXML */,
 				2DB0FAC21416C8CF00EFD6BC /* UkrBashAppDelegate.h */,
 				2DB0FAC31416C8CF00EFD6BC /* UkrBashAppDelegate.m */,
@@ -111,6 +136,35 @@
 				2DB323DC1417A1FA001440B7 /* GDataXMLNode.m */,
 			);
 			name = GDataXML;
+			sourceTree = "<group>";
+		};
+		2DB323DE1417B19A001440B7 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				2DB323DF1417BA02001440B7 /* UBParser.h */,
+				2DB323E01417BA02001440B7 /* UBParser.m */,
+				2DB323E21417BBAD001440B7 /* UBQuotesParser.h */,
+				2DB323E31417BBAD001440B7 /* UBQuotesParser.m */,
+				2DB323E51417BBEC001440B7 /* UBPicturesParser.h */,
+				2DB323E61417BBEC001440B7 /* UBPicturesParser.m */,
+				2DB323E81417BC1E001440B7 /* UBSiteGetInfoParser.h */,
+				2DB323E91417BC1E001440B7 /* UBSiteGetInfoParser.m */,
+				2DB323EB1417BC4E001440B7 /* UBSiteGetTagsParser.h */,
+				2DB323EC1417BC4E001440B7 /* UBSiteGetTagsParser.m */,
+				2DB323EE1417BC70001440B7 /* UBErrorsParser.h */,
+				2DB323EF1417BC70001440B7 /* UBErrorsParser.m */,
+			);
+			name = Parser;
+			sourceTree = "<group>";
+		};
+		2DB323F11417C9C1001440B7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2DB323FA1417CAA4001440B7 /* UBMainMenuController.h */,
+				2DB323FB1417CAA4001440B7 /* UBMainMenuController.m */,
+				2DB323FC1417CAA4001440B7 /* UBMainMenuController.xib */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +216,7 @@
 			files = (
 				2DB0FABE1416C8CF00EFD6BC /* InfoPlist.strings in Resources */,
 				2DB0FAC71416C8CF00EFD6BC /* MainWindow.xib in Resources */,
+				2DB323FE1417CAA4001440B7 /* UBMainMenuController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +231,13 @@
 				2DB0FAC41416C8CF00EFD6BC /* UkrBashAppDelegate.m in Sources */,
 				2DB0FACA1416C8CF00EFD6BC /* UkrBash.xcdatamodeld in Sources */,
 				2DB323DD1417A1FA001440B7 /* GDataXMLNode.m in Sources */,
+				2DB323E11417BA02001440B7 /* UBParser.m in Sources */,
+				2DB323E41417BBAD001440B7 /* UBQuotesParser.m in Sources */,
+				2DB323E71417BBEC001440B7 /* UBPicturesParser.m in Sources */,
+				2DB323EA1417BC1E001440B7 /* UBSiteGetInfoParser.m in Sources */,
+				2DB323ED1417BC4E001440B7 /* UBSiteGetTagsParser.m in Sources */,
+				2DB323F01417BC71001440B7 /* UBErrorsParser.m in Sources */,
+				2DB323FD1417CAA4001440B7 /* UBMainMenuController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
