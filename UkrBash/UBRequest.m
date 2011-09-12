@@ -47,6 +47,21 @@ static NSString *kWithoutTag = @"withoutTag";
 static NSString *kQuery = @"query";
 static NSString *kStats = @"stats";
 
+- (void)start {
+    connection = [[NSURLConnection alloc] initWithRequest:[self URLRequest] delegate:self];
+    [connection start];
+}
+
+- (void)cancel {
+    [connection cancel];
+    [connection release];
+    connection = nil;
+}
+
+- (NSURLRequest*)URLRequest {
+    return nil;
+}
+
 
 
 

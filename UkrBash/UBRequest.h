@@ -10,7 +10,12 @@
 
 
 @interface UBRequest : NSObject {
+    NSURLConnection *connection;
     
 }
+
+- (NSURLRequest*)URLRequest;
+- (void)start;
+- (void)cancel;
 
 @end
