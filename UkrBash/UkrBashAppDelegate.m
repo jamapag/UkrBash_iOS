@@ -7,6 +7,7 @@
 //
 
 #import "UkrBashAppDelegate.h"
+#import "UBMainMenuController.h"
 
 @implementation UkrBashAppDelegate
 
@@ -21,8 +22,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
     [self.window makeKeyAndVisible];
+
+    UBMainMenuController *mainMenu = [[UBMainMenuController alloc] initWithNibName:@"UBMainMenuController" bundle:nil];
+    UINavigationController *mainNavigationContorller = [[UINavigationController alloc] initWithRootViewController:mainMenu];
+    
+    [self.window addSubview:mainNavigationContorller.view];
+    
+    [mainNavigationContorller release];
+    [mainMenu release];
+
     return YES;
 }
 
