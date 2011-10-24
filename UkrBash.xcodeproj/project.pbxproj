@@ -26,6 +26,7 @@
 		2DB323F01417BC71001440B7 /* UBErrorsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323EF1417BC70001440B7 /* UBErrorsParser.m */; };
 		2DB323FD1417CAA4001440B7 /* UBMainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323FB1417CAA4001440B7 /* UBMainMenuController.m */; };
 		2DB323FE1417CAA4001440B7 /* UBMainMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB323FC1417CAA4001440B7 /* UBMainMenuController.xib */; };
+		2DF27D9E1455D2670011168F /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF27D9D1455D2670011168F /* libxml2.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		2DB323FA1417CAA4001440B7 /* UBMainMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMainMenuController.h; sourceTree = "<group>"; };
 		2DB323FB1417CAA4001440B7 /* UBMainMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMainMenuController.m; sourceTree = "<group>"; };
 		2DB323FC1417CAA4001440B7 /* UBMainMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UBMainMenuController.xib; sourceTree = "<group>"; };
+		2DF27D9D1455D2670011168F /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DF27D9E1455D2670011168F /* libxml2.dylib in Frameworks */,
 				2DB0FAB21416C8CF00EFD6BC /* UIKit.framework in Frameworks */,
 				2DB0FAB41416C8CF00EFD6BC /* Foundation.framework in Frameworks */,
 				2DB0FAB61416C8CF00EFD6BC /* CoreGraphics.framework in Frameworks */,
@@ -107,6 +110,7 @@
 		2DB0FAB01416C8CF00EFD6BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2DF27D9D1455D2670011168F /* libxml2.dylib */,
 				2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */,
 				2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */,
 				2DB0FAB51416C8CF00EFD6BC /* CoreGraphics.framework */,
@@ -289,6 +293,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				SDKROOT = iphoneos;
 			};
@@ -303,6 +308,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
