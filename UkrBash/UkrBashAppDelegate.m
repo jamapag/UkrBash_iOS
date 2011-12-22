@@ -7,7 +7,7 @@
 //
 
 #import "UkrBashAppDelegate.h"
-#import "UBMainMenuController.h"
+#import "UBQuotesContainerController.h"
 
 @implementation UkrBashAppDelegate
 
@@ -23,15 +23,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self.window makeKeyAndVisible];
-
-    UBMainMenuController *mainMenu = [[UBMainMenuController alloc] initWithNibName:@"UBMainMenuController" bundle:nil];
-    UINavigationController *mainNavigationContorller = [[UINavigationController alloc] initWithRootViewController:mainMenu];
     
-    [self.window addSubview:mainNavigationContorller.view];
+    UBQuotesContainerController *containerController = [[UBQuotesContainerController alloc] init];
+//    UINavigationController *mainNavigationContorller = [[UINavigationController alloc] initWithRootViewController:mainMenu];
     
-    [mainNavigationContorller release];
-    [mainMenu release];
-
+    [self.window addSubview:containerController.view];
+    // TODO: fix memory leak
+//    [containerController release];
+    
     return YES;
 }
 

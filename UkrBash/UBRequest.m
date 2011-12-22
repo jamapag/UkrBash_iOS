@@ -7,49 +7,56 @@
 //
 
 #import "UBRequest.h"
-
+#import "UBQuotesParser.h"
 
 @implementation UBRequest
 
+@synthesize delegate;
+@synthesize method;
+
+// Sample http://api.ukrbash.org/1/quotes.getPublished.xml?client=apiKey
 // Base API Url
-static NSString *kAPIBaseURL = @"http://api.ukrbash.org/1/";
+const NSString *kAPIBaseURL = @"http://api.ukrbash.org/1/";
 
 // Methods
-static NSString *kQuotes_getPublished = @"quotes.getPublished";
-static NSString *kQuotes_getUpcoming = @"quotes.getUpcoming";
-static NSString *kQuotes_getTheBest = @"quotes.getTheBest";
-static NSString *kQuotes_getRandom = @"quotes.getRandom";
+NSString *const kQuotes_getPublished = @"quotes.getPublished";
+NSString *const kQuotes_getUpcoming = @"quotes.getUpcoming";
+NSString *const kQuotes_getTheBest = @"quotes.getTheBest";
+NSString *const kQuotes_getRandom = @"quotes.getRandom";
 
-static NSString *kPictures_getPublished = @"pictures.getPublished";
-static NSString *kPictures_getUpcoming = @"pictures.getUpcoming";
-static NSString *kPictures_getTheBest = @"pictures.getTheBest";
-static NSString *kPictures_getRandom = @"pictures.getRandom";
+NSString *const kPictures_getPublished = @"pictures.getPublished";
+NSString *const kPictures_getUpcoming = @"pictures.getUpcoming";
+NSString *const kPictures_getTheBest = @"pictures.getTheBest";
+NSString *const kPictures_getRandom = @"pictures.getRandom";
 
-static NSString *kSite_getInfo = @"site.getInfo";
-static NSString *kSite_getTags = @"site.getTags";
-static NSString *kSite_getSearch = @"site.getSearch";
+NSString *const kSite_getInfo = @"site.getInfo";
+NSString *const kSite_getTags = @"site.getTags";
+NSString *const kSite_getSearch = @"site.getSearch";
 
 // Format
-static NSString *kFormat = @".xml";
+NSString *const kFormat = @".xml";
 
 // Params
-static NSString *kClient = @"client";
-static NSString *kStart = @"start";
-static NSString *kLimit = @"limit";
-static NSString *kAddBefore = @"addBefore";
-static NSString *kAddAfter = @"addAfter";
-static NSString *kPubBefore = @"pubBefore";
-static NSString *kPubAfter = @"pubAfter";
-static NSString *kWithAuthor = @"withAuthor";
-static NSString *kWithoutAuthor = @"withoutAuthor";
-static NSString *kWithTag = @"withTag";
-static NSString *kWithoutTag = @"withoutTag";
-static NSString *kQuery = @"query";
-static NSString *kStats = @"stats";
+NSString *const kClient = @"client";
+NSString *const kStart = @"start";
+NSString *const kLimit = @"limit";
+NSString *const kAddBefore = @"addBefore";
+NSString *const kAddAfter = @"addAfter";
+NSString *const kPubBefore = @"pubBefore";
+NSString *const kPubAfter = @"pubAfter";
+NSString *const kWithAuthor = @"withAuthor";
+NSString *const kWithoutAuthor = @"withoutAuthor";
+NSString *const kWithTag = @"withTag";
+NSString *const kWithoutTag = @"withoutTag";
+NSString *const kQuery = @"query";
+NSString *const kStats = @"stats";
 
-- (void)start {
-    connection = [[NSURLConnection alloc] initWithRequest:[self URLRequest] delegate:self];
-    [connection start];
+- (void)dealloc {
+    [loadedData release];
+    delegate = nil;
+    [connection release];
+    [method release];
+    [super dealloc];
 }
 
 - (void)cancel {
@@ -58,11 +65,32 @@ static NSString *kStats = @"stats";
     connection = nil;
 }
 
-- (NSURLRequest*)URLRequest {
-    return nil;
+#pragma mark -
+
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+//    [self.delegate request:self didFailWithError:error];
 }
 
 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+//    NSString *dataString = [[NSString alloc] initWithData:loadedData encoding:NSUTF8StringEncoding];
+//    NSLog(@"DATA: %@", dataString);
+    return;
+}
 
 
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [loadedData appendData:data];
+}
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
+//    responseHTTPStatusCode = [response statusCode];
+    if (!loadedData) {
+        loadedData = [[NSMutableData alloc] init];
+    } else {
+        [loadedData setLength:0];
+    }
+}
 @end

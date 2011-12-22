@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-
-@interface UBParser : NSObject {
+@interface UBParser : NSObject
+{
     
 }
-
 @end

@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UBParser.h"
 
-
-@interface UBQuotesParser : NSObject {
+@interface UBQuotesParser : UBParser {
     
 }
+
+- (NSArray *)parseQuotesWithData:(NSData *)xmlData;
 
 @end
