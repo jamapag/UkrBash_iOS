@@ -12,10 +12,16 @@
 
 @implementation UBQuotesRequest
 
-- (void)startWithNSURLRequest:(NSURLRequest *)request
+- (NSURLRequest *)createPublishedQuotesRequestWithStart:(NSInteger)start andLimit:(NSInteger)limit
 {
-    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
+    method = [[NSString alloc] initWithString:kQuotes_getPublished];
+    NSMutableURLRequest *request = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@", kAPIBaseURL, kQuotes_getPublished, kFormat];
+    NSString *params = [NSString stringWithFormat:@"?%@=%@&%@=%d&%@=%d", kClient, kApiKey, kStart, start, kLimit, limit];
+    urlString = [urlString stringByAppendingString:params];
+    request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    return [request autorelease];
 }
 
 - (NSURLRequest *)createPublishedQuotesRequest
@@ -29,13 +35,6 @@
     request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
 
     return [request autorelease];
-}
-
-#pragma -
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(request:didFinishWithData:)]) {
-        [delegate request:self didFinishWithData:loadedData];
-    }
 }
 
 @end

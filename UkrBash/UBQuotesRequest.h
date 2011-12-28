@@ -10,7 +10,8 @@
 
 @interface UBQuotesRequest : UBRequest
 
-- (void)startWithNSURLRequest:(NSURLRequest *)request;
+
+- (NSURLRequest *)createPublishedQuotesRequestWithStart:(NSInteger)start andLimit:(NSInteger)limit;
 - (NSURLRequest *)createPublishedQuotesRequest;
 
 @end

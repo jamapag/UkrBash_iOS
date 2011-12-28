@@ -11,6 +11,7 @@
 		2D57274C1455F5EE00A6DAE4 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274B1455F5EE00A6DAE4 /* Model.m */; };
 		2D57274F1456017900A6DAE4 /* UBQuotesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274E1456017900A6DAE4 /* UBQuotesRequest.m */; };
 		2D9F6E0E14A158C40012D690 /* UBQuotesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */; };
+		2DADD34714A3FA4A00808AA6 /* UBQuoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */; };
 		2DB0FAB21416C8CF00EFD6BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */; };
 		2DB0FAB41416C8CF00EFD6BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */; };
 		2DB0FAB61416C8CF00EFD6BC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB51416C8CF00EFD6BC /* CoreGraphics.framework */; };
@@ -40,6 +41,8 @@
 		2D57274E1456017900A6DAE4 /* UBQuotesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesRequest.m; sourceTree = "<group>"; };
 		2D9F6E0C14A158C40012D690 /* UBQuotesContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesContainerController.h; sourceTree = "<group>"; };
 		2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesContainerController.m; sourceTree = "<group>"; };
+		2DADD34514A3FA4A00808AA6 /* UBQuoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuoteCell.h; sourceTree = "<group>"; };
+		2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuoteCell.m; sourceTree = "<group>"; };
 		2DB0FAAD1416C8CF00EFD6BC /* UkrBash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UkrBash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -103,6 +106,8 @@
 		2DADD34314A3F6AF00808AA6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2DADD34514A3FA4A00808AA6 /* UBQuoteCell.h */,
+				2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				2D57274F1456017900A6DAE4 /* UBQuotesRequest.m in Sources */,
 				2D9F6E0E14A158C40012D690 /* UBQuotesContainerController.m in Sources */,
 				2DDED39A14A3649D003B315D /* UBQuote.m in Sources */,
+				2DADD34714A3FA4A00808AA6 /* UBQuoteCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,8 @@
 {
     NSArray *currentQuotes;
     UITableView *publishedQuotesTableView;
+    
+    BOOL loading;
 }
 
 @end

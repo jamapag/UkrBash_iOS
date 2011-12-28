@@ -47,6 +47,7 @@ static Model *sharedModel = nil;
 
 - (void)loadPublishedQuotes
 {
+    NSLog(@"Load Published quotes");
     UBQuotesRequest *request = [[UBQuotesRequest alloc] init];
     request.delegate = self;
     [request startWithNSURLRequest:[request createPublishedQuotesRequest]];
@@ -54,10 +55,21 @@ static Model *sharedModel = nil;
     [request release];
 }
 
+- (void)loadMorePublishedQuotes
+{
+    NSLog(@"Load more published quotes");
+    UBQuotesRequest *request = [[UBQuotesRequest alloc] init];
+    request.delegate = self;
+    [request startWithNSURLRequest:[request createPublishedQuotesRequestWithStart:[publishedQuotes count] andLimit:25]];
+    [requests addObject:request];
+    [request release];
+}
+
 #pragma mark - UBQuotesRequestDelegate
 - (void)request:(UBRequest *)request didFinishWithData:(NSData *)data
 {
-    // if request is quotes request && request type == published quotes -> then 
+    NSLog(@"Did finish with data");
+    // TODO: test method. Need to refactor.
     UBQuotesParser *parser = [[UBQuotesParser alloc] init];
     NSArray *array = [parser parseQuotesWithData:data];
     if ([request.method isEqualToString:kQuotes_getPublished]) {
@@ -66,11 +78,11 @@ static Model *sharedModel = nil;
     [parser release];
     [requests removeObject:request];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPublishedQuotesUpdated object:nil];
-    // TODO: send notification about new quotes
 }
 
-- (void)request:(UBRequest *)request didFinishWithError:(NSError *)error
+- (void)request:(UBRequest *)request didFailWithError:(NSError *)error
 {
+    NSLog(@"Fail with error: %@", [error localizedDescription]);
 }
 
 @end

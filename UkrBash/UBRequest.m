@@ -59,6 +59,12 @@ NSString *const kStats = @"stats";
     [super dealloc];
 }
 
+- (void)startWithNSURLRequest:(NSURLRequest *)request
+{
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
+}
+
 - (void)cancel {
     [connection cancel];
     [connection release];
@@ -69,11 +75,15 @@ NSString *const kStats = @"stats";
 
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-//    [self.delegate request:self didFailWithError:error];
+    [self.delegate request:self didFailWithError:error];
 }
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"Connection did finish loading");
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(request:didFinishWithData:)]) {
+        [delegate request:self didFinishWithData:loadedData];
+    }
 //    NSString *dataString = [[NSString alloc] initWithData:loadedData encoding:NSUTF8StringEncoding];
 //    NSLog(@"DATA: %@", dataString);
     return;
@@ -81,12 +91,14 @@ NSString *const kStats = @"stats";
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    NSLog(@"Connection Did Receive data");
     [loadedData appendData:data];
 }
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
 //    responseHTTPStatusCode = [response statusCode];
+    NSLog(@"Connectin Did Receive response");
     if (!loadedData) {
         loadedData = [[NSMutableData alloc] init];
     } else {

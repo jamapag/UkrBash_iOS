@@ -12,7 +12,7 @@
 @protocol UBRequestDelegate <NSObject>
 
 - (void)request:(UBRequest *)request didFinishWithData:(NSData *)data;
-- (void)request:(UBRequest *)request didFinishWithError:(NSError *)error;
+- (void)request:(UBRequest *)request didFailWithError:(NSError *)error;
 
 @end
 
@@ -61,6 +61,7 @@ extern NSString *const kStats;
 @property (nonatomic, assign) id <UBRequestDelegate> delegate;
 @property (nonatomic, readonly) NSString *method;
 
+- (void)startWithNSURLRequest:(NSURLRequest *)request;
 - (void)cancel;
 
 @end

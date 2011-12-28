@@ -22,5 +22,6 @@ extern NSString *const kNotificationPublishedQuotesUpdated;
 
 + (Model *)sharedModel;
 - (void)loadPublishedQuotes;
+- (void)loadMorePublishedQuotes;
 
 @end
