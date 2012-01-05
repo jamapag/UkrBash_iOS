@@ -46,8 +46,8 @@
     
     currentQuotes = [[[Model sharedModel] publishedQuotes] retain];
     [[Model sharedModel] loadPublishedQuotes];
-//    self.view.backgroundColor = [UIColor underPageBackgroundColor];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor underPageBackgroundColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
     
     publishedQuotesTableView = [[UITableView alloc] initWithFrame:self.view.bounds];  
     publishedQuotesTableView.delegate = self;
@@ -85,16 +85,34 @@
 
 - (void)publishedQuotesUpdated:(NSNotificationCenter *)notification
 {
-    NSLog(@"Quotes updated");
     [publishedQuotesTableView reloadData];
     loading = NO;
+    [self hideFooter];
 }
 
 - (void)loadMoreQuotes
 {
-    // TODO: show loading inicator.
+    [self showFooter];
     loading = YES;
     [[Model sharedModel] loadMorePublishedQuotes];
+}
+
+- (void)showFooter
+{
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator.center = footerView.center;
+    [activityIndicator startAnimating];
+    [footerView addSubview:activityIndicator];
+    
+    publishedQuotesTableView.tableFooterView = footerView;
+    [footerView release];
+    [activityIndicator release];
+}
+
+- (void)hideFooter
+{
+    publishedQuotesTableView.tableFooterView = nil;
 }
 
 #pragma mark - UITableViewDatasource
@@ -121,9 +139,9 @@
     UBQuote *quote = (UBQuote *)[currentQuotes objectAtIndex:indexPath.row];
     cell.quoteTextLabel.text = quote.text;
     
-    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+//    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
     
-    CGSize size = [quote.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+//    CGSize size = [quote.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     
 //    cell.quoteTextLabel.frame = CGRectMake(CELL_CONTENT_MARGIN, CELL_CONTENT_MARGIN, CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), MAX(size.height, 44.0f));
 

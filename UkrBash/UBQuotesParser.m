@@ -33,7 +33,7 @@ static NSString *kName_Tags = @"tags";
     NSArray *items = [doc nodesForXPath:@"quotes" error:nil];
     GDataXMLElement *quotesElement = [items objectAtIndex:0];
     NSArray *quotesArray = [quotesElement elementsForName:kName_Quote];
-    NSLog(@"COunt: %d", [quotesArray count]);
+//    NSLog(@"Count: %d", [quotesArray count]);
     for (GDataXMLElement *quoteElement in quotesArray) {
         UBQuote *quote = [[UBQuote alloc] init];
         NSArray *ids = [quoteElement elementsForName:kName_Id];

@@ -80,7 +80,7 @@ NSString *const kStats = @"stats";
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"Connection did finish loading");
+//    NSLog(@"Connection did finish loading");
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(request:didFinishWithData:)]) {
         [delegate request:self didFinishWithData:loadedData];
     }
@@ -91,14 +91,14 @@ NSString *const kStats = @"stats";
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    NSLog(@"Connection Did Receive data");
+//    NSLog(@"Connection Did Receive data");
     [loadedData appendData:data];
 }
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
 //    responseHTTPStatusCode = [response statusCode];
-    NSLog(@"Connectin Did Receive response");
+//    NSLog(@"Connectin Did Receive response");
     if (!loadedData) {
         loadedData = [[NSMutableData alloc] init];
     } else {

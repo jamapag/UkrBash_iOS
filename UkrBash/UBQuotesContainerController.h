@@ -16,4 +16,7 @@
     BOOL loading;
 }
 
+- (void)showFooter;
+- (void)hideFooter;
+
 @end
