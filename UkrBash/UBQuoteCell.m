@@ -51,6 +51,8 @@
     self.contentView.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
     self.contentView.layer.shadowRadius = 3.0f;
     self.contentView.layer.masksToBounds = NO;
+    self.contentView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.contentView.layer.borderWidth = .5;
     
     CGSize size = self.contentView.bounds.size;
     CGFloat curlFactor = 7.0f;
