@@ -40,21 +40,21 @@
 - (void)layoutSubviews
 {
     CGRect rect = self.bounds;
-    rect.origin.x += 5;
+    rect.origin.x += 15;
     rect.origin.y += 5;
-    rect.size.width -= 10;
+    rect.size.width -= 20;
     rect.size.height -= 10;
     self.contentView.frame = rect;
     
     self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.contentView.layer.shadowOpacity = 0.7f;
-    self.contentView.layer.shadowOffset = CGSizeMake(0.0f, 4.0f);
-    self.contentView.layer.shadowRadius = 4.0f;
+    self.contentView.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
+    self.contentView.layer.shadowRadius = 3.0f;
     self.contentView.layer.masksToBounds = NO;
     
     CGSize size = self.contentView.bounds.size;
-    CGFloat curlFactor = 15.0f;
-    CGFloat shadowDepth = 4.0f;
+    CGFloat curlFactor = 7.0f;
+    CGFloat shadowDepth = 3.0f;
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(0.0f, 0.0f)];
     [path addLineToPoint:CGPointMake(size.width, 0.0f)];
