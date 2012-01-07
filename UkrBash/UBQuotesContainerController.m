@@ -35,6 +35,11 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)scrollToTopAction:(id)sender
+{
+    [publishedQuotesTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0. inSection:0.] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
 #pragma mark - View lifecycle
 
 
@@ -46,20 +51,31 @@
     
     currentQuotes = [[[Model sharedModel] publishedQuotes] retain];
     [[Model sharedModel] loadPublishedQuotes];
-    self.view.backgroundColor = [UIColor underPageBackgroundColor];
-//    self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height)];
+    backgroundImageView.image = [UIImage imageNamed:@"Default"];
+    backgroundImageView.contentMode = UIViewContentModeBottom;
+    [self.view addSubview:backgroundImageView];
+    [backgroundImageView release];
     
     publishedQuotesTableView = [[UITableView alloc] initWithFrame:self.view.bounds];  
     publishedQuotesTableView.delegate = self;
     publishedQuotesTableView.dataSource = self;
     publishedQuotesTableView.backgroundColor = [UIColor clearColor];
     publishedQuotesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [publishedQuotesTableView setContentInset:UIEdgeInsetsMake(50., 0., 0., 0.)];
     
     [self.view addSubview:publishedQuotesTableView];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(publishedQuotesUpdated:)
                                                  name:kNotificationPublishedQuotesUpdated
                                                object:nil];
+    
+    logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 5., 152., 39.)];
+    logoButton.center = CGPointMake(self.view.frame.size.width / 2., logoButton.center.y);
+    [logoButton addTarget:self action:@selector(scrollToTopAction:) forControlEvents:UIControlEventTouchUpInside];
+    [logoButton setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+    [self.view addSubview:logoButton];
 }
 
 /*
@@ -172,6 +188,18 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
+    CGFloat alpha = 1;
+    if (aScrollView.contentOffset.y < 0) {
+        if (abs(aScrollView.contentOffset.y) >= publishedQuotesTableView.contentInset.top) {
+            alpha = 1.;
+        } else {
+            alpha = 1. - (publishedQuotesTableView.contentInset.top + aScrollView.contentOffset.y) / 100;
+        }
+    } else {
+        alpha = .5;
+    }
+    logoButton.alpha = alpha;
+    
     CGPoint offset = aScrollView.contentOffset;
     CGRect bounds = aScrollView.bounds;
     CGSize size = aScrollView.contentSize;

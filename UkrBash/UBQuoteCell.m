@@ -17,7 +17,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        [self.contentView.layer setCornerRadius:5.f];
+        [self.contentView.layer setCornerRadius:4.f];
         self.contentView.backgroundColor = [UIColor whiteColor];
         // Initialization code
         quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(5., 5., self.contentView.frame.size.width - 10, self.contentView.frame.size.height - 10)];

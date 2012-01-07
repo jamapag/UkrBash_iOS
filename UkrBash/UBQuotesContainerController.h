@@ -12,6 +12,7 @@
 {
     NSArray *currentQuotes;
     UITableView *publishedQuotesTableView;
+    UIButton *logoButton;
     
     BOOL loading;
 }
