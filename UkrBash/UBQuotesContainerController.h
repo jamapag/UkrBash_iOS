@@ -13,6 +13,7 @@
     NSArray *currentQuotes;
     UITableView *publishedQuotesTableView;
     UIButton *logoButton;
+    UILabel *categoryLabel;
     
     BOOL loading;
 }

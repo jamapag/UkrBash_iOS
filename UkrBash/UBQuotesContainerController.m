@@ -35,9 +35,20 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - actions
+
 - (void)scrollToTopAction:(id)sender
 {
     [publishedQuotesTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0. inSection:0.] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+- (void)changeCategoryAction:(UIButton *)sender
+{
+    NSString *str = categoryLabel.text;
+    categoryLabel.text = sender.titleLabel.text;
+    [sender setTitle:str forState:UIControlStateNormal];
+    
+    // TODO: reload quotes here
 }
 
 #pragma mark - View lifecycle
@@ -63,7 +74,7 @@
     publishedQuotesTableView.dataSource = self;
     publishedQuotesTableView.backgroundColor = [UIColor clearColor];
     publishedQuotesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [publishedQuotesTableView setContentInset:UIEdgeInsetsMake(50., 0., 0., 0.)];
+    [publishedQuotesTableView setContentInset:UIEdgeInsetsMake(120., 0., 0., 0.)];
     
     [self.view addSubview:publishedQuotesTableView];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -76,6 +87,35 @@
     [logoButton addTarget:self action:@selector(scrollToTopAction:) forControlEvents:UIControlEventTouchUpInside];
     [logoButton setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
     [self.view addSubview:logoButton];
+    
+    NSArray *categories = [NSArray arrayWithObjects:@"Неопубліковане", @"Найкраще", @"Випадкове", @"Картинки", nil];
+    NSInteger index = 0;
+    for (NSString *categoryTitle in categories) {
+        CGFloat x = 15. + (index % 2) * (145. + 10.);
+        CGFloat y = logoButton.frame.origin.y + logoButton.frame.size.height - 15 + floor(index / 2) * 33;
+        UIButton *categoryButton = [[UIButton alloc] initWithFrame:CGRectMake(x, -y, 145., 28.)];
+        [categoryButton setTitle:categoryTitle forState:UIControlStateNormal];
+        UIImage *backgroundImage = [[UIImage imageNamed:@"category-button-bg"] stretchableImageWithLeftCapWidth:10. topCapHeight:0];
+        [categoryButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
+        [categoryButton addTarget:self action:@selector(changeCategoryAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        categoryButton.titleLabel.font = [UIFont fontWithName:@"TimesNewRomanPSMT" size:13.5];
+        [categoryButton setTitleColor:[UIColor colorWithWhite:.71 alpha:1.] forState:UIControlStateNormal];
+        
+        [publishedQuotesTableView addSubview:categoryButton];
+        [categoryButton release];
+        
+        index++;
+    }
+    
+    categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(175., 37., 140., 15.)];
+    categoryLabel.text = @"Опубліковане";
+    categoryLabel.backgroundColor = [UIColor clearColor];
+    categoryLabel.font = [UIFont fontWithName:@"TimesNewRomanPSMT" size:13];
+    categoryLabel.shadowColor = [UIColor blackColor];
+    categoryLabel.shadowOffset = CGSizeMake(0., .5);
+    categoryLabel.textColor = [UIColor colorWithRed:.04 green:.6 blue:.97 alpha:1.];
+    [self.view addSubview:categoryLabel];
 }
 
 /*
@@ -198,7 +238,8 @@
     } else {
         alpha = .5;
     }
-    logoButton.alpha = alpha;
+    logoButton.alpha = MAX(alpha, .5);
+    categoryLabel.alpha = MAX(alpha, .5);
     
     CGPoint offset = aScrollView.contentOffset;
     CGRect bounds = aScrollView.bounds;
