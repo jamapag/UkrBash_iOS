@@ -35,6 +35,12 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc
+{
+    [activeCell release];
+    [super dealloc];
+}
+
 #pragma mark - actions
 
 - (void)scrollToTopAction:(id)sender
@@ -131,6 +137,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [activeCell release], activeCell = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -208,6 +215,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UBQuoteCell *cell = (UBQuoteCell*)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell.shareButtonsVisible) {
+        [activeCell release], activeCell = nil;
+        [cell hideShareButtons];
+    } else {
+        UBQuoteCell *ac = (UBQuoteCell*)[tableView cellForRowAtIndexPath:activeCell];
+        [ac hideShareButtons];
+        
+        [activeCell release], activeCell = nil;
+        activeCell = [indexPath retain];
+        [cell showShareButtons];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

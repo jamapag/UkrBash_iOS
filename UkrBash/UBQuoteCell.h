@@ -11,8 +11,17 @@
 @interface UBQuoteCell : UITableViewCell
 {
     UILabel *quoteTextLabel;
+    UILabel *ratingLabel;
+    UILabel *authorLabel;
+    UILabel *dateLabel;
+    UIView *containerView;
+    BOOL shareButtonsVisible;
 }
 
 @property (nonatomic, readonly) UILabel *quoteTextLabel;
+@property (nonatomic, readonly) BOOL shareButtonsVisible;
+
+- (void)showShareButtons;
+- (void)hideShareButtons;
 
 @end

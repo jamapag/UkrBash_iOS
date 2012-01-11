@@ -14,6 +14,7 @@
     UITableView *publishedQuotesTableView;
     UIButton *logoButton;
     UILabel *categoryLabel;
+    NSIndexPath *activeCell;
     
     BOOL loading;
 }
