@@ -12,7 +12,7 @@
 #import "UBQuoteCell.h"
 
 #define FONT_SIZE 12.0f
-#define CELL_CONTENT_WIDTH 320.0f - 10.0f
+#define CELL_CONTENT_WIDTH 300.0f
 #define CELL_CONTENT_MARGIN 5.0f
 
 
