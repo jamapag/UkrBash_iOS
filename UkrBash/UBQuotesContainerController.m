@@ -38,6 +38,10 @@
 - (void)dealloc
 {
     [activeCell release];
+    [publishedQuotesTableView release];
+    [currentQuotes release];
+    [categoryLabel release];
+    [logoButton release];
     [super dealloc];
 }
 
@@ -138,6 +142,10 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [activeCell release], activeCell = nil;
+    [publishedQuotesTableView release], publishedQuotesTableView = nil;
+    [currentQuotes release], currentQuotes = nil;
+    [categoryLabel release], categoryLabel = nil;
+    [logoButton release], logoButton = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
