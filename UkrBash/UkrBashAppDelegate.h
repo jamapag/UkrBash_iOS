@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UBNavigationController.h"
 
 @interface UkrBashAppDelegate : NSObject <UIApplicationDelegate> {
-
+    UBNavigationController *navigationController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

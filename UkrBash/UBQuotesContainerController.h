@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UBViewController.h"
 
-@interface UBQuotesContainerController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface UBQuotesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource>
 {
     NSArray *currentQuotes;
     UITableView *publishedQuotesTableView;
