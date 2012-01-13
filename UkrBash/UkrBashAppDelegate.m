@@ -8,6 +8,8 @@
 
 #import "UkrBashAppDelegate.h"
 #import "UBQuotesContainerController.h"
+#import "UBMenuViewController.h"
+#import "UBNavigationController.h"
 
 @implementation UkrBashAppDelegate
 
@@ -24,12 +26,13 @@
 {
     [self.window makeKeyAndVisible];
     
+    UBMenuViewController *menuController = [[UBMenuViewController alloc] init];
+    navigationController = [[UBNavigationController alloc] initWithMenuViewController:menuController];
     UBQuotesContainerController *containerController = [[UBQuotesContainerController alloc] init];
-//    UINavigationController *mainNavigationContorller = [[UINavigationController alloc] initWithRootViewController:mainMenu];
-    
-    [self.window addSubview:containerController.view];
-    // TODO: fix memory leak
-//    [containerController release];
+    [navigationController pushViewController:containerController animated:NO];
+    [self.window addSubview:navigationController.view];
+    [menuController release];
+    [containerController release];
     
     return YES;
 }
@@ -76,6 +79,7 @@
     [__managedObjectContext release];
     [__managedObjectModel release];
     [__persistentStoreCoordinator release];
+    [navigationController release];
     [super dealloc];
 }
 
