@@ -89,7 +89,7 @@
                                                  name:kNotificationPublishedQuotesUpdated
                                                object:nil];
     
-    logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 5., 152., 39.)];
+    logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 5., 165., 38.)];
     logoButton.center = CGPointMake(self.view.frame.size.width / 2., logoButton.center.y);
     [logoButton addTarget:self action:@selector(scrollToTopAction:) forControlEvents:UIControlEventTouchUpInside];
     [logoButton setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
@@ -102,7 +102,7 @@
     categoryLabel.shadowColor = [UIColor blackColor];
     categoryLabel.shadowOffset = CGSizeMake(0., .5);
     categoryLabel.textColor = [UIColor colorWithRed:.04 green:.6 blue:.97 alpha:1.];
-    [self.view addSubview:categoryLabel];
+//    [self.view addSubview:categoryLabel];
     
     UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [menuButton setTitle:@"M" forState:UIControlStateNormal];

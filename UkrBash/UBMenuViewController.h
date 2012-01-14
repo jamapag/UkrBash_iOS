@@ -12,6 +12,7 @@
 @interface UBMenuViewController : UBViewController <UITableViewDelegate, UITableViewDataSource>
 {
     UITableView *_tableView;
+    UIButton *logoButton;
     NSArray *menuItems;
 }
 

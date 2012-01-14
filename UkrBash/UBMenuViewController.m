@@ -49,6 +49,13 @@ enum UBMenuItems {
     [super dealloc];
 }
 
+#pragma mark - actions
+
+- (void)scrollToTopAction:(id)sender
+{
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0. inSection:0.] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
 #pragma mark - View lifecycle
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -69,6 +76,12 @@ enum UBMenuItems {
     _tableView.rowHeight = 52.;
     _tableView.contentInset = UIEdgeInsetsMake(50., 0., 0., 0.);
     [self.view addSubview:_tableView];
+
+    logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 5., 165., 38.)];
+    logoButton.center = CGPointMake(self.view.frame.size.width / 2., logoButton.center.y);
+    [logoButton addTarget:self action:@selector(scrollToTopAction:) forControlEvents:UIControlEventTouchUpInside];
+    [logoButton setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+    [self.view addSubview:logoButton];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -133,6 +146,23 @@ enum UBMenuItems {
     if (indexPath.row == UBMenuItemWebsite) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
     }
+}
+
+#pragma mark - UIScrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView
+{
+    CGFloat alpha = 1;
+    if (aScrollView.contentOffset.y < 0) {
+        if (abs(aScrollView.contentOffset.y) >= self.tableView.contentInset.top) {
+            alpha = 1.;
+        } else {
+            alpha = 1. - (self.tableView.contentInset.top + aScrollView.contentOffset.y) / 100;
+        }
+    } else {
+        alpha = .5;
+    }
+    logoButton.alpha = MAX(alpha, .5);
 }
 
 @end
