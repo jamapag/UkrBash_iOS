@@ -74,7 +74,7 @@ enum UBMenuItems {
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.rowHeight = 52.;
-    _tableView.contentInset = UIEdgeInsetsMake(50., 0., 0., 0.);
+    _tableView.contentInset = UIEdgeInsetsMake(55., 0., 0., 0.);
     [self.view addSubview:_tableView];
 
     logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 5., 165., 38.)];
