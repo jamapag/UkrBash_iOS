@@ -104,10 +104,10 @@
     categoryLabel.textColor = [UIColor colorWithRed:.04 green:.6 blue:.97 alpha:1.];
 //    [self.view addSubview:categoryLabel];
     
-    UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [menuButton setTitle:@"M" forState:UIControlStateNormal];
+    UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(menuAction:) forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setFrame:CGRectMake(15., -37., 32., 32.)];
+    [menuButton setFrame:CGRectMake(15., -35., 36., 36.)];
     [publishedQuotesTableView addSubview:menuButton];
 }
 

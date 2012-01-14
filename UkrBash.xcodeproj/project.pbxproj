@@ -45,6 +45,8 @@
 		B0B8DBC914B8618600B07FDD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBC814B8618600B07FDD /* Default@2x.png */; };
 		B0B8DBCC14B8635100B07FDD /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBCA14B8635100B07FDD /* logo.png */; };
 		B0B8DBCD14B8635100B07FDD /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBCB14B8635100B07FDD /* logo@2x.png */; };
+		B0CFEC0C14C2051900B6C5A7 /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CFEC0A14C2051900B6C5A7 /* menu-button.png */; };
+		B0CFEC0D14C2051900B6C5A7 /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */; };
 		B0DCA88614BF22C7007132B6 /* UBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DCA88514BF22C7007132B6 /* UBNavigationController.m */; };
 		B0DCA88C14BF325A007132B6 /* menu-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DCA88814BF325A007132B6 /* menu-pin.png */; };
 		B0DCA88D14BF325A007132B6 /* menu-pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DCA88914BF325A007132B6 /* menu-pin@2x.png */; };
@@ -111,6 +113,8 @@
 		B0B8DBC814B8618600B07FDD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		B0B8DBCA14B8635100B07FDD /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		B0B8DBCB14B8635100B07FDD /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		B0CFEC0A14C2051900B6C5A7 /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button.png"; sourceTree = "<group>"; };
+		B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button@2x.png"; sourceTree = "<group>"; };
 		B0DCA88414BF22C7007132B6 /* UBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBNavigationController.h; sourceTree = "<group>"; };
 		B0DCA88514BF22C7007132B6 /* UBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBNavigationController.m; sourceTree = "<group>"; };
 		B0DCA88814BF325A007132B6 /* menu-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-pin.png"; sourceTree = "<group>"; };
@@ -265,6 +269,8 @@
 		2DBF09FD14B669FD00A8949B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B0CFEC0A14C2051900B6C5A7 /* menu-button.png */,
+				B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */,
 				B0DCA88814BF325A007132B6 /* menu-pin.png */,
 				B0DCA88914BF325A007132B6 /* menu-pin@2x.png */,
 				B0DCA88A14BF325A007132B6 /* view-background.png */,
@@ -366,6 +372,8 @@
 				B0DCA88D14BF325A007132B6 /* menu-pin@2x.png in Resources */,
 				B0DCA88E14BF325A007132B6 /* view-background.png in Resources */,
 				B0DCA88F14BF325A007132B6 /* view-background@2x.png in Resources */,
+				B0CFEC0C14C2051900B6C5A7 /* menu-button.png in Resources */,
+				B0CFEC0D14C2051900B6C5A7 /* menu-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
