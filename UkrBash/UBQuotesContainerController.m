@@ -58,6 +58,33 @@
     [self.ubNavigationController popViewControllerAnimated:YES];
 }
 
+- (void)showCopyMenu:(UILongPressGestureRecognizer*)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        [(UBQuoteCell*)gesture.view setSelected:YES animated:NO];
+        
+        [self becomeFirstResponder];
+        CGPoint location = [gesture locationInView:gesture.view];
+        UIMenuItem *copy = [[[UIMenuItem alloc] initWithTitle:@"Копіювати" action:@selector(copyQuote:)] autorelease];
+        UIMenuItem *copyURLItem = [[[UIMenuItem alloc] initWithTitle:@"Копіювати URL" action:@selector(copyURL:)] autorelease];
+        
+        UIMenuController *sharedMenu = [UIMenuController sharedMenuController];
+        [sharedMenu setMenuItems:[NSArray arrayWithObjects:copy, copyURLItem, nil]];
+        [sharedMenu setTargetRect:CGRectMake(location.x, location.y, 0., 0.) inView:gesture.view];
+        [sharedMenu setMenuVisible:YES animated:YES];
+    }
+}
+
+- (void)copyQuote:(id)sender
+{
+    
+}
+
+- (void)copyURL:(id)sender
+{
+    
+}
+
 #pragma mark - View lifecycle
 
 
@@ -137,6 +164,11 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
 - (void)publishedQuotesUpdated:(NSNotificationCenter *)notification
 {
     [publishedQuotesTableView reloadData];
@@ -188,6 +220,10 @@
     
     if(cell == nil) {
         cell = [[UBQuoteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCopyMenu:)];
+        [cell addGestureRecognizer:longPress];
+        [longPress release];
     }
     
     UBQuote *quote = (UBQuote *)[currentQuotes objectAtIndex:indexPath.row];
@@ -206,17 +242,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     UBQuoteCell *cell = (UBQuoteCell*)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.shareButtonsVisible) {
         [activeCell release], activeCell = nil;
         [cell hideShareButtons];
     } else {
-        UBQuoteCell *ac = (UBQuoteCell*)[tableView cellForRowAtIndexPath:activeCell];
-        [ac hideShareButtons];
-        
-        [activeCell release], activeCell = nil;
-        activeCell = [indexPath retain];
-        [cell showShareButtons];
+        if (![[UIMenuController sharedMenuController] isMenuVisible]) {
+            UBQuoteCell *ac = (UBQuoteCell*)[tableView cellForRowAtIndexPath:activeCell];
+            [ac hideShareButtons];
+            
+            [activeCell release], activeCell = nil;
+            activeCell = [indexPath retain];
+            [cell showShareButtons];
+        }
     }
 }
 

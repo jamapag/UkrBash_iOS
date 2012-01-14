@@ -118,7 +118,13 @@
 {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    if (selected) {
+        containerView.layer.borderWidth = 1.;
+        containerView.layer.borderColor = [[UIColor colorWithRed:.04 green:.6 blue:.97 alpha:1.] CGColor];
+    } else {
+        containerView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        containerView.layer.borderWidth = .5;
+    }
 }
 
 - (void)prepareForReuse
