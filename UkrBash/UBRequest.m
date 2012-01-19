@@ -8,6 +8,7 @@
 
 #import "UBRequest.h"
 #import "UBQuotesParser.h"
+#import "ApiKey.h"
 
 @implementation UBRequest
 
@@ -51,7 +52,18 @@ NSString *const kWithoutTag = @"withoutTag";
 NSString *const kQuery = @"query";
 NSString *const kStats = @"stats";
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        params = [[NSMutableDictionary alloc] init];
+        [params setObject:kApiKey forKey:kClient];
+    }
+    return self;
+}
+
 - (void)dealloc {
+    [params release];
     [loadedData release];
     delegate = nil;
     [connection release];
@@ -59,13 +71,35 @@ NSString *const kStats = @"stats";
     [super dealloc];
 }
 
-- (void)startWithNSURLRequest:(NSURLRequest *)request
+- (NSURLRequest *)generateNSURLRequest
 {
-    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    NSMutableURLRequest *request = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@", kAPIBaseURL, method, kFormat];
+    NSString *paramsSting = @"";
+    BOOL first = YES;
+    for (NSString *key in params) {
+        if (first) {
+            paramsSting = [paramsSting stringByAppendingFormat:@"?%@=%@", key, [params objectForKey:key]];
+            first = NO;
+        } else {
+            paramsSting = [paramsSting stringByAppendingFormat:@"&%@=%@", key, [params objectForKey:key]];            
+        }
+    }
+    urlString = [urlString stringByAppendingString:paramsSting];
+    NSLog(@"URL: %@", urlString);
+    request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    return [request autorelease];
+}
+
+- (void)start
+{
+    connection = [[NSURLConnection alloc] initWithRequest:[self generateNSURLRequest] delegate:self];
     [connection start];
 }
 
-- (void)cancel {
+- (void)cancel
+{
     [connection cancel];
     [connection release];
     connection = nil;
@@ -97,6 +131,7 @@ NSString *const kStats = @"stats";
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
+    // TODO: check status code;
 //    responseHTTPStatusCode = [response statusCode];
 //    NSLog(@"Connectin Did Receive response");
     if (!loadedData) {

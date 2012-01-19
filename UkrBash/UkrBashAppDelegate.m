@@ -10,6 +10,7 @@
 #import "UBQuotesContainerController.h"
 #import "UBMenuViewController.h"
 #import "UBNavigationController.h"
+#import "UBPublishedQuotesDataSource.h"
 
 @implementation UkrBashAppDelegate
 
@@ -28,7 +29,7 @@
     
     UBMenuViewController *menuController = [[UBMenuViewController alloc] init];
     navigationController = [[UBNavigationController alloc] initWithMenuViewController:menuController];
-    UBQuotesContainerController *containerController = [[UBQuotesContainerController alloc] init];
+    UBQuotesContainerController *containerController = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]];
     [navigationController pushViewController:containerController animated:NO];
     [self.window addSubview:navigationController.view];
     [menuController release];

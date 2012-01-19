@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D07888414C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */; };
 		2D144DDA1419073B009E1DBA /* UBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D144DD91419073B009E1DBA /* UBRequest.m */; };
 		2D57274C1455F5EE00A6DAE4 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274B1455F5EE00A6DAE4 /* Model.m */; };
 		2D57274F1456017900A6DAE4 /* UBQuotesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274E1456017900A6DAE4 /* UBQuotesRequest.m */; };
@@ -31,6 +32,9 @@
 		2DBF0A0114B66A1200A8949B /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBF09FF14B66A1200A8949B /* app-icon.png */; };
 		2DBF0A0214B66A1200A8949B /* app-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBF0A0014B66A1200A8949B /* app-icon@2x.png */; };
 		2DDED39A14A3649D003B315D /* UBQuote.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DDED39914A3649D003B315D /* UBQuote.m */; };
+		2DE54AFF14C83FF800CB04CB /* UBPublishedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54AFE14C83FF800CB04CB /* UBPublishedQuotesDataSource.m */; };
+		2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */; };
+		2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */; };
 		2DF27D9E1455D2670011168F /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF27D9D1455D2670011168F /* libxml2.dylib */; };
 		B0052FCA14BCD60B0082DAB9 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = B0052FC414BCD60B0082DAB9 /* facebook.png */; };
 		B0052FCB14BCD60B0082DAB9 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0052FC514BCD60B0082DAB9 /* facebook@2x.png */; };
@@ -56,6 +60,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D07888214C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnpablishedQuotesDataSource.h; sourceTree = "<group>"; };
+		2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnpablishedQuotesDataSource.m; sourceTree = "<group>"; };
 		2D144DD81419073B009E1DBA /* UBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRequest.h; sourceTree = "<group>"; };
 		2D144DD91419073B009E1DBA /* UBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRequest.m; sourceTree = "<group>"; };
 		2D57274A1455F5EE00A6DAE4 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -98,6 +104,13 @@
 		2DDC236514A27527000B407F /* ApiKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiKey.h; sourceTree = "<group>"; };
 		2DDED39814A3649D003B315D /* UBQuote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuote.h; sourceTree = "<group>"; };
 		2DDED39914A3649D003B315D /* UBQuote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuote.m; sourceTree = "<group>"; };
+		2DE54AFB14C83F5500CB04CB /* UBQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesDataSource.h; sourceTree = "<group>"; };
+		2DE54AFD14C83FF800CB04CB /* UBPublishedQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPublishedQuotesDataSource.h; sourceTree = "<group>"; };
+		2DE54AFE14C83FF800CB04CB /* UBPublishedQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPublishedQuotesDataSource.m; sourceTree = "<group>"; };
+		2DE54B0014C8438D00CB04CB /* UBBestQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBBestQuotesDataSource.h; sourceTree = "<group>"; };
+		2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBBestQuotesDataSource.m; sourceTree = "<group>"; };
+		2DE54B0314C847FD00CB04CB /* UBRandomQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRandomQuotesDataSource.h; sourceTree = "<group>"; };
+		2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRandomQuotesDataSource.m; sourceTree = "<group>"; };
 		2DF27D9D1455D2670011168F /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		B0052FC414BCD60B0082DAB9 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
 		B0052FC514BCD60B0082DAB9 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
@@ -298,6 +311,15 @@
 				2DDED39914A3649D003B315D /* UBQuote.m */,
 				2D57274A1455F5EE00A6DAE4 /* Model.h */,
 				2D57274B1455F5EE00A6DAE4 /* Model.m */,
+				2D07888214C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.h */,
+				2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */,
+				2DE54AFB14C83F5500CB04CB /* UBQuotesDataSource.h */,
+				2DE54AFD14C83FF800CB04CB /* UBPublishedQuotesDataSource.h */,
+				2DE54AFE14C83FF800CB04CB /* UBPublishedQuotesDataSource.m */,
+				2DE54B0014C8438D00CB04CB /* UBBestQuotesDataSource.h */,
+				2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */,
+				2DE54B0314C847FD00CB04CB /* UBRandomQuotesDataSource.h */,
+				2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -403,6 +425,10 @@
 				B0DCA88614BF22C7007132B6 /* UBNavigationController.m in Sources */,
 				B0DCA89214BF3279007132B6 /* UBMenuViewController.m in Sources */,
 				B02855CE14C0CDEE00FAA8A8 /* UBViewController.m in Sources */,
+				2D07888414C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m in Sources */,
+				2DE54AFF14C83FF800CB04CB /* UBPublishedQuotesDataSource.m in Sources */,
+				2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */,
+				2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

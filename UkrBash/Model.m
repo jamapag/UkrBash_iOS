@@ -15,6 +15,9 @@ NSString *const kNotificationPublishedQuotesUpdated = @"kNotificationPublishedQu
 @implementation Model
 
 @synthesize publishedQuotes;
+@synthesize unpablishedQuotes;
+@synthesize bestQuotes;
+@synthesize randomQuotes;
 
 static Model *sharedModel = nil;
 
@@ -34,6 +37,9 @@ static Model *sharedModel = nil;
     if (self) {
         requests = [[NSMutableSet alloc] init];
         publishedQuotes = [[NSMutableArray alloc] init];
+        unpablishedQuotes = [[NSMutableArray alloc] init];
+        bestQuotes = [[NSMutableArray alloc] init];
+        randomQuotes = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -41,26 +47,55 @@ static Model *sharedModel = nil;
 - (void)dealloc 
 {
     [publishedQuotes release];
+    [unpablishedQuotes release];
+    [bestQuotes release];
+    [requests release];
+    [randomQuotes release];
     [super dealloc];
 }
 
-
-- (void)loadPublishedQuotes
+- (UBQuotesRequest *)createQuotesRequestWithMethod:(NSString *)method start:(NSInteger)start andLimit:(NSInteger)limit
 {
-    NSLog(@"Load Published quotes");
     UBQuotesRequest *request = [[UBQuotesRequest alloc] init];
     request.delegate = self;
-    [request startWithNSURLRequest:[request createPublishedQuotesRequest]];
-    [requests addObject:request];
-    [request release];
+    request.method = method;
+    [request setLimit:limit];
+    [request setStart:start];
+    return request;
 }
 
 - (void)loadMorePublishedQuotes
 {
     NSLog(@"Load more published quotes");
-    UBQuotesRequest *request = [[UBQuotesRequest alloc] init];
-    request.delegate = self;
-    [request startWithNSURLRequest:[request createPublishedQuotesRequestWithStart:[publishedQuotes count] andLimit:25]];
+    UBQuotesRequest *request = [self createQuotesRequestWithMethod:kQuotes_getPublished start:[publishedQuotes count] andLimit:25];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadMoreUnpablishedQuotes
+{
+    NSLog(@"Load more upcoming quotes");
+    UBQuotesRequest *request = [self createQuotesRequestWithMethod:kQuotes_getUpcoming start:[unpablishedQuotes count] andLimit:25];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadMoreBestQuotes
+{
+    NSLog(@"Load more best quotes");
+    UBQuotesRequest *request = [self createQuotesRequestWithMethod:kQuotes_getTheBest start:[bestQuotes count] andLimit:25];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadMoreRandomQuotes
+{
+    NSLog(@"Load more random quotes");
+    UBQuotesRequest *request = [self createQuotesRequestWithMethod:kQuotes_getRandom start:[randomQuotes count] andLimit:25];
+    [request start];
     [requests addObject:request];
     [request release];
 }
@@ -69,11 +104,17 @@ static Model *sharedModel = nil;
 - (void)request:(UBRequest *)request didFinishWithData:(NSData *)data
 {
     NSLog(@"Did finish with data");
-    // TODO: test method. Need to refactor.
+    // TODO: Add errors parser
     UBQuotesParser *parser = [[UBQuotesParser alloc] init];
     NSArray *array = [parser parseQuotesWithData:data];
     if ([request.method isEqualToString:kQuotes_getPublished]) {
         [publishedQuotes addObjectsFromArray:array];
+    } else if ([request.method isEqualToString:kQuotes_getUpcoming]) {
+        [unpablishedQuotes addObjectsFromArray:array];
+    } else if ([request.method isEqualToString:kQuotes_getTheBest]) {
+        [bestQuotes addObjectsFromArray:array];
+    } else if ([request.method isEqualToString:kQuotes_getRandom]) {
+        [randomQuotes addObjectsFromArray:array];
     }
     [parser release];
     [requests removeObject:request];

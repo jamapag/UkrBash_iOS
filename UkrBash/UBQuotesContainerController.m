@@ -18,12 +18,13 @@
 
 
 @implementation UBQuotesContainerController
+@synthesize dataSource;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithDataSourceClass:(Class)dataSourceClass
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
-        // Custom initialization
+        dataSource = [[dataSourceClass alloc] init];
     }
     return self;
 }
@@ -38,6 +39,7 @@
 
 - (void)dealloc
 {
+    [dataSource release];
     [activeCell release];
     [publishedQuotesTableView release];
     [currentQuotes release];
@@ -93,9 +95,10 @@
 {
     [super loadView];
     
+    currentQuotes = [[dataSource getQuotes] retain];
     
-    currentQuotes = [[[Model sharedModel] publishedQuotes] retain];
-    [[Model sharedModel] loadPublishedQuotes];
+//    [[Model sharedModel] loadPublishedQuotes];
+//    loading = YES;
     
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height)];
     backgroundImageView.image = [UIImage imageNamed:@"Default"];
@@ -180,7 +183,7 @@
 {
     [self showFooter];
     loading = YES;
-    [[Model sharedModel] loadMorePublishedQuotes];
+    [dataSource loadMoreQuotes];
 }
 
 - (void)showFooter
@@ -302,7 +305,11 @@
     // NSLog(@"inset.top: %f", inset.top);   
     // NSLog(@"inset.bottom: %f", inset.bottom);   
     // NSLog(@"pos: %f of %f", y, h);
-    
+
+    if (h == 0 && [currentQuotes count] > 0) {
+        return;
+    }
+
     float reload_distance = 10;
     if(y > h + reload_distance) {
         if (!loading) {

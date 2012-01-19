@@ -55,13 +55,14 @@ extern NSString *const kStats;
     NSURLConnection *connection;
     NSMutableData *loadedData;
     NSString *method;
+    NSMutableDictionary *params;
     id <UBRequestDelegate> delegate;
 }
 
 @property (nonatomic, assign) id <UBRequestDelegate> delegate;
-@property (nonatomic, readonly) NSString *method;
+@property (nonatomic, retain) NSString *method;
 
-- (void)startWithNSURLRequest:(NSURLRequest *)request;
+- (void)start;
 - (void)cancel;
 
 @end

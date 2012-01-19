@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UBViewController.h"
+#import "UBUnpablishedQuotesDataSource.h"
 
 @interface UBQuotesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource>
 {
@@ -17,9 +18,14 @@
     UILabel *categoryLabel;
     NSIndexPath *activeCell;
     
+    id <UBQuotesDataSource> dataSource;
+    
     BOOL loading;
 }
 
+@property (nonatomic, retain) id <UBQuotesDataSource> dataSource;
+
+- (id)initWithDataSourceClass:(Class)dataSourceClass;
 - (void)showFooter;
 - (void)hideFooter;
 

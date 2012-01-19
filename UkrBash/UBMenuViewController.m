@@ -10,8 +10,12 @@
 #import "UBNavigationController.h"
 #import "UBViewController.h"
 #import "UBQuotesContainerController.h"
+#import "UBPublishedQuotesDataSource.h"
+#import "UBBestQuotesDataSource.h"
+#import "UBRandomQuotesDataSource.h"
 
 enum UBMenuItems {
+    UBMenuItemPublishedQuotes,
     UBMenuItemUnpublishedQuotes,
     UBMenuItemBestQuotes,
     UBMenuItemRandomQuotes,
@@ -19,7 +23,7 @@ enum UBMenuItems {
     UBMenuItemRateApp,
     UBMenuItemWebsite,
     UBMenuItemsCount
-    };
+};
 
 @implementation UBMenuViewController
 
@@ -89,7 +93,7 @@ enum UBMenuItems {
 {
     [super viewDidLoad];
     
-    menuItems = [[NSArray alloc] initWithObjects:@"Неопубліковане", @"Найкраще", @"Випадкове", @"Картинки", @"Оцінити програму", @"www.ukrbash.org", nil];
+    menuItems = [[NSArray alloc] initWithObjects:@"Опубліковане", @"Неопубліковане", @"Найкраще", @"Випадкове", @"Картинки", @"Оцінити програму", @"www.ukrbash.org", nil];
 }
 
 - (void)viewDidUnload
@@ -134,16 +138,29 @@ enum UBMenuItems {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == UBMenuItemUnpublishedQuotes ||
-        indexPath.row == UBMenuItemRandomQuotes ||
-        indexPath.row == UBMenuItemBestQuotes ||
-        indexPath.row == UBMenuItemImages) {
-        
-        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] init];
+    if (UBMenuItemPublishedQuotes == indexPath.row) {
+        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]];
         [self.ubNavigationController pushViewController:quotesContainer animated:YES];
         [quotesContainer release];
-    }
-    if (indexPath.row == UBMenuItemWebsite) {
+    } else if (UBMenuItemUnpublishedQuotes == indexPath.row) {
+        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBUnpablishedQuotesDataSource class]];
+        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+        [quotesContainer release];
+    } else if (UBMenuItemBestQuotes == indexPath.row) {
+        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBBestQuotesDataSource class]];
+        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+        [quotesContainer release];
+    } else if (UBMenuItemRandomQuotes == indexPath.row) {
+        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBRandomQuotesDataSource class]];
+        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+        [quotesContainer release];
+    } else if (UBMenuItemImages == indexPath.row) {
+        NSLog(@"Not implemented yet");
+        return;
+//        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] init];
+//        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+//        [quotesContainer release];
+    } else if (indexPath.row == UBMenuItemWebsite) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
     }
 }
