@@ -32,7 +32,9 @@
 - (void)hideShareButtons
 {
     [UIView animateWithDuration:.4 animations:^(void) {
-        containerView.center = CGPointMake(containerView.center.x - 160., containerView.center.y);
+        CGRect rect = containerView.frame;
+        rect.origin.x = self.bounds.origin.x + 15;
+        containerView.frame = rect;
     } completion:^(BOOL finished) {
         shareButtonsVisible = NO;
     }];
@@ -41,7 +43,9 @@
 - (void)showShareButtons
 {
     [UIView animateWithDuration:.4 animations:^(void) {
-        containerView.center = CGPointMake(containerView.center.x + 160., containerView.center.y);
+        CGRect rect = containerView.frame;
+        rect.origin.x = self.bounds.origin.x + 15 + 160.;
+        containerView.frame = rect;
     } completion:^(BOOL finished) {
         shareButtonsVisible = YES;
     }];
