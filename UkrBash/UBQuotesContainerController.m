@@ -63,7 +63,12 @@
 - (void)showCopyMenu:(UILongPressGestureRecognizer*)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        [(UBQuoteCell*)gesture.view setSelected:YES animated:NO];
+        UBQuoteCell *cell = (UBQuoteCell*)gesture.view;
+        NSIndexPath *path = [publishedQuotesTableView indexPathForCell:cell];
+        if ([path isEqual:activeCell]) {
+            return;
+        }
+        [cell setSelected:YES animated:NO];
         
         [self becomeFirstResponder];
         CGPoint location = [gesture locationInView:gesture.view];
