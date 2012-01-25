@@ -12,10 +12,6 @@
 #import "UBQuoteCell.h"
 #import "UBNavigationController.h"
 
-#define FONT_SIZE 12.0f
-#define CELL_CONTENT_WIDTH 300.0f
-#define CELL_CONTENT_MARGIN 5.0f
-
 
 @implementation UBQuotesContainerController
 @synthesize dataSource;
@@ -270,15 +266,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UBQuote *quote = [currentQuotes objectAtIndex:indexPath.row];
-    NSString *text = quote.text;
-    
-    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
-    
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-    
-    CGFloat height = MAX(size.height, 44.0f);
-    
-    return height + (CELL_CONTENT_MARGIN * 2) + (CELL_CONTENT_MARGIN * 2);
+    return [UBQuoteCell heightForQuoteText:quote.text viewWidth:publishedQuotesTableView.frame.size.width];
 }
 
 #pragma mark - UIScrollView delegate

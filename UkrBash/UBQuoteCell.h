@@ -21,6 +21,8 @@
 @property (nonatomic, readonly) UILabel *quoteTextLabel;
 @property (nonatomic, readonly) BOOL shareButtonsVisible;
 
++ (CGFloat)heightForQuoteText:(NSString*)text viewWidth:(CGFloat)width;
+
 - (void)showShareButtons;
 - (void)hideShareButtons;
 

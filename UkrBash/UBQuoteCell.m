@@ -9,10 +9,24 @@
 #import "UBQuoteCell.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define FONT_SIZE 12.0f
+#define CELL_CONTENT_MARGIN 5.0f
+
 @implementation UBQuoteCell
 
 @synthesize quoteTextLabel;
 @synthesize shareButtonsVisible;
+
++ (CGFloat)heightForQuoteText:(NSString*)text viewWidth:(CGFloat)width
+{
+    CGSize constraint = CGSizeMake((width - 20.) - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+    
+    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    
+    CGFloat height = MAX(size.height, 44.0f);
+    
+    return height + (CELL_CONTENT_MARGIN * 2) + (CELL_CONTENT_MARGIN * 2);
+}
 
 - (void)shareWithFacebookAction:(id)sender
 {
@@ -75,7 +89,7 @@
         
         quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(5., 5., containerView.frame.size.width - 10, containerView.frame.size.height - 10)];
         [quoteTextLabel setLineBreakMode:UILineBreakModeWordWrap];
-        [quoteTextLabel setFont:[UIFont systemFontOfSize:12.f]];
+        [quoteTextLabel setFont:[UIFont systemFontOfSize:FONT_SIZE]];
         [quoteTextLabel setNumberOfLines:0];
         [quoteTextLabel setUserInteractionEnabled:YES];
         [quoteTextLabel setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
