@@ -17,6 +17,7 @@
     UIButton *logoButton;
     UILabel *categoryLabel;
     NSIndexPath *activeCell;
+    NSDateFormatter *dateFormatter;
     
     id <UBQuotesDataSource> dataSource;
     

@@ -14,11 +14,16 @@
     UILabel *ratingLabel;
     UILabel *authorLabel;
     UILabel *dateLabel;
+    UILabel *idLabel;
     UIView *containerView;
     BOOL shareButtonsVisible;
 }
 
 @property (nonatomic, readonly) UILabel *quoteTextLabel;
+@property (nonatomic, readonly) UILabel *ratingLabel;
+@property (nonatomic, readonly) UILabel *dateLabel;
+@property (nonatomic, readonly) UILabel *authorLabel;
+@property (nonatomic, readonly) UILabel *idLabel;
 @property (nonatomic, readonly) BOOL shareButtonsVisible;
 
 + (CGFloat)heightForQuoteText:(NSString*)text viewWidth:(CGFloat)width;

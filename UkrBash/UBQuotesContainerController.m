@@ -41,7 +41,23 @@
     [currentQuotes release];
     [categoryLabel release];
     [logoButton release];
+    [dateFormatter release];
     [super dealloc];
+}
+
+#pragma mark -
+
+- (NSDateFormatter*)dateFormatter
+{
+    if (!dateFormatter)
+    {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"uk_UA"] autorelease];
+        [dateFormatter setLocale:locale];
+        [dateFormatter setDoesRelativeDateFormatting:YES];
+        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    }
+    return dateFormatter;
 }
 
 #pragma mark - actions
@@ -231,7 +247,22 @@
     }
     
     UBQuote *quote = (UBQuote *)[currentQuotes objectAtIndex:indexPath.row];
+    cell.idLabel.text = [NSString stringWithFormat:@"%d", quote.quoteId];
     cell.quoteTextLabel.text = quote.text;
+    if (quote.rating > 0)
+    {
+        cell.ratingLabel.text = [NSString stringWithFormat:@"+%d", quote.rating];
+    }
+    else if (quote.rating < 0)
+    {
+        cell.ratingLabel.text = [NSString stringWithFormat:@"%d", quote.rating];
+    }
+    else
+    {
+        cell.ratingLabel.text = @"0";
+    }
+    cell.dateLabel.text = [[self dateFormatter] stringFromDate:quote.pubDate];
+    cell.authorLabel.text = quote.author;
     
 //    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
     
