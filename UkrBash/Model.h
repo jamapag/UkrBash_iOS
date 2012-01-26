@@ -18,6 +18,7 @@ extern NSString *const kNotificationPublishedQuotesUpdated;
     NSMutableArray *unpablishedQuotes;
     NSMutableArray *bestQuotes;
     NSMutableArray *randomQuotes;
+    NSMutableArray *publishedImages;
     NSMutableSet *requests;
 }
 
@@ -25,6 +26,7 @@ extern NSString *const kNotificationPublishedQuotesUpdated;
 @property (nonatomic, readonly) NSMutableArray *unpablishedQuotes;
 @property (nonatomic, readonly) NSMutableArray *bestQuotes;
 @property (nonatomic, readonly) NSMutableArray *randomQuotes;
+@property (nonatomic, readonly) NSMutableArray *publishedImages;
 
 + (Model *)sharedModel;
 - (void)loadMorePublishedQuotes;

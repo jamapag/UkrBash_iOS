@@ -11,7 +11,7 @@
 
 @implementation UBPicturesParser
 
-static NSString *kXPath_Item = @"//picture";
+static NSString *kXPath_Item = @"picture";
 static NSString *kName_Id = @"id";
 static NSString *kName_Status = @"status";
 static NSString *kName_Type = @"type";

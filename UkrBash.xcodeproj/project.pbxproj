@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D07888414C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */; };
 		2D144DDA1419073B009E1DBA /* UBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D144DD91419073B009E1DBA /* UBRequest.m */; };
+		2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D48CDF114C8DF2500C5696B /* UBImagesRequest.m */; };
 		2D57274C1455F5EE00A6DAE4 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274B1455F5EE00A6DAE4 /* Model.m */; };
 		2D57274F1456017900A6DAE4 /* UBQuotesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274E1456017900A6DAE4 /* UBQuotesRequest.m */; };
 		2D9F6E0E14A158C40012D690 /* UBQuotesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */; };
@@ -64,6 +65,8 @@
 		2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnpablishedQuotesDataSource.m; sourceTree = "<group>"; };
 		2D144DD81419073B009E1DBA /* UBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRequest.h; sourceTree = "<group>"; };
 		2D144DD91419073B009E1DBA /* UBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRequest.m; sourceTree = "<group>"; };
+		2D48CDF014C8DF2500C5696B /* UBImagesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBImagesRequest.h; sourceTree = "<group>"; };
+		2D48CDF114C8DF2500C5696B /* UBImagesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBImagesRequest.m; sourceTree = "<group>"; };
 		2D57274A1455F5EE00A6DAE4 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		2D57274B1455F5EE00A6DAE4 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		2D57274D1456017900A6DAE4 /* UBQuotesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesRequest.h; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 				2D144DD91419073B009E1DBA /* UBRequest.m */,
 				2D57274D1456017900A6DAE4 /* UBQuotesRequest.h */,
 				2D57274E1456017900A6DAE4 /* UBQuotesRequest.m */,
+				2D48CDF014C8DF2500C5696B /* UBImagesRequest.h */,
+				2D48CDF114C8DF2500C5696B /* UBImagesRequest.m */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -429,6 +434,7 @@
 				2DE54AFF14C83FF800CB04CB /* UBPublishedQuotesDataSource.m in Sources */,
 				2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */,
 				2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */,
+				2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

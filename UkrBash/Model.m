@@ -9,6 +9,7 @@
 #import "Model.h"
 #import "UBQuotesRequest.h"
 #import "UBQuotesParser.h"
+#import "UBImagesRequest.h"
 
 NSString *const kNotificationPublishedQuotesUpdated = @"kNotificationPublishedQuotesUpdated";
 
@@ -18,6 +19,7 @@ NSString *const kNotificationPublishedQuotesUpdated = @"kNotificationPublishedQu
 @synthesize unpablishedQuotes;
 @synthesize bestQuotes;
 @synthesize randomQuotes;
+@synthesize publishedImages;
 
 static Model *sharedModel = nil;
 
@@ -51,6 +53,7 @@ static Model *sharedModel = nil;
     [bestQuotes release];
     [requests release];
     [randomQuotes release];
+    [publishedImages release];
     [super dealloc];
 }
 
@@ -100,6 +103,18 @@ static Model *sharedModel = nil;
     [request release];
 }
 
+- (void)loadMoreImages
+{
+    NSLog(@"Load more images");
+    UBImagesRequest *request = [[UBImagesRequest alloc] init];
+    request.delegate = self;
+    request.method = kPictures_getPublished;
+    [request setLimit:25];
+    [request setStart:0];
+    [requests addObject:request];
+    [request release];
+}
+
 #pragma mark - UBQuotesRequestDelegate
 - (void)request:(UBRequest *)request didFinishWithData:(NSData *)data
 {
@@ -115,6 +130,8 @@ static Model *sharedModel = nil;
         [bestQuotes addObjectsFromArray:array];
     } else if ([request.method isEqualToString:kQuotes_getRandom]) {
         [randomQuotes addObjectsFromArray:array];
+    } else if ([request.method isEqualToString:kPictures_getPublished]) {
+        [publishedImages addObjectsFromArray:array];
     }
     [parser release];
     [requests removeObject:request];

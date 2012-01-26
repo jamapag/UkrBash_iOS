@@ -73,6 +73,10 @@ static NSString *kName_Tags = @"tags";
         for (GDataXMLElement *text in texts) {
             quote.text = text.stringValue;
         }
+        NSArray *raings = [quoteElement elementsForName:kName_Rating];
+        for (GDataXMLElement *rating in raings) {
+            quote.rating = rating.stringValue.integerValue;
+        }
         
         [quotes addObject:quote];
         [quote release];
