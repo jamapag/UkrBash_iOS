@@ -439,6 +439,7 @@
 				2DE54AFF14C83FF800CB04CB /* UBPublishedQuotesDataSource.m in Sources */,
 				2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */,
 				2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */,
+				B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */,
 				2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
