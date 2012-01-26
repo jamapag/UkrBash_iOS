@@ -46,6 +46,7 @@
 		B02855CE14C0CDEE00FAA8A8 /* UBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */; };
 		B04B12E914BA3E340060F668 /* category-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B04B12E714BA3E340060F668 /* category-button-bg.png */; };
 		B04B12EA14BA3E340060F668 /* category-button-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B04B12E814BA3E340060F668 /* category-button-bg@2x.png */; };
+		B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */; };
 		B0B8DBC614B8617A00B07FDD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBC514B8617A00B07FDD /* Default.png */; };
 		B0B8DBC914B8618600B07FDD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBC814B8618600B07FDD /* Default@2x.png */; };
 		B0B8DBCC14B8635100B07FDD /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBCA14B8635100B07FDD /* logo.png */; };
@@ -125,6 +126,8 @@
 		B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBViewController.m; sourceTree = "<group>"; };
 		B04B12E714BA3E340060F668 /* category-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-button-bg.png"; sourceTree = "<group>"; };
 		B04B12E814BA3E340060F668 /* category-button-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-button-bg@2x.png"; sourceTree = "<group>"; };
+		B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMenuItemCell.h; sourceTree = "<group>"; };
+		B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMenuItemCell.m; sourceTree = "<group>"; };
 		B0B8DBC514B8617A00B07FDD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		B0B8DBC814B8618600B07FDD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		B0B8DBCA14B8635100B07FDD /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -175,6 +178,8 @@
 			children = (
 				2DADD34514A3FA4A00808AA6 /* UBQuoteCell.h */,
 				2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */,
+				B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */,
+				B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";

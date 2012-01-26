@@ -9,10 +9,29 @@
 #import "UBQuoteCell.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define FONT_SIZE 12.0f
+#define CELL_CONTENT_MARGIN 5.0f
+#define INFO_LABELS_HEIGHT 12.0f
+
 @implementation UBQuoteCell
 
 @synthesize quoteTextLabel;
+@synthesize ratingLabel;
+@synthesize dateLabel;
+@synthesize authorLabel;
+@synthesize idLabel;
 @synthesize shareButtonsVisible;
+
++ (CGFloat)heightForQuoteText:(NSString*)text viewWidth:(CGFloat)width
+{
+    CGSize constraint = CGSizeMake((width - 20.) - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+    
+    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    
+    CGFloat height = MAX(size.height, 44.0f);
+    
+    return height + (CELL_CONTENT_MARGIN * 4) + INFO_LABELS_HEIGHT * 2;
+}
 
 - (void)shareWithFacebookAction:(id)sender
 {
@@ -32,7 +51,9 @@
 - (void)hideShareButtons
 {
     [UIView animateWithDuration:.4 animations:^(void) {
-        containerView.center = CGPointMake(containerView.center.x - 160., containerView.center.y);
+        CGRect rect = containerView.frame;
+        rect.origin.x = self.bounds.origin.x + 15;
+        containerView.frame = rect;
     } completion:^(BOOL finished) {
         shareButtonsVisible = NO;
     }];
@@ -41,7 +62,9 @@
 - (void)showShareButtons
 {
     [UIView animateWithDuration:.4 animations:^(void) {
-        containerView.center = CGPointMake(containerView.center.x + 160., containerView.center.y);
+        CGRect rect = containerView.frame;
+        rect.origin.x = self.bounds.origin.x + 15 + 160.;
+        containerView.frame = rect;
     } completion:^(BOOL finished) {
         shareButtonsVisible = YES;
     }];
@@ -69,13 +92,40 @@
         containerView.layer.masksToBounds = NO;
         containerView.backgroundColor = [UIColor whiteColor];
         
-        quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(5., 5., containerView.frame.size.width - 10, containerView.frame.size.height - 10)];
+        CGFloat y = CELL_CONTENT_MARGIN;
+        idLabel = [[UILabel alloc] initWithFrame:CGRectMake(CELL_CONTENT_MARGIN, y, (containerView.frame.size.width - CELL_CONTENT_MARGIN * 2.) / 2., INFO_LABELS_HEIGHT)];
+        idLabel.font = [UIFont systemFontOfSize:10];
+        idLabel.textColor = [UIColor grayColor];
+        [containerView addSubview:idLabel];
+        
+        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x + idLabel.frame.size.width, y, (containerView.frame.size.width - CELL_CONTENT_MARGIN * 3.) / 2., INFO_LABELS_HEIGHT)];
+        ratingLabel.textAlignment = UITextAlignmentRight;
+        ratingLabel.font = [UIFont systemFontOfSize:10];
+        ratingLabel.textColor = [UIColor grayColor];
+        [containerView addSubview:ratingLabel];
+        
+        y += ratingLabel.frame.size.height;
+        quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(CELL_CONTENT_MARGIN, y, containerView.frame.size.width - CELL_CONTENT_MARGIN * 2., containerView.frame.size.height - INFO_LABELS_HEIGHT * 2 - CELL_CONTENT_MARGIN * 2)];
         [quoteTextLabel setLineBreakMode:UILineBreakModeWordWrap];
-        [quoteTextLabel setFont:[UIFont systemFontOfSize:12.f]];
+        [quoteTextLabel setFont:[UIFont systemFontOfSize:FONT_SIZE]];
         [quoteTextLabel setNumberOfLines:0];
         [quoteTextLabel setUserInteractionEnabled:YES];
         [quoteTextLabel setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
         [containerView addSubview:quoteTextLabel];
+        
+        y += quoteTextLabel.frame.size.height + 1;
+        authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(CELL_CONTENT_MARGIN, y, (containerView.frame.size.width - CELL_CONTENT_MARGIN * 2.) / 2., INFO_LABELS_HEIGHT)];
+        authorLabel.font = ratingLabel.font;
+        authorLabel.textColor = [UIColor grayColor];
+        authorLabel.shadowColor = [UIColor darkGrayColor];
+        authorLabel.shadowOffset = CGSizeMake(0., -.5);
+        [containerView addSubview:authorLabel];
+        
+        dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(authorLabel.frame.origin.x + authorLabel.frame.size.width, y, (containerView.frame.size.width - CELL_CONTENT_MARGIN * 3.) / 2., INFO_LABELS_HEIGHT)];
+        dateLabel.font = ratingLabel.font;
+        dateLabel.textColor = [UIColor grayColor];
+        dateLabel.textAlignment = UITextAlignmentRight;
+        [containerView addSubview:dateLabel];
         
         CGFloat x = containerView.frame.origin.x + 20.;
         CGFloat shareButtonWidth = 32.;
@@ -111,6 +161,10 @@
 {
     [containerView release];
     [quoteTextLabel release];
+    [ratingLabel release];
+    [dateLabel release];
+    [authorLabel release];
+    [idLabel release];
     [super dealloc];
 }
 
@@ -141,6 +195,14 @@
     rect.size.width -= 20;
     rect.size.height -= 10;
     containerView.frame = rect;
+    
+    rect = authorLabel.frame;
+    rect.origin.y = quoteTextLabel.frame.origin.y + quoteTextLabel.frame.size.height;
+    authorLabel.frame = rect;
+    
+    rect = dateLabel.frame;
+    rect.origin.y = quoteTextLabel.frame.origin.y + quoteTextLabel.frame.size.height;
+    dateLabel.frame = rect;
 
     CGSize size = containerView.bounds.size;
     CGFloat curlFactor = 7.0f;

@@ -12,10 +12,6 @@
 #import "UBQuoteCell.h"
 #import "UBNavigationController.h"
 
-#define FONT_SIZE 12.0f
-#define CELL_CONTENT_WIDTH 300.0f
-#define CELL_CONTENT_MARGIN 5.0f
-
 
 @implementation UBQuotesContainerController
 @synthesize dataSource;
@@ -45,7 +41,23 @@
     [currentQuotes release];
     [categoryLabel release];
     [logoButton release];
+    [dateFormatter release];
     [super dealloc];
+}
+
+#pragma mark -
+
+- (NSDateFormatter*)dateFormatter
+{
+    if (!dateFormatter)
+    {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"uk_UA"] autorelease];
+        [dateFormatter setLocale:locale];
+        [dateFormatter setDoesRelativeDateFormatting:YES];
+        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    }
+    return dateFormatter;
 }
 
 #pragma mark - actions
@@ -63,7 +75,12 @@
 - (void)showCopyMenu:(UILongPressGestureRecognizer*)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        [(UBQuoteCell*)gesture.view setSelected:YES animated:NO];
+        UBQuoteCell *cell = (UBQuoteCell*)gesture.view;
+        NSIndexPath *path = [publishedQuotesTableView indexPathForCell:cell];
+        if ([path isEqual:activeCell]) {
+            return;
+        }
+        [cell setSelected:YES animated:NO];
         
         [self becomeFirstResponder];
         CGPoint location = [gesture locationInView:gesture.view];
@@ -230,7 +247,22 @@
     }
     
     UBQuote *quote = (UBQuote *)[currentQuotes objectAtIndex:indexPath.row];
+    cell.idLabel.text = [NSString stringWithFormat:@"%d", quote.quoteId];
     cell.quoteTextLabel.text = quote.text;
+    if (quote.rating > 0)
+    {
+        cell.ratingLabel.text = [NSString stringWithFormat:@"+%d", quote.rating];
+    }
+    else if (quote.rating < 0)
+    {
+        cell.ratingLabel.text = [NSString stringWithFormat:@"%d", quote.rating];
+    }
+    else
+    {
+        cell.ratingLabel.text = @"0";
+    }
+    cell.dateLabel.text = [[self dateFormatter] stringFromDate:quote.pubDate];
+    cell.authorLabel.text = quote.author;
     
 //    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
     
@@ -265,15 +297,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UBQuote *quote = [currentQuotes objectAtIndex:indexPath.row];
-    NSString *text = quote.text;
-    
-    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
-    
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-    
-    CGFloat height = MAX(size.height, 44.0f);
-    
-    return height + (CELL_CONTENT_MARGIN * 2) + (CELL_CONTENT_MARGIN * 2);
+    return [UBQuoteCell heightForQuoteText:quote.text viewWidth:publishedQuotesTableView.frame.size.width];
 }
 
 #pragma mark - UIScrollView delegate

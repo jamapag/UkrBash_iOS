@@ -13,6 +13,7 @@
 #import "UBPublishedQuotesDataSource.h"
 #import "UBBestQuotesDataSource.h"
 #import "UBRandomQuotesDataSource.h"
+#import "UBMenuItemCell.h"
 
 enum UBMenuItems {
     UBMenuItemPublishedQuotes,
@@ -126,7 +127,7 @@ enum UBMenuItems {
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] autorelease];
+        cell = [[[UBMenuItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] autorelease];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
     }
