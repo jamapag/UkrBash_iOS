@@ -20,4 +20,13 @@
 @synthesize rating;
 @synthesize text;
 
+- (void)dealloc
+{
+    [type release];
+    [addDate release];
+    [pubDate release];
+    [author release];
+    [text release];
+}
+
 @end

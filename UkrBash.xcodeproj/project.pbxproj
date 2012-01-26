@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D07888414C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */; };
 		2D144DDA1419073B009E1DBA /* UBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D144DD91419073B009E1DBA /* UBRequest.m */; };
+		2D337F4E14D1AADB00DF225F /* UBPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F4D14D1AADB00DF225F /* UBPicture.m */; };
 		2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D48CDF114C8DF2500C5696B /* UBImagesRequest.m */; };
 		2D57274C1455F5EE00A6DAE4 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274B1455F5EE00A6DAE4 /* Model.m */; };
 		2D57274F1456017900A6DAE4 /* UBQuotesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274E1456017900A6DAE4 /* UBQuotesRequest.m */; };
@@ -66,6 +67,8 @@
 		2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnpablishedQuotesDataSource.m; sourceTree = "<group>"; };
 		2D144DD81419073B009E1DBA /* UBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRequest.h; sourceTree = "<group>"; };
 		2D144DD91419073B009E1DBA /* UBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRequest.m; sourceTree = "<group>"; };
+		2D337F4C14D1AADB00DF225F /* UBPicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicture.h; sourceTree = "<group>"; };
+		2D337F4D14D1AADB00DF225F /* UBPicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicture.m; sourceTree = "<group>"; };
 		2D48CDF014C8DF2500C5696B /* UBImagesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBImagesRequest.h; sourceTree = "<group>"; };
 		2D48CDF114C8DF2500C5696B /* UBImagesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBImagesRequest.m; sourceTree = "<group>"; };
 		2D57274A1455F5EE00A6DAE4 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -330,6 +333,8 @@
 				2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */,
 				2DE54B0314C847FD00CB04CB /* UBRandomQuotesDataSource.h */,
 				2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */,
+				2D337F4C14D1AADB00DF225F /* UBPicture.h */,
+				2D337F4D14D1AADB00DF225F /* UBPicture.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -441,6 +446,7 @@
 				2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */,
 				B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */,
 				2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */,
+				2D337F4E14D1AADB00DF225F /* UBPicture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

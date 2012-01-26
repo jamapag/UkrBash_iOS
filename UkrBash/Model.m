@@ -57,7 +57,7 @@ static Model *sharedModel = nil;
     [super dealloc];
 }
 
-- (UBQuotesRequest *)createQuotesRequestWithMethod:(NSString *)method start:(NSInteger)start andLimit:(NSInteger)limit
+- (UBQuotesRequest *)newQuotesRequestWithMethod:(NSString *)method start:(NSInteger)start andLimit:(NSInteger)limit
 {
     UBQuotesRequest *request = [[UBQuotesRequest alloc] init];
     request.delegate = self;
@@ -70,7 +70,7 @@ static Model *sharedModel = nil;
 - (void)loadMorePublishedQuotes
 {
     NSLog(@"Load more published quotes");
-    UBQuotesRequest *request = [self createQuotesRequestWithMethod:kQuotes_getPublished start:[publishedQuotes count] andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getPublished start:[publishedQuotes count] andLimit:25];
     [request start];
     [requests addObject:request];
     [request release];
@@ -79,7 +79,7 @@ static Model *sharedModel = nil;
 - (void)loadMoreUnpablishedQuotes
 {
     NSLog(@"Load more upcoming quotes");
-    UBQuotesRequest *request = [self createQuotesRequestWithMethod:kQuotes_getUpcoming start:[unpablishedQuotes count] andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getUpcoming start:[unpablishedQuotes count] andLimit:25];
     [request start];
     [requests addObject:request];
     [request release];
@@ -88,7 +88,7 @@ static Model *sharedModel = nil;
 - (void)loadMoreBestQuotes
 {
     NSLog(@"Load more best quotes");
-    UBQuotesRequest *request = [self createQuotesRequestWithMethod:kQuotes_getTheBest start:[bestQuotes count] andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getTheBest start:[bestQuotes count] andLimit:25];
     [request start];
     [requests addObject:request];
     [request release];
@@ -97,7 +97,7 @@ static Model *sharedModel = nil;
 - (void)loadMoreRandomQuotes
 {
     NSLog(@"Load more random quotes");
-    UBQuotesRequest *request = [self createQuotesRequestWithMethod:kQuotes_getRandom start:[randomQuotes count] andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getRandom start:[randomQuotes count] andLimit:25];
     [request start];
     [requests addObject:request];
     [request release];
