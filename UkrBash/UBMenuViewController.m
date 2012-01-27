@@ -15,15 +15,26 @@
 #import "UBRandomQuotesDataSource.h"
 #import "UBMenuItemCell.h"
 
+enum UBMenuSections {
+    UBMenuQuotesSection,
+    UBMenuImagesSection,
+    UBMenuInfoSection,
+    UBMenuSectionsCount
+};
+
 enum UBMenuItems {
-    UBMenuItemPublishedQuotes,
-    UBMenuItemUnpublishedQuotes,
-    UBMenuItemBestQuotes,
-    UBMenuItemRandomQuotes,
-    UBMenuItemImages,
     UBMenuItemRateApp,
     UBMenuItemWebsite,
     UBMenuItemsCount
+};
+
+enum UBSubMenuItems {
+    UBSubMenuItemTitle,
+    UBSubMenuItemPublished,
+    UBSubMenuItemUnpublished,
+    UBSubMenuItemBest,
+    UBSubMenuItemRandom,
+    UBSubMenuItemsCount
 };
 
 @implementation UBMenuViewController
@@ -49,7 +60,6 @@ enum UBMenuItems {
 
 - (void)dealloc
 {
-    [menuItems release];
     [_tableView release];
     [super dealloc];
 }
@@ -94,7 +104,6 @@ enum UBMenuItems {
 {
     [super viewDidLoad];
     
-    menuItems = [[NSArray alloc] initWithObjects:@"Опубліковане", @"Неопубліковане", @"Найкраще", @"Випадкове", @"Картинки", @"Оцінити програму", @"www.ukrbash.org", nil];
 }
 
 - (void)viewDidUnload
@@ -102,7 +111,6 @@ enum UBMenuItems {
     [super viewDidUnload];
 
     [_tableView release], _tableView = nil;
-    [menuItems release], menuItems = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -115,11 +123,24 @@ enum UBMenuItems {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return UBMenuSectionsCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (UBMenuQuotesSection == section) {
+        if (isQuotesSectionFolded) {
+            return 1;
+        } else {
+            return UBSubMenuItemsCount;
+        }
+    } else if (UBMenuImagesSection == section) {
+        if (isImagesSectionFolded) {
+            return 1;
+        } else {
+            return UBSubMenuItemsCount;
+        }
+    }
     return UBMenuItemsCount;
 }
 
@@ -132,37 +153,94 @@ enum UBMenuItems {
         cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
     }
     
-    cell.textLabel.text = [menuItems objectAtIndex:indexPath.row];
+    if (indexPath.section == UBMenuImagesSection && indexPath.row == UBSubMenuItemTitle) {
+        cell.textLabel.text = @"Картинки";
+    } else if (indexPath.section == UBMenuQuotesSection && indexPath.row == UBSubMenuItemTitle) {
+        cell.textLabel.text = @"Цитати";
+    }
+    if (indexPath.section == UBMenuImagesSection || indexPath.section == UBMenuQuotesSection) {
+        if (UBSubMenuItemTitle != indexPath.row) {
+            cell.indentationLevel = 2;
+        } else {
+            cell.indentationLevel = 0;
+        }
+        if (UBSubMenuItemPublished == indexPath.row) {
+            cell.textLabel.text = @"Опубліковане";
+        } else if (UBSubMenuItemUnpublished == indexPath.row) {
+            cell.textLabel.text = @"Неопубліковане";
+        } else if (UBSubMenuItemBest == indexPath.row) {
+            cell.textLabel.text = @"Найкраще";
+        } else if (UBSubMenuItemRandom == indexPath.row) {
+            cell.textLabel.text = @"Випадкове";
+        }
+    } else if (indexPath.section == UBMenuInfoSection) {
+        cell.indentationLevel = 0;
+        if (indexPath.row == UBMenuItemRateApp) {
+            cell.textLabel.text = @"Оцінити програму";
+        } else if (indexPath.row == UBMenuItemWebsite) {
+            cell.textLabel.text = @"www.ukrbash.org";
+        }
+    }
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView setFolding:(BOOL)isFolded forSection:(NSInteger)section
+{
+    NSMutableArray *rows = [NSMutableArray array];
+    for (NSInteger i = 1; i < UBSubMenuItemsCount; i++) {
+        [rows addObject:[NSIndexPath indexPathForRow:i inSection:section]];
+    }
+    if (isFolded) {
+        [tableView deleteRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationBottom];
+    } else {
+        [tableView insertRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationTop];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (UBMenuItemPublishedQuotes == indexPath.row) {
-        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]];
-        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-        [quotesContainer release];
-    } else if (UBMenuItemUnpublishedQuotes == indexPath.row) {
-        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBUnpablishedQuotesDataSource class]];
-        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-        [quotesContainer release];
-    } else if (UBMenuItemBestQuotes == indexPath.row) {
-        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBBestQuotesDataSource class]];
-        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-        [quotesContainer release];
-    } else if (UBMenuItemRandomQuotes == indexPath.row) {
-        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBRandomQuotesDataSource class]];
-        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-        [quotesContainer release];
-    } else if (UBMenuItemImages == indexPath.row) {
+    if (UBMenuQuotesSection == indexPath.section) {
+        if (UBSubMenuItemTitle == indexPath.row) {
+            isQuotesSectionFolded = !isQuotesSectionFolded;
+            [self tableView:tableView setFolding:isQuotesSectionFolded forSection:indexPath.section];
+        } else if (UBSubMenuItemPublished == indexPath.row) {
+            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]];
+            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+            [quotesContainer release];
+        } else if (UBSubMenuItemUnpublished == indexPath.row) {
+            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBUnpablishedQuotesDataSource class]];
+            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+            [quotesContainer release];
+        } else if (UBSubMenuItemBest == indexPath.row) {
+            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBBestQuotesDataSource class]];
+            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+            [quotesContainer release];
+        } else if (UBSubMenuItemRandom == indexPath.row) {
+            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBRandomQuotesDataSource class]];
+            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+            [quotesContainer release];
+        }
+    }
+    if (UBMenuImagesSection == indexPath.section) {
+        if (UBSubMenuItemTitle == indexPath.row) {
+            isImagesSectionFolded = !isImagesSectionFolded;
+            [self tableView:tableView setFolding:isImagesSectionFolded forSection:indexPath.section];
+        }
+    }
+    /*
+    if (UBMenuItemImages == indexPath.row) {
         NSLog(@"Not implemented yet");
         return;
 //        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] init];
 //        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
 //        [quotesContainer release];
-    } else if (indexPath.row == UBMenuItemWebsite) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
+    } else 
+     */
+    if (UBMenuInfoSection == indexPath.section) {
+        if (indexPath.row == UBMenuItemWebsite) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
+        }
     }
 }
 
