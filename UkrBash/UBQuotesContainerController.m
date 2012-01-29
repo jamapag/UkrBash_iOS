@@ -11,6 +11,8 @@
 #import "UBQuote.h"
 #import "UBQuoteCell.h"
 #import "UBNavigationController.h"
+#import <MessageUI/MessageUI.h>
+#import <Twitter/Twitter.h>
 
 
 @implementation UBQuotesContainerController
@@ -240,6 +242,7 @@
     
     if(cell == nil) {
         cell = [[[UBQuoteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+        cell.shareDelegate = self;
         
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCopyMenu:)];
         [cell addGestureRecognizer:longPress];
@@ -341,6 +344,31 @@
             [self loadMoreQuotes];
         }
     }
+}
+
+#pragma mark -
+
+- (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(UBQuoteShareType)shareType
+{
+    if (shareType == UBQuoteShareFacebookType) {
+        
+    } else if (shareType == UBQuoteShareTwitterType) {
+        TWTweetComposeViewController *tweetComposer = [[TWTweetComposeViewController alloc] init];
+        [self presentModalViewController:tweetComposer animated:YES];
+        [tweetComposer release];
+    } else if (shareType == UBQuoteShareEmailType) {
+        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+        mailComposer.mailComposeDelegate = self;
+        [self presentModalViewController:mailComposer animated:YES];
+        [mailComposer release];
+    }
+}
+
+#pragma mark - 
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end
