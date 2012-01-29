@@ -192,7 +192,7 @@ enum UBSubMenuItems {
         [rows addObject:[NSIndexPath indexPathForRow:i inSection:section]];
     }
     if (isFolded) {
-        [tableView deleteRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationBottom];
+        [tableView deleteRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationTop];
     } else {
         [tableView insertRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationTop];
     }
