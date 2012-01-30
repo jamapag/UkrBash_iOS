@@ -44,4 +44,13 @@
     }
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.imageView.transform = CGAffineTransformIdentity;
+    self.indentationLevel = 1;
+    self.indentationWidth = 10.;
+}
+
 @end

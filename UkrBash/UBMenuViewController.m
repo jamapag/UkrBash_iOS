@@ -157,6 +157,12 @@ enum UBSubMenuItems {
         cell.textLabel.text = @"Картинки";
     } else if (indexPath.section == UBMenuQuotesSection && indexPath.row == UBSubMenuItemTitle) {
         cell.textLabel.text = @"Цитати";
+
+        if (isQuotesSectionFolded) {
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin-45"];
+        }
     }
     if (indexPath.section == UBMenuImagesSection || indexPath.section == UBMenuQuotesSection) {
         if (UBSubMenuItemTitle != indexPath.row) {
@@ -196,6 +202,11 @@ enum UBSubMenuItems {
     } else {
         [tableView insertRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationTop];
     }
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    [UIView animateWithDuration:.3 animations:^{
+        cell.imageView.transform = CGAffineTransformRotate(cell.imageView.transform, -M_PI_4);
+    }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
