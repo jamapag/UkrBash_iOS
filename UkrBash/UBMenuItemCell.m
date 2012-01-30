@@ -32,14 +32,16 @@
             }];
         } else {
             [UIView animateWithDuration:1. animations:^ {
-            self.textLabel.textColor = [UIColor blackColor];
+                self.textLabel.textColor = [UIColor colorWithWhite:.25 alpha:1.];
             }];
         }
     } else {
         if (selected) {
             self.textLabel.textColor = [UIColor colorWithRed:.04 green:.6 blue:.97 alpha:1.];
+            self.textLabel.shadowOffset = CGSizeZero;
         } else {
-            self.textLabel.textColor = [UIColor blackColor];
+            self.textLabel.textColor = [UIColor colorWithWhite:.25 alpha:1.];
+            self.textLabel.shadowOffset = CGSizeMake(0., 1.);
         }
     }
 }

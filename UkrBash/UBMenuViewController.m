@@ -149,12 +149,21 @@ enum UBSubMenuItems {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[[UBMenuItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] autorelease];
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        cell.textLabel.shadowColor = [UIColor whiteColor];
+        cell.textLabel.shadowOffset = CGSizeMake(0., 1.);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
     }
     
     if (indexPath.section == UBMenuImagesSection && indexPath.row == UBSubMenuItemTitle) {
         cell.textLabel.text = @"Картинки";
+
+        if (isImagesSectionFolded) {
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin-45"];
+        }
     } else if (indexPath.section == UBMenuQuotesSection && indexPath.row == UBSubMenuItemTitle) {
         cell.textLabel.text = @"Цитати";
 
