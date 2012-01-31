@@ -63,6 +63,7 @@
         _viewController.view.layer.shadowRadius = 10.;
         _viewController.view.layer.shadowColor = [[UIColor blackColor] CGColor];
         _viewController.view.layer.shadowOpacity = .5;
+        _viewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:_viewController.view.bounds].CGPath;
         if (animated) {
             // TODO: do appearence animation here
             CGFloat x = _viewController.view.center.x + self.view.frame.size.width - 15.;
@@ -116,6 +117,7 @@
     borderView.layer.shadowRadius = 10.;
     borderView.layer.shadowColor = [[UIColor blackColor] CGColor];
     borderView.layer.shadowOpacity = .5;
+    borderView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0., -20., borderView.frame.size.width + 20., borderView.frame.size.height + 20.)].CGPath;
 
     if (_menuViewController) {
         _menuViewController.view.frame = CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height);
