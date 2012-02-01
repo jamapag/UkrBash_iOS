@@ -221,26 +221,40 @@ enum UBSubMenuItems {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (UBMenuItemPublishedQuotes == indexPath.row) {
-        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]];
-        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-        [quotesContainer release];
-    } else if (UBMenuItemUnpublishedQuotes == indexPath.row) {
-        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBUnpablishedQuotesDataSource class]];
-        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-        [quotesContainer release];
-    } else if (UBMenuItemBestQuotes == indexPath.row) {
-        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBBestQuotesDataSource class]];
-        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-        [quotesContainer release];
-    } else if (UBMenuItemRandomQuotes == indexPath.row) {
-        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBRandomQuotesDataSource class]];
-        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-        [quotesContainer release];
-    } else if (UBMenuItemImages == indexPath.row) {
-        UBQuotesContainerController *picturesController = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedPicturesDataSource class]];
-        [self.ubNavigationController pushViewController:picturesController animated:YES];
-        [picturesController release];
+    if (UBMenuQuotesSection == indexPath.section) {
+        if (UBSubMenuItemTitle == indexPath.row) {
+            isQuotesSectionFolded = !isQuotesSectionFolded;
+            [self tableView:tableView setFolding:isQuotesSectionFolded forSection:indexPath.section];
+        } else if (UBSubMenuItemPublished == indexPath.row) {
+            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]];
+            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+            [quotesContainer release];
+        } else if (UBSubMenuItemUnpublished == indexPath.row) {
+            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBUnpablishedQuotesDataSource class]];
+            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+            [quotesContainer release];
+        } else if (UBSubMenuItemBest == indexPath.row) {
+            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBBestQuotesDataSource class]];
+            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+            [quotesContainer release];
+        } else if (UBSubMenuItemRandom == indexPath.row) {
+            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBRandomQuotesDataSource class]];
+            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+            [quotesContainer release];
+        }
+    }
+    if (UBMenuImagesSection == indexPath.section) {
+        if (UBSubMenuItemTitle == indexPath.row) {
+            isImagesSectionFolded = !isImagesSectionFolded;
+            [self tableView:tableView setFolding:isImagesSectionFolded forSection:indexPath.section];
+        } else {
+            UBQuotesContainerController *picturesController = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedPicturesDataSource class]];
+            [self.ubNavigationController pushViewController:picturesController animated:YES];
+            [picturesController release];
+        }
+    }
+    /*
+    if (UBMenuItemImages == indexPath.row) {
         NSLog(@"Not implemented yet");
         return;
 //        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] init];

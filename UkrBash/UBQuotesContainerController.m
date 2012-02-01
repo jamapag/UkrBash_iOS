@@ -13,6 +13,8 @@
 #import "UBQuoteCell.h"
 #import "UBNavigationController.h"
 #import "UBPublishedPicturesDataSource.h"
+#import <MessageUI/MessageUI.h>
+#import <Twitter/Twitter.h>
 
 
 @implementation UBQuotesContainerController
