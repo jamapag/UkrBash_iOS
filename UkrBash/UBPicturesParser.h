@@ -13,4 +13,6 @@
     
 }
 
+- (NSArray *)parsePicturesWithData:(NSData *)xmlData;
+
 @end

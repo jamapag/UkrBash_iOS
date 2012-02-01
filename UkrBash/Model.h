@@ -10,7 +10,7 @@
 #import "UBRequest.h"
 #import "UBParser.h"
 
-extern NSString *const kNotificationPublishedQuotesUpdated;
+extern NSString *const kNotificationDataUpdated;
 
 @interface Model : NSObject <UBRequestDelegate>
 {
@@ -33,5 +33,6 @@ extern NSString *const kNotificationPublishedQuotesUpdated;
 - (void)loadMoreUnpablishedQuotes;
 - (void)loadMoreBestQuotes;
 - (void)loadMoreRandomQuotes;
+- (void)loadMorePublishedPictures;
 
 @end

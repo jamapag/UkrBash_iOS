@@ -14,6 +14,7 @@
 #import "UBBestQuotesDataSource.h"
 #import "UBRandomQuotesDataSource.h"
 #import "UBMenuItemCell.h"
+#import "UBPublishedPicturesDataSource.h"
 
 enum UBMenuItems {
     UBMenuItemPublishedQuotes,
@@ -156,6 +157,9 @@ enum UBMenuItems {
         [self.ubNavigationController pushViewController:quotesContainer animated:YES];
         [quotesContainer release];
     } else if (UBMenuItemImages == indexPath.row) {
+        UBQuotesContainerController *picturesController = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedPicturesDataSource class]];
+        [self.ubNavigationController pushViewController:picturesController animated:YES];
+        [picturesController release];
         NSLog(@"Not implemented yet");
         return;
 //        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] init];

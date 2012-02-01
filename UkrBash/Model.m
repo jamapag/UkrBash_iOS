@@ -9,9 +9,10 @@
 #import "Model.h"
 #import "UBQuotesRequest.h"
 #import "UBQuotesParser.h"
+#import "UBPicturesParser.h"
 #import "UBImagesRequest.h"
 
-NSString *const kNotificationPublishedQuotesUpdated = @"kNotificationPublishedQuotesUpdated";
+NSString *const kNotificationDataUpdated = @"kNotificationDataUpdated";
 
 @implementation Model
 
@@ -42,6 +43,7 @@ static Model *sharedModel = nil;
         unpablishedQuotes = [[NSMutableArray alloc] init];
         bestQuotes = [[NSMutableArray alloc] init];
         randomQuotes = [[NSMutableArray alloc] init];
+        publishedImages = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -103,14 +105,15 @@ static Model *sharedModel = nil;
     [request release];
 }
 
-- (void)loadMoreImages
+- (void)loadMorePublishedPictures
 {
-    NSLog(@"Load more images");
+    NSLog(@"Load more pictures");
     UBImagesRequest *request = [[UBImagesRequest alloc] init];
     request.delegate = self;
     request.method = kPictures_getPublished;
     [request setLimit:25];
-    [request setStart:0];
+    [request setStart:[publishedImages count]];
+    [request start];
     [requests addObject:request];
     [request release];
 }
@@ -120,8 +123,17 @@ static Model *sharedModel = nil;
 {
     NSLog(@"Did finish with data");
     // TODO: Add errors parser
-    UBQuotesParser *parser = [[UBQuotesParser alloc] init];
-    NSArray *array = [parser parseQuotesWithData:data];
+    NSArray *array = nil;
+    if ([request isKindOfClass:[UBQuotesRequest class]]) {
+        UBQuotesParser *parser = [[UBQuotesParser alloc] init];
+        array = [parser parseQuotesWithData:data];
+        [parser release];
+    } else {
+        UBPicturesParser *parser = [[UBPicturesParser alloc] init];
+        array = [parser parsePicturesWithData:data];
+        [parser release];
+    }
+    
     if ([request.method isEqualToString:kQuotes_getPublished]) {
         [publishedQuotes addObjectsFromArray:array];
     } else if ([request.method isEqualToString:kQuotes_getUpcoming]) {
@@ -133,9 +145,9 @@ static Model *sharedModel = nil;
     } else if ([request.method isEqualToString:kPictures_getPublished]) {
         [publishedImages addObjectsFromArray:array];
     }
-    [parser release];
+
     [requests removeObject:request];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPublishedQuotesUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDataUpdated object:nil];
 }
 
 - (void)request:(UBRequest *)request didFailWithError:(NSError *)error

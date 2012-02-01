@@ -9,8 +9,10 @@
 #import "UBQuotesContainerController.h"
 #import "Model.h"
 #import "UBQuote.h"
+#import "UBPicture.h"
 #import "UBQuoteCell.h"
 #import "UBNavigationController.h"
+#import "UBPublishedPicturesDataSource.h"
 
 
 @implementation UBQuotesContainerController
@@ -133,7 +135,7 @@
     [self.view addSubview:publishedQuotesTableView];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(publishedQuotesUpdated:)
-                                                 name:kNotificationPublishedQuotesUpdated
+                                                 name:kNotificationDataUpdated
                                                object:nil];
     
     logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 5., 165., 38.)];
@@ -246,6 +248,20 @@
         [longPress release];
     }
     
+    if ([dataSource isMemberOfClass:[UBPublishedPicturesDataSource class]]) {
+        UBPicture *picture = (UBPicture *)[currentQuotes objectAtIndex:indexPath.row];
+        cell.idLabel.text = [NSString stringWithFormat:@"%d", picture.pictureId];
+        cell.quoteTextLabel.text = picture.title;
+        if (picture.rating > 0) {
+            cell.ratingLabel.text = [NSString stringWithFormat:@"+%d", picture.rating];
+        } else {
+            cell.ratingLabel.text = [NSString stringWithFormat:@"%d", picture.rating];
+        }
+        cell.dateLabel.text = [[self dateFormatter] stringFromDate:picture.pubDate];
+        cell.authorLabel.text = picture.author;
+        return cell;
+    }
+    
     UBQuote *quote = (UBQuote *)[currentQuotes objectAtIndex:indexPath.row];
     cell.idLabel.text = [NSString stringWithFormat:@"%d", quote.quoteId];
     cell.quoteTextLabel.text = quote.text;
@@ -296,6 +312,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([dataSource isMemberOfClass:[UBPublishedPicturesDataSource class]]) {
+        return 70.;
+    }
+    
     UBQuote *quote = [currentQuotes objectAtIndex:indexPath.row];
     return [UBQuoteCell heightForQuoteText:quote.text viewWidth:publishedQuotesTableView.frame.size.width];
 }
