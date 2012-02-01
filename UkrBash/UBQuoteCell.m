@@ -8,10 +8,14 @@
 
 #import "UBQuoteCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import <Twitter/Twitter.h>
+#import <MessageUI/MessageUI.h>
 
 #define FONT_SIZE 12.0f
 #define CELL_CONTENT_MARGIN 5.0f
 #define INFO_LABELS_HEIGHT 12.0f
+
+CGFloat animationOffset = 52.;
 
 @implementation UBQuoteCell
 
@@ -21,6 +25,7 @@
 @synthesize authorLabel;
 @synthesize idLabel;
 @synthesize shareButtonsVisible;
+@synthesize shareDelegate;
 
 + (CGFloat)heightForQuoteText:(NSString*)text viewWidth:(CGFloat)width
 {
@@ -35,17 +40,23 @@
 
 - (void)shareWithFacebookAction:(id)sender
 {
-    
+    if (self.shareDelegate) {
+        [self.shareDelegate quoteCell:self shareQuoteWithType:UBQuoteShareFacebookType];
+    }
 }
 
 - (void)shareWithTwitterAction:(id)sender
 {
-    
+    if (self.shareDelegate) {
+        [self.shareDelegate quoteCell:self shareQuoteWithType:UBQuoteShareTwitterType];
+    }
 }
 
 - (void)shareWithEmailAction:(id)sender
 {
-    
+    if (self.shareDelegate) {
+        [self.shareDelegate quoteCell:self shareQuoteWithType:UBQuoteShareEmailType];
+    }
 }
 
 - (void)hideShareButtons
@@ -63,7 +74,7 @@
 {
     [UIView animateWithDuration:.4 animations:^(void) {
         CGRect rect = containerView.frame;
-        rect.origin.x = self.bounds.origin.x + 15 + 160.;
+        rect.origin.x = self.bounds.origin.x + 15 + animationOffset;
         containerView.frame = rect;
     } completion:^(BOOL finished) {
         shareButtonsVisible = YES;
@@ -136,21 +147,30 @@
         [shareBtn addTarget:self action:@selector(shareWithFacebookAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:shareBtn];
         x += shareButtonWidth + 10.;
+        animationOffset = x;
 
-        shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
-        shareBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-        [shareBtn setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
-        [shareBtn addTarget:self action:@selector(shareWithTwitterAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:shareBtn];
-        x += shareButtonWidth + 10.;
+        if ([TWTweetComposeViewController canSendTweet]) {
+            shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
+            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+            [shareBtn setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
+            [shareBtn addTarget:self action:@selector(shareWithTwitterAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self.contentView addSubview:shareBtn];
+            x += shareButtonWidth + 10.;
+            
+            animationOffset += shareButtonWidth + 10.;
+        }
         
-        shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
-        shareBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-        [shareBtn setImage:[UIImage imageNamed:@"gmail"] forState:UIControlStateNormal];
-        [shareBtn addTarget:self action:@selector(shareWithEmailAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:shareBtn];
+        if ([MFMailComposeViewController canSendMail]) {
+            shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
+            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+            [shareBtn setImage:[UIImage imageNamed:@"gmail"] forState:UIControlStateNormal];
+            [shareBtn addTarget:self action:@selector(shareWithEmailAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self.contentView addSubview:shareBtn];
+            
+            animationOffset += shareButtonWidth + 10.;
+        }
         
         [self.contentView addSubview:containerView];
     }
@@ -165,6 +185,7 @@
     [dateLabel release];
     [authorLabel release];
     [idLabel release];
+    shareDelegate = nil;
     [super dealloc];
 }
 

@@ -13,7 +13,7 @@
 {
     UITableView *_tableView;
     UIButton *logoButton;
-    NSArray *menuItems;
+    BOOL isQuotesSectionFolded, isImagesSectionFolded;
 }
 
 @property (nonatomic, readonly) UITableView *tableView;

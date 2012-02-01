@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum  {
+    UBQuoteShareFacebookType,
+    UBQuoteShareTwitterType,
+    UBQuoteShareEmailType
+} UBQuoteShareType;
+
+@class UBQuoteCell;
+
+@protocol UBQuoteCellDelegate <NSObject>
+
+- (void)quoteCell:(UBQuoteCell*)cell shareQuoteWithType:(UBQuoteShareType)shareType;
+
+@end
+
 @interface UBQuoteCell : UITableViewCell
 {
     UILabel *quoteTextLabel;
@@ -17,6 +31,7 @@
     UILabel *idLabel;
     UIView *containerView;
     BOOL shareButtonsVisible;
+    id <UBQuoteCellDelegate> shareDelegate;
 }
 
 @property (nonatomic, readonly) UILabel *quoteTextLabel;
@@ -25,6 +40,8 @@
 @property (nonatomic, readonly) UILabel *authorLabel;
 @property (nonatomic, readonly) UILabel *idLabel;
 @property (nonatomic, readonly) BOOL shareButtonsVisible;
+
+@property (nonatomic, assign) id <UBQuoteCellDelegate> shareDelegate;
 
 + (CGFloat)heightForQuoteText:(NSString*)text viewWidth:(CGFloat)width;
 

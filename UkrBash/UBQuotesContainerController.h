@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "UBViewController.h"
 #import "UBUnpablishedQuotesDataSource.h"
+#import "UBQuoteCell.h"
 
-@interface UBQuotesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource>
+@interface UBQuotesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource, UBQuoteCellDelegate, MFMailComposeViewControllerDelegate>
 {
     NSArray *currentQuotes;
     UITableView *publishedQuotesTableView;

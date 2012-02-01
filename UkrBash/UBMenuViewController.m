@@ -16,15 +16,26 @@
 #import "UBMenuItemCell.h"
 #import "UBPublishedPicturesDataSource.h"
 
+enum UBMenuSections {
+    UBMenuQuotesSection,
+    UBMenuImagesSection,
+    UBMenuInfoSection,
+    UBMenuSectionsCount
+};
+
 enum UBMenuItems {
-    UBMenuItemPublishedQuotes,
-    UBMenuItemUnpublishedQuotes,
-    UBMenuItemBestQuotes,
-    UBMenuItemRandomQuotes,
-    UBMenuItemImages,
     UBMenuItemRateApp,
     UBMenuItemWebsite,
     UBMenuItemsCount
+};
+
+enum UBSubMenuItems {
+    UBSubMenuItemTitle,
+    UBSubMenuItemPublished,
+    UBSubMenuItemUnpublished,
+    UBSubMenuItemBest,
+    UBSubMenuItemRandom,
+    UBSubMenuItemsCount
 };
 
 @implementation UBMenuViewController
@@ -50,7 +61,6 @@ enum UBMenuItems {
 
 - (void)dealloc
 {
-    [menuItems release];
     [_tableView release];
     [super dealloc];
 }
@@ -95,7 +105,6 @@ enum UBMenuItems {
 {
     [super viewDidLoad];
     
-    menuItems = [[NSArray alloc] initWithObjects:@"Опубліковане", @"Неопубліковане", @"Найкраще", @"Випадкове", @"Картинки", @"Оцінити програму", @"www.ukrbash.org", nil];
 }
 
 - (void)viewDidUnload
@@ -103,7 +112,6 @@ enum UBMenuItems {
     [super viewDidUnload];
 
     [_tableView release], _tableView = nil;
-    [menuItems release], menuItems = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -116,11 +124,24 @@ enum UBMenuItems {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return UBMenuSectionsCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (UBMenuQuotesSection == section) {
+        if (isQuotesSectionFolded) {
+            return 1;
+        } else {
+            return UBSubMenuItemsCount;
+        }
+    } else if (UBMenuImagesSection == section) {
+        if (isImagesSectionFolded) {
+            return 1;
+        } else {
+            return UBSubMenuItemsCount;
+        }
+    }
     return UBMenuItemsCount;
 }
 
@@ -129,13 +150,73 @@ enum UBMenuItems {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[[UBMenuItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] autorelease];
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        cell.textLabel.shadowColor = [UIColor whiteColor];
+        cell.textLabel.shadowOffset = CGSizeMake(0., 1.);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
     }
     
-    cell.textLabel.text = [menuItems objectAtIndex:indexPath.row];
+    if (indexPath.section == UBMenuImagesSection && indexPath.row == UBSubMenuItemTitle) {
+        cell.textLabel.text = @"Картинки";
+
+        if (isImagesSectionFolded) {
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin-45"];
+        }
+    } else if (indexPath.section == UBMenuQuotesSection && indexPath.row == UBSubMenuItemTitle) {
+        cell.textLabel.text = @"Цитати";
+
+        if (isQuotesSectionFolded) {
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin-45"];
+        }
+    }
+    if (indexPath.section == UBMenuImagesSection || indexPath.section == UBMenuQuotesSection) {
+        if (UBSubMenuItemTitle != indexPath.row) {
+            cell.indentationLevel = 2;
+        } else {
+            cell.indentationLevel = 0;
+        }
+        if (UBSubMenuItemPublished == indexPath.row) {
+            cell.textLabel.text = @"Опубліковане";
+        } else if (UBSubMenuItemUnpublished == indexPath.row) {
+            cell.textLabel.text = @"Неопубліковане";
+        } else if (UBSubMenuItemBest == indexPath.row) {
+            cell.textLabel.text = @"Найкраще";
+        } else if (UBSubMenuItemRandom == indexPath.row) {
+            cell.textLabel.text = @"Випадкове";
+        }
+    } else if (indexPath.section == UBMenuInfoSection) {
+        cell.indentationLevel = 0;
+        if (indexPath.row == UBMenuItemRateApp) {
+            cell.textLabel.text = @"Оцінити програму";
+        } else if (indexPath.row == UBMenuItemWebsite) {
+            cell.textLabel.text = @"www.ukrbash.org";
+        }
+    }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView setFolding:(BOOL)isFolded forSection:(NSInteger)section
+{
+    NSMutableArray *rows = [NSMutableArray array];
+    for (NSInteger i = 1; i < UBSubMenuItemsCount; i++) {
+        [rows addObject:[NSIndexPath indexPathForRow:i inSection:section]];
+    }
+    if (isFolded) {
+        [tableView deleteRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationTop];
+    } else {
+        [tableView insertRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationTop];
+    }
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    [UIView animateWithDuration:.3 animations:^{
+        cell.imageView.transform = CGAffineTransformRotate(cell.imageView.transform, -M_PI_4);
+    }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -165,8 +246,12 @@ enum UBMenuItems {
 //        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] init];
 //        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
 //        [quotesContainer release];
-    } else if (indexPath.row == UBMenuItemWebsite) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
+    } else 
+     */
+    if (UBMenuInfoSection == indexPath.section) {
+        if (indexPath.row == UBMenuItemWebsite) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
+        }
     }
 }
 
