@@ -259,12 +259,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([dataSource isMemberOfClass:[UBPublishedPicturesDataSource class]]) {
-        return 70.;
-    }
-    
-    UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
-    return [UBQuoteCell heightForQuoteText:quote.text viewWidth:publishedQuotesTableView.frame.size.width];
+    return [dataSource heightForCellAtIndexPath:indexPath maxWidth:publishedQuotesTableView.frame.size.width];
+//    if ([dataSource isMemberOfClass:[UBPublishedPicturesDataSource class]]) {
+//        return 70.;
+//    }
+//    
+//    UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
+//    return [UBQuoteCell heightForQuoteText:quote.text viewWidth:publishedQuotesTableView.frame.size.width];
 }
 
 #pragma mark - UIScrollView delegate

@@ -31,4 +31,9 @@
     cell.authorLabel.text = picture.author;
 }
 
+- (CGFloat)heightForCellAtIndexPath:(NSIndexPath *)indexPath maxWidth:(CGFloat)width
+{
+    return 70.;
+}
+
 @end
