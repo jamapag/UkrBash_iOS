@@ -210,6 +210,8 @@ CGFloat animationOffset = 52.;
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+    
     CGRect rect = self.bounds;
     rect.origin.x += 15;
     rect.origin.y += 5;

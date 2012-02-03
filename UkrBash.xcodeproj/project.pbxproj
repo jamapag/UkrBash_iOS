@@ -51,6 +51,7 @@
 		B0604E2D14D5F4A500F8ADB0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2C14D5F4A500F8ADB0 /* MessageUI.framework */; };
 		B0604E3014D5F4AE00F8ADB0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */; };
 		B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */; };
+		B09B37C414DC7649003E732D /* UBImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37C314DC7649003E732D /* UBImageCell.m */; };
 		B0B8DBC614B8617A00B07FDD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBC514B8617A00B07FDD /* Default.png */; };
 		B0B8DBC914B8618600B07FDD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBC814B8618600B07FDD /* Default@2x.png */; };
 		B0B8DBCC14B8635100B07FDD /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBCA14B8635100B07FDD /* logo.png */; };
@@ -140,6 +141,8 @@
 		B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMenuItemCell.h; sourceTree = "<group>"; };
 		B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMenuItemCell.m; sourceTree = "<group>"; };
+		B09B37C214DC7649003E732D /* UBImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBImageCell.h; sourceTree = "<group>"; };
+		B09B37C314DC7649003E732D /* UBImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBImageCell.m; sourceTree = "<group>"; };
 		B0B8DBC514B8617A00B07FDD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		B0B8DBC814B8618600B07FDD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		B0B8DBCA14B8635100B07FDD /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */,
 				B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */,
 				B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */,
+				B09B37C214DC7649003E732D /* UBImageCell.h */,
+				B09B37C314DC7649003E732D /* UBImageCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 				2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */,
 				2D337F4E14D1AADB00DF225F /* UBPicture.m in Sources */,
 				2D337F5114D1B2F600DF225F /* UBPublishedPicturesDataSource.m in Sources */,
+				B09B37C414DC7649003E732D /* UBImageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
