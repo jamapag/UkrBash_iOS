@@ -18,5 +18,6 @@
 - (NSArray*)items;
 - (void)loadMoreItems;
 - (NSDateFormatter*)dateFormatter;
+- (NSString*)ratingStringFromRating:(NSInteger)rating;
 
 @end

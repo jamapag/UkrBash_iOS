@@ -26,18 +26,7 @@
     UBQuote *quote = (UBQuote *)[[self items] objectAtIndex:indexPath.row];
     cell.idLabel.text = [NSString stringWithFormat:@"%d", quote.quoteId];
     cell.quoteTextLabel.text = quote.text;
-    if (quote.rating > 0)
-    {
-        cell.ratingLabel.text = [NSString stringWithFormat:@"+%d", quote.rating];
-    }
-    else if (quote.rating < 0)
-    {
-        cell.ratingLabel.text = [NSString stringWithFormat:@"%d", quote.rating];
-    }
-    else
-    {
-        cell.ratingLabel.text = @"0";
-    }
+    cell.ratingLabel.text = [self ratingStringFromRating:quote.rating];
     cell.dateLabel.text = [[self dateFormatter] stringFromDate:quote.pubDate];
     cell.authorLabel.text = quote.author;
 }

@@ -26,18 +26,7 @@
     UBPicture *picture = (UBPicture *)[[self items] objectAtIndex:indexPath.row];
     cell.idLabel.text = [NSString stringWithFormat:@"%d", picture.pictureId];
     cell.quoteTextLabel.text = picture.title;
-    if (picture.rating > 0)
-    {
-        cell.ratingLabel.text = [NSString stringWithFormat:@"+%d", picture.rating];
-    }
-    else if (picture.rating < 0)
-    {
-        cell.ratingLabel.text = [NSString stringWithFormat:@"%d", picture.rating];
-    }
-    else
-    {
-        cell.ratingLabel.text = @"0";
-    }
+    cell.ratingLabel.text = [self ratingStringFromRating:picture.rating];
     cell.dateLabel.text = [[self dateFormatter] stringFromDate:picture.pubDate];
     cell.authorLabel.text = picture.author;
 }

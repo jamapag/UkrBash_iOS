@@ -29,6 +29,17 @@
     return dateFormatter;
 }
 
+- (NSString *)ratingStringFromRating:(NSInteger)rating
+{
+    if (rating > 0) {
+        return [NSString stringWithFormat:@"+%d", rating];
+    } else if (rating < 0) {
+        return [NSString stringWithFormat:@"%d", rating];
+    } else {
+        return @"0";
+    }
+}
+
 - (UITableViewCell *)cellWithReuesIdentifier:(NSString *)reuseIdent
 {
     return [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdent] autorelease];
