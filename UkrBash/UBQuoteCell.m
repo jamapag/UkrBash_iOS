@@ -142,7 +142,7 @@ CGFloat animationOffset = 52.;
         CGFloat shareButtonWidth = 32.;
         UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
-        shareBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
         [shareBtn setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
         [shareBtn addTarget:self action:@selector(shareWithFacebookAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:shareBtn];
@@ -152,7 +152,7 @@ CGFloat animationOffset = 52.;
         if ([TWTweetComposeViewController canSendTweet]) {
             shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
-            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
             [shareBtn setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
             [shareBtn addTarget:self action:@selector(shareWithTwitterAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:shareBtn];
@@ -164,7 +164,7 @@ CGFloat animationOffset = 52.;
         if ([MFMailComposeViewController canSendMail]) {
             shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
-            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
             [shareBtn setImage:[UIImage imageNamed:@"gmail"] forState:UIControlStateNormal];
             [shareBtn addTarget:self action:@selector(shareWithEmailAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:shareBtn];

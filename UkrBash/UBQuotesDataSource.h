@@ -7,10 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UBTableViewDataSource.h"
 
-@protocol UBQuotesDataSource <NSObject>
-
-- (NSArray *)getQuotes;
-- (void)loadMoreQuotes;
+@interface UBQuotesDataSource : UBTableViewDataSource 
 
 @end

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UBQuotesDataSource.h"
+#import "UBTableViewDataSource.h"
 
-@interface UBPublishedPicturesDataSource : NSObject <UBQuotesDataSource>
+@interface UBPublishedPicturesDataSource : UBTableViewDataSource
 
 @end

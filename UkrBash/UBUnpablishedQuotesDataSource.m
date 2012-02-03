@@ -11,12 +11,12 @@
 
 @implementation UBUnpablishedQuotesDataSource
 
-- (NSArray *)getQuotes
+- (NSArray *)items
 {
     return [[Model sharedModel] unpablishedQuotes];
 }
 
-- (void)loadMoreQuotes
+- (void)loadMoreItems
 {
     [[Model sharedModel] loadMoreUnpablishedQuotes];
 }

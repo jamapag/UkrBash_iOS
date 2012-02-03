@@ -3,30 +3,28 @@
 //  UkrBash
 //
 //  Created by Maks Markovets on 21.12.11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 smile2mobile. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "UBViewController.h"
-#import "UBUnpablishedQuotesDataSource.h"
 #import "UBQuoteCell.h"
+#import "UBTableViewDataSource.h"
 
 @interface UBQuotesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource, UBQuoteCellDelegate, MFMailComposeViewControllerDelegate>
 {
-    NSArray *currentQuotes;
     UITableView *publishedQuotesTableView;
     UIButton *logoButton;
     UILabel *categoryLabel;
     NSIndexPath *activeCell;
-    NSDateFormatter *dateFormatter;
     
-    id <UBQuotesDataSource> dataSource;
+    UBTableViewDataSource *dataSource;
     
     BOOL loading;
 }
 
-@property (nonatomic, retain) id <UBQuotesDataSource> dataSource;
+@property (nonatomic, retain) UBTableViewDataSource *dataSource;
 
 - (id)initWithDataSourceClass:(Class)dataSourceClass;
 - (void)showFooter;

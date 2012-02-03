@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "UBQuotesDataSource.h"
 
-@interface UBPublishedQuotesDataSource : NSObject <UBQuotesDataSource>
+@interface UBPublishedQuotesDataSource : UBQuotesDataSource
 
 @end

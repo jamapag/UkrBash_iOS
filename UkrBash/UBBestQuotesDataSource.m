@@ -11,13 +11,14 @@
 
 @implementation UBBestQuotesDataSource
 
-- (NSArray *)getQuotes
+- (NSArray *)items
 {
     return [[Model sharedModel] bestQuotes];
 }
 
-- (void)loadMoreQuotes
+- (void)loadMoreItems
 {
     [[Model sharedModel] loadMoreBestQuotes];
 }
+
 @end

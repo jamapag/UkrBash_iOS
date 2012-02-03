@@ -11,12 +11,12 @@
 
 @implementation UBPublishedQuotesDataSource
 
-- (NSArray *)getQuotes
+- (NSArray *)items
 {
     return [[Model sharedModel] publishedQuotes];
 }
 
-- (void)loadMoreQuotes
+- (void)loadMoreItems
 {
     [[Model sharedModel] loadMorePublishedQuotes];
 }

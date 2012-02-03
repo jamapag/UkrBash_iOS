@@ -11,12 +11,12 @@
 
 @implementation UBRandomQuotesDataSource
 
-- (NSArray *)getQuotes
+- (NSArray *)items
 {
     return [[Model sharedModel] randomQuotes];
 }
 
-- (void)loadMoreQuotes
+- (void)loadMoreItems
 {
     [[Model sharedModel] loadMoreRandomQuotes];
 }

@@ -3,7 +3,7 @@
 //  UkrBash
 //
 //  Created by Maks Markovets on 21.12.11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 smile2mobile. All rights reserved.
 //
 
 #import "UBQuotesContainerController.h"
@@ -42,26 +42,9 @@
     [dataSource release];
     [activeCell release];
     [publishedQuotesTableView release];
-    [currentQuotes release];
     [categoryLabel release];
     [logoButton release];
-    [dateFormatter release];
     [super dealloc];
-}
-
-#pragma mark -
-
-- (NSDateFormatter*)dateFormatter
-{
-    if (!dateFormatter)
-    {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"uk_UA"] autorelease];
-        [dateFormatter setLocale:locale];
-        [dateFormatter setDoesRelativeDateFormatting:YES];
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    }
-    return dateFormatter;
 }
 
 #pragma mark - actions
@@ -115,8 +98,6 @@
 - (void)loadView
 {
     [super loadView];
-    
-    currentQuotes = [[dataSource getQuotes] retain];
     
 //    [[Model sharedModel] loadPublishedQuotes];
 //    loading = YES;
@@ -177,7 +158,6 @@
     // e.g. self.myOutlet = nil;
     [activeCell release], activeCell = nil;
     [publishedQuotesTableView release], publishedQuotesTableView = nil;
-    [currentQuotes release], currentQuotes = nil;
     [categoryLabel release], categoryLabel = nil;
     [logoButton release], logoButton = nil;
 }
@@ -204,7 +184,7 @@
 {
     [self showFooter];
     loading = YES;
-    [dataSource loadMoreQuotes];
+    [dataSource loadMoreItems];
 }
 
 - (void)showFooter
@@ -234,12 +214,28 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [currentQuotes count];
+    return [[dataSource items] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"Cell";
     
+    UBQuoteCell *cell = (UBQuoteCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = (UBQuoteCell *)[dataSource cellWithReuesIdentifier:cellIdentifier];
+
+        cell.shareDelegate = self;
+        
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCopyMenu:)];
+        [cell addGestureRecognizer:longPress];
+        [longPress release];
+    }
+    
+    [dataSource configureCell:cell forRowAtIndexPath:indexPath];
+    
+    return cell;
+    
+    /*
     UBQuoteCell *cell = (UBQuoteCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if(cell == nil) {
@@ -264,32 +260,7 @@
         cell.authorLabel.text = picture.author;
         return cell;
     }
-    
-    UBQuote *quote = (UBQuote *)[currentQuotes objectAtIndex:indexPath.row];
-    cell.idLabel.text = [NSString stringWithFormat:@"%d", quote.quoteId];
-    cell.quoteTextLabel.text = quote.text;
-    if (quote.rating > 0)
-    {
-        cell.ratingLabel.text = [NSString stringWithFormat:@"+%d", quote.rating];
-    }
-    else if (quote.rating < 0)
-    {
-        cell.ratingLabel.text = [NSString stringWithFormat:@"%d", quote.rating];
-    }
-    else
-    {
-        cell.ratingLabel.text = @"0";
-    }
-    cell.dateLabel.text = [[self dateFormatter] stringFromDate:quote.pubDate];
-    cell.authorLabel.text = quote.author;
-    
-//    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
-    
-//    CGSize size = [quote.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-    
-//    cell.quoteTextLabel.frame = CGRectMake(CELL_CONTENT_MARGIN, CELL_CONTENT_MARGIN, CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), MAX(size.height, 44.0f));
-
-    return cell;
+     */
 }
 
 #pragma mark - UITableViewDelegate methods
@@ -319,7 +290,7 @@
         return 70.;
     }
     
-    UBQuote *quote = [currentQuotes objectAtIndex:indexPath.row];
+    UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
     return [UBQuoteCell heightForQuoteText:quote.text viewWidth:publishedQuotesTableView.frame.size.width];
 }
 
@@ -353,7 +324,7 @@
     // NSLog(@"inset.bottom: %f", inset.bottom);   
     // NSLog(@"pos: %f of %f", y, h);
 
-    if (h == 0 && [currentQuotes count] > 0) {
+    if (h == 0 && [[dataSource items] count] > 0) {
         return;
     }
 
