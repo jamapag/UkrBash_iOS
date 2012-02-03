@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UBTableViewDataSource.h"
+#import "UBPicturesDataSource.h"
 
-@interface UBPublishedPicturesDataSource : UBTableViewDataSource
+@interface UBPublishedPicturesDataSource : UBPicturesDataSource
 
 @end

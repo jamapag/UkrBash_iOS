@@ -234,33 +234,6 @@
     [dataSource configureCell:cell forRowAtIndexPath:indexPath];
     
     return cell;
-    
-    /*
-    UBQuoteCell *cell = (UBQuoteCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if(cell == nil) {
-        cell = [[[UBQuoteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
-        cell.shareDelegate = self;
-        
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCopyMenu:)];
-        [cell addGestureRecognizer:longPress];
-        [longPress release];
-    }
-    
-    if ([dataSource isMemberOfClass:[UBPublishedPicturesDataSource class]]) {
-        UBPicture *picture = (UBPicture *)[currentQuotes objectAtIndex:indexPath.row];
-        cell.idLabel.text = [NSString stringWithFormat:@"%d", picture.pictureId];
-        cell.quoteTextLabel.text = picture.title;
-        if (picture.rating > 0) {
-            cell.ratingLabel.text = [NSString stringWithFormat:@"+%d", picture.rating];
-        } else {
-            cell.ratingLabel.text = [NSString stringWithFormat:@"%d", picture.rating];
-        }
-        cell.dateLabel.text = [[self dateFormatter] stringFromDate:picture.pubDate];
-        cell.authorLabel.text = picture.author;
-        return cell;
-    }
-     */
 }
 
 #pragma mark - UITableViewDelegate methods

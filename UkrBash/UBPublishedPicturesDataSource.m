@@ -11,12 +11,12 @@
 
 @implementation UBPublishedPicturesDataSource
 
-- (NSArray *)getQuotes
+- (NSArray *)items
 {
     return [[Model sharedModel] publishedImages];
 }
 
-- (void)loadMoreQuotes
+- (void)loadMoreItems
 {
     [[Model sharedModel] loadMorePublishedPictures];
 }
