@@ -173,6 +173,8 @@ enum UBSubMenuItems {
         } else {
             cell.imageView.image = [UIImage imageNamed:@"menu-pin-45"];
         }
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
     }
     if (indexPath.section == UBMenuImagesSection || indexPath.section == UBMenuQuotesSection) {
         if (UBSubMenuItemTitle != indexPath.row) {
