@@ -217,7 +217,8 @@
     return [[dataSource items] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *cellIdentifier = @"Cell";
     
     UBQuoteCell *cell = (UBQuoteCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -259,7 +260,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([dataSource isMemberOfClass:[UBPublishedPicturesDataSource class]]) {
+    if ([dataSource isKindOfClass:[UBPicturesDataSource class]]) {
         return 70.;
     }
     

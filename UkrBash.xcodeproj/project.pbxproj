@@ -12,6 +12,9 @@
 		2D337F4E14D1AADB00DF225F /* UBPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F4D14D1AADB00DF225F /* UBPicture.m */; };
 		2D337F5114D1B2F600DF225F /* UBPublishedPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F5014D1B2F600DF225F /* UBPublishedPicturesDataSource.m */; };
 		2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D48CDF114C8DF2500C5696B /* UBImagesRequest.m */; };
+		2D52D6C614DCADFC00E6A744 /* UBUnpablishedPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D52D6C514DCADFC00E6A744 /* UBUnpablishedPicturesDataSource.m */; };
+		2D52D6C914DCAE1B00E6A744 /* UBBestPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D52D6C814DCAE1A00E6A744 /* UBBestPicturesDataSource.m */; };
+		2D52D6CC14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D52D6CB14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m */; };
 		2D57274C1455F5EE00A6DAE4 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274B1455F5EE00A6DAE4 /* Model.m */; };
 		2D57274F1456017900A6DAE4 /* UBQuotesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274E1456017900A6DAE4 /* UBQuotesRequest.m */; };
 		2D9F6E0E14A158C40012D690 /* UBQuotesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */; };
@@ -82,6 +85,12 @@
 		2D337F5014D1B2F600DF225F /* UBPublishedPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPublishedPicturesDataSource.m; sourceTree = "<group>"; };
 		2D48CDF014C8DF2500C5696B /* UBImagesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBImagesRequest.h; sourceTree = "<group>"; };
 		2D48CDF114C8DF2500C5696B /* UBImagesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBImagesRequest.m; sourceTree = "<group>"; };
+		2D52D6C414DCADFB00E6A744 /* UBUnpablishedPicturesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnpablishedPicturesDataSource.h; sourceTree = "<group>"; };
+		2D52D6C514DCADFC00E6A744 /* UBUnpablishedPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnpablishedPicturesDataSource.m; sourceTree = "<group>"; };
+		2D52D6C714DCAE1A00E6A744 /* UBBestPicturesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBBestPicturesDataSource.h; sourceTree = "<group>"; };
+		2D52D6C814DCAE1A00E6A744 /* UBBestPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBBestPicturesDataSource.m; sourceTree = "<group>"; };
+		2D52D6CA14DCAE2A00E6A744 /* UBRandomPicturesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRandomPicturesDataSource.h; sourceTree = "<group>"; };
+		2D52D6CB14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRandomPicturesDataSource.m; sourceTree = "<group>"; };
 		2D57274A1455F5EE00A6DAE4 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		2D57274B1455F5EE00A6DAE4 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		2D57274D1456017900A6DAE4 /* UBQuotesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesRequest.h; sourceTree = "<group>"; };
@@ -388,6 +397,12 @@
 				B09B37CE14DC8410003E732D /* UBPicturesDataSource.m */,
 				2D337F4F14D1B2F600DF225F /* UBPublishedPicturesDataSource.h */,
 				2D337F5014D1B2F600DF225F /* UBPublishedPicturesDataSource.m */,
+				2D52D6C414DCADFB00E6A744 /* UBUnpablishedPicturesDataSource.h */,
+				2D52D6C514DCADFC00E6A744 /* UBUnpablishedPicturesDataSource.m */,
+				2D52D6C714DCAE1A00E6A744 /* UBBestPicturesDataSource.h */,
+				2D52D6C814DCAE1A00E6A744 /* UBBestPicturesDataSource.m */,
+				2D52D6CA14DCAE2A00E6A744 /* UBRandomPicturesDataSource.h */,
+				2D52D6CB14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m */,
 			);
 			name = "Images Datasources";
 			sourceTree = "<group>";
@@ -507,6 +522,9 @@
 				B09B37C914DC783F003E732D /* UBTableViewDataSource.m in Sources */,
 				B09B37CC14DC7B97003E732D /* UBQuotesDataSource.m in Sources */,
 				B09B37CF14DC8410003E732D /* UBPicturesDataSource.m in Sources */,
+				2D52D6C614DCADFC00E6A744 /* UBUnpablishedPicturesDataSource.m in Sources */,
+				2D52D6C914DCAE1B00E6A744 /* UBBestPicturesDataSource.m in Sources */,
+				2D52D6CC14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
