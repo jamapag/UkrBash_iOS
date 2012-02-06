@@ -16,6 +16,9 @@
 #import "UBRandomQuotesDataSource.h"
 #import "UBMenuItemCell.h"
 #import "UBPublishedPicturesDataSource.h"
+#import "UBUnpablishedPicturesDataSource.h"
+#import "UBRandomPicturesDataSource.h"
+#import "UBBestPicturesDataSource.h"
 
 enum UBMenuSections {
     UBMenuQuotesSection,
@@ -251,20 +254,22 @@ enum UBSubMenuItems {
             isImagesSectionFolded = !isImagesSectionFolded;
             [self tableView:tableView setFolding:isImagesSectionFolded forSection:indexPath.section];
         } else {
-            UBQuotesContainerController *picturesController = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedPicturesDataSource class]];
+            Class dataSourceClass;
+            if (UBSubMenuItemPublished == indexPath.row) {
+                dataSourceClass = [UBPublishedPicturesDataSource class];
+            } else if (UBSubMenuItemUnpublished == indexPath.row) {
+                dataSourceClass = [UBUnpablishedPicturesDataSource class];
+            } else if (UBSubMenuItemRandom == indexPath.row) {
+                dataSourceClass = [UBRandomPicturesDataSource class];
+            } else if (UBSubMenuItemBest == indexPath.row) {
+                dataSourceClass = [UBBestPicturesDataSource class];
+            }
+            UBQuotesContainerController *picturesController = [[UBQuotesContainerController alloc] initWithDataSourceClass:dataSourceClass];
             [self.ubNavigationController pushViewController:picturesController animated:YES];
             [picturesController release];
         }
     }
-    /*
-    if (UBMenuItemImages == indexPath.row) {
-        NSLog(@"Not implemented yet");
-        return;
-//        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] init];
-//        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-//        [quotesContainer release];
-    } else 
-     */
+
     if (UBMenuInfoSection == indexPath.section) {
         if (indexPath.row == UBMenuItemWebsite) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];

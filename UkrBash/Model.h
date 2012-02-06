@@ -18,7 +18,12 @@ extern NSString *const kNotificationDataUpdated;
     NSMutableArray *unpablishedQuotes;
     NSMutableArray *bestQuotes;
     NSMutableArray *randomQuotes;
+    
     NSMutableArray *publishedImages;
+    NSMutableArray *unpablishedImages;
+    NSMutableArray *bestImages;
+    NSMutableArray *randomImages;
+    
     NSMutableSet *requests;
 }
 
@@ -27,6 +32,9 @@ extern NSString *const kNotificationDataUpdated;
 @property (nonatomic, readonly) NSMutableArray *bestQuotes;
 @property (nonatomic, readonly) NSMutableArray *randomQuotes;
 @property (nonatomic, readonly) NSMutableArray *publishedImages;
+@property (nonatomic, readonly) NSMutableArray *unpablishedImages;
+@property (nonatomic, readonly) NSMutableArray *bestImages;
+@property (nonatomic, readonly) NSMutableArray *randomImages;
 
 + (Model *)sharedModel;
 - (void)loadMorePublishedQuotes;
@@ -34,5 +42,8 @@ extern NSString *const kNotificationDataUpdated;
 - (void)loadMoreBestQuotes;
 - (void)loadMoreRandomQuotes;
 - (void)loadMorePublishedPictures;
+- (void)loadMoreUnpablishedPictures;
+- (void)loadMoreRandomPictures;
+- (void)loadMoreBestPictures;
 
 @end

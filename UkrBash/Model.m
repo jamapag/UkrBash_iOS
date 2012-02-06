@@ -21,6 +21,9 @@ NSString *const kNotificationDataUpdated = @"kNotificationDataUpdated";
 @synthesize bestQuotes;
 @synthesize randomQuotes;
 @synthesize publishedImages;
+@synthesize unpablishedImages;
+@synthesize bestImages;
+@synthesize randomImages;
 
 static Model *sharedModel = nil;
 
@@ -44,6 +47,9 @@ static Model *sharedModel = nil;
         bestQuotes = [[NSMutableArray alloc] init];
         randomQuotes = [[NSMutableArray alloc] init];
         publishedImages = [[NSMutableArray alloc] init];
+        unpablishedImages = [[NSMutableArray alloc] init];
+        bestImages = [[NSMutableArray alloc] init];
+        randomImages = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -56,8 +62,13 @@ static Model *sharedModel = nil;
     [requests release];
     [randomQuotes release];
     [publishedImages release];
+    [unpablishedImages release];
+    [bestImages release];
+    [randomImages release];
     [super dealloc];
 }
+
+#pragma mark - Quotes Loaders
 
 - (UBQuotesRequest *)newQuotesRequestWithMethod:(NSString *)method start:(NSInteger)start andLimit:(NSInteger)limit
 {
@@ -105,18 +116,54 @@ static Model *sharedModel = nil;
     [request release];
 }
 
-- (void)loadMorePublishedPictures
+#pragma mark - Pictures Loaders
+
+- (UBImagesRequest *)newPicturesRequestWithMethod:(NSString *)method start:(NSInteger)start andLimit:(NSInteger)limit
 {
-    NSLog(@"Load more pictures");
     UBImagesRequest *request = [[UBImagesRequest alloc] init];
     request.delegate = self;
-    request.method = kPictures_getPublished;
-    [request setLimit:25];
-    [request setStart:[publishedImages count]];
+    request.method = method;
+    [request setLimit:limit];
+    [request setStart:start];
+    return request;
+}
+
+- (void)loadMorePublishedPictures
+{
+    NSLog(@"Load more published pictures");
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getPublished start:[publishedImages count] andLimit:25];
     [request start];
     [requests addObject:request];
     [request release];
 }
+
+- (void)loadMoreUnpablishedPictures
+{
+    NSLog(@"Load more upcoming pictures");
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getUpcoming start:[unpablishedImages count] andLimit:25];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadMoreRandomPictures
+{
+    NSLog(@"Load more random pictures");
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getRandom start:[randomImages count] andLimit:25];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadMoreBestPictures
+{
+    NSLog(@"Load more best pictures");
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getTheBest start:[bestImages count] andLimit:25];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
 
 #pragma mark - UBQuotesRequestDelegate
 - (void)request:(UBRequest *)request didFinishWithData:(NSData *)data
@@ -144,6 +191,12 @@ static Model *sharedModel = nil;
         [randomQuotes addObjectsFromArray:array];
     } else if ([request.method isEqualToString:kPictures_getPublished]) {
         [publishedImages addObjectsFromArray:array];
+    } else if ([request.method isEqualToString:kPictures_getUpcoming]) {
+        [unpablishedImages addObjectsFromArray:array];
+    } else if ([request.method isEqualToString:kPictures_getRandom]) {
+        [randomImages addObjectsFromArray:array];
+    } else if ([request.method isEqualToString:kPictures_getTheBest]) {
+        [bestImages addObjectsFromArray:array];
     }
 
     [requests removeObject:request];
