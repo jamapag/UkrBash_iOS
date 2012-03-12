@@ -39,7 +39,7 @@
 {
     [dataSource release];
     [activeCell release];
-    [publishedQuotesTableView release];
+    [tableView release];
     [categoryLabel release];
     [logoButton release];
     [super dealloc];
@@ -49,7 +49,7 @@
 
 - (void)scrollToTopAction:(id)sender
 {
-    [publishedQuotesTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0. inSection:0.] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0. inSection:0.] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (void)menuAction:(id)sender
@@ -61,7 +61,7 @@
 {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         UBQuoteCell *cell = (UBQuoteCell*)gesture.view;
-        NSIndexPath *path = [publishedQuotesTableView indexPathForCell:cell];
+        NSIndexPath *path = [tableView indexPathForCell:cell];
         if ([path isEqual:activeCell]) {
             return;
         }
@@ -106,14 +106,14 @@
     [self.view addSubview:backgroundImageView];
     [backgroundImageView release];
     
-    publishedQuotesTableView = [[UITableView alloc] initWithFrame:self.view.bounds];  
-    publishedQuotesTableView.delegate = self;
-    publishedQuotesTableView.dataSource = self;
-    publishedQuotesTableView.backgroundColor = [UIColor clearColor];
-    publishedQuotesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [publishedQuotesTableView setContentInset:UIEdgeInsetsMake(45., 0., 0., 0.)];
+    tableView = [[UITableView alloc] initWithFrame:self.view.bounds];  
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [tableView setContentInset:UIEdgeInsetsMake(45., 0., 0., 0.)];
     
-    [self.view addSubview:publishedQuotesTableView];
+    [self.view addSubview:tableView];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(publishedQuotesUpdated:)
                                                  name:kNotificationDataUpdated
@@ -138,7 +138,7 @@
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(menuAction:) forControlEvents:UIControlEventTouchUpInside];
     [menuButton setFrame:CGRectMake(15., -35., 36., 36.)];
-    [publishedQuotesTableView addSubview:menuButton];
+    [tableView addSubview:menuButton];
 }
 
 /*
@@ -155,7 +155,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [activeCell release], activeCell = nil;
-    [publishedQuotesTableView release], publishedQuotesTableView = nil;
+    [tableView release], tableView = nil;
     [categoryLabel release], categoryLabel = nil;
     [logoButton release], logoButton = nil;
 }
@@ -173,7 +173,7 @@
 
 - (void)publishedQuotesUpdated:(NSNotificationCenter *)notification
 {
-    [publishedQuotesTableView reloadData];
+    [tableView reloadData];
     loading = NO;
     [self hideFooter];
 }
@@ -193,19 +193,19 @@
     [activityIndicator startAnimating];
     [footerView addSubview:activityIndicator];
     
-    publishedQuotesTableView.tableFooterView = footerView;
+    tableView.tableFooterView = footerView;
     [footerView release];
     [activityIndicator release];
 }
 
 - (void)hideFooter
 {
-    publishedQuotesTableView.tableFooterView = nil;
+    tableView.tableFooterView = nil;
 }
 
 #pragma mark - UITableViewDatasource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)_tableView 
 {
     return 1;
 }
@@ -215,11 +215,11 @@
     return [[dataSource items] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
     
-    UBQuoteCell *cell = (UBQuoteCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UBQuoteCell *cell = (UBQuoteCell *)[_tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = (UBQuoteCell *)[dataSource cellWithReuesIdentifier:cellIdentifier];
 
@@ -237,16 +237,16 @@
 
 #pragma mark - UITableViewDelegate methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    UBQuoteCell *cell = (UBQuoteCell*)[tableView cellForRowAtIndexPath:indexPath];
+    UBQuoteCell *cell = (UBQuoteCell*)[_tableView cellForRowAtIndexPath:indexPath];
     if (cell.shareButtonsVisible) {
         [activeCell release], activeCell = nil;
         [cell hideShareButtons];
     } else {
         if (![[UIMenuController sharedMenuController] isMenuVisible]) {
-            UBQuoteCell *ac = (UBQuoteCell*)[tableView cellForRowAtIndexPath:activeCell];
+            UBQuoteCell *ac = (UBQuoteCell*)[_tableView cellForRowAtIndexPath:activeCell];
             [ac hideShareButtons];
             
             [activeCell release], activeCell = nil;
@@ -256,10 +256,10 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
-    return [UBQuoteCell heightForQuoteText:quote.text viewWidth:publishedQuotesTableView.frame.size.width];
+    return [UBQuoteCell heightForQuoteText:quote.text viewWidth:tableView.frame.size.width];
 }
 
 #pragma mark - UIScrollView delegate
@@ -268,10 +268,10 @@
 {
     CGFloat alpha = 1;
     if (aScrollView.contentOffset.y < 0) {
-        if (abs(aScrollView.contentOffset.y) >= publishedQuotesTableView.contentInset.top) {
+        if (abs(aScrollView.contentOffset.y) >= tableView.contentInset.top) {
             alpha = 1.;
         } else {
-            alpha = 1. - (publishedQuotesTableView.contentInset.top + aScrollView.contentOffset.y) / 100;
+            alpha = 1. - (tableView.contentInset.top + aScrollView.contentOffset.y) / 100;
         }
     } else {
         alpha = .5;

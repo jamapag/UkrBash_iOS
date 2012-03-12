@@ -14,7 +14,7 @@
 
 @interface UBQuotesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource, UBQuoteCellDelegate, MFMailComposeViewControllerDelegate>
 {
-    UITableView *publishedQuotesTableView;
+    UITableView *tableView;
     UIButton *logoButton;
     UILabel *categoryLabel;
     NSIndexPath *activeCell;
