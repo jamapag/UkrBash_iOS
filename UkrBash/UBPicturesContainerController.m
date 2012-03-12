@@ -8,7 +8,7 @@
 
 #import "UBPicturesContainerController.h"
 #import "Model.h"
-#import "UBImageCell.h"
+#import "UBPictureCell.h"
 
 @implementation UBPicturesContainerController
 
@@ -183,9 +183,9 @@
 {
     static NSString *cellIdentifier = @"Cell";
     
-    UBImageCell *cell = (UBImageCell *)[_tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UBPictureCell *cell = (UBPictureCell *)[_tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = (UBImageCell *)[dataSource cellWithReuesIdentifier:cellIdentifier];
+        cell = (UBPictureCell *)[dataSource cellWithReuesIdentifier:cellIdentifier];
     }
     
     [dataSource configureCell:cell forRowAtIndexPath:indexPath];

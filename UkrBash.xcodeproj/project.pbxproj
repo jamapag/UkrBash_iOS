@@ -58,7 +58,7 @@
 		B0604E2D14D5F4A500F8ADB0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2C14D5F4A500F8ADB0 /* MessageUI.framework */; };
 		B0604E3014D5F4AE00F8ADB0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */; };
 		B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */; };
-		B09B37C414DC7649003E732D /* UBImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37C314DC7649003E732D /* UBImageCell.m */; };
+		B09B37C414DC7649003E732D /* UBPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37C314DC7649003E732D /* UBPictureCell.m */; };
 		B09B37C914DC783F003E732D /* UBTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37C814DC783F003E732D /* UBTableViewDataSource.m */; };
 		B09B37CC14DC7B97003E732D /* UBQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37CB14DC7B97003E732D /* UBQuotesDataSource.m */; };
 		B09B37CF14DC8410003E732D /* UBPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37CE14DC8410003E732D /* UBPicturesDataSource.m */; };
@@ -166,8 +166,8 @@
 		B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMenuItemCell.h; sourceTree = "<group>"; };
 		B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMenuItemCell.m; sourceTree = "<group>"; };
-		B09B37C214DC7649003E732D /* UBImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBImageCell.h; sourceTree = "<group>"; };
-		B09B37C314DC7649003E732D /* UBImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBImageCell.m; sourceTree = "<group>"; };
+		B09B37C214DC7649003E732D /* UBPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = UBPictureCell.h; sourceTree = "<group>"; };
+		B09B37C314DC7649003E732D /* UBPictureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureCell.m; sourceTree = "<group>"; };
 		B09B37C714DC783F003E732D /* UBTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBTableViewDataSource.h; sourceTree = "<group>"; };
 		B09B37C814DC783F003E732D /* UBTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBTableViewDataSource.m; sourceTree = "<group>"; };
 		B09B37CB14DC7B97003E732D /* UBQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesDataSource.m; sourceTree = "<group>"; };
@@ -241,8 +241,8 @@
 				2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */,
 				B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */,
 				B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */,
-				B09B37C214DC7649003E732D /* UBImageCell.h */,
-				B09B37C314DC7649003E732D /* UBImageCell.m */,
+				B09B37C214DC7649003E732D /* UBPictureCell.h */,
+				B09B37C314DC7649003E732D /* UBPictureCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -548,7 +548,7 @@
 				2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */,
 				2D337F4E14D1AADB00DF225F /* UBPicture.m in Sources */,
 				2D337F5114D1B2F600DF225F /* UBPublishedPicturesDataSource.m in Sources */,
-				B09B37C414DC7649003E732D /* UBImageCell.m in Sources */,
+				B09B37C414DC7649003E732D /* UBPictureCell.m in Sources */,
 				B09B37C914DC783F003E732D /* UBTableViewDataSource.m in Sources */,
 				B09B37CC14DC7B97003E732D /* UBQuotesDataSource.m in Sources */,
 				B09B37CF14DC8410003E732D /* UBPicturesDataSource.m in Sources */,

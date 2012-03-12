@@ -7,21 +7,21 @@
 //
 
 #import "UBPicturesDataSource.h"
-#import "UBImageCell.h"
+#import "UBPictureCell.h"
 #import "UBPicture.h"
 
 @implementation UBPicturesDataSource
 
 - (UITableViewCell *)cellWithReuesIdentifier:(NSString *)reuseIdent
 {
-    return [[[UBImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdent] autorelease];
+    return [[[UBPictureCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdent] autorelease];
 }
 
 - (void)configureCell:(UITableViewCell *)_cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSAssert([_cell isKindOfClass:[UBImageCell class]], @"cell should be subclass of UBImageCell class");
+    NSAssert([_cell isKindOfClass:[UBPictureCell class]], @"cell should be subclass of UBImageCell class");
     
-    UBImageCell *cell = (UBImageCell*)_cell;
+    UBPictureCell *cell = (UBPictureCell*)_cell;
     
     UBPicture *picture = (UBPicture *)[[self items] objectAtIndex:indexPath.row];
     cell.idLabel.text = [NSString stringWithFormat:@"%d", picture.pictureId];

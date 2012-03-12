@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 smile2mobile. All rights reserved.
 //
 
-#import "UBImageCell.h"
+#import "UBPictureCell.h"
 
-@implementation UBImageCell
+@implementation UBPictureCell
 
 - (UIImageView *)imageView
 {

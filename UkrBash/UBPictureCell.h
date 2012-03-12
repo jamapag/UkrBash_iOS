@@ -8,7 +8,7 @@
 
 #import "UBQuoteCell.h"
 
-@interface UBImageCell : UBQuoteCell
+@interface UBPictureCell : UBQuoteCell
 {
     UIImageView *imageView;
 }
