@@ -10,6 +10,7 @@
 #import "UBNavigationController.h"
 #import "UBViewController.h"
 #import "UBQuotesContainerController.h"
+#import "UBPicturesContainerController.h"
 #import "UBPublishedQuotesDataSource.h"
 #import "UBUnpablishedQuotesDataSource.h"
 #import "UBBestQuotesDataSource.h"
@@ -124,6 +125,22 @@ enum UBSubMenuItems {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Navigation methods
+
+- (void)pushQuotesContainerWithDataSourceClass:(Class)dataSourceClass
+{
+    UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:dataSourceClass];
+    [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+    [quotesContainer release];
+}
+
+- (void)pushPicturesContainerWithDataSourceClass:(Class)dataSourceClass
+{
+    UBPicturesContainerController *picturesContainer = [[UBPicturesContainerController alloc] initWithDataSourceClass:dataSourceClass];
+    [self.ubNavigationController pushViewController:picturesContainer animated:YES];
+    [picturesContainer release];
+}
+
 #pragma mark - Table View Datasource/Delegate methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -231,22 +248,16 @@ enum UBSubMenuItems {
         if (UBSubMenuItemTitle == indexPath.row) {
             isQuotesSectionFolded = !isQuotesSectionFolded;
             [self tableView:tableView setFolding:isQuotesSectionFolded forSection:indexPath.section];
-        } else if (UBSubMenuItemPublished == indexPath.row) {
-            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]];
-            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-            [quotesContainer release];
-        } else if (UBSubMenuItemUnpublished == indexPath.row) {
-            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBUnpablishedQuotesDataSource class]];
-            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-            [quotesContainer release];
-        } else if (UBSubMenuItemBest == indexPath.row) {
-            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBBestQuotesDataSource class]];
-            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-            [quotesContainer release];
-        } else if (UBSubMenuItemRandom == indexPath.row) {
-            UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBRandomQuotesDataSource class]];
-            [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-            [quotesContainer release];
+        } else {
+            if (UBSubMenuItemPublished == indexPath.row) {
+                [self pushQuotesContainerWithDataSourceClass:[UBPublishedQuotesDataSource class]];
+            } else if (UBSubMenuItemUnpublished == indexPath.row) {
+                [self pushQuotesContainerWithDataSourceClass:[UBUnpablishedQuotesDataSource class]];
+            } else if (UBSubMenuItemBest == indexPath.row) {
+                [self pushQuotesContainerWithDataSourceClass:[UBBestQuotesDataSource class]];
+            } else if (UBSubMenuItemRandom == indexPath.row) {
+                [self pushQuotesContainerWithDataSourceClass:[UBRandomQuotesDataSource class]];
+            }
         }
     }
     if (UBMenuImagesSection == indexPath.section) {
@@ -254,19 +265,15 @@ enum UBSubMenuItems {
             isImagesSectionFolded = !isImagesSectionFolded;
             [self tableView:tableView setFolding:isImagesSectionFolded forSection:indexPath.section];
         } else {
-            Class dataSourceClass;
             if (UBSubMenuItemPublished == indexPath.row) {
-                dataSourceClass = [UBPublishedPicturesDataSource class];
+                [self pushPicturesContainerWithDataSourceClass:[UBPublishedPicturesDataSource class]];
             } else if (UBSubMenuItemUnpublished == indexPath.row) {
-                dataSourceClass = [UBUnpablishedPicturesDataSource class];
+                [self pushPicturesContainerWithDataSourceClass:[UBUnpablishedPicturesDataSource class]];
             } else if (UBSubMenuItemRandom == indexPath.row) {
-                dataSourceClass = [UBRandomPicturesDataSource class];
+                [self pushPicturesContainerWithDataSourceClass:[UBRandomPicturesDataSource class]];
             } else if (UBSubMenuItemBest == indexPath.row) {
-                dataSourceClass = [UBBestPicturesDataSource class];
+                [self pushPicturesContainerWithDataSourceClass:[UBBestPicturesDataSource class]];
             }
-            UBQuotesContainerController *picturesController = [[UBQuotesContainerController alloc] initWithDataSourceClass:dataSourceClass];
-            [self.ubNavigationController pushViewController:picturesController animated:YES];
-            [picturesController release];
         }
     }
 

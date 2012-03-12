@@ -1,21 +1,17 @@
 //
-//  UBQuotesContainerController.m
+//  UBPicturesContainerController.m
 //  UkrBash
 //
-//  Created by Maks Markovets on 21.12.11.
-//  Copyright (c) 2011 smile2mobile. All rights reserved.
+//  Created by Михаил Гребенкин on 12.03.12.
+//  Copyright (c) 2012 smile2mobile. All rights reserved.
 //
 
-#import "UBQuotesContainerController.h"
+#import "UBPicturesContainerController.h"
 #import "Model.h"
-#import "UBQuote.h"
-#import "UBQuoteCell.h"
-#import "UBNavigationController.h"
-#import <MessageUI/MessageUI.h>
-#import <Twitter/Twitter.h>
+#import "UBImageCell.h"
 
+@implementation UBPicturesContainerController
 
-@implementation UBQuotesContainerController
 @synthesize dataSource;
 
 - (id)initWithDataSourceClass:(Class)dataSourceClass
@@ -23,6 +19,15 @@
     self = [super init];
     if (self) {
         dataSource = [[dataSourceClass alloc] init];
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
     }
     return self;
 }
@@ -39,7 +44,7 @@
 {
     [dataSource release];
     [activeCell release];
-    [publishedQuotesTableView release];
+    [tableView release];
     [categoryLabel release];
     [logoButton release];
     [super dealloc];
@@ -49,7 +54,7 @@
 
 - (void)scrollToTopAction:(id)sender
 {
-    [publishedQuotesTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0. inSection:0.] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0. inSection:0.] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (void)menuAction:(id)sender
@@ -57,48 +62,12 @@
     [self.ubNavigationController popViewControllerAnimated:YES];
 }
 
-- (void)showCopyMenu:(UILongPressGestureRecognizer*)gesture
-{
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        UBQuoteCell *cell = (UBQuoteCell*)gesture.view;
-        NSIndexPath *path = [publishedQuotesTableView indexPathForCell:cell];
-        if ([path isEqual:activeCell]) {
-            return;
-        }
-        [cell setSelected:YES animated:NO];
-        
-        [self becomeFirstResponder];
-        CGPoint location = [gesture locationInView:gesture.view];
-        UIMenuItem *copy = [[[UIMenuItem alloc] initWithTitle:@"Копіювати" action:@selector(copyQuote:)] autorelease];
-        UIMenuItem *copyURLItem = [[[UIMenuItem alloc] initWithTitle:@"Копіювати URL" action:@selector(copyURL:)] autorelease];
-        
-        UIMenuController *sharedMenu = [UIMenuController sharedMenuController];
-        [sharedMenu setMenuItems:[NSArray arrayWithObjects:copy, copyURLItem, nil]];
-        [sharedMenu setTargetRect:CGRectMake(location.x, location.y, 0., 0.) inView:gesture.view];
-        [sharedMenu setMenuVisible:YES animated:YES];
-    }
-}
-
-- (void)copyQuote:(id)sender
-{
-    
-}
-
-- (void)copyURL:(id)sender
-{
-    
-}
-
 #pragma mark - View lifecycle
-
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
     [super loadView];
-    
-//    [[Model sharedModel] loadPublishedQuotes];
-//    loading = YES;
     
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height)];
     backgroundImageView.image = [UIImage imageNamed:@"Default"];
@@ -106,14 +75,14 @@
     [self.view addSubview:backgroundImageView];
     [backgroundImageView release];
     
-    publishedQuotesTableView = [[UITableView alloc] initWithFrame:self.view.bounds];  
-    publishedQuotesTableView.delegate = self;
-    publishedQuotesTableView.dataSource = self;
-    publishedQuotesTableView.backgroundColor = [UIColor clearColor];
-    publishedQuotesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [publishedQuotesTableView setContentInset:UIEdgeInsetsMake(45., 0., 0., 0.)];
+    tableView = [[UITableView alloc] initWithFrame:self.view.bounds];  
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [tableView setContentInset:UIEdgeInsetsMake(45., 0., 0., 0.)];
     
-    [self.view addSubview:publishedQuotesTableView];
+    [self.view addSubview:tableView];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(publishedQuotesUpdated:)
                                                  name:kNotificationDataUpdated
@@ -132,13 +101,13 @@
     categoryLabel.shadowColor = [UIColor blackColor];
     categoryLabel.shadowOffset = CGSizeMake(0., .5);
     categoryLabel.textColor = [UIColor colorWithRed:.04 green:.6 blue:.97 alpha:1.];
-//    [self.view addSubview:categoryLabel];
+    //    [self.view addSubview:categoryLabel];
     
     UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(menuAction:) forControlEvents:UIControlEventTouchUpInside];
     [menuButton setFrame:CGRectMake(15., -35., 36., 36.)];
-    [publishedQuotesTableView addSubview:menuButton];
+    [tableView addSubview:menuButton];
 }
 
 /*
@@ -155,7 +124,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [activeCell release], activeCell = nil;
-    [publishedQuotesTableView release], publishedQuotesTableView = nil;
+    [tableView release], tableView = nil;
     [categoryLabel release], categoryLabel = nil;
     [logoButton release], logoButton = nil;
 }
@@ -166,14 +135,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (BOOL)canBecomeFirstResponder
-{
-    return YES;
-}
-
 - (void)publishedQuotesUpdated:(NSNotificationCenter *)notification
 {
-    [publishedQuotesTableView reloadData];
+    [tableView reloadData];
     loading = NO;
     [self hideFooter];
 }
@@ -193,14 +157,14 @@
     [activityIndicator startAnimating];
     [footerView addSubview:activityIndicator];
     
-    publishedQuotesTableView.tableFooterView = footerView;
+    tableView.tableFooterView = footerView;
     [footerView release];
     [activityIndicator release];
 }
 
 - (void)hideFooter
 {
-    publishedQuotesTableView.tableFooterView = nil;
+    tableView.tableFooterView = nil;
 }
 
 #pragma mark - UITableViewDatasource
@@ -215,19 +179,13 @@
     return [[dataSource items] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
     
-    UBQuoteCell *cell = (UBQuoteCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UBImageCell *cell = (UBImageCell *)[_tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = (UBQuoteCell *)[dataSource cellWithReuesIdentifier:cellIdentifier];
-
-        cell.shareDelegate = self;
-        
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCopyMenu:)];
-        [cell addGestureRecognizer:longPress];
-        [longPress release];
+        cell = (UBImageCell *)[dataSource cellWithReuesIdentifier:cellIdentifier];
     }
     
     [dataSource configureCell:cell forRowAtIndexPath:indexPath];
@@ -237,29 +195,9 @@
 
 #pragma mark - UITableViewDelegate methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    UBQuoteCell *cell = (UBQuoteCell*)[tableView cellForRowAtIndexPath:indexPath];
-    if (cell.shareButtonsVisible) {
-        [activeCell release], activeCell = nil;
-        [cell hideShareButtons];
-    } else {
-        if (![[UIMenuController sharedMenuController] isMenuVisible]) {
-            UBQuoteCell *ac = (UBQuoteCell*)[tableView cellForRowAtIndexPath:activeCell];
-            [ac hideShareButtons];
-            
-            [activeCell release], activeCell = nil;
-            activeCell = [indexPath retain];
-            [cell showShareButtons];
-        }
-    }
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
-    return [UBQuoteCell heightForQuoteText:quote.text viewWidth:publishedQuotesTableView.frame.size.width];
+    return 100.;
 }
 
 #pragma mark - UIScrollView delegate
@@ -268,10 +206,10 @@
 {
     CGFloat alpha = 1;
     if (aScrollView.contentOffset.y < 0) {
-        if (abs(aScrollView.contentOffset.y) >= publishedQuotesTableView.contentInset.top) {
+        if (abs(aScrollView.contentOffset.y) >= tableView.contentInset.top) {
             alpha = 1.;
         } else {
-            alpha = 1. - (publishedQuotesTableView.contentInset.top + aScrollView.contentOffset.y) / 100;
+            alpha = 1. - (tableView.contentInset.top + aScrollView.contentOffset.y) / 100;
         }
     } else {
         alpha = .5;
@@ -285,17 +223,11 @@
     UIEdgeInsets inset = aScrollView.contentInset;
     float y = offset.y + bounds.size.height - inset.bottom;
     float h = size.height;
-    // NSLog(@"offset: %f", offset.y);   
-    // NSLog(@"content.height: %f", size.height);   
-    // NSLog(@"bounds.height: %f", bounds.size.height);   
-    // NSLog(@"inset.top: %f", inset.top);   
-    // NSLog(@"inset.bottom: %f", inset.bottom);   
-    // NSLog(@"pos: %f of %f", y, h);
-
+    
     if (h == 0 && [[dataSource items] count] > 0) {
         return;
     }
-
+    
     float reload_distance = 10;
     if(y > h + reload_distance) {
         if (!loading) {
@@ -303,31 +235,6 @@
             [self loadMoreQuotes];
         }
     }
-}
-
-#pragma mark -
-
-- (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(UBQuoteShareType)shareType
-{
-    if (shareType == UBQuoteShareFacebookType) {
-        
-    } else if (shareType == UBQuoteShareTwitterType) {
-        TWTweetComposeViewController *tweetComposer = [[TWTweetComposeViewController alloc] init];
-        [self presentModalViewController:tweetComposer animated:YES];
-        [tweetComposer release];
-    } else if (shareType == UBQuoteShareEmailType) {
-        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
-        mailComposer.mailComposeDelegate = self;
-        [self presentModalViewController:mailComposer animated:YES];
-        [mailComposer release];
-    }
-}
-
-#pragma mark - 
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

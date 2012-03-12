@@ -19,6 +19,5 @@
 - (void)loadMoreItems;
 - (NSDateFormatter*)dateFormatter;
 - (NSString*)ratingStringFromRating:(NSInteger)rating;
-- (CGFloat)heightForCellAtIndexPath:(NSIndexPath*)indexPath maxWidth:(CGFloat)width;
 
 @end

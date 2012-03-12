@@ -61,10 +61,4 @@
     NSAssert(NO, @"this method should be overloaded by subclasses");
 }
 
-- (CGFloat)heightForCellAtIndexPath:(NSIndexPath *)indexPath maxWidth:(CGFloat)width
-{
-    NSAssert(NO, @"this method should be overloaded by subclasses");
-    return 0;
-}
-
 @end

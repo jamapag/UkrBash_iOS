@@ -51,6 +51,7 @@
 		B0052FCD14BCD60B0082DAB9 /* gmail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0052FC714BCD60B0082DAB9 /* gmail@2x.png */; };
 		B0052FCE14BCD60B0082DAB9 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = B0052FC814BCD60B0082DAB9 /* twitter.png */; };
 		B0052FCF14BCD60B0082DAB9 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0052FC914BCD60B0082DAB9 /* twitter@2x.png */; };
+		B008F69E150E942000556346 /* UBPicturesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B008F69D150E942000556346 /* UBPicturesContainerController.m */; };
 		B02855CE14C0CDEE00FAA8A8 /* UBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */; };
 		B04B12E914BA3E340060F668 /* category-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B04B12E714BA3E340060F668 /* category-button-bg.png */; };
 		B04B12EA14BA3E340060F668 /* category-button-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B04B12E814BA3E340060F668 /* category-button-bg@2x.png */; };
@@ -155,6 +156,8 @@
 		B0052FC714BCD60B0082DAB9 /* gmail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gmail@2x.png"; sourceTree = "<group>"; };
 		B0052FC814BCD60B0082DAB9 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		B0052FC914BCD60B0082DAB9 /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
+		B008F69C150E942000556346 /* UBPicturesContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesContainerController.h; sourceTree = "<group>"; };
+		B008F69D150E942000556346 /* UBPicturesContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesContainerController.m; sourceTree = "<group>"; };
 		B02855CC14C0CDEE00FAA8A8 /* UBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBViewController.h; sourceTree = "<group>"; };
 		B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBViewController.m; sourceTree = "<group>"; };
 		B04B12E714BA3E340060F668 /* category-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-button-bg.png"; sourceTree = "<group>"; };
@@ -344,6 +347,8 @@
 			children = (
 				2D9F6E0C14A158C40012D690 /* UBQuotesContainerController.h */,
 				2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */,
+				B008F69C150E942000556346 /* UBPicturesContainerController.h */,
+				B008F69D150E942000556346 /* UBPicturesContainerController.m */,
 				B0DCA88414BF22C7007132B6 /* UBNavigationController.h */,
 				B0DCA88514BF22C7007132B6 /* UBNavigationController.m */,
 				B0DCA89014BF3279007132B6 /* UBMenuViewController.h */,
@@ -401,6 +406,8 @@
 		B09B37C614DC780B003E732D /* Quotes Datasources */ = {
 			isa = PBXGroup;
 			children = (
+				2DE54AFB14C83F5500CB04CB /* UBQuotesDataSource.h */,
+				B09B37CB14DC7B97003E732D /* UBQuotesDataSource.m */,
 				2D07888214C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.h */,
 				2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */,
 				2DE54AFD14C83FF800CB04CB /* UBPublishedQuotesDataSource.h */,
@@ -409,8 +416,6 @@
 				2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */,
 				2DE54B0314C847FD00CB04CB /* UBRandomQuotesDataSource.h */,
 				2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */,
-				2DE54AFB14C83F5500CB04CB /* UBQuotesDataSource.h */,
-				B09B37CB14DC7B97003E732D /* UBQuotesDataSource.m */,
 			);
 			name = "Quotes Datasources";
 			sourceTree = "<group>";
@@ -553,6 +558,7 @@
 				2D12630214F6E6DA001C9DA0 /* DownloadOperations.m in Sources */,
 				2D12630314F6E6DA001C9DA0 /* MediaCenter.m in Sources */,
 				2D12630614F6E78A001C9DA0 /* UIKitExtentions.m in Sources */,
+				B008F69E150E942000556346 /* UBPicturesContainerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

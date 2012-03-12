@@ -31,10 +31,4 @@
     cell.authorLabel.text = quote.author;
 }
 
-- (CGFloat)heightForCellAtIndexPath:(NSIndexPath *)indexPath maxWidth:(CGFloat)width
-{
-    UBQuote *quote = [[self items] objectAtIndex:indexPath.row];
-    return [UBQuoteCell heightForQuoteText:quote.text viewWidth:width];
-}
-
 @end
