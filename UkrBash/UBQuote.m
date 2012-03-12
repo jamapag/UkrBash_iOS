@@ -27,6 +27,7 @@
     [pubDate release];
     [author release];
     [text release];
+    [super dealloc];
 }
 
 @end

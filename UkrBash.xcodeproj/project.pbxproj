@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2D07888414C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */; };
+		2D12630214F6E6DA001C9DA0 /* DownloadOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1262FE14F6E6DA001C9DA0 /* DownloadOperations.m */; };
+		2D12630314F6E6DA001C9DA0 /* MediaCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D12630114F6E6DA001C9DA0 /* MediaCenter.m */; };
+		2D12630614F6E78A001C9DA0 /* UIKitExtentions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D12630514F6E789001C9DA0 /* UIKitExtentions.m */; };
 		2D144DDA1419073B009E1DBA /* UBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D144DD91419073B009E1DBA /* UBRequest.m */; };
 		2D337F4E14D1AADB00DF225F /* UBPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F4D14D1AADB00DF225F /* UBPicture.m */; };
 		2D337F5114D1B2F600DF225F /* UBPublishedPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F5014D1B2F600DF225F /* UBPublishedPicturesDataSource.m */; };
@@ -77,6 +80,13 @@
 /* Begin PBXFileReference section */
 		2D07888214C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnpablishedQuotesDataSource.h; sourceTree = "<group>"; };
 		2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnpablishedQuotesDataSource.m; sourceTree = "<group>"; };
+		2D1262FD14F6E6DA001C9DA0 /* DownloadOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadOperations.h; sourceTree = "<group>"; };
+		2D1262FE14F6E6DA001C9DA0 /* DownloadOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadOperations.m; sourceTree = "<group>"; };
+		2D1262FF14F6E6DA001C9DA0 /* ImageCenterFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCenterFriend.h; sourceTree = "<group>"; };
+		2D12630014F6E6DA001C9DA0 /* MediaCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaCenter.h; sourceTree = "<group>"; };
+		2D12630114F6E6DA001C9DA0 /* MediaCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaCenter.m; sourceTree = "<group>"; };
+		2D12630414F6E789001C9DA0 /* UIKitExtentions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKitExtentions.h; sourceTree = "<group>"; };
+		2D12630514F6E789001C9DA0 /* UIKitExtentions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitExtentions.m; sourceTree = "<group>"; };
 		2D144DD81419073B009E1DBA /* UBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRequest.h; sourceTree = "<group>"; };
 		2D144DD91419073B009E1DBA /* UBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRequest.m; sourceTree = "<group>"; };
 		2D337F4C14D1AADB00DF225F /* UBPicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicture.h; sourceTree = "<group>"; };
@@ -196,6 +206,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D1262FC14F6E6DA001C9DA0 /* MediaCenter */ = {
+			isa = PBXGroup;
+			children = (
+				2D1262FD14F6E6DA001C9DA0 /* DownloadOperations.h */,
+				2D1262FE14F6E6DA001C9DA0 /* DownloadOperations.m */,
+				2D1262FF14F6E6DA001C9DA0 /* ImageCenterFriend.h */,
+				2D12630014F6E6DA001C9DA0 /* MediaCenter.h */,
+				2D12630114F6E6DA001C9DA0 /* MediaCenter.m */,
+			);
+			path = MediaCenter;
+			sourceTree = "<group>";
+		};
 		2D144DD71419071D009E1DBA /* Requests */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +280,7 @@
 		2DB0FAB91416C8CF00EFD6BC /* UkrBash */ = {
 			isa = PBXGroup;
 			children = (
+				2D1262FC14F6E6DA001C9DA0 /* MediaCenter */,
 				2DADD34314A3F6AF00808AA6 /* Views */,
 				2DDED39614A36469003B315D /* Model */,
 				2D144DD71419071D009E1DBA /* Requests */,
@@ -266,6 +289,8 @@
 				2DB323D91417A1BD001440B7 /* GDataXML */,
 				2DB0FAC21416C8CF00EFD6BC /* UkrBashAppDelegate.h */,
 				2DB0FAC31416C8CF00EFD6BC /* UkrBashAppDelegate.m */,
+				2D12630414F6E789001C9DA0 /* UIKitExtentions.h */,
+				2D12630514F6E789001C9DA0 /* UIKitExtentions.m */,
 				2DB0FAC51416C8CF00EFD6BC /* MainWindow.xib */,
 				2DB0FAC81416C8CF00EFD6BC /* UkrBash.xcdatamodeld */,
 				2DB0FABA1416C8CF00EFD6BC /* Supporting Files */,
@@ -433,7 +458,7 @@
 		2DB0FAA41416C8CF00EFD6BC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 2DB0FAA71416C8CF00EFD6BC /* Build configuration list for PBXProject "UkrBash" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -525,6 +550,9 @@
 				2D52D6C614DCADFC00E6A744 /* UBUnpablishedPicturesDataSource.m in Sources */,
 				2D52D6C914DCAE1B00E6A744 /* UBBestPicturesDataSource.m in Sources */,
 				2D52D6CC14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m in Sources */,
+				2D12630214F6E6DA001C9DA0 /* DownloadOperations.m in Sources */,
+				2D12630314F6E6DA001C9DA0 /* MediaCenter.m in Sources */,
+				2D12630614F6E78A001C9DA0 /* UIKitExtentions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

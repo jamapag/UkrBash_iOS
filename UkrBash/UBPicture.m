@@ -31,6 +31,7 @@
     [image release];
     [thumbnail release];
     [title release];
+    [super dealloc];
 }
 
 @end
