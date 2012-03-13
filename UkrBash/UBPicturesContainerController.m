@@ -9,6 +9,8 @@
 #import "UBPicturesContainerController.h"
 #import "Model.h"
 #import "UBPictureCell.h"
+#import "MediaCenter.h"
+#import "UBPicture.h"
 
 @implementation UBPicturesContainerController
 
@@ -19,6 +21,7 @@
     self = [super init];
     if (self) {
         dataSource = [[dataSourceClass alloc] init];
+        pendingImages = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -43,10 +46,10 @@
 - (void)dealloc
 {
     [dataSource release];
-    [activeCell release];
     [tableView release];
     [categoryLabel release];
     [logoButton release];
+    [pendingImages release];
     [super dealloc];
 }
 
@@ -110,20 +113,32 @@
     [tableView addSubview:menuButton];
 }
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:kImageCenterNotification_didLoadImage object:nil queue:nil usingBlock:^(NSNotification *note) {
+        NSMutableArray *rows = [NSMutableArray array];
+        for (NSString *url in [[note userInfo] objectForKey:@"imageUrl"]) {
+            if ([pendingImages objectForKey:url]) {
+                [rows addObject:[pendingImages objectForKey:url]];
+                [pendingImages removeObjectForKey:url];
+            }
+        }
+        if ([rows count] > 0) {
+            [tableView reloadRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationFade];
+        }
+    }];
 }
-*/
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    [activeCell release], activeCell = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kImageCenterNotification_didLoadImage object:nil];
+    [pendingImages removeAllObjects];
     [tableView release], tableView = nil;
     [categoryLabel release], categoryLabel = nil;
     [logoButton release], logoButton = nil;
@@ -186,6 +201,12 @@
     UBPictureCell *cell = (UBPictureCell *)[_tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = (UBPictureCell *)[dataSource cellWithReuesIdentifier:cellIdentifier];
+    }
+    
+    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    UIImage *image = [[MediaCenter imageCenter] imageWithUrl:picture.thumbnail];
+    if (!image && ![pendingImages objectForKey:picture.thumbnail]) {
+        [pendingImages setObject:indexPath forKey:picture.thumbnail];
     }
     
     [dataSource configureCell:cell forRowAtIndexPath:indexPath];

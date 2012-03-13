@@ -14,9 +14,9 @@
     UITableView *tableView;
     UIButton *logoButton;
     UILabel *categoryLabel;
-    NSIndexPath *activeCell;
     
     UBTableViewDataSource *dataSource;
+    NSMutableDictionary *pendingImages;
     
     BOOL loading;
 }

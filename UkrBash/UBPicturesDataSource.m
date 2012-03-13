@@ -9,6 +9,7 @@
 #import "UBPicturesDataSource.h"
 #import "UBPictureCell.h"
 #import "UBPicture.h"
+#import "MediaCenter.h"
 
 @implementation UBPicturesDataSource
 
@@ -29,6 +30,7 @@
     cell.ratingLabel.text = [self ratingStringFromRating:picture.rating];
     cell.dateLabel.text = [[self dateFormatter] stringFromDate:picture.pubDate];
     cell.authorLabel.text = picture.author;
+    cell.imageView.image = [[MediaCenter imageCenter] imageWithUrl:picture.thumbnail];
 }
 
 @end

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define CELL_CONTENT_MARGIN 5.0f
+
 typedef enum  {
     UBQuoteShareFacebookType,
     UBQuoteShareTwitterType,
