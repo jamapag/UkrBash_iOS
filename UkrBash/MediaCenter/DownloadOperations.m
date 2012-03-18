@@ -49,7 +49,7 @@
 	NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
 	
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-	[[UIApplication sharedApplication] showNetworkActivityIndicator];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[connection start];
 	while (!done) {
 		[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
@@ -58,7 +58,7 @@
             done = YES;
         }
 	}
-	[[UIApplication sharedApplication] hideNetworkActivityIndicator];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[connection release];
         
     [pool drain];
@@ -131,12 +131,12 @@
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-	[[UIApplication sharedApplication] showNetworkActivityIndicator];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[connection start];
 	while (!done) {
 		[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
 	}
-	[[UIApplication sharedApplication] hideNetworkActivityIndicator];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[connection release];
 }
 
