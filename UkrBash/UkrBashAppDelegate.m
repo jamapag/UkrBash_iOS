@@ -23,6 +23,8 @@
 
 @synthesize persistentStoreCoordinator=__persistentStoreCoordinator;
 
+@synthesize facebook;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self.window makeKeyAndVisible];
@@ -36,6 +38,14 @@
     [containerController release];
     
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self.facebook handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.facebook handleOpenURL:url];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -81,6 +91,7 @@
     [__managedObjectModel release];
     [__persistentStoreCoordinator release];
     [navigationController release];
+    [facebook release];
     [super dealloc];
 }
 

@@ -13,6 +13,10 @@
 #import "UBNavigationController.h"
 #import <MessageUI/MessageUI.h>
 #import <Twitter/Twitter.h>
+#import "FacebookSharer.h"
+#import "UkrBashAppDelegate.h"
+#import "ShareManager.h"
+#import "EMailSharer.h"
 
 
 @implementation UBQuotesContainerController
@@ -309,17 +313,22 @@
 
 - (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(UBQuoteShareType)shareType
 {
+    NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+    UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
+    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%d", quote.quoteId];
+    
     if (shareType == UBQuoteShareFacebookType) {
-        
+        FacebookSharer *fbSharer = [[ShareManager sharedInstance] createFacebookSharer];
+        UkrBashAppDelegate *delegate = (UkrBashAppDelegate *) [[UIApplication sharedApplication] delegate];
+        delegate.facebook = fbSharer.facebook;
+
+        [fbSharer shareUrl:quoteUrl withMessage:nil];
     } else if (shareType == UBQuoteShareTwitterType) {
-        TWTweetComposeViewController *tweetComposer = [[TWTweetComposeViewController alloc] init];
-        [self presentModalViewController:tweetComposer animated:YES];
-        [tweetComposer release];
+        TwitterSharer *twitterSharer = [[ShareManager sharedInstance] createTwitterSharerWithViewController:self];
+        [twitterSharer shareUrl:quoteUrl withMessage:quote.text];
     } else if (shareType == UBQuoteShareEmailType) {
-        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
-        mailComposer.mailComposeDelegate = self;
-        [self presentModalViewController:mailComposer animated:YES];
-        [mailComposer release];
+        EMailSharer *emailSharer = [[ShareManager sharedInstance] createEmailSharerWithViewController:self];
+        [emailSharer shareUrl:quoteUrl withMessage:quote.text];
     }
 }
 
