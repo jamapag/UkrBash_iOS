@@ -7,7 +7,7 @@
 //
 
 #import "UBViewController.h"
-#import "UBTableViewDataSource.h"
+#import "UBPicturesDataSource.h"
 
 @interface UBPicturesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource>
 {
@@ -15,13 +15,13 @@
     UIButton *logoButton;
     UILabel *categoryLabel;
     
-    UBTableViewDataSource *dataSource;
+    UBPicturesDataSource *dataSource;
     NSMutableDictionary *pendingImages;
     
     BOOL loading;
 }
 
-@property (nonatomic, retain) UBTableViewDataSource *dataSource;
+@property (nonatomic, retain) UBPicturesDataSource *dataSource;
 
 - (id)initWithDataSourceClass:(Class)dataSourceClass;
 - (void)showFooter;

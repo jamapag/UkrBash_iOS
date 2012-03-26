@@ -11,6 +11,16 @@
 #import "UBPictureCell.h"
 #import "MediaCenter.h"
 #import "UBPicture.h"
+#import "UBPicturesViewerController.h"
+#import <QuartzCore/QuartzCore.h>
+
+
+@interface UBPicturesContainerController ()
+{
+    UBPicturesViewerController *viewerController;
+}
+
+@end
 
 @implementation UBPicturesContainerController
 
@@ -50,7 +60,18 @@
     [categoryLabel release];
     [logoButton release];
     [pendingImages release];
+    [viewerController release];
     [super dealloc];
+}
+
+#pragma mark -
+
+- (UBPicturesViewerController*)picturesViewerController
+{
+    if (!viewerController) {
+        viewerController = [[UBPicturesViewerController alloc] initWithDataSource:dataSource currentIndex:0];
+    }
+    return viewerController;
 }
 
 #pragma mark - actions
@@ -78,13 +99,13 @@
     [self.view addSubview:backgroundImageView];
     [backgroundImageView release];
     
-    tableView = [[UITableView alloc] initWithFrame:self.view.bounds];  
+    tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView setContentInset:UIEdgeInsetsMake(45., 0., 0., 0.)];
-    
+
     [self.view addSubview:tableView];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(publishedQuotesUpdated:)
@@ -219,6 +240,40 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 100.;
+}
+
+- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    CALayer *viewLayer = cell.layer;
+    
+    CGFloat animationDuration = .4;
+    
+    CABasicAnimation* popInAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    popInAnimation.duration = animationDuration;
+    [popInAnimation setToValue:[NSNumber numberWithFloat:1.5]];
+    
+    CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeAnimation.duration = animationDuration;
+    [fadeAnimation setToValue:[NSNumber numberWithFloat:0.]];
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.animations = [NSArray arrayWithObjects:popInAnimation, fadeAnimation, nil];
+    animationGroup.duration = animationDuration;
+	
+    [viewLayer addAnimation:animationGroup forKey:@"animation"];
+    
+    
+    UBPicturesViewerController *viewer = [self picturesViewerController];
+    viewer.pictureIndex = indexPath.row;
+    viewer.view.frame = self.view.bounds;
+    viewer.view.alpha = 0;
+    [self.view addSubview:viewer.view];
+    [UIView animateWithDuration:animationDuration animations:^{
+        viewer.view.alpha = 1;
+    }];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 }
 
 #pragma mark - UIScrollView delegate
