@@ -230,8 +230,8 @@
 		B09B37CB14DC7B97003E732D /* UBQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesDataSource.m; sourceTree = "<group>"; };
 		B09B37CD14DC8410003E732D /* UBPicturesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesDataSource.h; sourceTree = "<group>"; };
 		B09B37CE14DC8410003E732D /* UBPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesDataSource.m; sourceTree = "<group>"; };
-		B0B8DBC514B8617A00B07FDD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
-		B0B8DBC814B8618600B07FDD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		B0B8DBC514B8617A00B07FDD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		B0B8DBC814B8618600B07FDD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		B0B8DBCA14B8635100B07FDD /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		B0B8DBCB14B8635100B07FDD /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		B0CFEC0A14C2051900B6C5A7 /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button.png"; sourceTree = "<group>"; };
@@ -368,6 +368,7 @@
 				B00510841517BBFA00D6D69B /* QuartzCore.framework */,
 				B0B8DBC814B8618600B07FDD /* Default@2x.png */,
 				B0B8DBC514B8617A00B07FDD /* Default.png */,
+				2D333E2E1510F8E500E2CEF3 /* FBConnect */,
 				2DB0FAB91416C8CF00EFD6BC /* UkrBash */,
 				2DB0FAB01416C8CF00EFD6BC /* Frameworks */,
 				2DB0FAAE1416C8CF00EFD6BC /* Products */,
@@ -682,6 +683,22 @@
 				2D12630614F6E78A001C9DA0 /* UIKitExtentions.m in Sources */,
 				B008F69E150E942000556346 /* UBPicturesContainerController.m in Sources */,
 				B0003092151A285C00EC259C /* UBPicturesViewerController.m in Sources */,
+				2D333E4D1510F90600E2CEF3 /* Facebook.m in Sources */,
+				2D333E4F1510F90600E2CEF3 /* FBDialog.m in Sources */,
+				2D333E501510F90600E2CEF3 /* FBFrictionlessRequestSettings.m in Sources */,
+				2D333E511510F90600E2CEF3 /* FBLoginDialog.m in Sources */,
+				2D333E521510F90600E2CEF3 /* FBRequest.m in Sources */,
+				2D333E531510F90600E2CEF3 /* NSObject+SBJSON.m in Sources */,
+				2D333E541510F90600E2CEF3 /* NSString+SBJSON.m in Sources */,
+				2D333E551510F90600E2CEF3 /* SBJSON.m in Sources */,
+				2D333E561510F90600E2CEF3 /* SBJsonBase.m in Sources */,
+				2D333E571510F90600E2CEF3 /* SBJsonParser.m in Sources */,
+				2D333E581510F90600E2CEF3 /* SBJsonWriter.m in Sources */,
+				2D5A4E8D151B36BD002ABFA2 /* BaseSharer.m in Sources */,
+				2D5A4E91151B374D002ABFA2 /* FacebookSharer.m in Sources */,
+				2D230022151B5FC80059BD2B /* ShareManager.m in Sources */,
+				2D230026151B69820059BD2B /* TwitterSharer.m in Sources */,
+				2D23002D151B78950059BD2B /* EMailSharer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
