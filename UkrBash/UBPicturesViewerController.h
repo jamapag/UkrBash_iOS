@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "UBPicturesDataSource.h"
+#import "UBPictureInfoView.h"
 
 @interface UBPicturesViewerController : UIViewController
 {
     UIButton *backButton;
-    UIView *textBackgroundView;
-    UILabel *textLabel;
+    UBPictureInfoView *infoView;
     UIImageView *imageView;
     
     UBPicturesDataSource *dataSource;

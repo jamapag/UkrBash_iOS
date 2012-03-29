@@ -89,6 +89,7 @@
 		B0CC930E1523ACED0021C54D /* border@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CC930C1523ACED0021C54D /* border@2x.png */; };
 		B0CFEC0C14C2051900B6C5A7 /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CFEC0A14C2051900B6C5A7 /* menu-button.png */; };
 		B0CFEC0D14C2051900B6C5A7 /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */; };
+		B0D8FD861524F15400D4A6EB /* UBPictureInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */; };
 		B0DCA88614BF22C7007132B6 /* UBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DCA88514BF22C7007132B6 /* UBNavigationController.m */; };
 		B0DCA88C14BF325A007132B6 /* menu-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DCA88814BF325A007132B6 /* menu-pin.png */; };
 		B0DCA88D14BF325A007132B6 /* menu-pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DCA88914BF325A007132B6 /* menu-pin@2x.png */; };
@@ -240,6 +241,8 @@
 		B0CC930C1523ACED0021C54D /* border@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "border@2x.png"; sourceTree = "<group>"; };
 		B0CFEC0A14C2051900B6C5A7 /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button.png"; sourceTree = "<group>"; };
 		B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button@2x.png"; sourceTree = "<group>"; };
+		B0D8FD841524F15400D4A6EB /* UBPictureInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureInfoView.h; sourceTree = "<group>"; };
+		B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureInfoView.m; sourceTree = "<group>"; };
 		B0DCA88414BF22C7007132B6 /* UBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBNavigationController.h; sourceTree = "<group>"; };
 		B0DCA88514BF22C7007132B6 /* UBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBNavigationController.m; sourceTree = "<group>"; };
 		B0DCA88814BF325A007132B6 /* menu-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-pin.png"; sourceTree = "<group>"; };
@@ -362,6 +365,8 @@
 				B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */,
 				B09B37C214DC7649003E732D /* UBPictureCell.h */,
 				B09B37C314DC7649003E732D /* UBPictureCell.m */,
+				B0D8FD841524F15400D4A6EB /* UBPictureInfoView.h */,
+				B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -707,6 +712,7 @@
 				2D230022151B5FC80059BD2B /* ShareManager.m in Sources */,
 				2D230026151B69820059BD2B /* TwitterSharer.m in Sources */,
 				2D23002D151B78950059BD2B /* EMailSharer.m in Sources */,
+				B0D8FD861524F15400D4A6EB /* UBPictureInfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

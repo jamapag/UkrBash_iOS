@@ -7,7 +7,10 @@
 //
 
 #import "UBTableViewDataSource.h"
+#import "UBPictureInfoView.h"
 
 @interface UBPicturesDataSource : UBTableViewDataSource
+
+- (void)configurePictureInfoView:(UBPictureInfoView*)infoView forRowAtIndexPath:(NSIndexPath*)indexPath;
 
 @end

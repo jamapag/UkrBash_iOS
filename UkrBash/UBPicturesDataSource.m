@@ -33,4 +33,14 @@
     cell.imageView.image = [[MediaCenter imageCenter] imageWithUrl:picture.thumbnail];
 }
 
+- (void)configurePictureInfoView:(UBPictureInfoView *)infoView forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UBPicture *picture = (UBPicture *)[[self items] objectAtIndex:indexPath.row];
+    infoView.idLabel.text = [NSString stringWithFormat:@"%d", picture.pictureId];
+    infoView.textLabel.text = picture.title;
+    infoView.ratingLabel.text = [self ratingStringFromRating:picture.rating];
+    infoView.dateLabel.text = [[self dateFormatter] stringFromDate:picture.pubDate];
+    infoView.authorLabel.text = picture.author;
+}
+
 @end

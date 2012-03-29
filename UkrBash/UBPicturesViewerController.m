@@ -28,7 +28,7 @@
     } else {
         imageView.image = img;
     }
-    textLabel.text = picture.title;
+    [dataSource configurePictureInfoView:infoView forRowAtIndexPath:[NSIndexPath indexPathForRow:pictureIndex inSection:0]];
 }
 
 - (void)setPictureIndex:(NSInteger)newIndex
@@ -62,8 +62,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kImageCenterNotification_didLoadImage object:nil];
     [dataSource release];
-    [textLabel release], textLabel = nil;
-    [textBackgroundView release], textBackgroundView = nil;
+    [infoView release];
     [backButton release], backButton = nil;
     [imageView release], imageView = nil;
     [super dealloc];
@@ -98,21 +97,9 @@
     [self.view addSubview:imageView];
     
     CGFloat padding = 10.;
-    textBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(padding, self.view.frame.size.height - padding - 40., self.view.frame.size.width - 2 * padding, 40.)];
-    textBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    textBackgroundView.backgroundColor = [UIColor colorWithWhite:0. alpha:.6];
-    textBackgroundView.layer.cornerRadius = 5.;
-    [self.view addSubview:textBackgroundView];
-    
-    padding = 5.;
-    textLabel = [[UILabel alloc] initWithFrame:CGRectMake(textBackgroundView.frame.origin.x + padding, textBackgroundView.frame.origin.y + padding, textBackgroundView.frame.size.width - 2 * padding, textBackgroundView.frame.size.height - 2 * padding)];
-    textLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    textLabel.textColor = [UIColor whiteColor];
-    textLabel.backgroundColor = [UIColor clearColor];
-    textLabel.textAlignment = UITextAlignmentCenter;
-    textLabel.font = [UIFont systemFontOfSize:12.];
-    textLabel.numberOfLines = 0.;
-    [self.view addSubview:textLabel];
+    infoView = [[UBPictureInfoView alloc] initWithFrame:CGRectMake(padding, self.view.frame.size.height - padding - 60., self.view.frame.size.width - 2 * padding, 60.)];
+    infoView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+    [self.view addSubview:infoView];
 
     padding = 10.;
     backButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
@@ -128,8 +115,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kImageCenterNotification_didLoadImage object:nil];
 
-    [textLabel release], textLabel = nil;
-    [textBackgroundView release], textBackgroundView = nil;
+    [infoView release], infoView = nil;
     [backButton release], backButton = nil;
     [imageView release], imageView = nil;
 }
