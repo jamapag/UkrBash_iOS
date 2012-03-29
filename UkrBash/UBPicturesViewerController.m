@@ -92,18 +92,21 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     imageView.backgroundColor = [UIColor blackColor];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:imageView];
     
     CGFloat padding = 10.;
     textBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(padding, self.view.frame.size.height - padding - 40., self.view.frame.size.width - 2 * padding, 40.)];
+    textBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     textBackgroundView.backgroundColor = [UIColor colorWithWhite:0. alpha:.6];
     textBackgroundView.layer.cornerRadius = 5.;
     [self.view addSubview:textBackgroundView];
     
     padding = 5.;
     textLabel = [[UILabel alloc] initWithFrame:CGRectMake(textBackgroundView.frame.origin.x + padding, textBackgroundView.frame.origin.y + padding, textBackgroundView.frame.size.width - 2 * padding, textBackgroundView.frame.size.height - 2 * padding)];
+    textLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     textLabel.textColor = [UIColor whiteColor];
     textLabel.backgroundColor = [UIColor clearColor];
     textLabel.textAlignment = UITextAlignmentCenter;
@@ -161,7 +164,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 @end

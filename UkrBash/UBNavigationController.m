@@ -10,6 +10,8 @@
 #import "UBViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define BORDER_WIDTH 15.
+
 @implementation UBNavigationController
 
 @synthesize menuViewController = _menuViewController;
@@ -58,20 +60,19 @@
     if (!_viewController) {
         _viewController = [viewController retain];
         _viewController.ubNavigationController = self;
-        _viewController.view.frame = CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height);
+        _viewController.view.frame = CGRectMake(0., 0., self.view.bounds.size.width, self.view.bounds.size.height);
         _viewController.view.layer.shadowOffset = CGSizeMake(-15., 5.);
         _viewController.view.layer.shadowRadius = 10.;
         _viewController.view.layer.shadowColor = [[UIColor blackColor] CGColor];
         _viewController.view.layer.shadowOpacity = .5;
         _viewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:_viewController.view.bounds].CGPath;
         if (animated) {
-            // TODO: do appearence animation here
-            CGFloat x = _viewController.view.center.x + self.view.frame.size.width - 15.;
+            CGFloat x = _viewController.view.center.x + self.view.bounds.size.width - BORDER_WIDTH;
             _viewController.view.center = CGPointMake(x, _viewController.view.center.y);
             [borderView removeFromSuperview];
             [self.view addSubview:_viewController.view];
             [UIView animateWithDuration:.4 animations:^ {
-                CGFloat newX = self.view.frame.size.width / 2.;
+                CGFloat newX = self.view.bounds.size.width / 2.;
                 _viewController.view.center = CGPointMake(newX, _viewController.view.center.y);
             }];
         } else {
@@ -83,15 +84,22 @@
 
 - (void)popViewControllerAnimated:(BOOL)animated
 {
+    NSAssert(_viewController != nil, @"Can't pop menu controller.");
     if (_viewController) {
         if (animated) {
             [UIView animateWithDuration:.5 animations:^(void) {
-                CGFloat x = _viewController.view.center.x + self.view.frame.size.width - 15.;
+                CGFloat x = _viewController.view.center.x + self.view.bounds.size.width - BORDER_WIDTH;
                 _viewController.view.center = CGPointMake(x, _viewController.view.center.y);
             } completion:^(BOOL finished) {
                 _viewController.ubNavigationController = nil;
                 [_viewController.view removeFromSuperview];
                 [_viewController release], _viewController = nil;
+                
+                CGFloat height = self.view.bounds.size.height;
+                if (height < self.view.bounds.size.width) {
+                    height = self.view.bounds.size.width;
+                }
+                borderView.frame = CGRectMake(self.view.bounds.size.width - BORDER_WIDTH, 0., BORDER_WIDTH, height);
                 [self.view addSubview:borderView];
             }];
         } else {
@@ -110,9 +118,12 @@
 {
     [super loadView];
     
-    borderView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 15., 0., 15., self.view.frame.size.height)];
+    self.view.clipsToBounds = YES;
+    
+    borderView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - BORDER_WIDTH, 0., BORDER_WIDTH, self.view.frame.size.height)];
+    borderView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     borderView.contentMode = UIViewContentModeBottomLeft;
-    borderView.image = [UIImage imageNamed:@"Default"];
+    borderView.image = [UIImage imageNamed:@"border"];
     borderView.layer.shadowOffset = CGSizeMake(-15., 5.);
     borderView.layer.shadowRadius = 10.;
     borderView.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -149,8 +160,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 @end

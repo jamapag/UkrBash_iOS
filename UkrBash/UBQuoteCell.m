@@ -92,6 +92,7 @@ CGFloat animationOffset = 52.;
         rect.size.width -= 20;
         rect.size.height -= 10;
         containerView = [[UIView alloc] initWithFrame:rect];
+        containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         containerView.layer.cornerRadius = 4.;
         containerView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         containerView.layer.borderWidth = .5;
@@ -109,6 +110,7 @@ CGFloat animationOffset = 52.;
         [containerView addSubview:idLabel];
         
         ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x + idLabel.frame.size.width, y, (containerView.frame.size.width - CELL_CONTENT_MARGIN * 3.) / 2., INFO_LABELS_HEIGHT)];
+        ratingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         ratingLabel.textAlignment = UITextAlignmentRight;
         ratingLabel.font = [UIFont systemFontOfSize:10];
         ratingLabel.textColor = [UIColor grayColor];
@@ -116,11 +118,11 @@ CGFloat animationOffset = 52.;
         
         y += ratingLabel.frame.size.height;
         quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(CELL_CONTENT_MARGIN, y, containerView.frame.size.width - CELL_CONTENT_MARGIN * 2., containerView.frame.size.height - INFO_LABELS_HEIGHT * 2 - CELL_CONTENT_MARGIN * 2)];
+        quoteTextLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [quoteTextLabel setLineBreakMode:UILineBreakModeWordWrap];
         [quoteTextLabel setFont:[UIFont systemFontOfSize:FONT_SIZE]];
         [quoteTextLabel setNumberOfLines:0];
         [quoteTextLabel setUserInteractionEnabled:YES];
-        [quoteTextLabel setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
         [containerView addSubview:quoteTextLabel];
         
         y += quoteTextLabel.frame.size.height + 1;
@@ -132,6 +134,7 @@ CGFloat animationOffset = 52.;
         [containerView addSubview:authorLabel];
         
         dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(authorLabel.frame.origin.x + authorLabel.frame.size.width, y, (containerView.frame.size.width - CELL_CONTENT_MARGIN * 3.) / 2., INFO_LABELS_HEIGHT)];
+        dateLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         dateLabel.font = ratingLabel.font;
         dateLabel.textColor = [UIColor grayColor];
         dateLabel.textAlignment = UITextAlignmentRight;

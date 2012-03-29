@@ -85,12 +85,14 @@ enum UBSubMenuItems {
     [super loadView];
 
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height)];
+    backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     backgroundImageView.image = [UIImage imageNamed:@"view-background"];
-    backgroundImageView.contentMode = UIViewContentModeBottom;
+    backgroundImageView.contentMode = UIViewContentModeBottomLeft;
     [self.view addSubview:backgroundImageView];
     [backgroundImageView release];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor clearColor];
@@ -99,6 +101,7 @@ enum UBSubMenuItems {
     [self.view addSubview:_tableView];
 
     logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 5., 165., 38.)];
+    logoButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     logoButton.center = CGPointMake(self.view.frame.size.width / 2., logoButton.center.y);
     [logoButton addTarget:self action:@selector(scrollToTopAction:) forControlEvents:UIControlEventTouchUpInside];
     [logoButton setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
@@ -122,7 +125,7 @@ enum UBSubMenuItems {
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 #pragma mark - Navigation methods

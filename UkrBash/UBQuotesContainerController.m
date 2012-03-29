@@ -105,12 +105,21 @@
 //    loading = YES;
     
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height)];
-    backgroundImageView.image = [UIImage imageNamed:@"Default"];
-    backgroundImageView.contentMode = UIViewContentModeBottom;
+    backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    backgroundImageView.image = [UIImage imageNamed:@"view-background"];
+    backgroundImageView.contentMode = UIViewContentModeBottomLeft;
     [self.view addSubview:backgroundImageView];
     [backgroundImageView release];
     
+    UIImage *borderImage = [UIImage imageNamed:@"border"];
+    UIImageView *borderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., borderImage.size.width, self.view.frame.size.height)];
+    borderImageView.image = borderImage;
+    borderImageView.contentMode = UIViewContentModeBottomLeft;
+    [self.view addSubview:borderImageView];
+    [borderImageView release];
+    
     tableView = [[UITableView alloc] initWithFrame:self.view.bounds];  
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.backgroundColor = [UIColor clearColor];
@@ -124,6 +133,7 @@
                                                object:nil];
     
     logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 5., 165., 38.)];
+    logoButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     logoButton.center = CGPointMake(self.view.frame.size.width / 2., logoButton.center.y);
     [logoButton addTarget:self action:@selector(scrollToTopAction:) forControlEvents:UIControlEventTouchUpInside];
     [logoButton setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
@@ -139,6 +149,7 @@
 //    [self.view addSubview:categoryLabel];
     
     UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    menuButton.autoresizingMask = UIViewAutoresizingNone;
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(menuAction:) forControlEvents:UIControlEventTouchUpInside];
     [menuButton setFrame:CGRectMake(15., -35., 36., 36.)];
@@ -167,7 +178,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 - (BOOL)canBecomeFirstResponder
@@ -191,9 +202,11 @@
 
 - (void)showFooter
 {
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    footerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityIndicator.center = footerView.center;
+    activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
     [activityIndicator startAnimating];
     [footerView addSubview:activityIndicator];
     
