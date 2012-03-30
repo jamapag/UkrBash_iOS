@@ -31,6 +31,11 @@ static NSString *kName_Tags = @"tags";
     
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData options:0 error:nil];
     NSArray *items = [doc nodesForXPath:@"quotes" error:nil];
+    if ([items count] == 0) {
+        [doc release];
+        return nil;
+    }
+    
     GDataXMLElement *quotesElement = [items objectAtIndex:0];
     NSArray *quotesArray = [quotesElement elementsForName:kName_Quote];
 //    NSLog(@"Count: %d", [quotesArray count]);

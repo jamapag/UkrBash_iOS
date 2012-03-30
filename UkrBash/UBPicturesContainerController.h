@@ -8,8 +8,9 @@
 
 #import "UBViewController.h"
 #import "UBPicturesDataSource.h"
+#import "EGORefreshTableHeaderView.h"
 
-@interface UBPicturesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource>
+@interface UBPicturesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource, EGORefreshTableHeaderDelegate>
 {
     UITableView *tableView;
     UIButton *logoButton;
@@ -17,6 +18,8 @@
     
     UBPicturesDataSource *dataSource;
     NSMutableDictionary *pendingImages;
+    
+    EGORefreshTableHeaderView *_refreshHeaderView;
     
     BOOL loading;
 }

@@ -8,6 +8,8 @@
 
 #import "UBUnpablishedQuotesDataSource.h"
 #import "Model.h"
+#import "UBQuoteCell.h"
+#import "UBQuote.h"
 
 @implementation UBUnpablishedQuotesDataSource
 
@@ -19,6 +21,11 @@
 - (void)loadMoreItems
 {
     [[Model sharedModel] loadMoreUnpablishedQuotes];
+}
+
+- (void)loadNewItems
+{
+    [[Model sharedModel] loadNewUnpablishedQuotes];
 }
 
 @end

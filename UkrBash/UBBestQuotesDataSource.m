@@ -21,4 +21,9 @@
     [[Model sharedModel] loadMoreBestQuotes];
 }
 
+- (void)loadNewItems
+{
+    [[Model sharedModel] loadNewBestQuotes];
+}
+
 @end

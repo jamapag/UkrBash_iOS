@@ -21,4 +21,9 @@
     [[Model sharedModel] loadMoreRandomPictures];
 }
 
+- (void)loadNewItems
+{
+    [[Model sharedModel] loadNewRandomPictures];
+}
+
 @end

@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MessageUI/MessageUI.h>
 #import "UBViewController.h"
 #import "UBQuoteCell.h"
 #import "UBTableViewDataSource.h"
+#import "EGORefreshTableHeaderView.h"
 
-@interface UBQuotesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource, UBQuoteCellDelegate, MFMailComposeViewControllerDelegate>
+@interface UBQuotesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource, UBQuoteCellDelegate, EGORefreshTableHeaderDelegate>
 {
     UITableView *tableView;
     UIButton *logoButton;
@@ -20,6 +20,7 @@
     NSIndexPath *activeCell;
     
     UBTableViewDataSource *dataSource;
+    EGORefreshTableHeaderView *_refreshHeaderView;
     
     BOOL loading;
 }

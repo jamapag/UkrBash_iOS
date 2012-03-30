@@ -21,4 +21,9 @@
     [[Model sharedModel] loadMoreUnpablishedPictures];
 }
 
+- (void)loadNewItems
+{
+    [[Model sharedModel] loadNewUnpablishedPictures];
+}
+
 @end

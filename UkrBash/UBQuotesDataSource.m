@@ -27,7 +27,12 @@
     cell.idLabel.text = [NSString stringWithFormat:@"%d", quote.quoteId];
     cell.quoteTextLabel.text = quote.text;
     cell.ratingLabel.text = [self ratingStringFromRating:quote.rating];
-    cell.dateLabel.text = [[self dateFormatter] stringFromDate:quote.pubDate];
+    if (quote.pubDate) {
+        cell.dateLabel.text = [[self dateFormatter] stringFromDate:quote.pubDate];        
+    } else {
+        cell.dateLabel.text = [[self dateFormatter] stringFromDate:quote.addDate];
+    }
+
     cell.authorLabel.text = quote.author;
 }
 

@@ -21,4 +21,9 @@
     [[Model sharedModel] loadMorePublishedPictures];
 }
 
+- (void)loadNewItems
+{
+    [[Model sharedModel] loadNewPublishedPictures];
+}
+
 @end

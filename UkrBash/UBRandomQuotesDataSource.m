@@ -21,4 +21,9 @@
     [[Model sharedModel] loadMoreRandomQuotes];
 }
 
+- (void)loadNewItems
+{
+    [[Model sharedModel] loadNewRandomQuotes];
+}
+
 @end

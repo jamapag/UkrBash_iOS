@@ -11,6 +11,8 @@
 #import "UBQuotesParser.h"
 #import "UBPicturesParser.h"
 #import "UBImagesRequest.h"
+#import "UBQuote.h"
+#import "UBErrorsParser.h"
 
 NSString *const kNotificationDataUpdated = @"kNotificationDataUpdated";
 
@@ -116,6 +118,46 @@ static Model *sharedModel = nil;
     [request release];
 }
 
+- (void)loadNewUnpablishedQuotes
+{
+    NSLog(@"Load New unpablished quotes");
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getUpcoming start:0 andLimit:25];
+    [request setAddToTop:YES];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadNewPublishedQuotes
+{
+    NSLog(@"Load new published quotes");
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getPublished start:0 andLimit:25];
+    [request setAddToTop:YES];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadNewBestQuotes
+{
+    NSLog(@"Load new published quotes");
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getTheBest start:0 andLimit:25];
+    [request setAddToTop:YES];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadNewRandomQuotes
+{
+    NSLog(@"Load new published quotes");
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getRandom start:0 andLimit:25];
+    [request setAddToTop:YES];
+    [request start];
+    [requests addObject:request];
+    [request release];    
+}
+
 #pragma mark - Pictures Loaders
 
 - (UBImagesRequest *)newPicturesRequestWithMethod:(NSString *)method start:(NSInteger)start andLimit:(NSInteger)limit
@@ -164,6 +206,46 @@ static Model *sharedModel = nil;
     [request release];
 }
 
+- (void)loadNewPublishedPictures
+{
+    NSLog(@"Load new published pictures");
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getPublished start:0 andLimit:25];
+    [request setAddToTop:YES];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadNewUnpablishedPictures
+{
+    NSLog(@"Load new upcoming pictures");
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getUpcoming start:0 andLimit:25];
+    [request setAddToTop:YES];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadNewRandomPictures
+{
+    NSLog(@"Load new random pictures");
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getRandom start:0 andLimit:25];
+    [request setAddToTop:YES];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
+- (void)loadNewBestPictures
+{
+    NSLog(@"Load new best pictures");
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getTheBest start:0 andLimit:25];
+    [request setAddToTop:YES];
+    [request start];
+    [requests addObject:request];
+    [request release];
+}
+
 
 #pragma mark - UBQuotesRequestDelegate
 - (void)request:(UBRequest *)request didFinishWithData:(NSData *)data
@@ -181,24 +263,55 @@ static Model *sharedModel = nil;
         [parser release];
     }
     
+    if (array == nil) {
+        UBErrorsParser *parser = [[UBErrorsParser alloc] init];
+        NSDictionary *errorDictionary = [parser parseErrorWithData:data];
+        NSLog(@"Error code: %@", [errorDictionary objectForKey:@"code"]);
+        [parser release];
+    }
+    
     if ([request.method isEqualToString:kQuotes_getPublished]) {
+        if (request.addToTop) {
+            [publishedQuotes removeAllObjects];
+        }
         [publishedQuotes addObjectsFromArray:array];
     } else if ([request.method isEqualToString:kQuotes_getUpcoming]) {
+        if (request.addToTop) {
+            [unpablishedQuotes removeAllObjects];
+        }
         [unpablishedQuotes addObjectsFromArray:array];
     } else if ([request.method isEqualToString:kQuotes_getTheBest]) {
+        if (request.addToTop) {
+            [bestQuotes removeAllObjects];
+        }
         [bestQuotes addObjectsFromArray:array];
     } else if ([request.method isEqualToString:kQuotes_getRandom]) {
+        if (request.addToTop) {
+            [randomQuotes removeAllObjects];
+        }
         [randomQuotes addObjectsFromArray:array];
     } else if ([request.method isEqualToString:kPictures_getPublished]) {
+        if (request.addToTop) {
+            [publishedImages removeAllObjects];
+        }
         [publishedImages addObjectsFromArray:array];
     } else if ([request.method isEqualToString:kPictures_getUpcoming]) {
+        if (request.addToTop) {
+            [unpablishedImages removeAllObjects];
+        }
         [unpablishedImages addObjectsFromArray:array];
     } else if ([request.method isEqualToString:kPictures_getRandom]) {
+        if (request.addToTop) {
+            [randomImages removeAllObjects];
+        }
         [randomImages addObjectsFromArray:array];
     } else if ([request.method isEqualToString:kPictures_getTheBest]) {
+        if (request.addToTop) {
+            [bestImages removeAllObjects];
+        }
         [bestImages addObjectsFromArray:array];
     }
-
+    
     [requests removeObject:request];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDataUpdated object:nil];
 }
