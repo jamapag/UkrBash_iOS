@@ -117,7 +117,7 @@
     [self.view addSubview:borderImageView];
     [borderImageView release];
     
-    tableView = [[UITableView alloc] initWithFrame:self.view.bounds];  
+    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 45., self.view.frame.size.width, self.view.frame.size.height - 45.)];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     tableView.delegate = self;
     tableView.dataSource = self;
