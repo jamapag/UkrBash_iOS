@@ -22,4 +22,14 @@
     [params setObject:[NSNumber numberWithInteger:start] forKey:kStart];
 }
 
+- (void)setAddAfter:(long long)addAfter
+{
+    [params setObject:[NSNumber numberWithLongLong:addAfter] forKey:kAddAfter];
+}
+
+- (void)setPubAfter:(long long)pubAfter
+{
+    [params setObject:[NSNumber numberWithLongLong:pubAfter] forKey:kPubAfter];
+}
+
 @end

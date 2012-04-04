@@ -21,4 +21,9 @@
     [[Model sharedModel] loadMorePublishedQuotes];
 }
 
+- (void)loadNewItems
+{
+    [[Model sharedModel] loadNewPublishedQuotes];
+}
+
 @end

@@ -28,7 +28,11 @@
     cell.idLabel.text = [NSString stringWithFormat:@"%d", picture.pictureId];
     cell.quoteTextLabel.text = picture.title;
     cell.ratingLabel.text = [self ratingStringFromRating:picture.rating];
-    cell.dateLabel.text = [[self dateFormatter] stringFromDate:picture.pubDate];
+    if (picture.pubDate) {
+        cell.dateLabel.text = [[self dateFormatter] stringFromDate:picture.pubDate];
+    } else {
+        cell.dateLabel.text = [[self dateFormatter] stringFromDate:picture.addDate];
+    }
     cell.authorLabel.text = picture.author;
     cell.imageView.image = [[MediaCenter imageCenter] imageWithUrl:picture.thumbnail];
 }

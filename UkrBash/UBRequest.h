@@ -55,12 +55,14 @@ extern NSString *const kStats;
     NSURLConnection *connection;
     NSMutableData *loadedData;
     NSString *method;
+    BOOL addToTop;
     NSMutableDictionary *params;
     id <UBRequestDelegate> delegate;
 }
 
 @property (nonatomic, assign) id <UBRequestDelegate> delegate;
 @property (nonatomic, retain) NSString *method;
+@property (nonatomic, assign) BOOL addToTop;
 
 - (void)start;
 - (void)cancel;

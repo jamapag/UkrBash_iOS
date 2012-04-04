@@ -32,6 +32,10 @@ static NSString *kName_Rating = @"rating";
     
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData options:0 error:nil];
     NSArray *items = [doc nodesForXPath:@"pictures" error:nil];
+    if ([items count] == 0) {
+        [doc release];
+        return nil;
+    }
     GDataXMLElement *picturesElement = [items objectAtIndex:0];
     NSArray *picturesArray = [picturesElement elementsForName:kName_Picture];
     

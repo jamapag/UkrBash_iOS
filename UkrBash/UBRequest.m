@@ -14,6 +14,7 @@
 
 @synthesize delegate;
 @synthesize method;
+@synthesize addToTop;
 
 // Sample http://api.ukrbash.org/1/quotes.getPublished.xml?client=apiKey
 // Base API Url

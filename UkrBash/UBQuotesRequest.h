@@ -12,5 +12,7 @@
 
 - (void)setLimit:(NSInteger)limit;
 - (void)setStart:(NSInteger)start;
+- (void)setAddAfter:(long long)addAfter;
+- (void)setPubAfter:(long long)pubAfter;
 
 @end

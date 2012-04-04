@@ -21,4 +21,9 @@
     [[Model sharedModel] loadMoreBestPictures];
 }
 
+- (void)loadNewItems
+{
+    [[Model sharedModel] loadNewBestPictures];
+}
+
 @end

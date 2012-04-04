@@ -46,4 +46,14 @@ extern NSString *const kNotificationDataUpdated;
 - (void)loadMoreRandomPictures;
 - (void)loadMoreBestPictures;
 
+- (void)loadNewUnpablishedQuotes;
+- (void)loadNewPublishedQuotes;
+- (void)loadNewBestQuotes;
+- (void)loadNewRandomQuotes;
+- (void)loadNewUnpablishedPictures;
+- (void)loadNewPublishedPictures;
+- (void)loadNewBestPictures;
+- (void)loadNewRandomPictures;
+
+
 @end

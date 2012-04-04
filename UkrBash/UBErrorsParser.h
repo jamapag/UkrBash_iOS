@@ -13,4 +13,6 @@
     
 }
 
+- (NSDictionary *)parseErrorWithData:(NSData *)xmlData;
+
 @end

@@ -11,8 +11,6 @@
 #import "UBQuote.h"
 #import "UBQuoteCell.h"
 #import "UBNavigationController.h"
-#import <MessageUI/MessageUI.h>
-#import <Twitter/Twitter.h>
 #import "FacebookSharer.h"
 #import "UkrBashAppDelegate.h"
 #import "ShareManager.h"
@@ -46,6 +44,7 @@
     [tableView release];
     [categoryLabel release];
     [logoButton release];
+    [_refreshHeaderView release];
     [super dealloc];
 }
 
@@ -124,9 +123,22 @@
     tableView.dataSource = self;
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [tableView setContentInset:UIEdgeInsetsMake(45., 0., 0., 0.)];
+    
+    // for starting loading automatically.
+    [tableView setContentInset:UIEdgeInsetsMake(1., 0., 0., 0.)];
     
     [self.view addSubview:tableView];
+    
+    
+    if (_refreshHeaderView == nil) {
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - tableView.bounds.size.height, self.view.frame.size.width, tableView.bounds.size.height)];
+		view.delegate = self;
+		[tableView addSubview:view];
+		_refreshHeaderView = view;
+		[view release];		
+	}
+
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(publishedQuotesUpdated:)
                                                  name:kNotificationDataUpdated
@@ -152,8 +164,8 @@
     menuButton.autoresizingMask = UIViewAutoresizingNone;
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(menuAction:) forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setFrame:CGRectMake(15., -35., 36., 36.)];
-    [tableView addSubview:menuButton];
+    [menuButton setFrame:CGRectMake(15., 5., 36., 36.)];
+    [self.view addSubview:menuButton];
 }
 
 /*
@@ -173,6 +185,7 @@
     [tableView release], tableView = nil;
     [categoryLabel release], categoryLabel = nil;
     [logoButton release], logoButton = nil;
+    [_refreshHeaderView release], _refreshHeaderView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -190,6 +203,7 @@
 {
     [tableView reloadData];
     loading = NO;
+    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:tableView];
     [self hideFooter];
 }
 
@@ -198,6 +212,12 @@
     [self showFooter];
     loading = YES;
     [dataSource loadMoreItems];
+}
+
+- (void)loadNewItems
+{
+    loading = YES;
+    [dataSource loadNewItems];
 }
 
 - (void)showFooter
@@ -283,18 +303,20 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
-    CGFloat alpha = 1;
-    if (aScrollView.contentOffset.y < 0) {
-        if (abs(aScrollView.contentOffset.y) >= tableView.contentInset.top) {
-            alpha = 1.;
-        } else {
-            alpha = 1. - (tableView.contentInset.top + aScrollView.contentOffset.y) / 100;
-        }
-    } else {
-        alpha = .5;
-    }
-    logoButton.alpha = MAX(alpha, .5);
-    categoryLabel.alpha = MAX(alpha, .5);
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:aScrollView];
+    
+//    CGFloat alpha = 1;
+//    if (aScrollView.contentOffset.y < 0) {
+//        if (abs(aScrollView.contentOffset.y) >= tableView.contentInset.top) {
+//            alpha = 1.;
+//        } else {
+//            alpha = 1. - (tableView.contentInset.top + aScrollView.contentOffset.y) / 100;
+//        }
+//    } else {
+//        alpha = .5;
+//    }
+//    logoButton.alpha = MAX(alpha, .5);
+//    categoryLabel.alpha = MAX(alpha, .5);
     
     CGPoint offset = aScrollView.contentOffset;
     CGRect bounds = aScrollView.bounds;
@@ -322,6 +344,10 @@
     }
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
 #pragma mark -
 
 - (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(UBQuoteShareType)shareType
@@ -345,11 +371,15 @@
     }
 }
 
-#pragma mark - 
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+#pragma mark - EGORefreshTableHeaderDelegate methods.
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self loadNewItems];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{
+    return loading;
 }
 
 @end

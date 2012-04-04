@@ -61,4 +61,9 @@
     NSAssert(NO, @"this method should be overloaded by subclasses");
 }
 
+- (void)loadNewItems
+{
+    NSAssert(NO, @"this method should be overloaded by subclasses");
+}
+
 @end

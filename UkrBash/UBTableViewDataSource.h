@@ -17,6 +17,7 @@
 - (void)configureCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath;
 - (NSArray*)items;
 - (void)loadMoreItems;
+- (void)loadNewItems;
 - (NSDateFormatter*)dateFormatter;
 - (NSString*)ratingStringFromRating:(NSInteger)rating;
 
