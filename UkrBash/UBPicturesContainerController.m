@@ -97,7 +97,7 @@
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height)];
     backgroundImageView.image = [UIImage imageNamed:@"view-background"];
     backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    backgroundImageView.contentMode = UIViewContentModeBottom;
+    backgroundImageView.contentMode = UIViewContentModeBottomLeft;
     [self.view addSubview:backgroundImageView];
     [backgroundImageView release];
     
