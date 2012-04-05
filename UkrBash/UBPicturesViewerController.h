@@ -10,11 +10,12 @@
 #import "UBPicturesDataSource.h"
 #import "UBPictureInfoView.h"
 
-@interface UBPicturesViewerController : UIViewController
+@interface UBPicturesViewerController : UIViewController <UIScrollViewDelegate>
 {
     UIButton *backButton;
     UBPictureInfoView *infoView;
     UIImageView *imageView;
+    UIScrollView *scrollView;
     
     UBPicturesDataSource *dataSource;
     NSInteger pictureIndex;

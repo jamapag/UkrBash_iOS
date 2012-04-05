@@ -19,6 +19,37 @@
 
 @synthesize pictureIndex;
 
+- (void)updateZoom
+{
+    if (!imageView.image) {
+        return;
+    }
+    scrollView.zoomScale = 1.;
+
+    CGFloat width = imageView.image.size.width;
+    CGFloat height = imageView.image.size.height;
+    CGFloat minZoomScale = 0;
+    CGFloat x = 0;
+    CGFloat y = 0;
+    if (width > scrollView.frame.size.width) {
+        minZoomScale = scrollView.frame.size.width / width;
+        y = (scrollView.frame.size.height - height) / 2.;
+    } else if (height > scrollView.frame.size.height) {
+        minZoomScale = scrollView.frame.size.height / height;
+        x = (scrollView.frame.size.width - width) / 2.;
+    } else {
+        y = (scrollView.frame.size.height - height) / 2.;
+        x = (scrollView.frame.size.width - width) / 2.;
+        minZoomScale = 1.;
+    }
+    imageView.frame = CGRectMake(x, y, width, height);
+    scrollView.contentSize = CGSizeMake(MAX(width, scrollView.frame.size.width), MAX(height, scrollView.frame.size.height));
+    
+    scrollView.maximumZoomScale = 1.;
+    scrollView.minimumZoomScale = minZoomScale;
+    scrollView.zoomScale = minZoomScale;
+}
+
 - (void)updatePicture
 {
     UBPicture *picture = [[dataSource items] objectAtIndex:pictureIndex];
@@ -28,6 +59,7 @@
     } else {
         imageView.image = img;
     }
+    [self updateZoom];
     [dataSource configurePictureInfoView:infoView forRowAtIndexPath:[NSIndexPath indexPathForRow:pictureIndex inSection:0]];
 }
 
@@ -63,6 +95,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kImageCenterNotification_didLoadImage object:nil];
     [dataSource release];
     [infoView release];
+    [scrollView release];
     [backButton release], backButton = nil;
     [imageView release], imageView = nil;
     [super dealloc];
@@ -90,11 +123,17 @@
     
     self.view.backgroundColor = [UIColor blackColor];
     
-    imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    scrollView.backgroundColor = [UIColor blackColor];
+    scrollView.delegate = self;
+    [self.view addSubview:scrollView];
+    
+    imageView = [[UIImageView alloc] initWithFrame:scrollView.bounds];
     imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     imageView.backgroundColor = [UIColor blackColor];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.view addSubview:imageView];
+    [scrollView addSubview:imageView];
     
     CGFloat padding = 10.;
     infoView = [[UBPictureInfoView alloc] initWithFrame:CGRectMake(padding, self.view.frame.size.height - padding - 60., self.view.frame.size.width - 2 * padding, 60.)];
@@ -115,6 +154,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kImageCenterNotification_didLoadImage object:nil];
 
+    [scrollView release], scrollView = nil;
     [infoView release], infoView = nil;
     [backButton release], backButton = nil;
     [imageView release], imageView = nil;
@@ -128,12 +168,15 @@
         UBPicture *picture = [[dataSource items] objectAtIndex:pictureIndex];
         for (NSString *url in [[note userInfo] objectForKey:@"imageUrl"]) {
             if ([url isEqualToString:picture.image]) {
-                imageView.image = [[MediaCenter imageCenter] imageWithUrl:url];
+                [self updatePicture];
                 break;
             } else if (!imageView.image && [url isEqualToString:picture.thumbnail]) {
-                imageView.image = [[MediaCenter imageCenter] imageWithUrl:url];
+                [self updatePicture];
             }
         }
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIDeviceOrientationDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+        [self updateZoom];
     }];
     
     if (!imageView.image) {
@@ -151,6 +194,13 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+#pragma mark - Scroll View delegate
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return imageView;
 }
 
 @end
