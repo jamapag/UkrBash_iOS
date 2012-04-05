@@ -131,6 +131,26 @@
     
 }
 
+- (void)tapGestureHandler:(UITapGestureRecognizer*)tapGesture
+{
+    if (toolbar.hidden) {
+        toolbar.hidden = NO;
+        infoView.hidden = NO;
+    } else {
+        toolbar.hidden = YES;
+        infoView.hidden = YES;
+    }
+}
+
+- (void)doubleTapGestureHandler:(UITapGestureRecognizer*)tapGesture
+{
+    if (scrollView.zoomScale == scrollView.minimumZoomScale) {
+        [scrollView setZoomScale:scrollView.maximumZoomScale animated:YES];
+    } else {
+        [scrollView setZoomScale:scrollView.minimumZoomScale animated:YES];
+    }
+}
+
 #pragma mark - View life circle
 
 - (void)viewDidLoad
@@ -145,6 +165,17 @@
     scrollView.backgroundColor = [UIColor blackColor];
     scrollView.delegate = self;
     [self.view addSubview:scrollView];
+    
+    UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapGestureHandler:)];
+    doubleTapGesture.numberOfTapsRequired = 2;
+    [scrollView addGestureRecognizer:doubleTapGesture];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler:)];
+    tapGesture.numberOfTapsRequired = 1;
+    [tapGesture requireGestureRecognizerToFail:doubleTapGesture];
+    [scrollView addGestureRecognizer:tapGesture];
+    [tapGesture release];
+    [doubleTapGesture release];
     
     imageView = [[UIImageView alloc] initWithFrame:scrollView.bounds];
     imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
