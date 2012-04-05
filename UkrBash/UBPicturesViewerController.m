@@ -12,6 +12,11 @@
 #import "UBPicture.h"
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
+#import "ShareManager.h"
+#import "UkrBashAppDelegate.h"
+#import "FacebookSharer.h"
+#import "TwitterSharer.h"
+#import "EMailSharer.h"
 
 @interface UBPicturesViewerController ()
 
@@ -118,20 +123,33 @@
 
 - (void)fbShareAction:(id)sender
 {
+    UBPicture *picture = [[dataSource items] objectAtIndex:pictureIndex];
+    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
     
+    FacebookSharer *fbSharer = [[ShareManager sharedInstance] createFacebookSharer];
+    UkrBashAppDelegate *delegate = (UkrBashAppDelegate *) [[UIApplication sharedApplication] delegate];
+    delegate.facebook = fbSharer.facebook;
+        
+    [fbSharer shareUrl:pictureUrl withMessage:nil];
 }
 
 - (void)twShareAction:(id)sender
 {
-    
+    UBPicture *picture = [[dataSource items] objectAtIndex:pictureIndex];
+    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
+    TwitterSharer *twitterSharer = [[ShareManager sharedInstance] createTwitterSharerWithViewController:self];
+    [twitterSharer shareUrl:pictureUrl withMessage:picture.title];
 }
 
 - (void)mailShareAction:(id)sender
 {
-    
+    UBPicture *picture = [[dataSource items] objectAtIndex:pictureIndex];
+    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];    
+    EMailSharer *emailSharer = [[ShareManager sharedInstance] createEmailSharerWithViewController:self];
+    [emailSharer shareUrl:pictureUrl withMessage:picture.title];
 }
 
-- (void)tapGestureHandler:(UITapGestureRecognizer*)tapGesture
+- (void)tapGestureHandler:(UITapGestureRecognizer *)tapGesture
 {
     if (toolbar.hidden) {
         toolbar.hidden = NO;
