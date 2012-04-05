@@ -87,6 +87,8 @@
 		B0604E2D14D5F4A500F8ADB0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2C14D5F4A500F8ADB0 /* MessageUI.framework */; };
 		B0604E3014D5F4AE00F8ADB0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */; };
 		B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */; };
+		B07C47D5152DA4D900DE05EB /* back-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = B07C47D3152DA4D900DE05EB /* back-btn.png */; };
+		B07C47D6152DA4D900DE05EB /* back-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B07C47D4152DA4D900DE05EB /* back-btn@2x.png */; };
 		B09B37C414DC7649003E732D /* UBPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37C314DC7649003E732D /* UBPictureCell.m */; };
 		B09B37C914DC783F003E732D /* UBTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37C814DC783F003E732D /* UBTableViewDataSource.m */; };
 		B09B37CC14DC7B97003E732D /* UBQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37CB14DC7B97003E732D /* UBQuotesDataSource.m */; };
@@ -247,6 +249,8 @@
 		B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMenuItemCell.h; sourceTree = "<group>"; };
 		B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMenuItemCell.m; sourceTree = "<group>"; };
+		B07C47D3152DA4D900DE05EB /* back-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-btn.png"; sourceTree = "<group>"; };
+		B07C47D4152DA4D900DE05EB /* back-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-btn@2x.png"; sourceTree = "<group>"; };
 		B09B37C214DC7649003E732D /* UBPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureCell.h; sourceTree = "<group>"; };
 		B09B37C314DC7649003E732D /* UBPictureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureCell.m; sourceTree = "<group>"; };
 		B09B37C714DC783F003E732D /* UBTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBTableViewDataSource.h; sourceTree = "<group>"; };
@@ -530,6 +534,8 @@
 				2D439B381525BC4E0042D5D0 /* EGORefreshTableHeadreViewImages */,
 				B0CFEC0A14C2051900B6C5A7 /* menu-button.png */,
 				B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */,
+				B07C47D3152DA4D900DE05EB /* back-btn.png */,
+				B07C47D4152DA4D900DE05EB /* back-btn@2x.png */,
 				B0DCA88814BF325A007132B6 /* menu-pin.png */,
 				B0DCA88914BF325A007132B6 /* menu-pin@2x.png */,
 				B0E9C15414D6F752000C3D97 /* menu-pin-45.png */,
@@ -690,6 +696,8 @@
 				2D439B461525BC4E0042D5D0 /* grayArrow@2x.png in Resources */,
 				2D439B471525BC4E0042D5D0 /* whiteArrow.png in Resources */,
 				2D439B481525BC4E0042D5D0 /* whiteArrow@2x.png in Resources */,
+				B07C47D5152DA4D900DE05EB /* back-btn.png in Resources */,
+				B07C47D6152DA4D900DE05EB /* back-btn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

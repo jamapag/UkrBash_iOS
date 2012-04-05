@@ -141,8 +141,9 @@
     [self.view addSubview:infoView];
 
     padding = 10.;
-    backButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+    backButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
     backButton.frame = CGRectMake(padding, padding, 30., 30.);
+    [backButton setImage:[UIImage imageNamed:@"back-btn"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
 }
