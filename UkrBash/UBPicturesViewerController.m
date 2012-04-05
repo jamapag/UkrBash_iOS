@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MediaCenter.h"
 #import "UBPicture.h"
+#import <Twitter/Twitter.h>
+#import <MessageUI/MessageUI.h>
 
 @interface UBPicturesViewerController ()
 
@@ -114,6 +116,21 @@
                      }];
 }
 
+- (void)fbShareAction:(id)sender
+{
+    
+}
+
+- (void)twShareAction:(id)sender
+{
+    
+}
+
+- (void)mailShareAction:(id)sender
+{
+    
+}
+
 #pragma mark - View life circle
 
 - (void)viewDidLoad
@@ -140,12 +157,46 @@
     infoView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:infoView];
 
+    CGFloat sharingButtonHeight = 32.;
     padding = 10.;
+    toolbar = [[UIView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, padding + sharingButtonHeight)];
+    toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    toolbar.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:toolbar];
+
+    CGFloat x = padding, y = padding;
     backButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-    backButton.frame = CGRectMake(padding, padding, 30., 30.);
+    backButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
     [backButton setImage:[UIImage imageNamed:@"back-btn"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:backButton];
+    [toolbar addSubview:backButton];
+    padding += 10.;
+    x += sharingButtonHeight + padding;
+    
+    UIButton *fbButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    fbButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
+    [fbButton setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
+    [fbButton addTarget:self action:@selector(fbShareAction:) forControlEvents:UIControlEventTouchUpInside];
+    [toolbar addSubview:fbButton];
+    x += sharingButtonHeight + padding;
+
+    if ([TWTweetComposeViewController canSendTweet]) {
+        UIButton *twButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        twButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
+        [twButton setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
+        [twButton addTarget:self action:@selector(twShareAction:) forControlEvents:UIControlEventTouchUpInside];
+        [toolbar addSubview:twButton];
+        x += sharingButtonHeight + padding;
+    }
+    
+    if ([MFMailComposeViewController canSendMail]) {
+        UIButton *mailButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        mailButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
+        [mailButton setImage:[UIImage imageNamed:@"gmail"] forState:UIControlStateNormal];
+        [mailButton addTarget:self action:@selector(mailShareAction:) forControlEvents:UIControlEventTouchUpInside];
+        [toolbar addSubview:mailButton];
+        x += sharingButtonHeight + padding;
+    }
 }
 
 - (void)viewDidUnload

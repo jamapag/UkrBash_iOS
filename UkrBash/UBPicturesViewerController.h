@@ -16,6 +16,7 @@
     UBPictureInfoView *infoView;
     UIImageView *imageView;
     UIScrollView *scrollView;
+    UIView *toolbar;
     
     UBPicturesDataSource *dataSource;
     NSInteger pictureIndex;
