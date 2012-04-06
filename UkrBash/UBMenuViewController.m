@@ -146,6 +146,12 @@ enum UBSubMenuItems {
 
 - (void)pushQuotesContainerWithDataSourceClass:(Class)dataSourceClass title:(NSString*)title
 {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:title forKey:UBContainerTitleKey];
+    [userDefaults setValue:NSStringFromClass(dataSourceClass) forKey:UBContainerDataSourceKey];
+    [userDefaults setValue:UBContainerTypeQuotes forKey:UBContainerTypeKey];
+    [userDefaults synchronize];
+    
     UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:dataSourceClass];
     quotesContainer.title = title;
     [self.ubNavigationController pushViewController:quotesContainer animated:YES];
@@ -154,6 +160,12 @@ enum UBSubMenuItems {
 
 - (void)pushPicturesContainerWithDataSourceClass:(Class)dataSourceClass title:(NSString*)title
 {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:title forKey:UBContainerTitleKey];
+    [userDefaults setValue:NSStringFromClass(dataSourceClass) forKey:UBContainerDataSourceKey];
+    [userDefaults setValue:UBContainerTypePictures forKey:UBContainerTypeKey];
+    [userDefaults synchronize];
+
     UBPicturesContainerController *picturesContainer = [[UBPicturesContainerController alloc] initWithDataSourceClass:dataSourceClass];
     picturesContainer.title = title;
     [self.ubNavigationController pushViewController:picturesContainer animated:YES];

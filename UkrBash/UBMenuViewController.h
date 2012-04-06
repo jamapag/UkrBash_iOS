@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "UBViewController.h"
 
+#define UBContainerTypeKey @"UBContainerTypeKey"
+#define UBContainerTypeQuotes @"quotes"
+#define UBContainerTypePictures @"pictures"
+
+#define UBContainerDataSourceKey @"UBContainerDataSourceKey"
+#define UBContainerTitleKey @"UBContainerTitleKey"
+
 @interface UBMenuViewController : UBViewController <UITableViewDelegate, UITableViewDataSource>
 {
     UITableView *_tableView;

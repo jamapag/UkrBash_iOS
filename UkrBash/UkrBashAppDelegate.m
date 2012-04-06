@@ -8,9 +8,11 @@
 
 #import "UkrBashAppDelegate.h"
 #import "UBQuotesContainerController.h"
+#import "UBPicturesContainerController.h"
 #import "UBMenuViewController.h"
 #import "UBNavigationController.h"
 #import "UBPublishedQuotesDataSource.h"
+#import "UBPublishedPicturesDataSource.h"
 
 @implementation UkrBashAppDelegate
 
@@ -25,18 +27,45 @@
 
 @synthesize facebook;
 
+- (UBViewController*)containerWithType:(NSString*)type dataSource:(NSString*)dataSource
+{
+    if (!type) {
+        return [[[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]] autorelease];
+    } else if ([type isEqualToString:UBContainerTypeQuotes]) {
+        if (!dataSource) {
+            dataSource = NSStringFromClass([UBPublishedQuotesDataSource class]);
+        }
+        return [[[UBQuotesContainerController alloc] initWithDataSourceClass:NSClassFromString(dataSource)] autorelease];
+    } else if ([type isEqualToString:UBContainerTypePictures]) {
+        if (!dataSource) {
+            dataSource = NSStringFromClass([UBPublishedPicturesDataSource class]);
+        }
+        return [[[UBPicturesContainerController alloc] initWithDataSourceClass:NSClassFromString(dataSource)] autorelease];
+    }
+    return nil;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self.window makeKeyAndVisible];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *containerType = [userDefaults stringForKey:UBContainerTypeKey];
+    NSString *containerTitle = [userDefaults stringForKey:UBContainerTitleKey];
+    NSString *containerDataSource = [userDefaults stringForKey:UBContainerDataSourceKey];
+    if (!containerTitle) {
+        containerTitle = @"Опубліковане";
+    }
+    
     UBMenuViewController *menuController = [[UBMenuViewController alloc] init];
     navigationController = [[UBNavigationController alloc] initWithMenuViewController:menuController];
-    UBQuotesContainerController *containerController = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]];
-    containerController.title = @"Опубліковане";
-    [navigationController pushViewController:containerController animated:NO];
+    
+    UBViewController *container = [self containerWithType:containerType dataSource:containerDataSource];
+    container.title = containerTitle;
+    [navigationController pushViewController:container animated:NO];
+    
     [self.window addSubview:navigationController.view];
     [menuController release];
-    [containerController release];
     
     return YES;
 }
