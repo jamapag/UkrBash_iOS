@@ -18,6 +18,7 @@
 
 
 @implementation UBQuotesContainerController
+
 @synthesize dataSource;
 
 - (id)initWithDataSourceClass:(Class)dataSourceClass
@@ -42,18 +43,11 @@
     [dataSource release];
     [activeCell release];
     [tableView release];
-    [categoryLabel release];
-    [logoButton release];
     [_refreshHeaderView release];
     [super dealloc];
 }
 
 #pragma mark - actions
-
-- (void)scrollToTopAction:(id)sender
-{
-    [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0. inSection:0.] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-}
 
 - (void)menuAction:(id)sender
 {
@@ -100,9 +94,6 @@
 {
     [super loadView];
     
-//    [[Model sharedModel] loadPublishedQuotes];
-//    loading = YES;
-    
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height)];
     backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     backgroundImageView.image = [UIImage imageNamed:@"view-background"];
@@ -144,28 +135,39 @@
                                                  name:kNotificationDataUpdated
                                                object:nil];
     
-    logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 5., 165., 38.)];
-    logoButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    logoButton.center = CGPointMake(self.view.frame.size.width / 2., logoButton.center.y);
-    [logoButton addTarget:self action:@selector(scrollToTopAction:) forControlEvents:UIControlEventTouchUpInside];
-    [logoButton setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [self.view addSubview:logoButton];
-    
-    categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(175., 37., 140., 15.)];
-    categoryLabel.text = @"Опубліковане";
-    categoryLabel.backgroundColor = [UIColor clearColor];
-    categoryLabel.font = [UIFont fontWithName:@"TimesNewRomanPSMT" size:13];
-    categoryLabel.shadowColor = [UIColor blackColor];
-    categoryLabel.shadowOffset = CGSizeMake(0., .5);
-    categoryLabel.textColor = [UIColor colorWithRed:.04 green:.6 blue:.97 alpha:1.];
-//    [self.view addSubview:categoryLabel];
+    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, 44.)];
+    headerView.userInteractionEnabled = YES;
+    headerView.image = [UIImage imageNamed:@"header"];
+    headerView.contentMode = UIViewContentModeTopLeft;
+    headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., headerView.image.size.width, headerView.image.size.height)] CGPath];
+    headerView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    headerView.layer.shadowRadius = 2.;
+    headerView.layer.shadowOffset = CGSizeMake(0, 2.);
+    headerView.layer.shadowOpacity = .3;
     
     UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
     menuButton.autoresizingMask = UIViewAutoresizingNone;
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(menuAction:) forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setFrame:CGRectMake(15., 5., 36., 36.)];
-    [self.view addSubview:menuButton];
+    [menuButton setFrame:CGRectMake(15., 2., 36., 36.)];
+    [headerView addSubview:menuButton];
+    
+    CGFloat x = menuButton.frame.origin.x + menuButton.frame.size.width + 5.;
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, menuButton.frame.origin.y, headerView.frame.size.width - x * 2, menuButton.frame.size.height)];
+    titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.textAlignment = UITextAlignmentCenter;
+    titleLabel.font = [UIFont boldSystemFontOfSize:21.];
+    titleLabel.textColor = [UIColor darkGrayColor];
+    titleLabel.shadowColor = [UIColor whiteColor];
+    titleLabel.shadowOffset = CGSizeMake(0, 1.);
+    titleLabel.text = self.title;
+    [headerView addSubview:titleLabel];
+    [titleLabel release];
+    
+    [self.view addSubview:headerView];
+    [headerView release];
 }
 
 /*
@@ -183,8 +185,6 @@
     // e.g. self.myOutlet = nil;
     [activeCell release], activeCell = nil;
     [tableView release], tableView = nil;
-    [categoryLabel release], categoryLabel = nil;
-    [logoButton release], logoButton = nil;
     [_refreshHeaderView release], _refreshHeaderView = nil;
 }
 
@@ -304,19 +304,6 @@
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
     [_refreshHeaderView egoRefreshScrollViewDidScroll:aScrollView];
-    
-//    CGFloat alpha = 1;
-//    if (aScrollView.contentOffset.y < 0) {
-//        if (abs(aScrollView.contentOffset.y) >= tableView.contentInset.top) {
-//            alpha = 1.;
-//        } else {
-//            alpha = 1. - (tableView.contentInset.top + aScrollView.contentOffset.y) / 100;
-//        }
-//    } else {
-//        alpha = .5;
-//    }
-//    logoButton.alpha = MAX(alpha, .5);
-//    categoryLabel.alpha = MAX(alpha, .5);
     
     CGPoint offset = aScrollView.contentOffset;
     CGRect bounds = aScrollView.bounds;

@@ -13,8 +13,6 @@
 @interface UBPicturesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource, EGORefreshTableHeaderDelegate>
 {
     UITableView *tableView;
-    UIButton *logoButton;
-    UILabel *categoryLabel;
     
     UBPicturesDataSource *dataSource;
     NSMutableDictionary *pendingImages;

@@ -32,6 +32,7 @@
     UBMenuViewController *menuController = [[UBMenuViewController alloc] init];
     navigationController = [[UBNavigationController alloc] initWithMenuViewController:menuController];
     UBQuotesContainerController *containerController = [[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]];
+    containerController.title = @"Опубліковане";
     [navigationController pushViewController:containerController animated:NO];
     [self.window addSubview:navigationController.view];
     [menuController release];

@@ -15,8 +15,6 @@
 @interface UBQuotesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource, UBQuoteCellDelegate, EGORefreshTableHeaderDelegate>
 {
     UITableView *tableView;
-    UIButton *logoButton;
-    UILabel *categoryLabel;
     NSIndexPath *activeCell;
     
     UBTableViewDataSource *dataSource;

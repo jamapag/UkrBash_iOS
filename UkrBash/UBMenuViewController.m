@@ -91,21 +91,35 @@ enum UBSubMenuItems {
     [self.view addSubview:backgroundImageView];
     [backgroundImageView release];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 44., self.view.frame.size.width, self.view.frame.size.height - 44.) style:UITableViewStylePlain];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.rowHeight = 52.;
-    _tableView.contentInset = UIEdgeInsetsMake(55., 0., 0., 0.);
     [self.view addSubview:_tableView];
 
-    logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 5., 165., 38.)];
+    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, 44.)];
+    headerView.userInteractionEnabled = YES;
+    headerView.image = [UIImage imageNamed:@"header"];
+    headerView.contentMode = UIViewContentModeTopLeft;
+    headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., headerView.image.size.width, headerView.image.size.height)] CGPath];
+    headerView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    headerView.layer.shadowRadius = 2.;
+    headerView.layer.shadowOffset = CGSizeMake(0, 2.);
+    headerView.layer.shadowOpacity = .3;
+    
+    logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 4., 135., 30.)];
+    logoButton.contentMode = UIViewContentModeScaleToFill;
     logoButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     logoButton.center = CGPointMake(self.view.frame.size.width / 2., logoButton.center.y);
     [logoButton addTarget:self action:@selector(scrollToTopAction:) forControlEvents:UIControlEventTouchUpInside];
     [logoButton setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [self.view addSubview:logoButton];
+    [headerView addSubview:logoButton];
+    
+    [self.view addSubview:headerView];
+    [headerView release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -130,16 +144,18 @@ enum UBSubMenuItems {
 
 #pragma mark - Navigation methods
 
-- (void)pushQuotesContainerWithDataSourceClass:(Class)dataSourceClass
+- (void)pushQuotesContainerWithDataSourceClass:(Class)dataSourceClass title:(NSString*)title
 {
     UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:dataSourceClass];
+    quotesContainer.title = title;
     [self.ubNavigationController pushViewController:quotesContainer animated:YES];
     [quotesContainer release];
 }
 
-- (void)pushPicturesContainerWithDataSourceClass:(Class)dataSourceClass
+- (void)pushPicturesContainerWithDataSourceClass:(Class)dataSourceClass title:(NSString*)title
 {
     UBPicturesContainerController *picturesContainer = [[UBPicturesContainerController alloc] initWithDataSourceClass:dataSourceClass];
+    picturesContainer.title = title;
     [self.ubNavigationController pushViewController:picturesContainer animated:YES];
     [picturesContainer release];
 }
@@ -252,14 +268,16 @@ enum UBSubMenuItems {
             isQuotesSectionFolded = !isQuotesSectionFolded;
             [self tableView:tableView setFolding:isQuotesSectionFolded forSection:indexPath.section];
         } else {
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            NSString *title = cell.textLabel.text;
             if (UBSubMenuItemPublished == indexPath.row) {
-                [self pushQuotesContainerWithDataSourceClass:[UBPublishedQuotesDataSource class]];
+                [self pushQuotesContainerWithDataSourceClass:[UBPublishedQuotesDataSource class] title:title];
             } else if (UBSubMenuItemUnpublished == indexPath.row) {
-                [self pushQuotesContainerWithDataSourceClass:[UBUnpablishedQuotesDataSource class]];
+                [self pushQuotesContainerWithDataSourceClass:[UBUnpablishedQuotesDataSource class] title:title];
             } else if (UBSubMenuItemBest == indexPath.row) {
-                [self pushQuotesContainerWithDataSourceClass:[UBBestQuotesDataSource class]];
+                [self pushQuotesContainerWithDataSourceClass:[UBBestQuotesDataSource class] title:title];
             } else if (UBSubMenuItemRandom == indexPath.row) {
-                [self pushQuotesContainerWithDataSourceClass:[UBRandomQuotesDataSource class]];
+                [self pushQuotesContainerWithDataSourceClass:[UBRandomQuotesDataSource class] title:title];
             }
         }
     }
@@ -268,14 +286,16 @@ enum UBSubMenuItems {
             isImagesSectionFolded = !isImagesSectionFolded;
             [self tableView:tableView setFolding:isImagesSectionFolded forSection:indexPath.section];
         } else {
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            NSString *title = cell.textLabel.text;
             if (UBSubMenuItemPublished == indexPath.row) {
-                [self pushPicturesContainerWithDataSourceClass:[UBPublishedPicturesDataSource class]];
+                [self pushPicturesContainerWithDataSourceClass:[UBPublishedPicturesDataSource class] title:title];
             } else if (UBSubMenuItemUnpublished == indexPath.row) {
-                [self pushPicturesContainerWithDataSourceClass:[UBUnpablishedPicturesDataSource class]];
+                [self pushPicturesContainerWithDataSourceClass:[UBUnpablishedPicturesDataSource class] title:title];
             } else if (UBSubMenuItemRandom == indexPath.row) {
-                [self pushPicturesContainerWithDataSourceClass:[UBRandomPicturesDataSource class]];
+                [self pushPicturesContainerWithDataSourceClass:[UBRandomPicturesDataSource class] title:title];
             } else if (UBSubMenuItemBest == indexPath.row) {
-                [self pushPicturesContainerWithDataSourceClass:[UBBestPicturesDataSource class]];
+                [self pushPicturesContainerWithDataSourceClass:[UBBestPicturesDataSource class] title:title];
             }
         }
     }
@@ -285,23 +305,6 @@ enum UBSubMenuItems {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
         }
     }
-}
-
-#pragma mark - UIScrollView delegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)aScrollView
-{
-    CGFloat alpha = 1;
-    if (aScrollView.contentOffset.y < 0) {
-        if (abs(aScrollView.contentOffset.y) >= self.tableView.contentInset.top) {
-            alpha = 1.;
-        } else {
-            alpha = 1. - (self.tableView.contentInset.top + aScrollView.contentOffset.y) / 100;
-        }
-    } else {
-        alpha = .5;
-    }
-    logoButton.alpha = MAX(alpha, .5);
 }
 
 @end
