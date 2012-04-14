@@ -262,9 +262,9 @@
 
         cell.shareDelegate = self;
         
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCopyMenu:)];
-        [cell addGestureRecognizer:longPress];
-        [longPress release];
+//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCopyMenu:)];
+//        [cell addGestureRecognizer:longPress];
+//        [longPress release];
     }
     
     [dataSource configureCell:cell forRowAtIndexPath:indexPath];
