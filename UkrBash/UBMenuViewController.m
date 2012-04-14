@@ -313,6 +313,9 @@ enum UBSubMenuItems {
     }
 
     if (UBMenuInfoSection == indexPath.section) {
+        if (indexPath.row == UBMenuItemRateApp) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=517226573"]];
+        }
         if (indexPath.row == UBMenuItemWebsite) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
         }
