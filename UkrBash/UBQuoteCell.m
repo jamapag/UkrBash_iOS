@@ -11,7 +11,7 @@
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 
-#define FONT_SIZE 12.0f
+#define FONT_SIZE 14.0f
 #define INFO_LABELS_HEIGHT 12.0f
 
 CGFloat animationOffset = 52.;
