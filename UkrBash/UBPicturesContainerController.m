@@ -13,6 +13,7 @@
 #import "UBPicture.h"
 #import "UBPicturesViewerController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UBPicturesScrollViewController.h"
 
 
 @interface UBPicturesContainerController ()
@@ -193,6 +194,14 @@
     return YES;
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                         duration:(NSTimeInterval)duration
+{
+    if (viewer) {
+        [viewer willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    }
+}
+
 - (void)publishedQuotesUpdated:(NSNotificationCenter *)notification
 {
     [tableView reloadData];
@@ -295,14 +304,16 @@
     [viewLayer addAnimation:animationGroup forKey:@"animation"];
     
     
-    UBPicturesViewerController *viewer = [self picturesViewerController];
-    viewer.pictureIndex = indexPath.row;
+    viewer = [[UBPicturesScrollViewController alloc] initWithDataSource:dataSource andStartPictureIndex:indexPath.row];
+//    UBPicturesViewerController *viewer = [self picturesViewerController];
+//    viewer.pictureIndex = indexPath.row;
     viewer.view.frame = self.view.bounds;
     viewer.view.alpha = 0;
     [self.view addSubview:viewer.view];
     [UIView animateWithDuration:animationDuration animations:^{
         viewer.view.alpha = 1;
     }];
+    
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 }

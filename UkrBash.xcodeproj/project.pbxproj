@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D07888414C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */; };
+		2D0D814D15A49E0A00AAB0B5 /* UBPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0D814C15A49E0A00AAB0B5 /* UBPictureView.m */; };
 		2D12630214F6E6DA001C9DA0 /* DownloadOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1262FE14F6E6DA001C9DA0 /* DownloadOperations.m */; };
 		2D12630314F6E6DA001C9DA0 /* MediaCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D12630114F6E6DA001C9DA0 /* MediaCenter.m */; };
 		2D12630614F6E78A001C9DA0 /* UIKitExtentions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D12630514F6E789001C9DA0 /* UIKitExtentions.m */; };
@@ -68,6 +69,7 @@
 		2DBF0A0114B66A1200A8949B /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBF09FF14B66A1200A8949B /* app-icon.png */; };
 		2DBF0A0214B66A1200A8949B /* app-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBF0A0014B66A1200A8949B /* app-icon@2x.png */; };
 		2DDED39A14A3649D003B315D /* UBQuote.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DDED39914A3649D003B315D /* UBQuote.m */; };
+		2DE4917F15A5C14000002488 /* UBPicturesScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE4917E15A5C14000002488 /* UBPicturesScrollViewController.m */; };
 		2DE54AFF14C83FF800CB04CB /* UBPublishedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54AFE14C83FF800CB04CB /* UBPublishedQuotesDataSource.m */; };
 		2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */; };
 		2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */; };
@@ -116,6 +118,8 @@
 /* Begin PBXFileReference section */
 		2D07888214C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnpablishedQuotesDataSource.h; sourceTree = "<group>"; };
 		2D07888314C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnpablishedQuotesDataSource.m; sourceTree = "<group>"; };
+		2D0D814B15A49E0A00AAB0B5 /* UBPictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureView.h; sourceTree = "<group>"; };
+		2D0D814C15A49E0A00AAB0B5 /* UBPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureView.m; sourceTree = "<group>"; };
 		2D1262FD14F6E6DA001C9DA0 /* DownloadOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadOperations.h; sourceTree = "<group>"; };
 		2D1262FE14F6E6DA001C9DA0 /* DownloadOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadOperations.m; sourceTree = "<group>"; };
 		2D1262FF14F6E6DA001C9DA0 /* ImageCenterFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCenterFriend.h; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 		2DDC236514A27527000B407F /* ApiKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiKey.h; sourceTree = "<group>"; };
 		2DDED39814A3649D003B315D /* UBQuote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuote.h; sourceTree = "<group>"; };
 		2DDED39914A3649D003B315D /* UBQuote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuote.m; sourceTree = "<group>"; };
+		2DE4917D15A5C14000002488 /* UBPicturesScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesScrollViewController.h; sourceTree = "<group>"; };
+		2DE4917E15A5C14000002488 /* UBPicturesScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesScrollViewController.m; sourceTree = "<group>"; };
 		2DE54AFB14C83F5500CB04CB /* UBQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesDataSource.h; sourceTree = "<group>"; };
 		2DE54AFD14C83FF800CB04CB /* UBPublishedQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPublishedQuotesDataSource.h; sourceTree = "<group>"; };
 		2DE54AFE14C83FF800CB04CB /* UBPublishedQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPublishedQuotesDataSource.m; sourceTree = "<group>"; };
@@ -411,6 +417,8 @@
 				B09B37C314DC7649003E732D /* UBPictureCell.m */,
 				B0D8FD841524F15400D4A6EB /* UBPictureInfoView.h */,
 				B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */,
+				2D0D814B15A49E0A00AAB0B5 /* UBPictureView.h */,
+				2D0D814C15A49E0A00AAB0B5 /* UBPictureView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -516,6 +524,8 @@
 		2DB323F11417C9C1001440B7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2DE4917D15A5C14000002488 /* UBPicturesScrollViewController.h */,
+				2DE4917E15A5C14000002488 /* UBPicturesScrollViewController.m */,
 				2D9F6E0C14A158C40012D690 /* UBQuotesContainerController.h */,
 				2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */,
 				B008F69C150E942000556346 /* UBPicturesContainerController.h */,
@@ -773,6 +783,8 @@
 				2D23002D151B78950059BD2B /* EMailSharer.m in Sources */,
 				B0D8FD861524F15400D4A6EB /* UBPictureInfoView.m in Sources */,
 				B09CFA98152C7CD600316B7C /* EGORefreshTableHeaderView.m in Sources */,
+				2D0D814D15A49E0A00AAB0B5 /* UBPictureView.m in Sources */,
+				2DE4917F15A5C14000002488 /* UBPicturesScrollViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,7 @@ static NSString *kName_Url = @"url";
     NSArray *errorElementsArray = [doc nodesForXPath:@"error" error:nil];
     if ([errorElementsArray count] == 0) {
         [doc release];
+        [errorDictionary release];
         return nil;
     }
     GDataXMLElement *errorElement = [errorElementsArray objectAtIndex:0];

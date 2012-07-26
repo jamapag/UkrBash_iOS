@@ -9,6 +9,7 @@
 #import "UBViewController.h"
 #import "UBPicturesDataSource.h"
 #import "EGORefreshTableHeaderView.h"
+#import "UBPicturesScrollViewController.h"
 
 @interface UBPicturesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource, EGORefreshTableHeaderDelegate>
 {
@@ -18,6 +19,7 @@
     NSMutableDictionary *pendingImages;
     
     EGORefreshTableHeaderView *_refreshHeaderView;
+    UBPicturesScrollViewController *viewer;
     
     BOOL loading;
 }
