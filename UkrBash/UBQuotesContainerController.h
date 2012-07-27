@@ -20,6 +20,8 @@
     UBTableViewDataSource *dataSource;
     EGORefreshTableHeaderView *_refreshHeaderView;
     
+    NSIndexPath *selectedIndexPath;
+    
     BOOL loading;
 }
 

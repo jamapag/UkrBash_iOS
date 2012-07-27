@@ -42,6 +42,7 @@
 {
     [dataSource release];
     [activeCell release];
+    [selectedIndexPath release];
     [tableView release];
     [_refreshHeaderView release];
     [super dealloc];
@@ -58,8 +59,9 @@
 {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         UBQuoteCell *cell = (UBQuoteCell*)gesture.view;
-        NSIndexPath *path = [tableView indexPathForCell:cell];
-        if ([path isEqual:activeCell]) {
+        [selectedIndexPath release], selectedIndexPath = nil;
+        selectedIndexPath = [[tableView indexPathForCell:cell] retain];
+        if ([selectedIndexPath isEqual:activeCell]) {
             return;
         }
         [cell setSelected:YES animated:NO];
@@ -78,12 +80,19 @@
 
 - (void)copyQuote:(id)sender
 {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     
+    UBQuote *quote = [[dataSource items] objectAtIndex:selectedIndexPath.row];
+    pasteboard.string = [quote text];
 }
 
 - (void)copyURL:(id)sender
 {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     
+    UBQuote *quote = [[dataSource items] objectAtIndex:selectedIndexPath.row];
+    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%d", quote.quoteId];
+    pasteboard.string = quoteUrl;
 }
 
 #pragma mark - View lifecycle
@@ -262,9 +271,9 @@
 
         cell.shareDelegate = self;
         
-//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCopyMenu:)];
-//        [cell addGestureRecognizer:longPress];
-//        [longPress release];
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCopyMenu:)];
+        [cell addGestureRecognizer:longPress];
+        [longPress release];
     }
     
     [dataSource configureCell:cell forRowAtIndexPath:indexPath];
