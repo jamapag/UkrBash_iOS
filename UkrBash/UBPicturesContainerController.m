@@ -194,6 +194,14 @@
     return YES;
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
+                                duration:(NSTimeInterval)duration
+{
+    if (viewer) {
+        [viewer willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    }
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                          duration:(NSTimeInterval)duration
 {
