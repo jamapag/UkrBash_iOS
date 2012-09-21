@@ -110,13 +110,9 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView setContentInset:UIEdgeInsetsMake(1., 0., 0., 0.)];
     
-    if (_refreshHeaderView == nil) {
-		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - tableView.bounds.size.height, self.view.frame.size.width, tableView.bounds.size.height)];
-		view.delegate = self;
-		[tableView addSubview:view];
-		_refreshHeaderView = view;
-		[view release];		
-	}
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - tableView.bounds.size.height, self.view.frame.size.width, tableView.bounds.size.height)];
+    _refreshHeaderView.delegate = self;
+    [tableView addSubview:_refreshHeaderView];
 
     [self.view addSubview:tableView];
     [[NSNotificationCenter defaultCenter] addObserver:self

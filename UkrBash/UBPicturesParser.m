@@ -34,6 +34,7 @@ static NSString *kName_Rating = @"rating";
     NSArray *items = [doc nodesForXPath:@"pictures" error:nil];
     if ([items count] == 0) {
         [doc release];
+        [pictures release];
         return nil;
     }
     GDataXMLElement *picturesElement = [items objectAtIndex:0];

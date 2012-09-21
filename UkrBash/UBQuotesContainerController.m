@@ -41,8 +41,12 @@
 - (void)dealloc
 {
     [dataSource release];
-    [activeCell release];
-    [selectedIndexPath release];
+    if (activeCell) {
+        [activeCell release];
+    }
+    if (selectedIndexPath) {
+        [selectedIndexPath release];
+    }
     [tableView release];
     [_refreshHeaderView release];
     [super dealloc];
@@ -130,13 +134,9 @@
     [self.view addSubview:tableView];
     
     
-    if (_refreshHeaderView == nil) {
-		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - tableView.bounds.size.height, self.view.frame.size.width, tableView.bounds.size.height)];
-		view.delegate = self;
-		[tableView addSubview:view];
-		_refreshHeaderView = view;
-		[view release];		
-	}
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - tableView.bounds.size.height, self.view.frame.size.width, tableView.bounds.size.height)];
+    _refreshHeaderView.delegate = self;
+    [tableView addSubview:_refreshHeaderView];
 
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -192,7 +192,9 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    [activeCell release], activeCell = nil;
+    if (activeCell) {
+        [activeCell release], activeCell = nil;
+    }
     [tableView release], tableView = nil;
     [_refreshHeaderView release], _refreshHeaderView = nil;
 }

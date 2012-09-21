@@ -33,6 +33,7 @@ static NSString *kName_Tags = @"tags";
     NSArray *items = [doc nodesForXPath:@"quotes" error:nil];
     if ([items count] == 0) {
         [doc release];
+        [quotes release];
         return nil;
     }
     

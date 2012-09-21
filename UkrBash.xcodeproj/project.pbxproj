@@ -653,7 +653,7 @@
 		2DB0FAA41416C8CF00EFD6BC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = 2DB0FAA71416C8CF00EFD6BC /* Build configuration list for PBXProject "UkrBash" */;
 			compatibilityVersion = "Xcode 3.2";
