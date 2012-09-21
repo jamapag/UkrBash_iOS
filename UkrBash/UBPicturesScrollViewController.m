@@ -187,12 +187,18 @@
         [pictureView setFrame:[self frameForPageAtIndex:[pictureView index]]];
     }
     
-    [self scrollToIndex:currentPictureIndex];
+    [self scrollToIndex:pictureIndexBeforeRotation];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
     return YES;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
+                                duration:(NSTimeInterval)duration 
+{
+    pictureIndexBeforeRotation = currentPictureIndex;
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

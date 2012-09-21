@@ -24,6 +24,7 @@
     NSMutableArray *pictureViews;
     
     NSInteger currentPictureIndex;
+    NSInteger pictureIndexBeforeRotation;
 }
 
 - (id)initWithDataSource:(UBPicturesDataSource *)aDataSource andStartPictureIndex:(NSInteger)startIndex;
