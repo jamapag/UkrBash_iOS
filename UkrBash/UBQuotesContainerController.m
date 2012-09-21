@@ -107,17 +107,17 @@
 {
     [super loadView];
     
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height)];
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., -20., self.view.frame.size.width, self.view.frame.size.height)];
     backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     backgroundImageView.image = [UIImage imageNamed:@"view-background"];
-    backgroundImageView.contentMode = UIViewContentModeBottomLeft;
+    backgroundImageView.contentMode = UIViewContentModeTopLeft;
     [self.view addSubview:backgroundImageView];
     [backgroundImageView release];
     
     UIImage *borderImage = [UIImage imageNamed:@"border"];
-    UIImageView *borderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., borderImage.size.width, self.view.frame.size.height)];
+    UIImageView *borderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., -20., borderImage.size.width, self.view.frame.size.height)];
     borderImageView.image = borderImage;
-    borderImageView.contentMode = UIViewContentModeBottomLeft;
+    borderImageView.contentMode = UIViewContentModeTopLeft;
     [self.view addSubview:borderImageView];
     [borderImageView release];
     

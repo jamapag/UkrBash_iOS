@@ -84,10 +84,10 @@ enum UBSubMenuItems {
 {
     [super loadView];
 
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height)];
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., -20., self.view.frame.size.width, self.view.frame.size.height)];
     backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     backgroundImageView.image = [UIImage imageNamed:@"view-background"];
-    backgroundImageView.contentMode = UIViewContentModeBottomLeft;
+    backgroundImageView.contentMode = UIViewContentModeTopLeft;
     [self.view addSubview:backgroundImageView];
     [backgroundImageView release];
     
