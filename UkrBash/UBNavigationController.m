@@ -128,7 +128,7 @@
     borderView.layer.shadowRadius = 10.;
     borderView.layer.shadowColor = [[UIColor blackColor] CGColor];
     borderView.layer.shadowOpacity = .5;
-    borderView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0., -20., borderView.frame.size.width + 20., borderView.frame.size.height + 20.)].CGPath;
+    borderView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0., -20., borderView.frame.size.width + 20., borderView.frame.size.height + 40.)].CGPath;
 
     if (_menuViewController) {
         _menuViewController.view.frame = CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height);
