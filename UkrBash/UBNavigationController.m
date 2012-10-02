@@ -9,6 +9,7 @@
 #import "UBNavigationController.h"
 #import "UBViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GANTracker.h"
 
 #define BORDER_WIDTH 15.
 
@@ -58,6 +59,9 @@
 {
     NSAssert(_viewController == nil, @"Can't push two controllers in UBNavigationController");
     if (!_viewController) {
+        NSError * error = nil;
+        [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"/%@/%@/", NSStringFromClass([viewController class]), viewController.title] withError:&error];
+        
         _viewController = [viewController retain];
         _viewController.ubNavigationController = self;
         _viewController.view.frame = CGRectMake(0., 0., self.view.bounds.size.width, self.view.bounds.size.height);
@@ -86,6 +90,9 @@
 {
     NSAssert(_viewController != nil, @"Can't pop menu controller.");
     if (_viewController) {
+        NSError * error = nil;
+        [[GANTracker sharedTracker] trackPageview:@"/" withError:&error];
+        
         if (animated) {
             [UIView animateWithDuration:.5 animations:^(void) {
                 CGFloat x = _viewController.view.center.x + self.view.bounds.size.width - BORDER_WIDTH;

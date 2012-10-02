@@ -84,6 +84,9 @@
 		B0052FCF14BCD60B0082DAB9 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0052FC914BCD60B0082DAB9 /* twitter@2x.png */; };
 		B008F69E150E942000556346 /* UBPicturesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B008F69D150E942000556346 /* UBPicturesContainerController.m */; };
 		B02855CE14C0CDEE00FAA8A8 /* UBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */; };
+		B0378CFD161B23AD00B9331B /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0378CFC161B23AD00B9331B /* libGoogleAnalytics.a */; };
+		B0378D08161B2DAE00B9331B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B0378D07161B2DAE00B9331B /* libsqlite3.dylib */; };
+		B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0378D09161B2DE600B9331B /* CFNetwork.framework */; };
 		B040F189152DD81F00D4035E /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = B040F187152DD81F00D4035E /* header.png */; };
 		B040F18A152DD81F00D4035E /* header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B040F188152DD81F00D4035E /* header@2x.png */; };
 		B04B12E914BA3E340060F668 /* category-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B04B12E714BA3E340060F668 /* category-button-bg.png */; };
@@ -253,6 +256,10 @@
 		B008F69D150E942000556346 /* UBPicturesContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesContainerController.m; sourceTree = "<group>"; };
 		B02855CC14C0CDEE00FAA8A8 /* UBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBViewController.h; sourceTree = "<group>"; };
 		B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBViewController.m; sourceTree = "<group>"; };
+		B0378CFB161B23AD00B9331B /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
+		B0378CFC161B23AD00B9331B /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		B0378D07161B2DAE00B9331B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		B0378D09161B2DE600B9331B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B040F187152DD81F00D4035E /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
 		B040F188152DD81F00D4035E /* header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header@2x.png"; sourceTree = "<group>"; };
 		B04B12E714BA3E340060F668 /* category-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-button-bg.png"; sourceTree = "<group>"; };
@@ -297,6 +304,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */,
+				B0378D08161B2DAE00B9331B /* libsqlite3.dylib in Frameworks */,
 				B00510851517BBFA00D6D69B /* QuartzCore.framework in Frameworks */,
 				B0604E3014D5F4AE00F8ADB0 /* Twitter.framework in Frameworks */,
 				B0604E2D14D5F4A500F8ADB0 /* MessageUI.framework in Frameworks */,
@@ -305,6 +314,7 @@
 				2DB0FAB41416C8CF00EFD6BC /* Foundation.framework in Frameworks */,
 				2DB0FAB61416C8CF00EFD6BC /* CoreGraphics.framework in Frameworks */,
 				2DB0FAB81416C8CF00EFD6BC /* CoreData.framework in Frameworks */,
+				B0378CFD161B23AD00B9331B /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +440,7 @@
 		2DB0FAA21416C8CF00EFD6BC = {
 			isa = PBXGroup;
 			children = (
+				B0378CFA161B23AD00B9331B /* GoogleAnalytics */,
 				2D333E2E1510F8E500E2CEF3 /* FBConnect */,
 				2DB0FAB91416C8CF00EFD6BC /* UkrBash */,
 				2DB0FAB01416C8CF00EFD6BC /* Frameworks */,
@@ -448,6 +459,8 @@
 		2DB0FAB01416C8CF00EFD6BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B0378D09161B2DE600B9331B /* CFNetwork.framework */,
+				B0378D07161B2DAE00B9331B /* libsqlite3.dylib */,
 				B00510841517BBFA00D6D69B /* QuartzCore.framework */,
 				2DF27D9D1455D2670011168F /* libxml2.dylib */,
 				2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */,
@@ -597,6 +610,15 @@
 				2D337F4D14D1AADB00DF225F /* UBPicture.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		B0378CFA161B23AD00B9331B /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				B0378CFB161B23AD00B9331B /* GANTracker.h */,
+				B0378CFC161B23AD00B9331B /* libGoogleAnalytics.a */,
+			);
+			path = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
 		B09B37C614DC780B003E732D /* Quotes Datasources */ = {
@@ -865,6 +887,10 @@
 				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UkrBash/UkrBash-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleAnalytics\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -879,6 +905,10 @@
 				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UkrBash/UkrBash-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleAnalytics\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

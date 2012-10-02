@@ -13,6 +13,10 @@
 #import "UBNavigationController.h"
 #import "UBPublishedQuotesDataSource.h"
 #import "UBPublishedPicturesDataSource.h"
+#import "GANTracker.h"
+#import "ApiKey.h"
+#import <sys/sysctl.h>
+
 
 @implementation UkrBashAppDelegate
 
@@ -26,6 +30,41 @@
 @synthesize persistentStoreCoordinator=__persistentStoreCoordinator;
 
 @synthesize facebook;
+
+-(NSString *)deviceType {
+    size_t size;
+    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+    char *machine = malloc(size);
+    sysctlbyname("hw.machine", machine, &size, NULL, 0);
+
+    NSString *platform = [NSString stringWithCString:machine encoding:NSUTF8StringEncoding];
+    free(machine);
+    if ([platform isEqualToString:@"iPhone1,1"])    return @"iPhone 1G";
+    if ([platform isEqualToString:@"iPhone1,2"])    return @"iPhone 3G";
+    if ([platform isEqualToString:@"iPhone2,1"])    return @"iPhone 3GS";
+    if ([platform isEqualToString:@"iPhone3,1"])    return @"iPhone 4";
+    if ([platform isEqualToString:@"iPhone3,3"])    return @"Verizon iPhone 4";
+    if ([platform isEqualToString:@"iPhone4,1"])    return @"iPhone 4S";
+    if ([platform isEqualToString:@"iPhone5,1"])    return @"iPhone 5";
+    if ([platform isEqualToString:@"iPhone5,2"])    return @"iPhone 5 CDMA";
+    if ([platform isEqualToString:@"iPod1,1"])      return @"iPod Touch 1G";
+    if ([platform isEqualToString:@"iPod2,1"])      return @"iPod Touch 2G";
+    if ([platform isEqualToString:@"iPod3,1"])      return @"iPod Touch 3G";
+    if ([platform isEqualToString:@"iPod4,1"])      return @"iPod Touch 4G";
+    if ([platform isEqualToString:@"iPod5,1"])      return @"iPod Touch 5G";
+    if ([platform isEqualToString:@"iPad1,1"])      return @"iPad";
+    if ([platform isEqualToString:@"iPad2,1"])      return @"iPad 2 (WiFi)";
+    if ([platform isEqualToString:@"iPad2,2"])      return @"iPad 2 (GSM)";
+    if ([platform isEqualToString:@"iPad2,3"])      return @"iPad 2 (CDMA)";
+    if ([platform isEqualToString:@"iPad2,4"])      return @"iPad 2";
+    if ([platform isEqualToString:@"iPad3,1"])      return @"iPad-3G (WiFi)";
+    if ([platform isEqualToString:@"iPad3,2"])      return @"iPad-3G (GSM)";
+    if ([platform isEqualToString:@"iPad3,3"])      return @"iPad-3G (CDMA)";
+    if ([platform isEqualToString:@"i386"])         return @"Simulator";
+    if ([platform isEqualToString:@"x86_64"])       return @"Simulator";
+
+    return platform;
+}
 
 - (UBViewController*)containerWithType:(NSString*)type dataSource:(NSString*)dataSource
 {
@@ -47,6 +86,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[GANTracker sharedTracker] startTrackerWithAccountID:kGANAccountID
+                                           dispatchPeriod:kGANDispatchPeriodSec
+                                                 delegate:nil];
+    NSError * error = nil;
+    [[GANTracker sharedTracker] setCustomVariableAtIndex:1
+                                                    name:kGANCustomVariablePlatform
+                                                   value:[self deviceType]
+                                               withError:&error];
+    
     [self.window makeKeyAndVisible];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
