@@ -8,8 +8,7 @@
 
 #import "UBQuoteCell.h"
 #import <QuartzCore/QuartzCore.h>
-#import <Twitter/Twitter.h>
-#import <MessageUI/MessageUI.h>
+#import "SharingController.h"
 
 #define FONT_SIZE 14.0f
 #define INFO_LABELS_HEIGHT 12.0f
@@ -142,16 +141,20 @@ CGFloat animationOffset = 52.;
         
         CGFloat x = containerView.frame.origin.x + 20.;
         CGFloat shareButtonWidth = 32.;
-        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
-        shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-        [shareBtn setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
-        [shareBtn addTarget:self action:@selector(shareWithFacebookAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:shareBtn];
-        x += shareButtonWidth + 10.;
-        animationOffset = x;
+        UIButton *shareBtn = nil;
+        
+        if ([SharingController isSharingAvailableForNetworkType:SharingFacebookNetwork]) {
+            shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
+            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+            [shareBtn setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
+            [shareBtn addTarget:self action:@selector(shareWithFacebookAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self.contentView addSubview:shareBtn];
+            x += shareButtonWidth + 10.;
+            animationOffset = x;
+        }
 
-        if ([TWTweetComposeViewController canSendTweet]) {
+        if ([SharingController isSharingAvailableForNetworkType:SharingTwitterNetwork]) {
             shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
             shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
@@ -163,7 +166,7 @@ CGFloat animationOffset = 52.;
             animationOffset += shareButtonWidth + 10.;
         }
         
-        if ([MFMailComposeViewController canSendMail]) {
+        if ([SharingController isSharingAvailableForNetworkType:SharingEMailNetwork]) {
             shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
             shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;

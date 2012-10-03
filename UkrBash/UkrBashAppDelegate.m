@@ -15,6 +15,8 @@
 #import "UBPublishedPicturesDataSource.h"
 #import "GANTracker.h"
 #import "ApiKey.h"
+#import "SharingController.h"
+#import "FacebookSharingController.h"
 #import <sys/sysctl.h>
 
 
@@ -28,8 +30,6 @@
 @synthesize managedObjectModel=__managedObjectModel;
 
 @synthesize persistentStoreCoordinator=__persistentStoreCoordinator;
-
-@synthesize facebook;
 
 -(NSString *)deviceType {
     size_t size;
@@ -119,11 +119,11 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [self.facebook handleOpenURL:url];
+    return [[SharingController sharingControllerForNetworkType:SharingFacebookNetwork] handleOpenUrl:url];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [self.facebook handleOpenURL:url];
+    return [[SharingController sharingControllerForNetworkType:SharingFacebookNetwork] handleOpenUrl:url];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -169,7 +169,6 @@
     [__managedObjectModel release];
     [__persistentStoreCoordinator release];
     [navigationController release];
-    [facebook release];
     [super dealloc];
 }
 

@@ -13,9 +13,8 @@
 		2D12630314F6E6DA001C9DA0 /* MediaCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D12630114F6E6DA001C9DA0 /* MediaCenter.m */; };
 		2D12630614F6E78A001C9DA0 /* UIKitExtentions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D12630514F6E789001C9DA0 /* UIKitExtentions.m */; };
 		2D144DDA1419073B009E1DBA /* UBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D144DD91419073B009E1DBA /* UBRequest.m */; };
-		2D230022151B5FC80059BD2B /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D230021151B5FC80059BD2B /* ShareManager.m */; };
-		2D230026151B69820059BD2B /* TwitterSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D230025151B69820059BD2B /* TwitterSharer.m */; };
-		2D23002D151B78950059BD2B /* EMailSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D23002C151B78950059BD2B /* EMailSharer.m */; };
+		2D230026151B69820059BD2B /* TwitterSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D230025151B69820059BD2B /* TwitterSharingController.m */; };
+		2D23002D151B78950059BD2B /* EMailSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D23002C151B78950059BD2B /* EMailSharingController.m */; };
 		2D333E4D1510F90600E2CEF3 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D333E341510F90600E2CEF3 /* Facebook.m */; };
 		2D333E4E1510F90600E2CEF3 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2D333E361510F90600E2CEF3 /* FBDialog.bundle */; };
 		2D333E4F1510F90600E2CEF3 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D333E381510F90600E2CEF3 /* FBDialog.m */; };
@@ -46,8 +45,8 @@
 		2D52D6CC14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D52D6CB14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m */; };
 		2D57274C1455F5EE00A6DAE4 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274B1455F5EE00A6DAE4 /* Model.m */; };
 		2D57274F1456017900A6DAE4 /* UBQuotesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274E1456017900A6DAE4 /* UBQuotesRequest.m */; };
-		2D5A4E8D151B36BD002ABFA2 /* BaseSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A4E8C151B36BD002ABFA2 /* BaseSharer.m */; };
-		2D5A4E91151B374D002ABFA2 /* FacebookSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A4E90151B374D002ABFA2 /* FacebookSharer.m */; };
+		2D5A4E8D151B36BD002ABFA2 /* SharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A4E8C151B36BD002ABFA2 /* SharingController.m */; };
+		2D5A4E91151B374D002ABFA2 /* FacebookSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A4E90151B374D002ABFA2 /* FacebookSharingController.m */; };
 		2D9F6E0E14A158C40012D690 /* UBQuotesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */; };
 		2DADD34714A3FA4A00808AA6 /* UBQuoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */; };
 		2DB0FAB21416C8CF00EFD6BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */; };
@@ -96,6 +95,7 @@
 		B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */; };
 		B07C47D5152DA4D900DE05EB /* back-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = B07C47D3152DA4D900DE05EB /* back-btn.png */; };
 		B07C47D6152DA4D900DE05EB /* back-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B07C47D4152DA4D900DE05EB /* back-btn@2x.png */; };
+		B07CD485161C730A00DB5551 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B07CD484161C730A00DB5551 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B07EE72415D0236C0004B8E2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B07EE72315D0236C0004B8E2 /* Localizable.strings */; };
 		B08E6A7D160C759F00761824 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B08E6A7C160C759F00761824 /* Default-568h@2x.png */; };
 		B09B37C414DC7649003E732D /* UBPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37C314DC7649003E732D /* UBPictureCell.m */; };
@@ -134,12 +134,10 @@
 		2D12630514F6E789001C9DA0 /* UIKitExtentions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitExtentions.m; sourceTree = "<group>"; };
 		2D144DD81419073B009E1DBA /* UBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRequest.h; sourceTree = "<group>"; };
 		2D144DD91419073B009E1DBA /* UBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRequest.m; sourceTree = "<group>"; };
-		2D230020151B5FC80059BD2B /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
-		2D230021151B5FC80059BD2B /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
-		2D230024151B69820059BD2B /* TwitterSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterSharer.h; sourceTree = "<group>"; };
-		2D230025151B69820059BD2B /* TwitterSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterSharer.m; sourceTree = "<group>"; };
-		2D23002B151B78950059BD2B /* EMailSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMailSharer.h; sourceTree = "<group>"; };
-		2D23002C151B78950059BD2B /* EMailSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMailSharer.m; sourceTree = "<group>"; };
+		2D230024151B69820059BD2B /* TwitterSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterSharingController.h; sourceTree = "<group>"; };
+		2D230025151B69820059BD2B /* TwitterSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterSharingController.m; sourceTree = "<group>"; };
+		2D23002B151B78950059BD2B /* EMailSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMailSharingController.h; sourceTree = "<group>"; };
+		2D23002C151B78950059BD2B /* EMailSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMailSharingController.m; sourceTree = "<group>"; };
 		2D333E331510F90600E2CEF3 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		2D333E341510F90600E2CEF3 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
 		2D333E351510F90600E2CEF3 /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
@@ -193,10 +191,10 @@
 		2D57274B1455F5EE00A6DAE4 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		2D57274D1456017900A6DAE4 /* UBQuotesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesRequest.h; sourceTree = "<group>"; };
 		2D57274E1456017900A6DAE4 /* UBQuotesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesRequest.m; sourceTree = "<group>"; };
-		2D5A4E8B151B36BD002ABFA2 /* BaseSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSharer.h; sourceTree = "<group>"; };
-		2D5A4E8C151B36BD002ABFA2 /* BaseSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSharer.m; sourceTree = "<group>"; };
-		2D5A4E8F151B374D002ABFA2 /* FacebookSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSharer.h; sourceTree = "<group>"; };
-		2D5A4E90151B374D002ABFA2 /* FacebookSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSharer.m; sourceTree = "<group>"; };
+		2D5A4E8B151B36BD002ABFA2 /* SharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharingController.h; sourceTree = "<group>"; };
+		2D5A4E8C151B36BD002ABFA2 /* SharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharingController.m; sourceTree = "<group>"; };
+		2D5A4E8F151B374D002ABFA2 /* FacebookSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSharingController.h; sourceTree = "<group>"; };
+		2D5A4E90151B374D002ABFA2 /* FacebookSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSharingController.m; sourceTree = "<group>"; };
 		2D9F6E0C14A158C40012D690 /* UBQuotesContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesContainerController.h; sourceTree = "<group>"; };
 		2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesContainerController.m; sourceTree = "<group>"; };
 		2DADD34514A3FA4A00808AA6 /* UBQuoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuoteCell.h; sourceTree = "<group>"; };
@@ -270,6 +268,7 @@
 		B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMenuItemCell.m; sourceTree = "<group>"; };
 		B07C47D3152DA4D900DE05EB /* back-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-btn.png"; sourceTree = "<group>"; };
 		B07C47D4152DA4D900DE05EB /* back-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-btn@2x.png"; sourceTree = "<group>"; };
+		B07CD484161C730A00DB5551 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		B07EE72315D0236C0004B8E2 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		B08E6A7C160C759F00761824 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B09B37C214DC7649003E732D /* UBPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureCell.h; sourceTree = "<group>"; };
@@ -304,6 +303,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B07CD485161C730A00DB5551 /* Social.framework in Frameworks */,
 				B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */,
 				B0378D08161B2DAE00B9331B /* libsqlite3.dylib in Frameworks */,
 				B00510851517BBFA00D6D69B /* QuartzCore.framework in Frameworks */,
@@ -404,16 +404,14 @@
 		2D980AC815194E97006424BF /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
-				2D5A4E8B151B36BD002ABFA2 /* BaseSharer.h */,
-				2D5A4E8C151B36BD002ABFA2 /* BaseSharer.m */,
-				2D5A4E8F151B374D002ABFA2 /* FacebookSharer.h */,
-				2D5A4E90151B374D002ABFA2 /* FacebookSharer.m */,
-				2D230020151B5FC80059BD2B /* ShareManager.h */,
-				2D230021151B5FC80059BD2B /* ShareManager.m */,
-				2D230024151B69820059BD2B /* TwitterSharer.h */,
-				2D230025151B69820059BD2B /* TwitterSharer.m */,
-				2D23002B151B78950059BD2B /* EMailSharer.h */,
-				2D23002C151B78950059BD2B /* EMailSharer.m */,
+				2D5A4E8B151B36BD002ABFA2 /* SharingController.h */,
+				2D5A4E8C151B36BD002ABFA2 /* SharingController.m */,
+				2D5A4E8F151B374D002ABFA2 /* FacebookSharingController.h */,
+				2D5A4E90151B374D002ABFA2 /* FacebookSharingController.m */,
+				2D230024151B69820059BD2B /* TwitterSharingController.h */,
+				2D230025151B69820059BD2B /* TwitterSharingController.m */,
+				2D23002B151B78950059BD2B /* EMailSharingController.h */,
+				2D23002C151B78950059BD2B /* EMailSharingController.m */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -459,6 +457,7 @@
 		2DB0FAB01416C8CF00EFD6BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B07CD484161C730A00DB5551 /* Social.framework */,
 				B0378D09161B2DE600B9331B /* CFNetwork.framework */,
 				B0378D07161B2DAE00B9331B /* libsqlite3.dylib */,
 				B00510841517BBFA00D6D69B /* QuartzCore.framework */,
@@ -806,11 +805,10 @@
 				2D333E561510F90600E2CEF3 /* SBJsonBase.m in Sources */,
 				2D333E571510F90600E2CEF3 /* SBJsonParser.m in Sources */,
 				2D333E581510F90600E2CEF3 /* SBJsonWriter.m in Sources */,
-				2D5A4E8D151B36BD002ABFA2 /* BaseSharer.m in Sources */,
-				2D5A4E91151B374D002ABFA2 /* FacebookSharer.m in Sources */,
-				2D230022151B5FC80059BD2B /* ShareManager.m in Sources */,
-				2D230026151B69820059BD2B /* TwitterSharer.m in Sources */,
-				2D23002D151B78950059BD2B /* EMailSharer.m in Sources */,
+				2D5A4E8D151B36BD002ABFA2 /* SharingController.m in Sources */,
+				2D5A4E91151B374D002ABFA2 /* FacebookSharingController.m in Sources */,
+				2D230026151B69820059BD2B /* TwitterSharingController.m in Sources */,
+				2D23002D151B78950059BD2B /* EMailSharingController.m in Sources */,
 				B0D8FD861524F15400D4A6EB /* UBPictureInfoView.m in Sources */,
 				B09CFA98152C7CD600316B7C /* EGORefreshTableHeaderView.m in Sources */,
 				2D0D814D15A49E0A00AAB0B5 /* UBPictureView.m in Sources */,
@@ -849,7 +847,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
@@ -865,7 +863,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lidia Rudyuk";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lidia Rudyuk";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
@@ -885,7 +883,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "UkrBash/UkrBash-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -903,7 +901,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "UkrBash/UkrBash-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

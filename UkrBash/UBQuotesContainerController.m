@@ -11,10 +11,9 @@
 #import "UBQuote.h"
 #import "UBQuoteCell.h"
 #import "UBNavigationController.h"
-#import "FacebookSharer.h"
+#import "SharingController.h"
 #import "UkrBashAppDelegate.h"
-#import "ShareManager.h"
-#import "EMailSharer.h"
+#import "EMailSharingController.h"
 #import "GANTracker.h"
 
 
@@ -362,22 +361,23 @@
     NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%d", quote.quoteId];
     
     NSString * network = @"NaN";
+    SharingNetworkType networkType = 0;
     if (shareType == UBQuoteShareFacebookType) {
-        FacebookSharer *fbSharer = [[ShareManager sharedInstance] createFacebookSharer];
-        UkrBashAppDelegate *delegate = (UkrBashAppDelegate *) [[UIApplication sharedApplication] delegate];
-        delegate.facebook = fbSharer.facebook;
-
-        [fbSharer shareUrl:quoteUrl withMessage:nil];
+        networkType = SharingFacebookNetwork;
         network = @"Facebook";
     } else if (shareType == UBQuoteShareTwitterType) {
-        TwitterSharer *twitterSharer = [[ShareManager sharedInstance] createTwitterSharerWithViewController:self];
-        [twitterSharer shareUrl:quoteUrl withMessage:quote.text];
+        networkType = SharingTwitterNetwork;
         network = @"Twitter";
     } else if (shareType == UBQuoteShareEmailType) {
-        EMailSharer *emailSharer = [[ShareManager sharedInstance] createEmailSharerWithViewController:self];
-        [emailSharer shareUrl:quoteUrl withMessage:quote.text];
+        networkType = SharingEMailNetwork;
         network = @"EMail";
     }
+
+    SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
+    sharingController.url = quoteUrl;
+    sharingController.message = (networkType == SharingEMailNetwork) ? quote.text : nil;
+    sharingController.rootViewController = self;
+    [sharingController showSharingDialog];
 
     NSError * error = nil;
     [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"quotes" label:network value:-1 withError:&error];

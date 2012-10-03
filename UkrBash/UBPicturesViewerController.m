@@ -10,13 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MediaCenter.h"
 #import "UBPicture.h"
-#import <Twitter/Twitter.h>
-#import <MessageUI/MessageUI.h>
-#import "ShareManager.h"
+#import "SharingController.h"
 #import "UkrBashAppDelegate.h"
-#import "FacebookSharer.h"
-#import "TwitterSharer.h"
-#import "EMailSharer.h"
 #import "GANTracker.h"
 
 @interface UBPicturesViewerController ()
@@ -109,6 +104,19 @@
     [super dealloc];
 }
 
+#pragma mark -
+
+- (void)sharePictureWithIndex:(NSInteger)index withSharingNetwork:(SharingNetworkType)networkType
+{
+    UBPicture *picture = [[dataSource items] objectAtIndex:index];
+    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
+    
+    SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
+    sharingController.url = pictureUrl;
+    sharingController.rootViewController = self;
+    [sharingController showSharingDialog];
+}
+
 #pragma mark - Actions
 
 - (void)backAction:(id)sender
@@ -124,37 +132,21 @@
 
 - (void)fbShareAction:(id)sender
 {
-    UBPicture *picture = [[dataSource items] objectAtIndex:pictureIndex];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
-    
-    FacebookSharer *fbSharer = [[ShareManager sharedInstance] createFacebookSharer];
-    UkrBashAppDelegate *delegate = (UkrBashAppDelegate *) [[UIApplication sharedApplication] delegate];
-    delegate.facebook = fbSharer.facebook;
-        
-    [fbSharer shareUrl:pictureUrl withMessage:nil];
-
+    [self sharePictureWithIndex:pictureIndex withSharingNetwork:SharingFacebookNetwork];
     NSError * error = nil;
     [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:@"Facebook" value:-1 withError:&error];
 }
 
 - (void)twShareAction:(id)sender
 {
-    UBPicture *picture = [[dataSource items] objectAtIndex:pictureIndex];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
-    TwitterSharer *twitterSharer = [[ShareManager sharedInstance] createTwitterSharerWithViewController:self];
-    [twitterSharer shareUrl:pictureUrl withMessage:picture.title];
-
+    [self sharePictureWithIndex:pictureIndex withSharingNetwork:SharingTwitterNetwork];
     NSError * error = nil;
     [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:@"Twitter" value:-1 withError:&error];
 }
 
 - (void)mailShareAction:(id)sender
 {
-    UBPicture *picture = [[dataSource items] objectAtIndex:pictureIndex];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];    
-    EMailSharer *emailSharer = [[ShareManager sharedInstance] createEmailSharerWithViewController:self];
-    [emailSharer shareUrl:pictureUrl withMessage:picture.title];
-
+    [self sharePictureWithIndex:pictureIndex withSharingNetwork:SharingEMailNetwork];
     NSError * error = nil;
     [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:@"EMail" value:-1 withError:&error];
 }
@@ -232,14 +224,16 @@
     padding += 10.;
     x += sharingButtonHeight + padding;
     
-    UIButton *fbButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    fbButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
-    [fbButton setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
-    [fbButton addTarget:self action:@selector(fbShareAction:) forControlEvents:UIControlEventTouchUpInside];
-    [toolbar addSubview:fbButton];
-    x += sharingButtonHeight + padding;
+    if ([SharingController isSharingAvailableForNetworkType:SharingFacebookNetwork]) {
+        UIButton *fbButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        fbButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
+        [fbButton setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
+        [fbButton addTarget:self action:@selector(fbShareAction:) forControlEvents:UIControlEventTouchUpInside];
+        [toolbar addSubview:fbButton];
+        x += sharingButtonHeight + padding;
+    }
 
-    if ([TWTweetComposeViewController canSendTweet]) {
+    if ([SharingController isSharingAvailableForNetworkType:SharingTwitterNetwork]) {
         UIButton *twButton = [UIButton buttonWithType:UIButtonTypeCustom];
         twButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
         [twButton setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
@@ -248,7 +242,7 @@
         x += sharingButtonHeight + padding;
     }
     
-    if ([MFMailComposeViewController canSendMail]) {
+    if ([SharingController isSharingAvailableForNetworkType:SharingEMailNetwork]) {
         UIButton *mailButton = [UIButton buttonWithType:UIButtonTypeCustom];
         mailButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
         [mailButton setImage:[UIImage imageNamed:@"gmail"] forState:UIControlStateNormal];
