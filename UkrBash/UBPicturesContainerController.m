@@ -14,6 +14,7 @@
 #import "UBPicturesViewerController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UBPicturesScrollViewController.h"
+#import "GANTracker.h"
 
 
 @interface UBPicturesContainerController ()
@@ -308,6 +309,8 @@
     [viewLayer addAnimation:animationGroup forKey:@"animation"];
     
     
+    NSError * error = nil;
+    [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"/%@/%@/picture/", NSStringFromClass([self class]), self.title] withError:&error];
     viewer = [[UBPicturesScrollViewController alloc] initWithDataSource:dataSource andStartPictureIndex:indexPath.row];
 //    UBPicturesViewerController *viewer = [self picturesViewerController];
 //    viewer.pictureIndex = indexPath.row;

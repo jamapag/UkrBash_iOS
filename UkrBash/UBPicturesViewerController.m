@@ -17,6 +17,7 @@
 #import "FacebookSharer.h"
 #import "TwitterSharer.h"
 #import "EMailSharer.h"
+#import "GANTracker.h"
 
 @interface UBPicturesViewerController ()
 
@@ -131,6 +132,9 @@
     delegate.facebook = fbSharer.facebook;
         
     [fbSharer shareUrl:pictureUrl withMessage:nil];
+
+    NSError * error = nil;
+    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:@"Facebook" value:-1 withError:&error];
 }
 
 - (void)twShareAction:(id)sender
@@ -139,6 +143,9 @@
     NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
     TwitterSharer *twitterSharer = [[ShareManager sharedInstance] createTwitterSharerWithViewController:self];
     [twitterSharer shareUrl:pictureUrl withMessage:picture.title];
+
+    NSError * error = nil;
+    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:@"Twitter" value:-1 withError:&error];
 }
 
 - (void)mailShareAction:(id)sender
@@ -147,6 +154,9 @@
     NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];    
     EMailSharer *emailSharer = [[ShareManager sharedInstance] createEmailSharerWithViewController:self];
     [emailSharer shareUrl:pictureUrl withMessage:picture.title];
+
+    NSError * error = nil;
+    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:@"EMail" value:-1 withError:&error];
 }
 
 - (void)tapGestureHandler:(UITapGestureRecognizer *)tapGesture

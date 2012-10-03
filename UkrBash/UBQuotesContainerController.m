@@ -15,6 +15,7 @@
 #import "UkrBashAppDelegate.h"
 #import "ShareManager.h"
 #import "EMailSharer.h"
+#import "GANTracker.h"
 
 
 @implementation UBQuotesContainerController
@@ -88,6 +89,9 @@
     
     UBQuote *quote = [[dataSource items] objectAtIndex:selectedIndexPath.row];
     pasteboard.string = [quote text];
+
+    NSError * error = nil;
+    [[GANTracker sharedTracker] trackEvent:@"copying" action:@"quotes" label:@"quote" value:-1 withError:&error];
 }
 
 - (void)copyURL:(id)sender
@@ -97,6 +101,9 @@
     UBQuote *quote = [[dataSource items] objectAtIndex:selectedIndexPath.row];
     NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%d", quote.quoteId];
     pasteboard.string = quoteUrl;
+
+    NSError * error = nil;
+    [[GANTracker sharedTracker] trackEvent:@"copying" action:@"quotes" label:@"url" value:-1 withError:&error];
 }
 
 #pragma mark - View lifecycle
@@ -354,19 +361,26 @@
     UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
     NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%d", quote.quoteId];
     
+    NSString * network = @"NaN";
     if (shareType == UBQuoteShareFacebookType) {
         FacebookSharer *fbSharer = [[ShareManager sharedInstance] createFacebookSharer];
         UkrBashAppDelegate *delegate = (UkrBashAppDelegate *) [[UIApplication sharedApplication] delegate];
         delegate.facebook = fbSharer.facebook;
 
         [fbSharer shareUrl:quoteUrl withMessage:nil];
+        network = @"Facebook";
     } else if (shareType == UBQuoteShareTwitterType) {
         TwitterSharer *twitterSharer = [[ShareManager sharedInstance] createTwitterSharerWithViewController:self];
         [twitterSharer shareUrl:quoteUrl withMessage:quote.text];
+        network = @"Twitter";
     } else if (shareType == UBQuoteShareEmailType) {
         EMailSharer *emailSharer = [[ShareManager sharedInstance] createEmailSharerWithViewController:self];
         [emailSharer shareUrl:quoteUrl withMessage:quote.text];
+        network = @"EMail";
     }
+
+    NSError * error = nil;
+    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"quotes" label:network value:-1 withError:&error];
 }
 
 #pragma mark - EGORefreshTableHeaderDelegate methods.
