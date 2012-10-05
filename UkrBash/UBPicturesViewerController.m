@@ -115,6 +115,9 @@
     sharingController.url = pictureUrl;
     sharingController.rootViewController = self;
     [sharingController showSharingDialog];
+
+    NSError * error = nil;
+    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:NSStringFromClass([sharingController class]) value:-1 withError:&error];
 }
 
 #pragma mark - Actions
@@ -133,22 +136,16 @@
 - (void)fbShareAction:(id)sender
 {
     [self sharePictureWithIndex:pictureIndex withSharingNetwork:SharingFacebookNetwork];
-    NSError * error = nil;
-    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:@"Facebook" value:-1 withError:&error];
 }
 
 - (void)twShareAction:(id)sender
 {
     [self sharePictureWithIndex:pictureIndex withSharingNetwork:SharingTwitterNetwork];
-    NSError * error = nil;
-    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:@"Twitter" value:-1 withError:&error];
 }
 
 - (void)mailShareAction:(id)sender
 {
     [self sharePictureWithIndex:pictureIndex withSharingNetwork:SharingEMailNetwork];
-    NSError * error = nil;
-    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:@"EMail" value:-1 withError:&error];
 }
 
 - (void)tapGestureHandler:(UITapGestureRecognizer *)tapGesture

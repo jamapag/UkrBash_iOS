@@ -7,20 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SharingController.h"
 
 #define CELL_CONTENT_MARGIN 5.0f
 
-typedef enum  {
-    UBQuoteShareFacebookType,
-    UBQuoteShareTwitterType,
-    UBQuoteShareEmailType
-} UBQuoteShareType;
 
 @class UBQuoteCell;
 
 @protocol UBQuoteCellDelegate <NSObject>
 
-- (void)quoteCell:(UBQuoteCell*)cell shareQuoteWithType:(UBQuoteShareType)shareType;
+- (void)quoteCell:(UBQuoteCell*)cell shareQuoteWithType:(SharingNetworkType)shareType;
 
 @end
 

@@ -354,25 +354,12 @@
 
 #pragma mark -
 
-- (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(UBQuoteShareType)shareType
+- (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(SharingNetworkType)networkType
 {
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
     NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%d", quote.quoteId];
     
-    NSString * network = @"NaN";
-    SharingNetworkType networkType = 0;
-    if (shareType == UBQuoteShareFacebookType) {
-        networkType = SharingFacebookNetwork;
-        network = @"Facebook";
-    } else if (shareType == UBQuoteShareTwitterType) {
-        networkType = SharingTwitterNetwork;
-        network = @"Twitter";
-    } else if (shareType == UBQuoteShareEmailType) {
-        networkType = SharingEMailNetwork;
-        network = @"EMail";
-    }
-
     SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = quoteUrl;
     sharingController.message = (networkType == SharingEMailNetwork) ? quote.text : nil;
@@ -380,7 +367,7 @@
     [sharingController showSharingDialog];
 
     NSError * error = nil;
-    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"quotes" label:network value:-1 withError:&error];
+    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"quotes" label:NSStringFromClass([sharingController class]) value:-1 withError:&error];
 }
 
 #pragma mark - EGORefreshTableHeaderDelegate methods.

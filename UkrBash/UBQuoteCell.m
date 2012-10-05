@@ -8,7 +8,6 @@
 
 #import "UBQuoteCell.h"
 #import <QuartzCore/QuartzCore.h>
-#import "SharingController.h"
 
 #define FONT_SIZE 14.0f
 #define INFO_LABELS_HEIGHT 12.0f
@@ -39,21 +38,21 @@ CGFloat animationOffset = 52.;
 - (void)shareWithFacebookAction:(id)sender
 {
     if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:UBQuoteShareFacebookType];
+        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingFacebookNetwork];
     }
 }
 
 - (void)shareWithTwitterAction:(id)sender
 {
     if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:UBQuoteShareTwitterType];
+        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingTwitterNetwork];
     }
 }
 
 - (void)shareWithEmailAction:(id)sender
 {
     if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:UBQuoteShareEmailType];
+        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingEMailNetwork];
     }
 }
 
