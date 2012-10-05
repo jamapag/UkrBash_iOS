@@ -112,6 +112,7 @@
     container.title = containerTitle;
     [navigationController pushViewController:container animated:NO];
     
+    self.window.rootViewController = navigationController;
     [self.window addSubview:navigationController.view];
     [menuController release];
     
