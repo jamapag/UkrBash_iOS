@@ -31,6 +31,7 @@ enum UBMenuSections {
 enum UBMenuItems {
     UBMenuItemRateApp,
     UBMenuItemWebsite,
+    UBMenuItemContact,
     UBMenuItemsCount
 };
 
@@ -201,13 +202,18 @@ enum UBSubMenuItems {
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
-        cell = [[[UBMenuItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] autorelease];
+        cell = [[[UBMenuItemCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"] autorelease];
         cell.textLabel.textColor = [UIColor darkGrayColor];
         cell.textLabel.shadowColor = [UIColor whiteColor];
         cell.textLabel.shadowOffset = CGSizeMake(0., 1.);
+        cell.detailTextLabel.textColor = [UIColor darkGrayColor];
+        cell.detailTextLabel.shadowColor = [UIColor whiteColor];
+        cell.detailTextLabel.shadowOffset = CGSizeMake(0., 1.);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
     }
+    
+    cell.detailTextLabel.text = @"";
     
     if (indexPath.section == UBMenuImagesSection && indexPath.row == UBSubMenuItemTitle) {
         cell.textLabel.text = @"Картинки";
@@ -249,6 +255,10 @@ enum UBSubMenuItems {
             cell.textLabel.text = @"Оцінити програму";
         } else if (indexPath.row == UBMenuItemWebsite) {
             cell.textLabel.text = @"www.ukrbash.org";
+            cell.detailTextLabel.text = @"Відкрити у Safari";
+        } else if (indexPath.row == UBMenuItemContact) {
+            cell.textLabel.text = @"Зв`язатися з розробником";
+            cell.detailTextLabel.text = @"Маєте пропозицію чи зауваження?";
         }
     }
     
@@ -315,10 +325,35 @@ enum UBSubMenuItems {
     if (UBMenuInfoSection == indexPath.section) {
         if (indexPath.row == UBMenuItemRateApp) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=517226573"]];
-        }
-        if (indexPath.row == UBMenuItemWebsite) {
+        } else if (indexPath.row == UBMenuItemWebsite) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
+        } else if (indexPath.row == UBMenuItemContact) {
+            MFMailComposeViewController * mailComposer = [[MFMailComposeViewController alloc] init];
+            mailComposer.mailComposeDelegate = self;
+            [mailComposer setToRecipients:[NSArray arrayWithObject:@"info@smile2mobile.net"]];
+            [mailComposer setSubject:@"UkrBash iOS feedback"];
+            if ([self.ubNavigationController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
+                [self.ubNavigationController presentViewController:mailComposer animated:YES completion:nil];
+            } else {
+                [self.ubNavigationController presentModalViewController:mailComposer animated:YES];
+            }
         }
+    }
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    if ([self.ubNavigationController respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
+        [self.ubNavigationController dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self.ubNavigationController dismissModalViewControllerAnimated:YES];
+    }
+    if (!error && result == MFMailComposeResultSent) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Дякуєм!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        [alert release];
     }
 }
 

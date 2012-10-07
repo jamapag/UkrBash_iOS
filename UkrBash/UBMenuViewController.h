@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "UBViewController.h"
 
 #define UBContainerTypeKey @"UBContainerTypeKey"
@@ -16,7 +17,7 @@
 #define UBContainerDataSourceKey @"UBContainerDataSourceKey"
 #define UBContainerTitleKey @"UBContainerTitleKey"
 
-@interface UBMenuViewController : UBViewController <UITableViewDelegate, UITableViewDataSource>
+@interface UBMenuViewController : UBViewController <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
 {
     UITableView *_tableView;
     UIButton *logoButton;
