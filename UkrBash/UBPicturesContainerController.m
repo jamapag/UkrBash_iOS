@@ -11,18 +11,10 @@
 #import "UBPictureCell.h"
 #import "MediaCenter.h"
 #import "UBPicture.h"
-#import "UBPicturesViewerController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UBPicturesScrollViewController.h"
 #import "GANTracker.h"
 
-
-@interface UBPicturesContainerController ()
-{
-    UBPicturesViewerController *viewerController;
-}
-
-@end
 
 @implementation UBPicturesContainerController
 
@@ -60,19 +52,11 @@
     [dataSource release];
     [tableView release];
     [pendingImages release];
-    [viewerController release];
     [_refreshHeaderView release];
-    [super dealloc];
-}
-
-#pragma mark -
-
-- (UBPicturesViewerController*)picturesViewerController
-{
-    if (!viewerController) {
-        viewerController = [[UBPicturesViewerController alloc] initWithDataSource:dataSource currentIndex:0];
+    if (viewer) {
+        [viewer release];
     }
-    return viewerController;
+    [super dealloc];
 }
 
 #pragma mark - actions
@@ -311,9 +295,10 @@
     
     NSError * error = nil;
     [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"/%@/%@/picture/", NSStringFromClass([self class]), self.title] withError:&error];
+    if (viewer) {
+        [viewer release], viewer = nil;
+    }
     viewer = [[UBPicturesScrollViewController alloc] initWithDataSource:dataSource andStartPictureIndex:indexPath.row];
-//    UBPicturesViewerController *viewer = [self picturesViewerController];
-//    viewer.pictureIndex = indexPath.row;
     viewer.view.frame = self.view.bounds;
     viewer.view.alpha = 0;
     [self.view addSubview:viewer.view];
