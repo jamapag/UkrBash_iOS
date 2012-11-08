@@ -881,6 +881,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lidia Rudyuk";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
@@ -892,6 +893,7 @@
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "805124A9-59B8-4591-B6F4-0E51B31F8A52";
 				USER_HEADER_SEARCH_PATHS = "Submodules/**";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
