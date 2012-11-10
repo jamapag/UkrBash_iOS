@@ -100,6 +100,9 @@
 		B0CFEC0C14C2051900B6C5A7 /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CFEC0A14C2051900B6C5A7 /* menu-button.png */; };
 		B0CFEC0D14C2051900B6C5A7 /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */; };
 		B0D8FD861524F15400D4A6EB /* UBPictureInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */; };
+		B0DA90B3164EDB860084D29A /* VKXMLResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */; };
+		B0DA90BA164EDB9A0084D29A /* VKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B6164EDB9A0084D29A /* VKLoginViewController.m */; };
+		B0DA90BB164EDB9A0084D29A /* VKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B8164EDB9A0084D29A /* VKRequest.m */; };
 		B0DCA88614BF22C7007132B6 /* UBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DCA88514BF22C7007132B6 /* UBNavigationController.m */; };
 		B0DCA88C14BF325A007132B6 /* menu-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DCA88814BF325A007132B6 /* menu-pin.png */; };
 		B0DCA88D14BF325A007132B6 /* menu-pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DCA88914BF325A007132B6 /* menu-pin@2x.png */; };
@@ -276,6 +279,13 @@
 		B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button@2x.png"; sourceTree = "<group>"; };
 		B0D8FD841524F15400D4A6EB /* UBPictureInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureInfoView.h; sourceTree = "<group>"; };
 		B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureInfoView.m; sourceTree = "<group>"; };
+		B0DA90B1164EDB860084D29A /* VKXMLResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKXMLResponseParser.h; sourceTree = "<group>"; };
+		B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKXMLResponseParser.m; sourceTree = "<group>"; };
+		B0DA90B5164EDB9A0084D29A /* VKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKLoginViewController.h; sourceTree = "<group>"; };
+		B0DA90B6164EDB9A0084D29A /* VKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKLoginViewController.m; sourceTree = "<group>"; };
+		B0DA90B7164EDB9A0084D29A /* VKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKRequest.h; sourceTree = "<group>"; };
+		B0DA90B8164EDB9A0084D29A /* VKRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKRequest.m; sourceTree = "<group>"; };
+		B0DA90B9164EDB9A0084D29A /* VKResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKResponseParser.h; sourceTree = "<group>"; };
 		B0DCA88414BF22C7007132B6 /* UBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBNavigationController.h; sourceTree = "<group>"; };
 		B0DCA88514BF22C7007132B6 /* UBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBNavigationController.m; sourceTree = "<group>"; };
 		B0DCA88814BF325A007132B6 /* menu-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-pin.png"; sourceTree = "<group>"; };
@@ -401,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				2D33124E16307D5E00213BF2 /* facebook-ios-sdk.xcodeproj */,
+				B0DA90B4164EDB9A0084D29A /* Vkontakte */,
 				B0378CFA161B23AD00B9331B /* GoogleAnalytics */,
 				2DB0FAB91416C8CF00EFD6BC /* UkrBash */,
 				2DB0FAB01416C8CF00EFD6BC /* Frameworks */,
@@ -499,6 +510,8 @@
 				2DB323EC1417BC4E001440B7 /* UBSiteGetTagsParser.m */,
 				2DB323EE1417BC70001440B7 /* UBErrorsParser.h */,
 				2DB323EF1417BC70001440B7 /* UBErrorsParser.m */,
+				B0DA90B1164EDB860084D29A /* VKXMLResponseParser.h */,
+				B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -614,6 +627,18 @@
 				2D52D6CB14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m */,
 			);
 			name = "Images Datasources";
+			sourceTree = "<group>";
+		};
+		B0DA90B4164EDB9A0084D29A /* Vkontakte */ = {
+			isa = PBXGroup;
+			children = (
+				B0DA90B5164EDB9A0084D29A /* VKLoginViewController.h */,
+				B0DA90B6164EDB9A0084D29A /* VKLoginViewController.m */,
+				B0DA90B7164EDB9A0084D29A /* VKRequest.h */,
+				B0DA90B8164EDB9A0084D29A /* VKRequest.m */,
+				B0DA90B9164EDB9A0084D29A /* VKResponseParser.h */,
+			);
+			path = Vkontakte;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -786,6 +811,9 @@
 				B09CFA98152C7CD600316B7C /* EGORefreshTableHeaderView.m in Sources */,
 				2D0D814D15A49E0A00AAB0B5 /* UBPictureView.m in Sources */,
 				2DE4917F15A5C14000002488 /* UBPicturesScrollViewController.m in Sources */,
+				B0DA90B3164EDB860084D29A /* VKXMLResponseParser.m in Sources */,
+				B0DA90BA164EDB9A0084D29A /* VKLoginViewController.m in Sources */,
+				B0DA90BB164EDB9A0084D29A /* VKRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
