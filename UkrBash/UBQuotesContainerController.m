@@ -364,6 +364,8 @@
     sharingController.url = quoteUrl;
     sharingController.message = (networkType == SharingEMailNetwork) ? quote.text : nil;
     sharingController.rootViewController = self;
+    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Цитата %d", quote.quoteId]];
+    [sharingController setAttachmentDescription:quote.text];
     [sharingController showSharingDialog];
 
     NSError * error = nil;

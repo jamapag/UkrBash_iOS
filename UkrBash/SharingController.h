@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-#define IsSharingNetworkTypeValid(networkType) (((networkType) >= SharingFacebookNetwork && (networkType) <= SharingEMailNetwork) ? YES : NO)
+#define IsSharingNetworkTypeValid(networkType) (((networkType) >= SharingFacebookNetwork && (networkType) < SharingNetworkTypeCount) ? YES : NO)
 
 typedef enum {
     SharingFacebookNetwork = 1,
     SharingTwitterNetwork,
-    SharingEMailNetwork
+    SharingEMailNetwork,
+    SharingVkontakteNetwork,
+    SharingNetworkTypeCount
 } SharingNetworkType;
 
 @interface SharingController : NSObject
@@ -39,5 +41,9 @@ typedef enum {
 - (void)addImage:(UIImage*)image;
 - (void)removeAllImages;
 - (void)showSharingDialog;
+
+- (void)setAttachmentTitle:(NSString *)attachmentTitle;
+- (void)setAttachmentDescription:(NSString *)attachmentDescription;
+- (void)setAttachmentImagePreview:(UIImage *)attachmentPreviewImage;
 
 @end

@@ -80,9 +80,23 @@
 		B040F18A152DD81F00D4035E /* header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B040F188152DD81F00D4035E /* header@2x.png */; };
 		B04B12E914BA3E340060F668 /* category-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B04B12E714BA3E340060F668 /* category-button-bg.png */; };
 		B04B12EA14BA3E340060F668 /* category-button-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B04B12E814BA3E340060F668 /* category-button-bg@2x.png */; };
+		B056CE6C166E30C0002E8EDD /* Vkontakte.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE6B166E30C0002E8EDD /* Vkontakte.m */; };
+		B056CE70166E3716002E8EDD /* VKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B8164EDB9A0084D29A /* VKRequest.m */; };
+		B056CE71166E371A002E8EDD /* Vkontakte.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE6B166E30C0002E8EDD /* Vkontakte.m */; };
+		B056CE72166E371D002E8EDD /* VKError.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FBF2B1166CF367007BFDC0 /* VKError.m */; };
+		B056CE73166E372A002E8EDD /* VKXMLResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */; };
+		B056CE74166E3752002E8EDD /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323DC1417A1FA001440B7 /* GDataXMLNode.m */; };
+		B056CE75166E3762002E8EDD /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF27D9D1455D2670011168F /* libxml2.dylib */; };
+		B056CE82166E3931002E8EDD /* VKURLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FBF2C7166D3C4F007BFDC0 /* VKURLParserTests.m */; };
+		B056CE85166E397D002E8EDD /* VKRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE84166E397D002E8EDD /* VKRequestTests.m */; };
+		B056CE88166E48E2002E8EDD /* FBTestBlocker.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE87166E48E2002E8EDD /* FBTestBlocker.m */; };
+		B056CE8B166E4E44002E8EDD /* VKXMLResponseParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE8A166E4E44002E8EDD /* VKXMLResponseParserTests.m */; };
 		B0604E2D14D5F4A500F8ADB0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2C14D5F4A500F8ADB0 /* MessageUI.framework */; };
 		B0604E3014D5F4AE00F8ADB0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */; };
 		B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */; };
+		B07BD5EA166F903900D318B0 /* error_response_example.xml in Resources */ = {isa = PBXBuildFile; fileRef = B07BD5E7166F903900D318B0 /* error_response_example.xml */; };
+		B07BD5EB166F903900D318B0 /* success_response_example_list.xml in Resources */ = {isa = PBXBuildFile; fileRef = B07BD5E8166F903900D318B0 /* success_response_example_list.xml */; };
+		B07BD5EC166F903900D318B0 /* success_response_example_not_list.xml in Resources */ = {isa = PBXBuildFile; fileRef = B07BD5E9166F903900D318B0 /* success_response_example_not_list.xml */; };
 		B07C47D5152DA4D900DE05EB /* back-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = B07C47D3152DA4D900DE05EB /* back-btn.png */; };
 		B07C47D6152DA4D900DE05EB /* back-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B07C47D4152DA4D900DE05EB /* back-btn@2x.png */; };
 		B07CD485161C730A00DB5551 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B07CD484161C730A00DB5551 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -95,11 +109,29 @@
 		B09CFA98152C7CD600316B7C /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D439B351525BBDC0042D5D0 /* EGORefreshTableHeaderView.m */; };
 		B0B8DBCC14B8635100B07FDD /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBCA14B8635100B07FDD /* logo.png */; };
 		B0B8DBCD14B8635100B07FDD /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBCB14B8635100B07FDD /* logo@2x.png */; };
+		B0C0BB751670CB2500A2421B /* VKSharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C0BB741670CB2500A2421B /* VKSharingView.m */; };
+		B0C0BB821670D30A00A2421B /* UIColor+Vkontakte.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C0BB811670D30A00A2421B /* UIColor+Vkontakte.m */; };
 		B0CC930D1523ACED0021C54D /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CC930B1523ACED0021C54D /* border.png */; };
 		B0CC930E1523ACED0021C54D /* border@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CC930C1523ACED0021C54D /* border@2x.png */; };
 		B0CFEC0C14C2051900B6C5A7 /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CFEC0A14C2051900B6C5A7 /* menu-button.png */; };
 		B0CFEC0D14C2051900B6C5A7 /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */; };
+		B0D2BCC716761DCB00F4D771 /* VKWallPostAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D2BCC616761DCB00F4D771 /* VKWallPostAttachment.m */; };
+		B0D2BCD61676335500F4D771 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCC91676335500F4D771 /* Localizable.strings */; };
+		B0D2BCD71676335500F4D771 /* upload1.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCCA1676335500F4D771 /* upload1.png */; };
+		B0D2BCD81676335500F4D771 /* upload1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCCB1676335500F4D771 /* upload1@2x.png */; };
+		B0D2BCD91676335500F4D771 /* upload2.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCCC1676335500F4D771 /* upload2.png */; };
+		B0D2BCDA1676335500F4D771 /* upload2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCCD1676335500F4D771 /* upload2@2x.png */; };
+		B0D2BCDB1676335500F4D771 /* upload3.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCCE1676335500F4D771 /* upload3.png */; };
+		B0D2BCDC1676335500F4D771 /* upload3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCCF1676335500F4D771 /* upload3@2x.png */; };
+		B0D2BCDD1676335500F4D771 /* upload4.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCD01676335500F4D771 /* upload4.png */; };
+		B0D2BCDE1676335500F4D771 /* upload4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCD11676335500F4D771 /* upload4@2x.png */; };
+		B0D2BCDF1676335500F4D771 /* upload5.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCD21676335500F4D771 /* upload5.png */; };
+		B0D2BCE01676335500F4D771 /* upload5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCD31676335500F4D771 /* upload5@2x.png */; };
+		B0D2BCE11676335500F4D771 /* upload6.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCD41676335500F4D771 /* upload6.png */; };
+		B0D2BCE21676335500F4D771 /* upload6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCD51676335500F4D771 /* upload6@2x.png */; };
 		B0D8FD861524F15400D4A6EB /* UBPictureInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */; };
+		B0DA12EA1689F911008C407C /* vk.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DA12E81689F911008C407C /* vk.png */; };
+		B0DA12EB1689F911008C407C /* vk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DA12E91689F911008C407C /* vk@2x.png */; };
 		B0DA90B3164EDB860084D29A /* VKXMLResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */; };
 		B0DA90BA164EDB9A0084D29A /* VKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B6164EDB9A0084D29A /* VKLoginViewController.m */; };
 		B0DA90BB164EDB9A0084D29A /* VKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B8164EDB9A0084D29A /* VKRequest.m */; };
@@ -111,6 +143,13 @@
 		B0DCA89214BF3279007132B6 /* UBMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DCA89114BF3279007132B6 /* UBMenuViewController.m */; };
 		B0E9C15614D6F752000C3D97 /* menu-pin-45.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E9C15414D6F752000C3D97 /* menu-pin-45.png */; };
 		B0E9C15714D6F752000C3D97 /* menu-pin-45@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E9C15514D6F752000C3D97 /* menu-pin-45@2x.png */; };
+		B0FBF2AC166CE4FB007BFDC0 /* VkontakteSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FBF2AB166CE4FB007BFDC0 /* VkontakteSharingController.m */; };
+		B0FBF2B2166CF367007BFDC0 /* VKError.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FBF2B1166CF367007BFDC0 /* VKError.m */; };
+		B0FBF2B5166D38DB007BFDC0 /* VKURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FBF2B4166D38DB007BFDC0 /* VKURLParser.m */; };
+		B0FBF2BE166D3C4E007BFDC0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */; };
+		B0FBF2BF166D3C4E007BFDC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */; };
+		B0FBF2C5166D3C4E007BFDC0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B0FBF2C3166D3C4E007BFDC0 /* InfoPlist.strings */; };
+		B0FBF2CD166D401C007BFDC0 /* VKURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FBF2B4166D38DB007BFDC0 /* VKURLParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +173,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = "facebook-ios-sdk";
+		};
+		B0FBF2D0166D4301007BFDC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2DB0FAA41416C8CF00EFD6BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2DB0FAAC1416C8CF00EFD6BC;
+			remoteInfo = UkrBash;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -255,10 +301,21 @@
 		B040F188152DD81F00D4035E /* header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header@2x.png"; sourceTree = "<group>"; };
 		B04B12E714BA3E340060F668 /* category-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-button-bg.png"; sourceTree = "<group>"; };
 		B04B12E814BA3E340060F668 /* category-button-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-button-bg@2x.png"; sourceTree = "<group>"; };
+		B056CE6A166E30C0002E8EDD /* Vkontakte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vkontakte.h; sourceTree = "<group>"; };
+		B056CE6B166E30C0002E8EDD /* Vkontakte.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vkontakte.m; sourceTree = "<group>"; };
+		B056CE83166E397D002E8EDD /* VKRequestTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKRequestTests.h; sourceTree = "<group>"; };
+		B056CE84166E397D002E8EDD /* VKRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKRequestTests.m; sourceTree = "<group>"; };
+		B056CE86166E48E2002E8EDD /* FBTestBlocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTestBlocker.h; sourceTree = "<group>"; };
+		B056CE87166E48E2002E8EDD /* FBTestBlocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTestBlocker.m; sourceTree = "<group>"; };
+		B056CE89166E4E44002E8EDD /* VKXMLResponseParserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKXMLResponseParserTests.h; sourceTree = "<group>"; };
+		B056CE8A166E4E44002E8EDD /* VKXMLResponseParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKXMLResponseParserTests.m; sourceTree = "<group>"; };
 		B0604E2C14D5F4A500F8ADB0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMenuItemCell.h; sourceTree = "<group>"; };
 		B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMenuItemCell.m; sourceTree = "<group>"; };
+		B07BD5E7166F903900D318B0 /* error_response_example.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = error_response_example.xml; sourceTree = "<group>"; };
+		B07BD5E8166F903900D318B0 /* success_response_example_list.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = success_response_example_list.xml; sourceTree = "<group>"; };
+		B07BD5E9166F903900D318B0 /* success_response_example_not_list.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = success_response_example_not_list.xml; sourceTree = "<group>"; };
 		B07C47D3152DA4D900DE05EB /* back-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-btn.png"; sourceTree = "<group>"; };
 		B07C47D4152DA4D900DE05EB /* back-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-btn@2x.png"; sourceTree = "<group>"; };
 		B07CD484161C730A00DB5551 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -273,12 +330,33 @@
 		B09B37CE14DC8410003E732D /* UBPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesDataSource.m; sourceTree = "<group>"; };
 		B0B8DBCA14B8635100B07FDD /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		B0B8DBCB14B8635100B07FDD /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		B0C0BB731670CB2500A2421B /* VKSharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKSharingView.h; sourceTree = "<group>"; };
+		B0C0BB741670CB2500A2421B /* VKSharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKSharingView.m; sourceTree = "<group>"; };
+		B0C0BB801670D30A00A2421B /* UIColor+Vkontakte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Vkontakte.h"; sourceTree = "<group>"; };
+		B0C0BB811670D30A00A2421B /* UIColor+Vkontakte.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Vkontakte.m"; sourceTree = "<group>"; };
 		B0CC930B1523ACED0021C54D /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
 		B0CC930C1523ACED0021C54D /* border@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "border@2x.png"; sourceTree = "<group>"; };
 		B0CFEC0A14C2051900B6C5A7 /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button.png"; sourceTree = "<group>"; };
 		B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button@2x.png"; sourceTree = "<group>"; };
+		B0D2BCC516761DCB00F4D771 /* VKWallPostAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKWallPostAttachment.h; sourceTree = "<group>"; };
+		B0D2BCC616761DCB00F4D771 /* VKWallPostAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKWallPostAttachment.m; sourceTree = "<group>"; };
+		B0D2BCC91676335500F4D771 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		B0D2BCCA1676335500F4D771 /* upload1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload1.png; sourceTree = "<group>"; };
+		B0D2BCCB1676335500F4D771 /* upload1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload1@2x.png"; sourceTree = "<group>"; };
+		B0D2BCCC1676335500F4D771 /* upload2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload2.png; sourceTree = "<group>"; };
+		B0D2BCCD1676335500F4D771 /* upload2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload2@2x.png"; sourceTree = "<group>"; };
+		B0D2BCCE1676335500F4D771 /* upload3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload3.png; sourceTree = "<group>"; };
+		B0D2BCCF1676335500F4D771 /* upload3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload3@2x.png"; sourceTree = "<group>"; };
+		B0D2BCD01676335500F4D771 /* upload4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload4.png; sourceTree = "<group>"; };
+		B0D2BCD11676335500F4D771 /* upload4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload4@2x.png"; sourceTree = "<group>"; };
+		B0D2BCD21676335500F4D771 /* upload5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload5.png; sourceTree = "<group>"; };
+		B0D2BCD31676335500F4D771 /* upload5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload5@2x.png"; sourceTree = "<group>"; };
+		B0D2BCD41676335500F4D771 /* upload6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload6.png; sourceTree = "<group>"; };
+		B0D2BCD51676335500F4D771 /* upload6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload6@2x.png"; sourceTree = "<group>"; };
 		B0D8FD841524F15400D4A6EB /* UBPictureInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureInfoView.h; sourceTree = "<group>"; };
 		B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureInfoView.m; sourceTree = "<group>"; };
+		B0DA12E81689F911008C407C /* vk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vk.png; sourceTree = "<group>"; };
+		B0DA12E91689F911008C407C /* vk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vk@2x.png"; sourceTree = "<group>"; };
 		B0DA90B1164EDB860084D29A /* VKXMLResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKXMLResponseParser.h; sourceTree = "<group>"; };
 		B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKXMLResponseParser.m; sourceTree = "<group>"; };
 		B0DA90B5164EDB9A0084D29A /* VKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKLoginViewController.h; sourceTree = "<group>"; };
@@ -296,6 +374,19 @@
 		B0DCA89114BF3279007132B6 /* UBMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMenuViewController.m; sourceTree = "<group>"; };
 		B0E9C15414D6F752000C3D97 /* menu-pin-45.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-pin-45.png"; sourceTree = "<group>"; };
 		B0E9C15514D6F752000C3D97 /* menu-pin-45@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-pin-45@2x.png"; sourceTree = "<group>"; };
+		B0FBF2AA166CE4FB007BFDC0 /* VkontakteSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VkontakteSharingController.h; path = Sharing/VkontakteSharingController.h; sourceTree = "<group>"; };
+		B0FBF2AB166CE4FB007BFDC0 /* VkontakteSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VkontakteSharingController.m; path = Sharing/VkontakteSharingController.m; sourceTree = "<group>"; };
+		B0FBF2B0166CF30D007BFDC0 /* VKError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VKError.h; sourceTree = "<group>"; };
+		B0FBF2B1166CF367007BFDC0 /* VKError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKError.m; sourceTree = "<group>"; };
+		B0FBF2B3166D38DA007BFDC0 /* VKURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKURLParser.h; sourceTree = "<group>"; };
+		B0FBF2B4166D38DB007BFDC0 /* VKURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKURLParser.m; sourceTree = "<group>"; };
+		B0FBF2BB166D3C4E007BFDC0 /* VkontakteTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VkontakteTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0FBF2BC166D3C4E007BFDC0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		B0FBF2C2166D3C4E007BFDC0 /* VkontakteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VkontakteTests-Info.plist"; sourceTree = "<group>"; };
+		B0FBF2C4166D3C4E007BFDC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B0FBF2C6166D3C4F007BFDC0 /* VKURLParserTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VKURLParserTests.h; sourceTree = "<group>"; };
+		B0FBF2C7166D3C4F007BFDC0 /* VKURLParserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VKURLParserTests.m; sourceTree = "<group>"; };
+		B0FBF2C9166D3C4F007BFDC0 /* VkontakteTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VkontakteTests-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,6 +409,16 @@
 				2DB0FAB61416C8CF00EFD6BC /* CoreGraphics.framework in Frameworks */,
 				2DB0FAB81416C8CF00EFD6BC /* CoreData.framework in Frameworks */,
 				B0378CFD161B23AD00B9331B /* libGoogleAnalytics.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0FBF2B7166D3C4E007BFDC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B056CE75166E3762002E8EDD /* libxml2.dylib in Frameworks */,
+				B0FBF2BE166D3C4E007BFDC0 /* UIKit.framework in Frameworks */,
+				B0FBF2BF166D3C4E007BFDC0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +485,8 @@
 				2D230025151B69820059BD2B /* TwitterSharingController.m */,
 				2D23002B151B78950059BD2B /* EMailSharingController.h */,
 				2D23002C151B78950059BD2B /* EMailSharingController.m */,
+				B0FBF2AA166CE4FB007BFDC0 /* VkontakteSharingController.h */,
+				B0FBF2AB166CE4FB007BFDC0 /* VkontakteSharingController.m */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -414,6 +517,7 @@
 				B0DA90B4164EDB9A0084D29A /* Vkontakte */,
 				B0378CFA161B23AD00B9331B /* GoogleAnalytics */,
 				2DB0FAB91416C8CF00EFD6BC /* UkrBash */,
+				B0FBF2C0166D3C4E007BFDC0 /* VkontakteTests */,
 				2DB0FAB01416C8CF00EFD6BC /* Frameworks */,
 				2DB0FAAE1416C8CF00EFD6BC /* Products */,
 			);
@@ -423,6 +527,7 @@
 			isa = PBXGroup;
 			children = (
 				2DB0FAAD1416C8CF00EFD6BC /* UkrBash.app */,
+				B0FBF2BB166D3C4E007BFDC0 /* VkontakteTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -443,6 +548,7 @@
 				2DB0FAB71416C8CF00EFD6BC /* CoreData.framework */,
 				B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */,
 				B0604E2C14D5F4A500F8ADB0 /* MessageUI.framework */,
+				B0FBF2BC166D3C4E007BFDC0 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -553,12 +659,7 @@
 				B0CC930C1523ACED0021C54D /* border@2x.png */,
 				B040F187152DD81F00D4035E /* header.png */,
 				B040F188152DD81F00D4035E /* header@2x.png */,
-				B0052FC414BCD60B0082DAB9 /* facebook.png */,
-				B0052FC514BCD60B0082DAB9 /* facebook@2x.png */,
-				B0052FC614BCD60B0082DAB9 /* gmail.png */,
-				B0052FC714BCD60B0082DAB9 /* gmail@2x.png */,
-				B0052FC814BCD60B0082DAB9 /* twitter.png */,
-				B0052FC914BCD60B0082DAB9 /* twitter@2x.png */,
+				B0DA12EC1689F924008C407C /* Share icons */,
 				B04B12E714BA3E340060F668 /* category-button-bg.png */,
 				B04B12E814BA3E340060F668 /* category-button-bg@2x.png */,
 				B0B8DBCA14B8635100B07FDD /* logo.png */,
@@ -595,6 +696,16 @@
 			path = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
+		B07BD5E6166F903900D318B0 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				B07BD5E7166F903900D318B0 /* error_response_example.xml */,
+				B07BD5E8166F903900D318B0 /* success_response_example_list.xml */,
+				B07BD5E9166F903900D318B0 /* success_response_example_not_list.xml */,
+			);
+			path = TestData;
+			sourceTree = "<group>";
+		};
 		B09B37C614DC780B003E732D /* Quotes Datasources */ = {
 			isa = PBXGroup;
 			children = (
@@ -629,16 +740,91 @@
 			name = "Images Datasources";
 			sourceTree = "<group>";
 		};
+		B0D2BCC81676335400F4D771 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B0D2BCC91676335500F4D771 /* Localizable.strings */,
+				B0D2BCCA1676335500F4D771 /* upload1.png */,
+				B0D2BCCB1676335500F4D771 /* upload1@2x.png */,
+				B0D2BCCC1676335500F4D771 /* upload2.png */,
+				B0D2BCCD1676335500F4D771 /* upload2@2x.png */,
+				B0D2BCCE1676335500F4D771 /* upload3.png */,
+				B0D2BCCF1676335500F4D771 /* upload3@2x.png */,
+				B0D2BCD01676335500F4D771 /* upload4.png */,
+				B0D2BCD11676335500F4D771 /* upload4@2x.png */,
+				B0D2BCD21676335500F4D771 /* upload5.png */,
+				B0D2BCD31676335500F4D771 /* upload5@2x.png */,
+				B0D2BCD41676335500F4D771 /* upload6.png */,
+				B0D2BCD51676335500F4D771 /* upload6@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B0DA12EC1689F924008C407C /* Share icons */ = {
+			isa = PBXGroup;
+			children = (
+				B0052FC414BCD60B0082DAB9 /* facebook.png */,
+				B0052FC514BCD60B0082DAB9 /* facebook@2x.png */,
+				B0052FC614BCD60B0082DAB9 /* gmail.png */,
+				B0052FC714BCD60B0082DAB9 /* gmail@2x.png */,
+				B0052FC814BCD60B0082DAB9 /* twitter.png */,
+				B0052FC914BCD60B0082DAB9 /* twitter@2x.png */,
+				B0DA12E81689F911008C407C /* vk.png */,
+				B0DA12E91689F911008C407C /* vk@2x.png */,
+			);
+			name = "Share icons";
+			sourceTree = "<group>";
+		};
 		B0DA90B4164EDB9A0084D29A /* Vkontakte */ = {
 			isa = PBXGroup;
 			children = (
+				B0D2BCC81676335400F4D771 /* Resources */,
 				B0DA90B5164EDB9A0084D29A /* VKLoginViewController.h */,
 				B0DA90B6164EDB9A0084D29A /* VKLoginViewController.m */,
 				B0DA90B7164EDB9A0084D29A /* VKRequest.h */,
 				B0DA90B8164EDB9A0084D29A /* VKRequest.m */,
 				B0DA90B9164EDB9A0084D29A /* VKResponseParser.h */,
+				B0FBF2B0166CF30D007BFDC0 /* VKError.h */,
+				B0FBF2B1166CF367007BFDC0 /* VKError.m */,
+				B0FBF2B3166D38DA007BFDC0 /* VKURLParser.h */,
+				B0FBF2B4166D38DB007BFDC0 /* VKURLParser.m */,
+				B056CE6A166E30C0002E8EDD /* Vkontakte.h */,
+				B056CE6B166E30C0002E8EDD /* Vkontakte.m */,
+				B0C0BB731670CB2500A2421B /* VKSharingView.h */,
+				B0C0BB741670CB2500A2421B /* VKSharingView.m */,
+				B0C0BB801670D30A00A2421B /* UIColor+Vkontakte.h */,
+				B0C0BB811670D30A00A2421B /* UIColor+Vkontakte.m */,
+				B0D2BCC516761DCB00F4D771 /* VKWallPostAttachment.h */,
+				B0D2BCC616761DCB00F4D771 /* VKWallPostAttachment.m */,
 			);
 			path = Vkontakte;
+			sourceTree = "<group>";
+		};
+		B0FBF2C0166D3C4E007BFDC0 /* VkontakteTests */ = {
+			isa = PBXGroup;
+			children = (
+				B056CE86166E48E2002E8EDD /* FBTestBlocker.h */,
+				B056CE87166E48E2002E8EDD /* FBTestBlocker.m */,
+				B0FBF2C1166D3C4E007BFDC0 /* Supporting Files */,
+				B0FBF2C6166D3C4F007BFDC0 /* VKURLParserTests.h */,
+				B0FBF2C7166D3C4F007BFDC0 /* VKURLParserTests.m */,
+				B056CE83166E397D002E8EDD /* VKRequestTests.h */,
+				B056CE84166E397D002E8EDD /* VKRequestTests.m */,
+				B056CE89166E4E44002E8EDD /* VKXMLResponseParserTests.h */,
+				B056CE8A166E4E44002E8EDD /* VKXMLResponseParserTests.m */,
+			);
+			path = VkontakteTests;
+			sourceTree = "<group>";
+		};
+		B0FBF2C1166D3C4E007BFDC0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B07BD5E6166F903900D318B0 /* TestData */,
+				B0FBF2C2166D3C4E007BFDC0 /* VkontakteTests-Info.plist */,
+				B0FBF2C3166D3C4E007BFDC0 /* InfoPlist.strings */,
+				B0FBF2C9166D3C4F007BFDC0 /* VkontakteTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -661,6 +847,25 @@
 			productName = UkrBash;
 			productReference = 2DB0FAAD1416C8CF00EFD6BC /* UkrBash.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B0FBF2BA166D3C4E007BFDC0 /* VkontakteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0FBF2CA166D3C4F007BFDC0 /* Build configuration list for PBXNativeTarget "VkontakteTests" */;
+			buildPhases = (
+				B0FBF2B6166D3C4E007BFDC0 /* Sources */,
+				B0FBF2B7166D3C4E007BFDC0 /* Frameworks */,
+				B0FBF2B8166D3C4E007BFDC0 /* Resources */,
+				B0FBF2B9166D3C4E007BFDC0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B0FBF2D1166D4301007BFDC0 /* PBXTargetDependency */,
+			);
+			name = VkontakteTests;
+			productName = VkontakteTests;
+			productReference = B0FBF2BB166D3C4E007BFDC0 /* VkontakteTests.octest */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -689,6 +894,7 @@
 			projectRoot = "";
 			targets = (
 				2DB0FAAC1416C8CF00EFD6BC /* UkrBash */,
+				B0FBF2BA166D3C4E007BFDC0 /* VkontakteTests */,
 			);
 		};
 /* End PBXProject section */
@@ -755,10 +961,52 @@
 				B040F18A152DD81F00D4035E /* header@2x.png in Resources */,
 				B07EE72415D0236C0004B8E2 /* Localizable.strings in Resources */,
 				B08E6A7D160C759F00761824 /* Default-568h@2x.png in Resources */,
+				B0D2BCD61676335500F4D771 /* Localizable.strings in Resources */,
+				B0D2BCD71676335500F4D771 /* upload1.png in Resources */,
+				B0D2BCD81676335500F4D771 /* upload1@2x.png in Resources */,
+				B0D2BCD91676335500F4D771 /* upload2.png in Resources */,
+				B0D2BCDA1676335500F4D771 /* upload2@2x.png in Resources */,
+				B0D2BCDB1676335500F4D771 /* upload3.png in Resources */,
+				B0D2BCDC1676335500F4D771 /* upload3@2x.png in Resources */,
+				B0D2BCDD1676335500F4D771 /* upload4.png in Resources */,
+				B0D2BCDE1676335500F4D771 /* upload4@2x.png in Resources */,
+				B0D2BCDF1676335500F4D771 /* upload5.png in Resources */,
+				B0D2BCE01676335500F4D771 /* upload5@2x.png in Resources */,
+				B0D2BCE11676335500F4D771 /* upload6.png in Resources */,
+				B0D2BCE21676335500F4D771 /* upload6@2x.png in Resources */,
+				B0DA12EA1689F911008C407C /* vk.png in Resources */,
+				B0DA12EB1689F911008C407C /* vk@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0FBF2B8166D3C4E007BFDC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0FBF2C5166D3C4E007BFDC0 /* InfoPlist.strings in Resources */,
+				B07BD5EA166F903900D318B0 /* error_response_example.xml in Resources */,
+				B07BD5EB166F903900D318B0 /* success_response_example_list.xml in Resources */,
+				B07BD5EC166F903900D318B0 /* success_response_example_not_list.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B0FBF2B9166D3C4E007BFDC0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2DB0FAA91416C8CF00EFD6BC /* Sources */ = {
@@ -814,6 +1062,30 @@
 				B0DA90B3164EDB860084D29A /* VKXMLResponseParser.m in Sources */,
 				B0DA90BA164EDB9A0084D29A /* VKLoginViewController.m in Sources */,
 				B0DA90BB164EDB9A0084D29A /* VKRequest.m in Sources */,
+				B0FBF2AC166CE4FB007BFDC0 /* VkontakteSharingController.m in Sources */,
+				B0FBF2B2166CF367007BFDC0 /* VKError.m in Sources */,
+				B0FBF2B5166D38DB007BFDC0 /* VKURLParser.m in Sources */,
+				B056CE6C166E30C0002E8EDD /* Vkontakte.m in Sources */,
+				B0C0BB751670CB2500A2421B /* VKSharingView.m in Sources */,
+				B0C0BB821670D30A00A2421B /* UIColor+Vkontakte.m in Sources */,
+				B0D2BCC716761DCB00F4D771 /* VKWallPostAttachment.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0FBF2B6166D3C4E007BFDC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B056CE74166E3752002E8EDD /* GDataXMLNode.m in Sources */,
+				B056CE73166E372A002E8EDD /* VKXMLResponseParser.m in Sources */,
+				B056CE72166E371D002E8EDD /* VKError.m in Sources */,
+				B056CE71166E371A002E8EDD /* Vkontakte.m in Sources */,
+				B056CE70166E3716002E8EDD /* VKRequest.m in Sources */,
+				B0FBF2CD166D401C007BFDC0 /* VKURLParser.m in Sources */,
+				B056CE82166E3931002E8EDD /* VKURLParserTests.m in Sources */,
+				B056CE85166E397D002E8EDD /* VKRequestTests.m in Sources */,
+				B056CE88166E48E2002E8EDD /* FBTestBlocker.m in Sources */,
+				B056CE8B166E4E44002E8EDD /* VKXMLResponseParserTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,6 +1096,11 @@
 			isa = PBXTargetDependency;
 			name = "facebook-ios-sdk";
 			targetProxy = 2D33125B16307D8200213BF2 /* PBXContainerItemProxy */;
+		};
+		B0FBF2D1166D4301007BFDC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2DB0FAAC1416C8CF00EFD6BC /* UkrBash */;
+			targetProxy = B0FBF2D0166D4301007BFDC0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -842,6 +1119,14 @@
 				2DB0FAC61416C8CF00EFD6BC /* en */,
 			);
 			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		B0FBF2C3166D3C4E007BFDC0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0FBF2C4166D3C4E007BFDC0 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -928,6 +1213,66 @@
 			};
 			name = Release;
 		};
+		B0FBF2CB166D3C4F007BFDC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VkontakteTests/VkontakteTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "VkontakteTests/VkontakteTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		B0FBF2CC166D3C4F007BFDC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VkontakteTests/VkontakteTests-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "VkontakteTests/VkontakteTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -945,6 +1290,15 @@
 			buildConfigurations = (
 				2DB0FACE1416C8CF00EFD6BC /* Debug */,
 				2DB0FACF1416C8CF00EFD6BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0FBF2CA166D3C4F007BFDC0 /* Build configuration list for PBXNativeTarget "VkontakteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0FBF2CB166D3C4F007BFDC0 /* Debug */,
+				B0FBF2CC166D3C4F007BFDC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

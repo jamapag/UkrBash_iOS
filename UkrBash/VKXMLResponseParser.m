@@ -16,14 +16,76 @@
     return [[[element elementsForName:name] objectAtIndex:0] stringValue];
 }
 
+- (BOOL)hasChildElements:(GDataXMLElement *)element
+{
+    if (element.childCount == 1 && [[element.children objectAtIndex:0] kind] == GDataXMLTextKind) {
+        return NO;
+    }
+    return element.childCount > 0;
+}
+
+- (BOOL)isList:(GDataXMLElement *)element
+{
+    GDataXMLNode * attrib = [element attributeForName:@"list"];
+    if (attrib && [attrib.stringValue isEqualToString:@"true"]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSUInteger)getListCount:(GDataXMLElement *)listElement
+{
+    NSArray * countElements = [listElement elementsForName:@"count"];
+    if (countElements.count == 0) {
+        return 0;
+    }
+    NSInteger count = [[[countElements objectAtIndex:0] stringValue] integerValue];
+    return count < 0 ? NSUIntegerMax : count;
+}
+
+- (NSDictionary *)dictionaryFromElement:(GDataXMLElement *)element
+{
+    if ([self isList:element]) {
+        return [self dictionaryFromListElement:element];
+    }
+    
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    for (GDataXMLElement * child in [element children]) {
+        if ([self hasChildElements:child]) {
+            [dict setObject:[self dictionaryFromElement:child] forKey:child.name];
+        }
+        else {
+            [dict setObject:[child stringValue] forKey:child.name];
+        }
+    }
+    return dict;
+}
+
+- (NSDictionary *)dictionaryFromListElement:(GDataXMLElement *)element
+{
+    if (![self isList:element]) {
+        return nil;
+    }
+    NSUInteger count = [self getListCount:element];
+    if (count == NSUIntegerMax) {
+        return nil;
+    }
+    NSMutableArray * items = [NSMutableArray array];
+    NSDictionary * dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                           @(count), @"count",
+                           items, @"items",
+                           nil];
+    for (GDataXMLElement * child in [element children]) {
+        if (![child.name isEqualToString:@"count"]) {
+            [items addObject:[self dictionaryFromElement:child]];
+        }
+    }
+    return dict;
+}
+
 - (NSDictionary *)responseDictionary:(GDataXMLElement *)rootElement error:(NSError **)error
 {
-    NSMutableDictionary * result = [NSMutableDictionary dictionary];
-    
-    
-    
-    
-//    GDataXMLNode * node = [[document nodesForXPath:@"response" error:error] objectAtIndex:0];
+    NSDictionary * result = [self dictionaryFromElement:rootElement];
     return [NSDictionary dictionaryWithObject:result forKey:@"response"];
 }
 

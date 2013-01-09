@@ -56,6 +56,13 @@ CGFloat animationOffset = 52.;
     }
 }
 
+- (void)shareWithVkontakteAction:(id)sender
+{
+    if (self.shareDelegate) {
+        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingVkontakteNetwork];
+    }
+}
+
 - (void)hideShareButtons
 {
     [UIView animateWithDuration:.4 animations:^(void) {
@@ -172,7 +179,20 @@ CGFloat animationOffset = 52.;
             [shareBtn setImage:[UIImage imageNamed:@"gmail"] forState:UIControlStateNormal];
             [shareBtn addTarget:self action:@selector(shareWithEmailAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:shareBtn];
-            
+            x += shareButtonWidth + 10.;
+
+            animationOffset += shareButtonWidth + 10.;
+        }
+        
+        if ([SharingController isSharingAvailableForNetworkType:SharingVkontakteNetwork]) {
+            shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
+            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+            [shareBtn setImage:[UIImage imageNamed:@"vk"] forState:UIControlStateNormal];
+            [shareBtn addTarget:self action:@selector(shareWithVkontakteAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self.contentView addSubview:shareBtn];
+            x += shareButtonWidth + 10.;
+
             animationOffset += shareButtonWidth + 10.;
         }
         

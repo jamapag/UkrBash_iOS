@@ -128,6 +128,15 @@
         x += sharingButtonHeight + padding;
     }
     
+    if ([SharingController isSharingAvailableForNetworkType:SharingVkontakteNetwork]) {
+        UIButton *mailButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        mailButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
+        [mailButton setImage:[UIImage imageNamed:@"vk"] forState:UIControlStateNormal];
+        [mailButton addTarget:self action:@selector(vkontakteShareAction:) forControlEvents:UIControlEventTouchUpInside];
+        [toolbar addSubview:mailButton];
+        x += sharingButtonHeight + padding;
+    }
+    
 }
 
 - (void)viewDidLoad
@@ -217,6 +226,9 @@
     SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = pictureUrl;
     sharingController.rootViewController = self;
+    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Цитата %d", picture.pictureId]];
+    [sharingController setAttachmentDescription:picture.title];
+    [sharingController setAttachmentImagePreview:[[MediaCenter imageCenter] imageWithUrl:picture.thumbnail]];
     [sharingController showSharingDialog];
 }
 
@@ -257,6 +269,11 @@
 - (void)mailShareAction:(id)sender
 {
     [self sharePictureWithIndex:currentPictureIndex withSharingNetwork:SharingEMailNetwork];
+}
+
+- (void)vkontakteShareAction:(id)sender
+{
+    [self sharePictureWithIndex:currentPictureIndex withSharingNetwork:SharingVkontakteNetwork];
 }
 
 #pragma mark -

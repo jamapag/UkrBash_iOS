@@ -7,13 +7,9 @@
 //
 
 #import "VKRequest.h"
+#import "VKError.h"
 
-NSString * VKErrorDomain = @"VKErrorDomain";
-
-NSString * VKConnectionErrorKey = @"VKConnectionErrorKey";
-NSString * VKParserErrorKey = @"VKParserErrorKey";
-NSString * VKResponseErrorMessageKey = @"VKResponseErrorMessageKey";
-NSString * VKResponseErrorCodeKey = @"VKResponseErrorCodeKey";
+#define VK_API_URL_SCHEMA @"https://api.vk.com/method/%@.%@?%@"
 
 @implementation VKRequest
 
@@ -92,13 +88,15 @@ NSString * VKResponseErrorCodeKey = @"VKResponseErrorCodeKey";
     else {
         paramsString = [NSString stringWithFormat:@"%@&access_token=%@", paramsString, self.accessToken];
     }
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://api.vk.com/method/%@.xml?%@", self.method, paramsString]];
+    return [NSURL URLWithString:[NSString stringWithFormat:VK_API_URL_SCHEMA, self.method, @"xml", paramsString]];
 }
 
 - (void)performRequestWithHandler:(VKRequestHandler)handler
 {
     NSAssert(self.accessToken != nil, @"Access token not defined");
     NSAssert(responseParser != nil, @"Response parser not defined");
+    
+    // NSLog(@"VK: %@", [self requestURL]);
     
     [[NSOperationQueue currentQueue] addOperationWithBlock:^{
         NSMutableURLRequest * request = [[NSMutableURLRequest alloc] initWithURL:[self requestURL]];
@@ -111,10 +109,10 @@ NSString * VKResponseErrorCodeKey = @"VKResponseErrorCodeKey";
         
         if (!data || error != nil) {
             NSDictionary * userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       error, VKConnectionErrorKey,
+                                       error, kVKConnectionErrorObjectKey,
                                        @"Can't connect to VK API server.", NSLocalizedDescriptionKey,
                                        nil];
-            NSError * requestError = [NSError errorWithDomain:VKErrorDomain code:1 userInfo:userInfo];
+            NSError * requestError = [NSError errorWithDomain:kVKErrorDomain code:VKConnectionErrorCode userInfo:userInfo];
             handler(self.method, nil, requestError);
             return;
         }
@@ -122,10 +120,10 @@ NSString * VKResponseErrorCodeKey = @"VKResponseErrorCodeKey";
         NSDictionary * result = [responseParser dictionaryFromData:data error:&error];
         if (error != nil) {
             NSDictionary * userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       error, VKParserErrorKey,
+                                       error, kVKDataParserErrorObjectKey,
                                        @"Can't parse server response.", NSLocalizedDescriptionKey,
                                        nil];
-            NSError * requestError = [NSError errorWithDomain:VKErrorDomain code:2 userInfo:userInfo];
+            NSError * requestError = [NSError errorWithDomain:kVKErrorDomain code:VKParseResponseErrorCode userInfo:userInfo];
             handler(self.method, nil, requestError);
             return;
         }
@@ -134,11 +132,11 @@ NSString * VKResponseErrorCodeKey = @"VKResponseErrorCodeKey";
             NSDictionary * errorObj = [result objectForKey:@"error"];
             NSString * localizedDescription = [NSString stringWithFormat:@"Error (%@): %@", [errorObj objectForKey:@"error_code"], [errorObj objectForKey:@"error_msg"]];
             NSDictionary * userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       [errorObj objectForKey:@"error_code"], VKResponseErrorCodeKey,
-                                       [errorObj objectForKey:@"error_msg"], VKResponseErrorMessageKey,
+                                       [errorObj objectForKey:@"error_code"], kVKResponseErrorCodeKey,
+                                       [errorObj objectForKey:@"error_msg"], kVKResponseErrorMessageKey,
                                        localizedDescription, NSLocalizedDescriptionKey,
                                        nil];
-            NSError * requestError = [NSError errorWithDomain:VKErrorDomain code:3 userInfo:userInfo];
+            NSError * requestError = [NSError errorWithDomain:kVKErrorDomain code:VKResponseErrorCode userInfo:userInfo];
             handler(self.method, result, requestError);
             return;
         }

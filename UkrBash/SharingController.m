@@ -10,6 +10,7 @@
 #import "FacebookSharingController.h"
 #import "TwitterSharingController.h"
 #import "EMailSharingController.h"
+#import "VkontakteSharingController.h"
 
 @interface SharingController ()
 {
@@ -39,6 +40,9 @@
         case SharingEMailNetwork:
             return [EMailSharingController isSharingAvailable];
             break;
+        case SharingVkontakteNetwork:
+            return [VkontakteSharingController isSharingAvailable];
+            break;
         default:
             break;
     }
@@ -57,6 +61,9 @@
             break;
         case SharingEMailNetwork:
             return [[[EMailSharingController alloc] init] autorelease];
+            break;
+        case SharingVkontakteNetwork:
+            return [[[VkontakteSharingController alloc] init] autorelease];
             break;
         default:
             break;
@@ -117,6 +124,21 @@
 - (void)showSharingDialog
 {
     NSAssert(NO, @"this method should be overloaded by subclasses");
+}
+
+- (void)setAttachmentDescription:(NSString *)attachmentDescription
+{
+    
+}
+
+- (void)setAttachmentTitle:(NSString *)attachmentTitle
+{
+    
+}
+
+- (void)setAttachmentImagePreview:(UIImage *)attachmentPreviewImage
+{
+    
 }
 
 @end
