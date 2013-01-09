@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response>
+ <note>
+  <id>9905480</id>
+  <title>Заметка 1</title>
+  <text>&amp;lt;div class="wikiText"&amp;gt;﻿Текст заметки 1&amp;lt;/div&amp;gt;</text>
+  <text_wiki>﻿Текст заметки 1</text_wiki>
+  <date>1274373519</date>
+  <user_id>66748</user_id>
+  <read_ncom>0</read_ncom>
+  <ncom>0</ncom>
+  <privacy>1</privacy>
+  <comment_privacy>1</comment_privacy>
+  <can_comment>1</can_comment>
+ </note>
+</response>

@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  UkrBash
+
+  Created by Michail Grebionkin on 06.12.12.
+
+*/
+
+"VKSharingCancelButtonTitle" = "Скасувати";
+"VKSharingSubmitButtonTitle" = "Відправити";
+"VKSharingSettingsFriendsOnly" = "Тільки для друзів";
