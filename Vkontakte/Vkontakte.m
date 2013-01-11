@@ -67,7 +67,7 @@
 {
     return self.accessToken != nil
         && self.expirationDate != nil
-        && [[NSDate date] compare:self.expirationDate] == NSOrderedDescending
+        && [(NSDate *)[NSDate date] compare:self.expirationDate] == NSOrderedDescending
         && self.userId > 0;
 }
 

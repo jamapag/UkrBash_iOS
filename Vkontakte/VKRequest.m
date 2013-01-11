@@ -58,7 +58,7 @@
         if ([value isKindOfClass:[NSNumber class]]) {
             [paramsString appendFormat:@"%@%@=%@", (i != 0 ? @"&" : @""), key, [value stringValue]];
         } else if ([value isKindOfClass:[NSString class]]) {
-            [paramsString appendFormat:@"%@%@=%@", (i != 0 ? @"&" : @""), key, value];
+            [paramsString appendFormat:@"%@%@=%@", (i != 0 ? @"&" : @""), key, [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         } else {
             NSLog(@"VKRequest Warning: unsupported request param type");
         }
