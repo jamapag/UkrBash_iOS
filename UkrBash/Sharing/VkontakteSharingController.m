@@ -199,7 +199,11 @@
     [[NSUserDefaults standardUserDefaults] setInteger:userId forKey:VK_USER_ID_KEY];
     
     vkontakte = [[Vkontakte alloc] initWithAccessToken:accessToken expirationDate:expirationDate userId:userId];
-    
+
+    VKXMLResponseParser * vkontakteResponseParser = [[VKXMLResponseParser alloc] init];
+    [vkontakte setResponseParser:vkontakteResponseParser];
+    [vkontakteResponseParser release];
+
     [self.rootViewController dismissModalViewControllerAnimated:YES];
     [self showSharingController];
 }
