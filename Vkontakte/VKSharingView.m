@@ -186,7 +186,7 @@ enum  {
         [_friendsOnlySwitch release];
         
         UILabel * l = [[UILabel alloc] initWithFrame:CGRectMake(padding, _friendsOnlySwitch.frame.origin.y, self.frame.size.width - 2. * padding - _friendsOnlySwitch.frame.size.width, _friendsOnlySwitch.frame.size.height)];
-        l.text = NSLocalizedString(@"VKSharingSettingsFriendsOnly", @"");
+        l.text = VKLocalizedString(@"VKSharingSettingsFriendsOnly", @"");
         l.font = [UIFont systemFontOfSize:14.];
         l.backgroundColor = self.backgroundColor;
         [self addSubview:l];
@@ -194,7 +194,7 @@ enum  {
         
         _submitButton = [[UIButton alloc] initWithFrame:CGRectMake(padding, CGRectGetMaxY(l.frame) + padding, self.frame.size.width / 2.- padding * 2., 40.)];
         _submitButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.];
-        [_submitButton setTitle:NSLocalizedString(@"VKSharingSubmitButtonTitle", @"") forState:UIControlStateNormal];
+        [_submitButton setTitle:VKLocalizedString(@"VKSharingSubmitButtonTitle", @"") forState:UIControlStateNormal];
         [_submitButton setBackgroundColor:[UIColor vkButtonBlueBackgroundColor]];
         _submitButton.layer.borderColor = [[UIColor vkButtonBlueBorderColor] CGColor];
         _submitButton.layer.borderWidth = 1.;
@@ -207,7 +207,7 @@ enum  {
         _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_submitButton.frame) + padding, _submitButton.frame.origin.y, _submitButton.frame.size.width, _submitButton.frame.size.height)];
         _cancelButton.titleLabel.font = [UIFont systemFontOfSize:14.];
         [_cancelButton setTitleColor:[UIColor vkButtonBlueBackgroundColor] forState:UIControlStateNormal];
-        [_cancelButton setTitle:NSLocalizedString(@"VKSharingCancelButtonTitle", @"") forState:UIControlStateNormal];
+        [_cancelButton setTitle:VKLocalizedString(@"VKSharingCancelButtonTitle", @"") forState:UIControlStateNormal];
         _cancelButton.backgroundColor = self.backgroundColor;
         [_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_cancelButton];
@@ -215,12 +215,12 @@ enum  {
         
         _activityView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., 32., 8.)];
         [_activityView setAnimationImages:@[
-         [UIImage imageNamed:@"upload1"],
-         [UIImage imageNamed:@"upload2"],
-         [UIImage imageNamed:@"upload3"],
-         [UIImage imageNamed:@"upload4"],
-         [UIImage imageNamed:@"upload5"],
-         [UIImage imageNamed:@"upload6"]
+         [UIImage imageNamed:@"Vkontakte iOS.bundle/upload1.png"],
+         [UIImage imageNamed:@"Vkontakte iOS.bundle/upload2.png"],
+         [UIImage imageNamed:@"Vkontakte iOS.bundle/upload3.png"],
+         [UIImage imageNamed:@"Vkontakte iOS.bundle/upload4.png"],
+         [UIImage imageNamed:@"Vkontakte iOS.bundle/upload5.png"],
+         [UIImage imageNamed:@"Vkontakte iOS.bundle/upload6.png"]
          ]];
         [_activityView setAnimationDuration:0.6];
         [_activityView setAnimationRepeatCount:0];

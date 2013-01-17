@@ -10,6 +10,8 @@
 #import "VKResponseParser.h"
 #import "VKRequest.h"
 
+#define VKLocalizedString(key, comment) ([Vkontakte localizedString:(key)])
+
 @interface Vkontakte : NSObject
 {
     NSInteger _userId;
@@ -31,5 +33,8 @@
 
 - (void)callMethod:(NSString *)method withParams:(NSDictionary *)params handler:(VKRequestHandler)handler;
 - (void)callPostMethod:(NSString *)method withParams:(NSDictionary *)params handler:(VKRequestHandler)handler;
+
++ (NSBundle *)resourceBundle;
++ (NSString *)localizedString:(NSString *)key;
 
 @end

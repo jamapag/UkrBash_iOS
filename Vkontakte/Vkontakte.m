@@ -92,4 +92,22 @@
     [self requestMethod:method withParams:params isPost:YES handler:handler];
 }
 
+#pragma mark - Methods for work with Vkontakte resources bundle
+
++ (NSBundle *)resourceBundle
+{
+    static NSBundle *resourcesBundle = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *resourceBundlePath = [[NSBundle mainBundle] pathForResource:@"Vkontakte iOS" ofType:@"bundle"];
+        resourcesBundle = [NSBundle bundleWithPath:resourceBundlePath];
+    });
+    return resourcesBundle;
+}
+
++ (NSString *)localizedString:(NSString *)key
+{
+    return [[self resourceBundle] localizedStringForKey:key value:@"" table:nil];
+}
+
 @end
