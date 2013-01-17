@@ -175,6 +175,10 @@ enum  {
         _textView.layer.borderColor = [[UIColor vkSharingViewInnerBlockBorderColor] CGColor];
         [self addSubview:_textView];
         [_textView release];
+        
+        UITapGestureRecognizer * cancelInputTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelInputAction:)];
+        [self addGestureRecognizer:cancelInputTapGesture];
+        [cancelInputTapGesture release];
 
         _attachmentContentView = [[VKSharingAttachmentContentView alloc] initWithFrame:CGRectMake(padding, CGRectGetMaxY(_textView.frame) + padding, subviewsWidth, 100.)];
         [self addSubview:_attachmentContentView];
@@ -412,6 +416,13 @@ enum  {
 }
 
 #pragma mark - Actions
+
+- (void)cancelInputAction:(id)sender
+{
+    if ([_textView isFirstResponder]) {
+        [_textView resignFirstResponder];
+    }
+}
 
 - (void)cancelAction:(id)sender
 {
