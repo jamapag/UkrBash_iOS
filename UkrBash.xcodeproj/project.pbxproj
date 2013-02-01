@@ -94,6 +94,9 @@
 		B0604E2D14D5F4A500F8ADB0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2C14D5F4A500F8ADB0 /* MessageUI.framework */; };
 		B0604E3014D5F4AE00F8ADB0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */; };
 		B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */; };
+		B066EE2916AD83DB00A2A25C /* UBDonateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B066EE2816AD83DB00A2A25C /* UBDonateViewController.m */; };
+		B066EE2B16AD878600A2A25C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B066EE2A16AD878600A2A25C /* StoreKit.framework */; };
+		B066EE2E16AD9E3900A2A25C /* UBDonateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B066EE2D16AD9E3900A2A25C /* UBDonateCell.m */; };
 		B07BD5EA166F903900D318B0 /* error_response_example.xml in Resources */ = {isa = PBXBuildFile; fileRef = B07BD5E7166F903900D318B0 /* error_response_example.xml */; };
 		B07BD5EB166F903900D318B0 /* success_response_example_list.xml in Resources */ = {isa = PBXBuildFile; fileRef = B07BD5E8166F903900D318B0 /* success_response_example_list.xml */; };
 		B07BD5EC166F903900D318B0 /* success_response_example_not_list.xml in Resources */ = {isa = PBXBuildFile; fileRef = B07BD5E9166F903900D318B0 /* success_response_example_not_list.xml */; };
@@ -321,6 +324,11 @@
 		B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMenuItemCell.h; sourceTree = "<group>"; };
 		B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMenuItemCell.m; sourceTree = "<group>"; };
+		B066EE2716AD83DB00A2A25C /* UBDonateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBDonateViewController.h; sourceTree = "<group>"; };
+		B066EE2816AD83DB00A2A25C /* UBDonateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBDonateViewController.m; sourceTree = "<group>"; };
+		B066EE2A16AD878600A2A25C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B066EE2C16AD9E3900A2A25C /* UBDonateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBDonateCell.h; sourceTree = "<group>"; };
+		B066EE2D16AD9E3900A2A25C /* UBDonateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBDonateCell.m; sourceTree = "<group>"; };
 		B07BD5E7166F903900D318B0 /* error_response_example.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = error_response_example.xml; sourceTree = "<group>"; };
 		B07BD5E8166F903900D318B0 /* success_response_example_list.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = success_response_example_list.xml; sourceTree = "<group>"; };
 		B07BD5E9166F903900D318B0 /* success_response_example_not_list.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = success_response_example_not_list.xml; sourceTree = "<group>"; };
@@ -405,6 +413,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B066EE2B16AD878600A2A25C /* StoreKit.framework in Frameworks */,
 				2D3312631630846700213BF2 /* AdSupport.framework in Frameworks */,
 				2D3312611630842A00213BF2 /* Accounts.framework in Frameworks */,
 				2D33125D16307DBF00213BF2 /* libfacebook_ios_sdk.a in Frameworks */,
@@ -524,6 +533,8 @@
 				B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */,
 				2D0D814B15A49E0A00AAB0B5 /* UBPictureView.h */,
 				2D0D814C15A49E0A00AAB0B5 /* UBPictureView.m */,
+				B066EE2C16AD9E3900A2A25C /* UBDonateCell.h */,
+				B066EE2D16AD9E3900A2A25C /* UBDonateCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -569,6 +580,7 @@
 				B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */,
 				B0604E2C14D5F4A500F8ADB0 /* MessageUI.framework */,
 				B0FBF2BC166D3C4E007BFDC0 /* SenTestingKit.framework */,
+				B066EE2A16AD878600A2A25C /* StoreKit.framework */,
 				B0F7352F16A8436F00381E5E /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
@@ -658,6 +670,8 @@
 				B0DCA89114BF3279007132B6 /* UBMenuViewController.m */,
 				B02855CC14C0CDEE00FAA8A8 /* UBViewController.h */,
 				B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */,
+				B066EE2716AD83DB00A2A25C /* UBDonateViewController.h */,
+				B066EE2816AD83DB00A2A25C /* UBDonateViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1133,6 +1147,8 @@
 				B0C0BB751670CB2500A2421B /* VKSharingView.m in Sources */,
 				B0C0BB821670D30A00A2421B /* UIColor+Vkontakte.m in Sources */,
 				B0D2BCC716761DCB00F4D771 /* VKWallPostAttachment.m in Sources */,
+				B066EE2916AD83DB00A2A25C /* UBDonateViewController.m in Sources */,
+				B066EE2E16AD9E3900A2A25C /* UBDonateCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1430,6 +1446,7 @@
 				B0F7353A16A8436F00381E5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0FBF2CA166D3C4F007BFDC0 /* Build configuration list for PBXNativeTarget "VkontakteTests" */ = {
 			isa = XCConfigurationList;

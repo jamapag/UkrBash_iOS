@@ -20,6 +20,7 @@
 #import "UBUnpablishedPicturesDataSource.h"
 #import "UBRandomPicturesDataSource.h"
 #import "UBBestPicturesDataSource.h"
+#import "UBDonateViewController.h"
 
 enum UBMenuSections {
     UBMenuQuotesSection,
@@ -29,6 +30,7 @@ enum UBMenuSections {
 };
 
 enum UBMenuItems {
+    UBMenuItemDonate,
     UBMenuItemRateApp,
     UBMenuItemWebsite,
     UBMenuItemContact,
@@ -251,7 +253,9 @@ enum UBSubMenuItems {
         }
     } else if (indexPath.section == UBMenuInfoSection) {
         cell.indentationLevel = 0;
-        if (indexPath.row == UBMenuItemRateApp) {
+        if (indexPath.row == UBMenuItemDonate) {
+            cell.textLabel.text = @"Підтримати розробку";
+        } else if (indexPath.row == UBMenuItemRateApp) {
             cell.textLabel.text = @"Оцінити програму";
         } else if (indexPath.row == UBMenuItemWebsite) {
             cell.textLabel.text = @"www.ukrbash.org";
@@ -323,7 +327,11 @@ enum UBSubMenuItems {
     }
 
     if (UBMenuInfoSection == indexPath.section) {
-        if (indexPath.row == UBMenuItemRateApp) {
+        if (indexPath.row == UBMenuItemDonate) {
+            UBDonateViewController *donateViewController = [[UBDonateViewController alloc] init];
+            [self.ubNavigationController pushViewController:donateViewController animated:YES];
+            [donateViewController release];
+        } else if (indexPath.row == UBMenuItemRateApp) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=517226573"]];
         } else if (indexPath.row == UBMenuItemWebsite) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
