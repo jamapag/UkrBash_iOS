@@ -137,6 +137,7 @@
         x += sharingButtonHeight + padding;
     }
     
+    [self updatePictureInfoView];
 }
 
 - (void)viewDidLoad
@@ -181,6 +182,13 @@
     [self setScrollViewContentSize];
     [self setCurrentPictureIndex:currentPictureIndex];
     [self scrollToIndex:currentPictureIndex];
+}
+
+- (void)updatePictureInfoView
+{
+    if (currentPictureIndex >= 0 && currentPictureIndex < [[dataSource items] count]) {
+        [dataSource configurePictureInfoView:infoView forRowAtIndexPath:[NSIndexPath indexPathForRow:currentPictureIndex inSection:0]];
+    }
 }
 
 #pragma mark -
@@ -288,9 +296,9 @@
     [self unloadPictureWithIndex:currentPictureIndex + 2];
     [self unloadPictureWithIndex:currentPictureIndex - 2];
     
-    if (currentPictureIndex >= 0 && currentPictureIndex < [[dataSource items] count]) {
-        [dataSource configurePictureInfoView:infoView forRowAtIndexPath:[NSIndexPath indexPathForRow:currentPictureIndex inSection:0]];
-    }
+//    if (currentPictureIndex >= 0 && currentPictureIndex < [[dataSource items] count]) {
+//        [dataSource configurePictureInfoView:infoView forRowAtIndexPath:[NSIndexPath indexPathForRow:currentPictureIndex inSection:0]];
+//    }
 }
 
 - (CGRect)frameForPageAtIndex:(NSUInteger)index 
@@ -367,6 +375,11 @@
 	if (page != currentPictureIndex) {
 		[self setCurrentPictureIndex:page];
 	}
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self updatePictureInfoView];
 }
 
 @end

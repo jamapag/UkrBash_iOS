@@ -130,7 +130,9 @@
     borderView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - BORDER_WIDTH, -20., BORDER_WIDTH, self.view.frame.size.height)];
     borderView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     borderView.contentMode = UIViewContentModeTopLeft;
-    borderView.image = [UIImage imageNamed:@"border"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        borderView.image = [UIImage imageNamed:@"border"];
+    }
     borderView.layer.shadowOffset = CGSizeMake(-15., 5.);
     borderView.layer.shadowRadius = 10.;
     borderView.layer.shadowColor = [[UIColor blackColor] CGColor];

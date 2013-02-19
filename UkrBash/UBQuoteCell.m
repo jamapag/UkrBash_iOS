@@ -10,6 +10,10 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define FONT_SIZE 14.0f
+#define IPAD_FONT_SIZE 18.0f
+
+#define IPHONE_CELL_PADDING 10
+#define IPAD_CELL_PADDING 20
 #define INFO_LABELS_HEIGHT 12.0f
 
 CGFloat animationOffset = 52.;
@@ -26,9 +30,20 @@ CGFloat animationOffset = 52.;
 
 + (CGFloat)heightForQuoteText:(NSString*)text viewWidth:(CGFloat)width
 {
-    CGSize constraint = CGSizeMake((width - 20.) - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+    float margin = 0;
+    float fontSize = 0;
     
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        fontSize = IPAD_FONT_SIZE;
+        margin = IPAD_CELL_CONTENT_MARGIN;
+    } else {
+        fontSize = FONT_SIZE;
+        margin = CELL_CONTENT_MARGIN;
+    }
+    
+    CGSize constraint = CGSizeMake((width - 20.) - (margin * 2), 20000.0f);
+    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     
     CGFloat height = MAX(size.height, 44.0f);
     
@@ -108,41 +123,59 @@ CGFloat animationOffset = 52.;
         containerView.layer.masksToBounds = NO;
         containerView.backgroundColor = [UIColor whiteColor];
         
+        float margin = 0;
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            margin = IPAD_CELL_CONTENT_MARGIN;
+        } else {
+            margin = CELL_CONTENT_MARGIN;
+        }
+        
         CGFloat y = CELL_CONTENT_MARGIN;
-        idLabel = [[UILabel alloc] initWithFrame:CGRectMake(CELL_CONTENT_MARGIN, y, (containerView.frame.size.width - CELL_CONTENT_MARGIN * 2.) / 2., INFO_LABELS_HEIGHT)];
+        idLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin, y, (containerView.frame.size.width - margin * 2.) / 2., INFO_LABELS_HEIGHT)];
         idLabel.font = [UIFont systemFontOfSize:10];
         idLabel.textColor = [UIColor grayColor];
+        idLabel.backgroundColor = [UIColor clearColor];
         [containerView addSubview:idLabel];
         
-        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x + idLabel.frame.size.width, y, (containerView.frame.size.width - CELL_CONTENT_MARGIN * 3.) / 2., INFO_LABELS_HEIGHT)];
+        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x + idLabel.frame.size.width, y, (containerView.frame.size.width - margin * 2.) / 2., INFO_LABELS_HEIGHT)];
         ratingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         ratingLabel.textAlignment = UITextAlignmentRight;
         ratingLabel.font = [UIFont systemFontOfSize:10];
         ratingLabel.textColor = [UIColor grayColor];
+        ratingLabel.backgroundColor = [UIColor clearColor];
         [containerView addSubview:ratingLabel];
         
         y += ratingLabel.frame.size.height;
-        quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(CELL_CONTENT_MARGIN, y, containerView.frame.size.width - CELL_CONTENT_MARGIN * 2., containerView.frame.size.height - INFO_LABELS_HEIGHT * 2 - CELL_CONTENT_MARGIN * 2)];
+        quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin, y, containerView.frame.size.width - margin * 2., containerView.frame.size.height - INFO_LABELS_HEIGHT * 2 - CELL_CONTENT_MARGIN * 2)];
         quoteTextLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [quoteTextLabel setLineBreakMode:UILineBreakModeWordWrap];
-        [quoteTextLabel setFont:[UIFont systemFontOfSize:FONT_SIZE]];
+        
+        float fontSize = 0;
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            fontSize = IPAD_FONT_SIZE;
+        } else {
+            fontSize = FONT_SIZE;
+        }
+        [quoteTextLabel setFont:[UIFont systemFontOfSize:fontSize]];
         [quoteTextLabel setNumberOfLines:0];
         [quoteTextLabel setUserInteractionEnabled:YES];
         [containerView addSubview:quoteTextLabel];
         
         y += quoteTextLabel.frame.size.height + 1;
-        authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(CELL_CONTENT_MARGIN, y, (containerView.frame.size.width - CELL_CONTENT_MARGIN * 2.) / 2., INFO_LABELS_HEIGHT)];
+        authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin, y, (containerView.frame.size.width - margin * 2.) / 2., INFO_LABELS_HEIGHT)];
         authorLabel.font = ratingLabel.font;
         authorLabel.textColor = [UIColor grayColor];
         authorLabel.shadowColor = [UIColor darkGrayColor];
         authorLabel.shadowOffset = CGSizeMake(0., -.5);
+        authorLabel.backgroundColor = [UIColor clearColor];
         [containerView addSubview:authorLabel];
         
-        dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(authorLabel.frame.origin.x + authorLabel.frame.size.width, y, (containerView.frame.size.width - CELL_CONTENT_MARGIN * 3.) / 2., INFO_LABELS_HEIGHT)];
+        dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(authorLabel.frame.origin.x + authorLabel.frame.size.width, y, (containerView.frame.size.width - margin * 2.) / 2., INFO_LABELS_HEIGHT)];
         dateLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         dateLabel.font = ratingLabel.font;
         dateLabel.textColor = [UIColor grayColor];
         dateLabel.textAlignment = UITextAlignmentRight;
+        dateLabel.backgroundColor = [UIColor clearColor];
         [containerView addSubview:dateLabel];
         
         CGFloat x = containerView.frame.origin.x + 20.;
@@ -243,12 +276,31 @@ CGFloat animationOffset = 52.;
     rect.size.height -= 10;
     containerView.frame = rect;
     
+    float margin = 0;
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        margin = IPAD_CELL_CONTENT_MARGIN;
+    } else {
+        margin = CELL_CONTENT_MARGIN;
+    }
+    
+    rect = idLabel.frame;
+    rect.size.width = (containerView.frame.size.width - margin * 2) / 2;
+    idLabel.frame = rect;
+    
+    rect = ratingLabel.frame;
+    rect.origin.x = idLabel.frame.origin.x + idLabel.frame.size.width;
+    rect.size.width = (containerView.frame.size.width - margin * 2.) / 2;
+    ratingLabel.frame = rect;
+    
     rect = authorLabel.frame;
     rect.origin.y = quoteTextLabel.frame.origin.y + quoteTextLabel.frame.size.height;
+    rect.size.width = (containerView.frame.size.width - margin * 2) / 2;
     authorLabel.frame = rect;
     
     rect = dateLabel.frame;
+    rect.origin.x = authorLabel.frame.origin.x + authorLabel.frame.size.width;
     rect.origin.y = quoteTextLabel.frame.origin.y + quoteTextLabel.frame.size.height;
+    rect.size.width = (containerView.frame.size.width - margin * 2.) / 2;
     dateLabel.frame = rect;
 
     CGSize size = containerView.bounds.size;
