@@ -10,7 +10,7 @@
 #import "SharingController.h"
 
 #define CELL_CONTENT_MARGIN 5.0f
-
+#define IPAD_CELL_CONTENT_MARGIN 20.0f
 
 @class UBQuoteCell;
 

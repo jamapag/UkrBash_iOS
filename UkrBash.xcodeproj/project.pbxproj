@@ -64,6 +64,8 @@
 		2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */; };
 		2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */; };
 		2DF27D9E1455D2670011168F /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF27D9D1455D2670011168F /* libxml2.dylib */; };
+		2DF8DFA116CC2E08002A8279 /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DF8DF9F16CC2E08002A8279 /* texture.png */; };
+		2DF8DFA216CC2E08002A8279 /* texture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DF8DFA016CC2E08002A8279 /* texture@2x.png */; };
 		B00510851517BBFA00D6D69B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00510841517BBFA00D6D69B /* QuartzCore.framework */; };
 		B0052FCA14BCD60B0082DAB9 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = B0052FC414BCD60B0082DAB9 /* facebook.png */; };
 		B0052FCB14BCD60B0082DAB9 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0052FC514BCD60B0082DAB9 /* facebook@2x.png */; };
@@ -282,6 +284,8 @@
 		2DE54B0314C847FD00CB04CB /* UBRandomQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRandomQuotesDataSource.h; sourceTree = "<group>"; };
 		2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRandomQuotesDataSource.m; sourceTree = "<group>"; };
 		2DF27D9D1455D2670011168F /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		2DF8DF9F16CC2E08002A8279 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
+		2DF8DFA016CC2E08002A8279 /* texture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "texture@2x.png"; sourceTree = "<group>"; };
 		B00510841517BBFA00D6D69B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B0052FC414BCD60B0082DAB9 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
 		B0052FC514BCD60B0082DAB9 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
@@ -645,6 +649,8 @@
 			isa = PBXGroup;
 			children = (
 				2D439B381525BC4E0042D5D0 /* EGORefreshTableHeadreViewImages */,
+				2DF8DF9F16CC2E08002A8279 /* texture.png */,
+				2DF8DFA016CC2E08002A8279 /* texture@2x.png */,
 				B0CFEC0A14C2051900B6C5A7 /* menu-button.png */,
 				B0CFEC0B14C2051900B6C5A7 /* menu-button@2x.png */,
 				B07C47D3152DA4D900DE05EB /* back-btn.png */,
@@ -976,6 +982,8 @@
 				B0D2BCE21676335500F4D771 /* upload6@2x.png in Resources */,
 				B0DA12EA1689F911008C407C /* vk.png in Resources */,
 				B0DA12EB1689F911008C407C /* vk@2x.png in Resources */,
+				2DF8DFA116CC2E08002A8279 /* texture.png in Resources */,
+				2DF8DFA216CC2E08002A8279 /* texture@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,18 +1181,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lidia Rudyuk (ZNYUJ46SEU)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "UkrBash/UkrBash-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAnalytics\"",
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F48892ED-B681-4777-8719-9A3E88D7277B";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1200,6 +1212,7 @@
 				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "UkrBash/UkrBash-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAnalytics\"",
@@ -1207,6 +1220,7 @@
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "805124A9-59B8-4591-B6F4-0E51B31F8A52";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Submodules/**";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

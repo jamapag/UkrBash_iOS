@@ -16,7 +16,6 @@
 #import "EMailSharingController.h"
 #import "GANTracker.h"
 
-
 @implementation UBQuotesContainerController
 
 @synthesize dataSource;
@@ -113,19 +112,16 @@
 {
     [super loadView];
     
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., -20., self.view.frame.size.width, self.view.frame.size.height)];
-    backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    backgroundImageView.image = [UIImage imageNamed:@"view-background"];
-    backgroundImageView.contentMode = UIViewContentModeTopLeft;
-    [self.view addSubview:backgroundImageView];
-    [backgroundImageView release];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
     
-    UIImage *borderImage = [UIImage imageNamed:@"border"];
-    UIImageView *borderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., -20., borderImage.size.width, self.view.frame.size.height)];
-    borderImageView.image = borderImage;
-    borderImageView.contentMode = UIViewContentModeTopLeft;
-    [self.view addSubview:borderImageView];
-    [borderImageView release];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        UIImage *borderImage = [UIImage imageNamed:@"border"];
+        UIImageView *borderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., -20., borderImage.size.width, self.view.frame.size.height)];
+        borderImageView.image = borderImage;
+        borderImageView.contentMode = UIViewContentModeTopLeft;
+        [self.view addSubview:borderImageView];
+        [borderImageView release];
+    }
     
     tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 45., self.view.frame.size.width, self.view.frame.size.height - 45.)];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

@@ -85,12 +85,7 @@ enum UBSubMenuItems {
 {
     [super loadView];
 
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., -20., self.view.frame.size.width, self.view.frame.size.height)];
-    backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    backgroundImageView.image = [UIImage imageNamed:@"view-background"];
-    backgroundImageView.contentMode = UIViewContentModeTopLeft;
-    [self.view addSubview:backgroundImageView];
-    [backgroundImageView release];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 44., self.view.frame.size.width, self.view.frame.size.height - 44.) style:UITableViewStylePlain];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -328,14 +323,19 @@ enum UBSubMenuItems {
         } else if (indexPath.row == UBMenuItemWebsite) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
         } else if (indexPath.row == UBMenuItemContact) {
-            MFMailComposeViewController * mailComposer = [[MFMailComposeViewController alloc] init];
-            mailComposer.mailComposeDelegate = self;
-            [mailComposer setToRecipients:[NSArray arrayWithObject:@"info@smile2mobile.net"]];
-            [mailComposer setSubject:@"UkrBash iOS feedback"];
-            if ([self.ubNavigationController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
-                [self.ubNavigationController presentViewController:mailComposer animated:YES completion:nil];
+            if ([MFMailComposeViewController canSendMail]) {
+                MFMailComposeViewController * mailComposer = [[MFMailComposeViewController alloc] init];
+                mailComposer.mailComposeDelegate = self;
+                [mailComposer setToRecipients:[NSArray arrayWithObject:@"info@smile2mobile.net"]];
+                [mailComposer setSubject:@"UkrBash iOS feedback"];
+                if ([self.ubNavigationController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
+                    [self.ubNavigationController presentViewController:mailComposer animated:YES completion:nil];
+                } else {
+                    [self.ubNavigationController presentModalViewController:mailComposer animated:YES];
+                }
             } else {
-                [self.ubNavigationController presentModalViewController:mailComposer animated:YES];
+                NSURL *url = [NSURL URLWithString:@"mailto:info@smile2mobile.net?subject=UkrBash%20iOS%20feedback"];
+                [[UIApplication sharedApplication] openURL:url];
             }
         }
     }
