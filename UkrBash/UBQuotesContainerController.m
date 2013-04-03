@@ -324,17 +324,11 @@
     UIEdgeInsets inset = aScrollView.contentInset;
     float y = offset.y + bounds.size.height - inset.bottom;
     float h = size.height;
-    // NSLog(@"offset: %f", offset.y);   
-    // NSLog(@"content.height: %f", size.height);   
-    // NSLog(@"bounds.height: %f", bounds.size.height);   
-    // NSLog(@"inset.top: %f", inset.top);   
-    // NSLog(@"inset.bottom: %f", inset.bottom);   
-    // NSLog(@"pos: %f of %f", y, h);
-
+    
     if (h == 0 && [[dataSource items] count] > 0) {
         return;
     }
-
+    
     float reload_distance = 10;
     if(y > h + reload_distance) {
         if (!loading) {

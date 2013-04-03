@@ -9,6 +9,7 @@
 #import "UkrBashAppDelegate.h"
 #import "UBQuotesContainerController.h"
 #import "UBPicturesContainerController.h"
+#import "UBPicturesCollectionViewController.h"
 #import "UBMenuViewController.h"
 #import "UBNavigationController.h"
 #import "UBPublishedQuotesDataSource.h"
@@ -79,7 +80,11 @@
         if (!dataSource) {
             dataSource = NSStringFromClass([UBPublishedPicturesDataSource class]);
         }
-        return [[[UBPicturesContainerController alloc] initWithDataSourceClass:NSClassFromString(dataSource)] autorelease];
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [UICollectionViewController class]) {
+            return [[[UBPicturesCollectionViewController alloc] initWithDataSourceClass:NSClassFromString(dataSource)] autorelease];
+        } else {
+            return [[[UBPicturesContainerController alloc] initWithDataSourceClass:NSClassFromString(dataSource)] autorelease];
+        }
     }
     return nil;
 }

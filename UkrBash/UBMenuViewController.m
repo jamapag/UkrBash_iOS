@@ -21,6 +21,7 @@
 #import "UBRandomPicturesDataSource.h"
 #import "UBBestPicturesDataSource.h"
 #import "UBDonateViewController.h"
+#import "UBPicturesCollectionViewController.h"
 
 enum UBMenuSections {
     UBMenuQuotesSection,
@@ -164,10 +165,17 @@ enum UBSubMenuItems {
     [userDefaults setValue:UBContainerTypePictures forKey:UBContainerTypeKey];
     [userDefaults synchronize];
 
-    UBPicturesContainerController *picturesContainer = [[UBPicturesContainerController alloc] initWithDataSourceClass:dataSourceClass];
-    picturesContainer.title = title;
-    [self.ubNavigationController pushViewController:picturesContainer animated:YES];
-    [picturesContainer release];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone || ![UICollectionView class]) {
+        UBPicturesContainerController *picturesContainer = [[UBPicturesContainerController alloc] initWithDataSourceClass:dataSourceClass];
+        picturesContainer.title = title;
+        [self.ubNavigationController pushViewController:picturesContainer animated:YES];
+        [picturesContainer release];
+    } else {
+        UBPicturesCollectionViewController *collecitonController = [[UBPicturesCollectionViewController alloc] initWithDataSourceClass:dataSourceClass];
+        collecitonController.title = title;
+        [self.ubNavigationController pushViewController:collecitonController animated:YES];
+        [collecitonController release];
+    }
 }
 
 #pragma mark - Table View Datasource/Delegate methods

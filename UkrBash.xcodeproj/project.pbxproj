@@ -13,6 +13,8 @@
 		2D12630314F6E6DA001C9DA0 /* MediaCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D12630114F6E6DA001C9DA0 /* MediaCenter.m */; };
 		2D12630614F6E78A001C9DA0 /* UIKitExtentions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D12630514F6E789001C9DA0 /* UIKitExtentions.m */; };
 		2D144DDA1419073B009E1DBA /* UBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D144DD91419073B009E1DBA /* UBRequest.m */; };
+		2D14843416D569A500002F9C /* UBPicturesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14843316D569A500002F9C /* UBPicturesCollectionViewController.m */; };
+		2D14843816D56F7500002F9C /* UBPictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14843716D56F7500002F9C /* UBPictureCollectionViewCell.m */; };
 		2D230026151B69820059BD2B /* TwitterSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D230025151B69820059BD2B /* TwitterSharingController.m */; };
 		2D23002D151B78950059BD2B /* EMailSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D23002C151B78950059BD2B /* EMailSharingController.m */; };
 		2D33125D16307DBF00213BF2 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D33125716307D5E00213BF2 /* libfacebook_ios_sdk.a */; };
@@ -38,6 +40,7 @@
 		2D57274F1456017900A6DAE4 /* UBQuotesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D57274E1456017900A6DAE4 /* UBQuotesRequest.m */; };
 		2D5A4E8D151B36BD002ABFA2 /* SharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A4E8C151B36BD002ABFA2 /* SharingController.m */; };
 		2D5A4E91151B374D002ABFA2 /* FacebookSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A4E90151B374D002ABFA2 /* FacebookSharingController.m */; };
+		2D6E4DA7170B329800353843 /* UBPictureCollectionReusableFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E4DA6170B329800353843 /* UBPictureCollectionReusableFooter.m */; };
 		2D9F6E0E14A158C40012D690 /* UBQuotesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */; };
 		2DADD34714A3FA4A00808AA6 /* UBQuoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */; };
 		2DB0FAB21416C8CF00EFD6BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */; };
@@ -60,6 +63,7 @@
 		2DBF0A0214B66A1200A8949B /* app-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBF0A0014B66A1200A8949B /* app-icon@2x.png */; };
 		2DDED39A14A3649D003B315D /* UBQuote.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DDED39914A3649D003B315D /* UBQuote.m */; };
 		2DE4917F15A5C14000002488 /* UBPicturesScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE4917E15A5C14000002488 /* UBPicturesScrollViewController.m */; };
+		2DE51AC116DE17BE0049F9A2 /* UBCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE51AC016DE17BE0049F9A2 /* UBCollectionViewLayout.m */; };
 		2DE54AFF14C83FF800CB04CB /* UBPublishedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54AFE14C83FF800CB04CB /* UBPublishedQuotesDataSource.m */; };
 		2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */; };
 		2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */; };
@@ -210,6 +214,10 @@
 		2D12630514F6E789001C9DA0 /* UIKitExtentions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitExtentions.m; sourceTree = "<group>"; };
 		2D144DD81419073B009E1DBA /* UBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRequest.h; sourceTree = "<group>"; };
 		2D144DD91419073B009E1DBA /* UBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRequest.m; sourceTree = "<group>"; };
+		2D14843216D569A500002F9C /* UBPicturesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesCollectionViewController.h; sourceTree = "<group>"; };
+		2D14843316D569A500002F9C /* UBPicturesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesCollectionViewController.m; sourceTree = "<group>"; };
+		2D14843616D56F7500002F9C /* UBPictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureCollectionViewCell.h; sourceTree = "<group>"; };
+		2D14843716D56F7500002F9C /* UBPictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureCollectionViewCell.m; sourceTree = "<group>"; };
 		2D230024151B69820059BD2B /* TwitterSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterSharingController.h; sourceTree = "<group>"; };
 		2D230025151B69820059BD2B /* TwitterSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterSharingController.m; sourceTree = "<group>"; };
 		2D23002B151B78950059BD2B /* EMailSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMailSharingController.h; sourceTree = "<group>"; };
@@ -249,6 +257,8 @@
 		2D5A4E8C151B36BD002ABFA2 /* SharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharingController.m; sourceTree = "<group>"; };
 		2D5A4E8F151B374D002ABFA2 /* FacebookSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSharingController.h; sourceTree = "<group>"; };
 		2D5A4E90151B374D002ABFA2 /* FacebookSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSharingController.m; sourceTree = "<group>"; };
+		2D6E4DA5170B329800353843 /* UBPictureCollectionReusableFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureCollectionReusableFooter.h; sourceTree = "<group>"; };
+		2D6E4DA6170B329800353843 /* UBPictureCollectionReusableFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureCollectionReusableFooter.m; sourceTree = "<group>"; };
 		2D9F6E0C14A158C40012D690 /* UBQuotesContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesContainerController.h; sourceTree = "<group>"; };
 		2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesContainerController.m; sourceTree = "<group>"; };
 		2DADD34514A3FA4A00808AA6 /* UBQuoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuoteCell.h; sourceTree = "<group>"; };
@@ -287,6 +297,8 @@
 		2DDED39914A3649D003B315D /* UBQuote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuote.m; sourceTree = "<group>"; };
 		2DE4917D15A5C14000002488 /* UBPicturesScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesScrollViewController.h; sourceTree = "<group>"; };
 		2DE4917E15A5C14000002488 /* UBPicturesScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesScrollViewController.m; sourceTree = "<group>"; };
+		2DE51ABF16DE17BE0049F9A2 /* UBCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBCollectionViewLayout.h; sourceTree = "<group>"; };
+		2DE51AC016DE17BE0049F9A2 /* UBCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBCollectionViewLayout.m; sourceTree = "<group>"; };
 		2DE54AFB14C83F5500CB04CB /* UBQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesDataSource.h; sourceTree = "<group>"; };
 		2DE54AFD14C83FF800CB04CB /* UBPublishedQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPublishedQuotesDataSource.h; sourceTree = "<group>"; };
 		2DE54AFE14C83FF800CB04CB /* UBPublishedQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPublishedQuotesDataSource.m; sourceTree = "<group>"; };
@@ -539,6 +551,12 @@
 				2D0D814C15A49E0A00AAB0B5 /* UBPictureView.m */,
 				B066EE2C16AD9E3900A2A25C /* UBDonateCell.h */,
 				B066EE2D16AD9E3900A2A25C /* UBDonateCell.m */,
+				2D14843616D56F7500002F9C /* UBPictureCollectionViewCell.h */,
+				2D14843716D56F7500002F9C /* UBPictureCollectionViewCell.m */,
+				2DE51ABF16DE17BE0049F9A2 /* UBCollectionViewLayout.h */,
+				2DE51AC016DE17BE0049F9A2 /* UBCollectionViewLayout.m */,
+				2D6E4DA5170B329800353843 /* UBPictureCollectionReusableFooter.h */,
+				2D6E4DA6170B329800353843 /* UBPictureCollectionReusableFooter.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -676,6 +694,8 @@
 				B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */,
 				B066EE2716AD83DB00A2A25C /* UBDonateViewController.h */,
 				B066EE2816AD83DB00A2A25C /* UBDonateViewController.m */,
+				2D14843216D569A500002F9C /* UBPicturesCollectionViewController.h */,
+				2D14843316D569A500002F9C /* UBPicturesCollectionViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1157,6 +1177,10 @@
 				B0D2BCC716761DCB00F4D771 /* VKWallPostAttachment.m in Sources */,
 				B066EE2916AD83DB00A2A25C /* UBDonateViewController.m in Sources */,
 				B066EE2E16AD9E3900A2A25C /* UBDonateCell.m in Sources */,
+				2D14843416D569A500002F9C /* UBPicturesCollectionViewController.m in Sources */,
+				2D14843816D56F7500002F9C /* UBPictureCollectionViewCell.m in Sources */,
+				2DE51AC116DE17BE0049F9A2 /* UBCollectionViewLayout.m in Sources */,
+				2D6E4DA7170B329800353843 /* UBPictureCollectionReusableFooter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

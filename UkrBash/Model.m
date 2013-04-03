@@ -16,6 +16,10 @@
 
 NSString *const kNotificationDataUpdated = @"kNotificationDataUpdated";
 
+NSInteger const kNumberOfQuotesToLoad = 25;
+NSInteger const kNumberOfPicturesToLoad = 26;
+
+
 @implementation Model
 
 @synthesize publishedQuotes;
@@ -85,7 +89,7 @@ static Model *sharedModel = nil;
 - (void)loadMorePublishedQuotes
 {
     NSLog(@"Load more published quotes");
-    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getPublished start:[publishedQuotes count] andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getPublished start:[publishedQuotes count] andLimit:kNumberOfQuotesToLoad];
     [request start];
     [requests addObject:request];
     [request release];
@@ -94,7 +98,7 @@ static Model *sharedModel = nil;
 - (void)loadMoreUnpablishedQuotes
 {
     NSLog(@"Load more upcoming quotes");
-    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getUpcoming start:[unpablishedQuotes count] andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getUpcoming start:[unpablishedQuotes count] andLimit:kNumberOfQuotesToLoad];
     [request start];
     [requests addObject:request];
     [request release];
@@ -103,7 +107,7 @@ static Model *sharedModel = nil;
 - (void)loadMoreBestQuotes
 {
     NSLog(@"Load more best quotes");
-    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getTheBest start:[bestQuotes count] andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getTheBest start:[bestQuotes count] andLimit:kNumberOfQuotesToLoad];
     [request start];
     [requests addObject:request];
     [request release];
@@ -112,7 +116,7 @@ static Model *sharedModel = nil;
 - (void)loadMoreRandomQuotes
 {
     NSLog(@"Load more random quotes");
-    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getRandom start:[randomQuotes count] andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getRandom start:[randomQuotes count] andLimit:kNumberOfQuotesToLoad];
     [request start];
     [requests addObject:request];
     [request release];
@@ -121,7 +125,7 @@ static Model *sharedModel = nil;
 - (void)loadNewUnpablishedQuotes
 {
     NSLog(@"Load New unpablished quotes");
-    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getUpcoming start:0 andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getUpcoming start:0 andLimit:kNumberOfQuotesToLoad];
     [request setAddToTop:YES];
     [request start];
     [requests addObject:request];
@@ -131,7 +135,7 @@ static Model *sharedModel = nil;
 - (void)loadNewPublishedQuotes
 {
     NSLog(@"Load new published quotes");
-    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getPublished start:0 andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getPublished start:0 andLimit:kNumberOfQuotesToLoad];
     [request setAddToTop:YES];
     [request start];
     [requests addObject:request];
@@ -141,7 +145,7 @@ static Model *sharedModel = nil;
 - (void)loadNewBestQuotes
 {
     NSLog(@"Load new published quotes");
-    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getTheBest start:0 andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getTheBest start:0 andLimit:kNumberOfQuotesToLoad];
     [request setAddToTop:YES];
     [request start];
     [requests addObject:request];
@@ -151,7 +155,7 @@ static Model *sharedModel = nil;
 - (void)loadNewRandomQuotes
 {
     NSLog(@"Load new published quotes");
-    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getRandom start:0 andLimit:25];
+    UBQuotesRequest *request = [self newQuotesRequestWithMethod:kQuotes_getRandom start:0 andLimit:kNumberOfQuotesToLoad];
     [request setAddToTop:YES];
     [request start];
     [requests addObject:request];
@@ -173,7 +177,7 @@ static Model *sharedModel = nil;
 - (void)loadMorePublishedPictures
 {
     NSLog(@"Load more published pictures");
-    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getPublished start:[publishedImages count] andLimit:25];
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getPublished start:[publishedImages count] andLimit:kNumberOfPicturesToLoad];
     [request start];
     [requests addObject:request];
     [request release];
@@ -182,7 +186,7 @@ static Model *sharedModel = nil;
 - (void)loadMoreUnpablishedPictures
 {
     NSLog(@"Load more upcoming pictures");
-    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getUpcoming start:[unpablishedImages count] andLimit:25];
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getUpcoming start:[unpablishedImages count] andLimit:kNumberOfPicturesToLoad];
     [request start];
     [requests addObject:request];
     [request release];
@@ -191,7 +195,7 @@ static Model *sharedModel = nil;
 - (void)loadMoreRandomPictures
 {
     NSLog(@"Load more random pictures");
-    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getRandom start:[randomImages count] andLimit:25];
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getRandom start:[randomImages count] andLimit:kNumberOfPicturesToLoad];
     [request start];
     [requests addObject:request];
     [request release];
@@ -200,7 +204,7 @@ static Model *sharedModel = nil;
 - (void)loadMoreBestPictures
 {
     NSLog(@"Load more best pictures");
-    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getTheBest start:[bestImages count] andLimit:25];
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getTheBest start:[bestImages count] andLimit:kNumberOfPicturesToLoad];
     [request start];
     [requests addObject:request];
     [request release];
@@ -209,7 +213,7 @@ static Model *sharedModel = nil;
 - (void)loadNewPublishedPictures
 {
     NSLog(@"Load new published pictures");
-    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getPublished start:0 andLimit:25];
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getPublished start:0 andLimit:kNumberOfPicturesToLoad];
     [request setAddToTop:YES];
     [request start];
     [requests addObject:request];
@@ -219,7 +223,7 @@ static Model *sharedModel = nil;
 - (void)loadNewUnpablishedPictures
 {
     NSLog(@"Load new upcoming pictures");
-    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getUpcoming start:0 andLimit:25];
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getUpcoming start:0 andLimit:kNumberOfPicturesToLoad];
     [request setAddToTop:YES];
     [request start];
     [requests addObject:request];
@@ -229,7 +233,7 @@ static Model *sharedModel = nil;
 - (void)loadNewRandomPictures
 {
     NSLog(@"Load new random pictures");
-    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getRandom start:0 andLimit:25];
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getRandom start:0 andLimit:kNumberOfPicturesToLoad];
     [request setAddToTop:YES];
     [request start];
     [requests addObject:request];
@@ -239,7 +243,7 @@ static Model *sharedModel = nil;
 - (void)loadNewBestPictures
 {
     NSLog(@"Load new best pictures");
-    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getTheBest start:0 andLimit:25];
+    UBImagesRequest *request = [self newPicturesRequestWithMethod:kPictures_getTheBest start:0 andLimit:kNumberOfPicturesToLoad];
     [request setAddToTop:YES];
     [request start];
     [requests addObject:request];
