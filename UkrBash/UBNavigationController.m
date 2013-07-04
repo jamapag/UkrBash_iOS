@@ -106,7 +106,7 @@
                 if (height < self.view.bounds.size.width) {
                     height = self.view.bounds.size.width;
                 }
-                borderView.frame = CGRectMake(self.view.bounds.size.width - BORDER_WIDTH, -20., BORDER_WIDTH, height);
+                borderView.frame = CGRectMake(self.view.bounds.size.width - BORDER_WIDTH, -20., BORDER_WIDTH, height + 20);
                 [self.view addSubview:borderView];
             }];
         } else {
@@ -127,12 +127,10 @@
     
     self.view.clipsToBounds = YES;
     
-    borderView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - BORDER_WIDTH, -20., BORDER_WIDTH, self.view.frame.size.height)];
+    borderView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - BORDER_WIDTH, -20., BORDER_WIDTH, self.view.frame.size.height + 20)];
+    borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
+    
     borderView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-    borderView.contentMode = UIViewContentModeTopLeft;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        borderView.image = [UIImage imageNamed:@"border"];
-    }
     borderView.layer.shadowOffset = CGSizeMake(-15., 5.);
     borderView.layer.shadowRadius = 10.;
     borderView.layer.shadowColor = [[UIColor blackColor] CGColor];

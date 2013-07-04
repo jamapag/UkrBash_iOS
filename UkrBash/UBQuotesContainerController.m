@@ -114,14 +114,10 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        UIImage *borderImage = [UIImage imageNamed:@"border"];
-        UIImageView *borderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., -20., borderImage.size.width, self.view.frame.size.height)];
-        borderImageView.image = borderImage;
-        borderImageView.contentMode = UIViewContentModeTopLeft;
-        [self.view addSubview:borderImageView];
-        [borderImageView release];
-    }
+    UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., -20., 50., self.view.frame.size.height + 20)];
+    borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
+    [self.view addSubview:borderView];
+    [borderView release];
     
     tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 45., self.view.frame.size.width, self.view.frame.size.height - 45.)];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

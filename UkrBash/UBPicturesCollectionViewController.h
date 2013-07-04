@@ -8,8 +8,10 @@
 
 #import "UBViewController.h"
 #import "UBPicturesDataSource.h"
+#import "UBPictureCollectionViewCell.h"
 
-@interface UBPicturesCollectionViewController : UBViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+
+@interface UBPicturesCollectionViewController : UBViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UBQuoteCollectionCellDelegate>
 {
     UICollectionView *_collectionView;
     UIRefreshControl *_refreshControl;
@@ -21,6 +23,7 @@
     
     bool loading;
     bool shouldShowFooter;
+    bool rotating;
 }
 
 - (id)initWithDataSourceClass:(Class)dataSourceClass;

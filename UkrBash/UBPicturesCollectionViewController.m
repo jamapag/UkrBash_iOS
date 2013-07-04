@@ -7,17 +7,19 @@
 //
 
 #import "UBPicturesCollectionViewController.h"
-#import "UBPictureCollectionViewCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UBPicture.h"
 #import "MediaCenter.h"
 #import "UBCollectionViewLayout.h"
 #import "Model.h"
 #import "UBPictureCollectionReusableFooter.h"
+#import "GANTracker.h"
 
 @interface UBPicturesCollectionViewController ()
 
 @end
+
+NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKindSectionFooter";
 
 @implementation UBPicturesCollectionViewController
 
@@ -62,6 +64,11 @@
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
     
+    UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., -20., 50., self.view.frame.size.height + 20)];
+    borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
+    [self.view addSubview:borderView];
+    [borderView release];
+    
     UBCollectionViewLayout *layout = [[UBCollectionViewLayout alloc] init];
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 45., self.view.frame.size.width, self.view.frame.size.height - 45) collectionViewLayout:layout];
     _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -75,8 +82,7 @@
     [self.view addSubview:_collectionView];
     
     [_collectionView registerClass:[UBPictureCollectionViewCell class] forCellWithReuseIdentifier:@"UBPictureCollectionViewCell"];
-    [_collectionView registerClass:[UBPictureCollectionReusableFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"UBPrictureCollectionViewFooter"];
-    
+    [_collectionView registerClass:[UBPictureCollectionReusableFooter class] forSupplementaryViewOfKind:UBCollectionElementKindSectionFooter withReuseIdentifier:@"UBPrictureCollectionViewFooter"];
     UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, 44.)];
     headerView.userInteractionEnabled = YES;
     headerView.image = [UIImage imageNamed:@"header"];
@@ -181,6 +187,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+
+- (void)quoteCell:(UBPictureCollectionViewCell *)cell shareQuoteWithType:(SharingNetworkType)networkType
+{
+    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
+    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
+    
+    SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
+    sharingController.url = pictureUrl;
+    sharingController.rootViewController = self;
+    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Картинка %d", picture.pictureId]];
+    [sharingController setAttachmentImagePreview:[[MediaCenter imageCenter] imageWithUrl:picture.image]];
+    [sharingController showSharingDialog];
+    
+    NSError * error = nil;
+    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:NSStringFromClass([sharingController class]) value:-1 withError:&error];
+}
+
+#pragma mark - -
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [[dataSource items] count];
@@ -189,6 +215,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UBPictureCollectionViewCell *imageCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UBPictureCollectionViewCell" forIndexPath:indexPath];
+    imageCell.shareDelegate = self;
     UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
     UIImage *image = [[MediaCenter imageCenter] imageWithUrl:picture.image];
     if (!image && ![pendingImages objectForKey:picture.image]) {
@@ -197,7 +224,14 @@
     } else {
         imageCell.imageView.image = image;
     }
+    imageCell.authorLabel.text = picture.author;
+    imageCell.ratingLabel.text = [NSString stringWithFormat:@"%d", picture.rating];
     [imageCell setPictureTitle:picture.title];
+    if (!imageCell.selected) {
+        [imageCell hideSharingOverlay];
+    } else {
+        [imageCell showSharingOverlay];
+    }
     return imageCell;
 }
 
@@ -216,7 +250,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(495, 495);
+    return CGSizeMake(495, 525);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -224,10 +258,25 @@
     return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
+#pragma mark - Rotation handling
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    rotating = YES;
+}
+
+- (void)viewDidLayoutSubviews {
+    rotating = NO;
+}
+
 #pragma mark - UIScrollView delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
+    if (rotating) {
+        return;
+    }
+    
     CGPoint offset = aScrollView.contentOffset;
     CGRect bounds = aScrollView.bounds;
     CGSize size = aScrollView.contentSize;

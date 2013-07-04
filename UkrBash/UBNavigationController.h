@@ -14,7 +14,7 @@
 {
     UBViewController *_menuViewController;
     UBViewController *_viewController;
-    UIImageView *borderView;
+    UIView *borderView;
 }
 
 @property (nonatomic, readonly) UBViewController *menuViewController;

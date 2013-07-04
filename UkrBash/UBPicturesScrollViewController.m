@@ -234,7 +234,7 @@
     SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = pictureUrl;
     sharingController.rootViewController = self;
-    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Цитата %d", picture.pictureId]];
+    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Картинка %d", picture.pictureId]];
     [sharingController setAttachmentDescription:picture.title];
     [sharingController setAttachmentImagePreview:[[MediaCenter imageCenter] imageWithUrl:picture.thumbnail]];
     [sharingController showSharingDialog];
