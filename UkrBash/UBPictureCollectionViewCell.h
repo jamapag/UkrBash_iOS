@@ -24,9 +24,7 @@
     UILabel *pictureTittleLabel;
     UILabel *authorLabel;
     UILabel *ratingLabel;
-    UIButton *shareButton;
     UIView *sharingOverlay;
-    float sharingOverlayWidth;
     id<UBQuoteCollectionCellDelegate> shareDelegate;
 }
 
@@ -38,6 +36,5 @@
 - (NSString *)pictureTitle;
 - (void)setPictureTitle:(NSString *)pictureTitle;
 - (void)hideSharingOverlay;
-- (void)showSharingOverlay;
 
 @end

@@ -58,17 +58,20 @@
         ratingLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:ratingLabel];
         
-        shareButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-        [shareButton setBackgroundImage:[UIImage imageNamed:@"right.png"] forState:UIControlStateNormal];
-        shareButton.backgroundColor = [UIColor grayColor];
-//        [shareButton setTitle:@">" forState:UIControlStateNormal];
-//        [shareButton.titleLabel setFont:[UIFont systemFontOfSize:22]];
-//        [shareButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        shareButton.frame = CGRectMake(0, self.frame.size.height / 2 - 22, 22, 44);
-        [shareButton addTarget:self action:@selector(shareButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:shareButton];
+        UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+        gestureRecognizer.numberOfTapsRequired = 1;
+        [self.contentView addGestureRecognizer:gestureRecognizer];
+        [gestureRecognizer release];
+        
     }
     return self;
+}
+
+- (void)handleTapGesture:(UIGestureRecognizer *)tapGesture
+{
+    if (tapGesture.state == UIGestureRecognizerStateEnded) {
+        [self shareButtonAction:nil];
+    }
 }
 
 - (void)layoutSubviews
@@ -82,7 +85,6 @@
     [pictureTittleLabel release];
     [authorLabel release];
     [ratingLabel release];
-    [shareButton release];
     [sharingOverlay release];
     [super dealloc];
 }
@@ -102,69 +104,68 @@
     self.selected = !self.selected;
     if (self.selected) {
         if (!sharingOverlay) {
-            sharingOverlay = [[UIView alloc] initWithFrame:CGRectMake(0, shareButton.frame.origin.y - 5, 300, 54)];
-            sharingOverlay.backgroundColor = [UIColor grayColor];
+            sharingOverlay = [[UIView alloc] initWithFrame:pictureTittleLabel.frame];
+            sharingOverlay.backgroundColor = [UIColor whiteColor];
+            UIView *buttonsBox = [[UIView alloc] initWithFrame:CGRectZero];
             UIButton *shareBtn = nil;
             CGFloat shareButtonWidth = 44.;
-            float x = 10 + 22;
+            CGFloat sharingOverlayHeight = sharingOverlay.frame.size.height;
+            float y = (sharingOverlayHeight / 2) - (shareButtonWidth / 2);
+            float x = 5;
             if ([SharingController isSharingAvailableForNetworkType:SharingFacebookNetwork]) {
                 shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                shareBtn.frame = CGRectMake(x, 5., shareButtonWidth, shareButtonWidth);
+                shareBtn.frame = CGRectMake(x, y, shareButtonWidth, shareButtonWidth);
                 shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
                 [shareBtn setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
                 [shareBtn addTarget:self action:@selector(shareWithFacebookAction:) forControlEvents:UIControlEventTouchUpInside];
-                [sharingOverlay addSubview:shareBtn];
+                [buttonsBox addSubview:shareBtn];
                 x += shareButtonWidth + 5.;
             }
             
             if ([SharingController isSharingAvailableForNetworkType:SharingTwitterNetwork]) {
                 shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                shareBtn.frame = CGRectMake(x, 5., shareButtonWidth, shareButtonWidth);
+                shareBtn.frame = CGRectMake(x, y, shareButtonWidth, shareButtonWidth);
                 shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
                 [shareBtn setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
                 [shareBtn addTarget:self action:@selector(shareWithTwitterAction:) forControlEvents:UIControlEventTouchUpInside];
-                [sharingOverlay addSubview:shareBtn];
+                [buttonsBox addSubview:shareBtn];
                 x += shareButtonWidth + 5.;
             }
             
             if ([SharingController isSharingAvailableForNetworkType:SharingEMailNetwork]) {
                 shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                shareBtn.frame = CGRectMake(x, 5., shareButtonWidth, shareButtonWidth);
+                shareBtn.frame = CGRectMake(x, y, shareButtonWidth, shareButtonWidth);
                 shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
                 [shareBtn setImage:[UIImage imageNamed:@"gmail"] forState:UIControlStateNormal];
                 [shareBtn addTarget:self action:@selector(shareWithEmailAction:) forControlEvents:UIControlEventTouchUpInside];
-                [sharingOverlay addSubview:shareBtn];
+                [buttonsBox addSubview:shareBtn];
                 x += shareButtonWidth + 5.;
             }
             
             if ([SharingController isSharingAvailableForNetworkType:SharingVkontakteNetwork]) {
                 shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                shareBtn.frame = CGRectMake(x, 5., shareButtonWidth, shareButtonWidth);
+                shareBtn.frame = CGRectMake(x, y, shareButtonWidth, shareButtonWidth);
                 shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
                 [shareBtn setImage:[UIImage imageNamed:@"vk"] forState:UIControlStateNormal];
                 [shareBtn addTarget:self action:@selector(shareWithVkontakteAction:) forControlEvents:UIControlEventTouchUpInside];
-                [sharingOverlay addSubview:shareBtn];
+                [buttonsBox addSubview:shareBtn];
                 x += shareButtonWidth + 5.;
             }
-            sharingOverlayWidth = x;
-            sharingOverlay.clipsToBounds = YES;
+            buttonsBox.frame = CGRectMake(sharingOverlay.frame.size.width / 2 - (x / 2), 0, x, sharingOverlay.frame.size.height);
+            [sharingOverlay addSubview:buttonsBox];
+            [buttonsBox release];
         }
-        sharingOverlay.frame = shareButton.frame;
+        
+        sharingOverlay.alpha = 0;
         [self.contentView addSubview:sharingOverlay];
-        [self.contentView bringSubviewToFront:shareButton];
-        [UIView animateWithDuration:.3
-                              delay:0.
-                            options:UIViewAnimationCurveLinear
-                         animations:^ {
-                             sharingOverlay.frame = CGRectMake(0, shareButton.frame.origin.y - 5, sharingOverlayWidth, 54);
-                             [shareButton setBackgroundImage:[UIImage imageNamed:@"left.png"] forState:UIControlStateNormal];
-                         }
-                         completion:NULL];
-
+        [UIView animateWithDuration:.4 animations:^ {
+            sharingOverlay.alpha = 1;
+        }];
     } else {
         [UIView animateWithDuration:.4 animations:^ {
+            sharingOverlay.alpha = 0;
+        } completion:^ (BOOL finished) {
             [sharingOverlay removeFromSuperview];
-            [shareButton setBackgroundImage:[UIImage imageNamed:@"right.png"] forState:UIControlStateNormal];
         }];
     }
 }
@@ -201,14 +202,7 @@
 {
     if (sharingOverlay) {
         [sharingOverlay removeFromSuperview];
-        [shareButton setBackgroundImage:[UIImage imageNamed:@"right.png"] forState:UIControlStateNormal];
     }
-}
-
-- (void)showSharingOverlay
-{
-    [self.contentView addSubview:sharingOverlay];
-    [self.contentView bringSubviewToFront:shareButton];
 }
 
 @end
