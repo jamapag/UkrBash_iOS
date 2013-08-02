@@ -15,6 +15,7 @@
 #import "UkrBashAppDelegate.h"
 #import "EMailSharingController.h"
 #import "GANTracker.h"
+#import "EGOUkrBashActivityIndicator.h"
 
 @implementation UBQuotesContainerController
 
@@ -233,7 +234,7 @@
 {
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     footerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    EGOUkrBashActivityIndicator *activityIndicator = [[EGOUkrBashActivityIndicator alloc] init];
     activityIndicator.center = footerView.center;
     activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
     [activityIndicator startAnimating];

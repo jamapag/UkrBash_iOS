@@ -123,6 +123,7 @@
 		B09B37CC14DC7B97003E732D /* UBQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37CB14DC7B97003E732D /* UBQuotesDataSource.m */; };
 		B09B37CF14DC8410003E732D /* UBPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B37CE14DC8410003E732D /* UBPicturesDataSource.m */; };
 		B09CFA98152C7CD600316B7C /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D439B351525BBDC0042D5D0 /* EGORefreshTableHeaderView.m */; };
+		B0B6EDC817AAF82500C1D4BC /* EGOUkrBashActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B6EDC717AAF82500C1D4BC /* EGOUkrBashActivityIndicator.m */; };
 		B0B8DBCC14B8635100B07FDD /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBCA14B8635100B07FDD /* logo.png */; };
 		B0B8DBCD14B8635100B07FDD /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B8DBCB14B8635100B07FDD /* logo@2x.png */; };
 		B0C0BB751670CB2500A2421B /* VKSharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C0BB741670CB2500A2421B /* VKSharingView.m */; };
@@ -381,6 +382,8 @@
 		B09B37CB14DC7B97003E732D /* UBQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesDataSource.m; sourceTree = "<group>"; };
 		B09B37CD14DC8410003E732D /* UBPicturesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesDataSource.h; sourceTree = "<group>"; };
 		B09B37CE14DC8410003E732D /* UBPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesDataSource.m; sourceTree = "<group>"; };
+		B0B6EDC617AAF82500C1D4BC /* EGOUkrBashActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOUkrBashActivityIndicator.h; sourceTree = "<group>"; };
+		B0B6EDC717AAF82500C1D4BC /* EGOUkrBashActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOUkrBashActivityIndicator.m; sourceTree = "<group>"; };
 		B0B8DBCA14B8635100B07FDD /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		B0B8DBCB14B8635100B07FDD /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		B0C0BB731670CB2500A2421B /* VKSharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKSharingView.h; sourceTree = "<group>"; };
@@ -562,6 +565,8 @@
 			children = (
 				2D439B341525BBDC0042D5D0 /* EGORefreshTableHeaderView.h */,
 				2D439B351525BBDC0042D5D0 /* EGORefreshTableHeaderView.m */,
+				B0B6EDC617AAF82500C1D4BC /* EGOUkrBashActivityIndicator.h */,
+				B0B6EDC717AAF82500C1D4BC /* EGOUkrBashActivityIndicator.m */,
 				2DADD34514A3FA4A00808AA6 /* UBQuoteCell.h */,
 				2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */,
 				B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */,
@@ -1224,6 +1229,7 @@
 				2D14843816D56F7500002F9C /* UBPictureCollectionViewCell.m in Sources */,
 				2DE51AC116DE17BE0049F9A2 /* UBCollectionViewLayout.m in Sources */,
 				2D6E4DA7170B329800353843 /* UBPictureCollectionReusableFooter.m in Sources */,
+				B0B6EDC817AAF82500C1D4BC /* EGOUkrBashActivityIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1340,7 +1346,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lidia Rudyuk (ZNYUJ46SEU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1354,7 +1360,7 @@
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F48892ED-B681-4777-8719-9A3E88D7277B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Submodules/**";

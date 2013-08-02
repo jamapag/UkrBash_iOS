@@ -86,8 +86,8 @@
 		[[self layer] addSublayer:layer];
 		_arrowImage=layer;
 		
-		UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-		view.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
+        EGOUkrBashActivityIndicator *view = [[EGOUkrBashActivityIndicator alloc] init];
+        view.frame = CGRectMake(CGRectGetMidX(frame) - CGRectGetMidX(view.frame), frame.size.height - 48., view.frame.size.width, view.frame.size.height);
 		[self addSubview:view];
 		_activityView = view;
 		[view release];
@@ -152,8 +152,15 @@
 				[CATransaction commit];
 			}
 			
-			_statusLabel.text = NSLocalizedString(@"Pull down to refresh...", @"Pull down to refresh status");
-			[_activityView stopAnimating];
+            [UIView animateWithDuration:.5
+                             animations:^{
+                                 _activityView.alpha = 0.;
+                             }
+                             completion:^(BOOL finished) {
+                                 _statusLabel.text = NSLocalizedString(@"Pull down to refresh...", @"Pull down to refresh status");
+                                 _activityView.hidden = YES;
+                                 [_activityView stopAnimating];
+                             }];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
 			_arrowImage.hidden = NO;
@@ -165,8 +172,13 @@
 			break;
 		case EGOOPullRefreshLoading:
 			
-			_statusLabel.text = NSLocalizedString(@"Loading...", @"Loading Status");
+			_statusLabel.text = @"";// NSLocalizedString(@"Loading...", @"Loading Status");
+            _activityView.alpha = 0.;
+            _activityView.hidden = NO;
 			[_activityView startAnimating];
+            [UIView animateWithDuration:.5 animations:^{
+                _activityView.alpha = 1.;
+            }];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
 			_arrowImage.hidden = YES;

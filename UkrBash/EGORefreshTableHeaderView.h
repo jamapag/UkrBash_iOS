@@ -26,6 +26,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "EGOUkrBashActivityIndicator.h"
 
 typedef enum{
 	EGOOPullRefreshPulling = 0,
@@ -42,7 +43,7 @@ typedef enum{
 	UILabel *_lastUpdatedLabel;
 	UILabel *_statusLabel;
 	CALayer *_arrowImage;
-	UIActivityIndicatorView *_activityView;
+    EGOUkrBashActivityIndicator *_activityView;
 	
 
 }
