@@ -145,6 +145,7 @@
 		B0DCA88E14BF325A007132B6 /* view-background.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DCA88A14BF325A007132B6 /* view-background.png */; };
 		B0DCA88F14BF325A007132B6 /* view-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DCA88B14BF325A007132B6 /* view-background@2x.png */; };
 		B0DCA89214BF3279007132B6 /* UBMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DCA89114BF3279007132B6 /* UBMenuViewController.m */; };
+		B0E2669F17B0442300AB836E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E2669E17B0442300AB836E /* SystemConfiguration.framework */; };
 		B0E9C15614D6F752000C3D97 /* menu-pin-45.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E9C15414D6F752000C3D97 /* menu-pin-45.png */; };
 		B0E9C15714D6F752000C3D97 /* menu-pin-45@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E9C15514D6F752000C3D97 /* menu-pin-45@2x.png */; };
 		B0F7353B16A8438400381E5E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B0D2BCC91676335500F4D771 /* Localizable.strings */; };
@@ -342,7 +343,6 @@
 		B008F69D150E942000556346 /* UBPicturesContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesContainerController.m; sourceTree = "<group>"; };
 		B02855CC14C0CDEE00FAA8A8 /* UBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBViewController.h; sourceTree = "<group>"; };
 		B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBViewController.m; sourceTree = "<group>"; };
-		B0378CFB161B23AD00B9331B /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
 		B0378CFC161B23AD00B9331B /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		B0378D07161B2DAE00B9331B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		B0378D09161B2DE600B9331B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -428,6 +428,12 @@
 		B0DCA88B14BF325A007132B6 /* view-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "view-background@2x.png"; sourceTree = "<group>"; };
 		B0DCA89014BF3279007132B6 /* UBMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMenuViewController.h; sourceTree = "<group>"; };
 		B0DCA89114BF3279007132B6 /* UBMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMenuViewController.m; sourceTree = "<group>"; };
+		B0E2669917B03DF200AB836E /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		B0E2669A17B03DF200AB836E /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		B0E2669B17B03DF200AB836E /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		B0E2669C17B03DF200AB836E /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
+		B0E2669D17B03DF200AB836E /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
+		B0E2669E17B0442300AB836E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B0E9C15414D6F752000C3D97 /* menu-pin-45.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-pin-45.png"; sourceTree = "<group>"; };
 		B0E9C15514D6F752000C3D97 /* menu-pin-45@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-pin-45@2x.png"; sourceTree = "<group>"; };
 		B0F7352E16A8436F00381E5E /* Vkontakte iOS.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vkontakte iOS.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -453,13 +459,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0E2669F17B0442300AB836E /* SystemConfiguration.framework in Frameworks */,
+				B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */,
 				2D5397EC177B5096002018F2 /* Security.framework in Frameworks */,
 				B066EE2B16AD878600A2A25C /* StoreKit.framework in Frameworks */,
 				2D3312631630846700213BF2 /* AdSupport.framework in Frameworks */,
 				2D3312611630842A00213BF2 /* Accounts.framework in Frameworks */,
 				2D33125D16307DBF00213BF2 /* libfacebook_ios_sdk.a in Frameworks */,
 				B07CD485161C730A00DB5551 /* Social.framework in Frameworks */,
-				B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */,
 				B0378D08161B2DAE00B9331B /* libsqlite3.dylib in Frameworks */,
 				B00510851517BBFA00D6D69B /* QuartzCore.framework in Frameworks */,
 				B0604E3014D5F4AE00F8ADB0 /* Twitter.framework in Frameworks */,
@@ -592,6 +599,7 @@
 		2DB0FAA21416C8CF00EFD6BC = {
 			isa = PBXGroup;
 			children = (
+				B0E2669E17B0442300AB836E /* SystemConfiguration.framework */,
 				2D5397EB177B5096002018F2 /* Security.framework */,
 				2D33124E16307D5E00213BF2 /* facebook-ios-sdk.xcodeproj */,
 				B0DA90B4164EDB9A0084D29A /* Vkontakte */,
@@ -786,7 +794,11 @@
 		B0378CFA161B23AD00B9331B /* GoogleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				B0378CFB161B23AD00B9331B /* GANTracker.h */,
+				B0E2669917B03DF200AB836E /* GAI.h */,
+				B0E2669A17B03DF200AB836E /* GAITrackedViewController.h */,
+				B0E2669B17B03DF200AB836E /* GAITracker.h */,
+				B0E2669C17B03DF200AB836E /* GAITransaction.h */,
+				B0E2669D17B03DF200AB836E /* GAITransactionItem.h */,
 				B0378CFC161B23AD00B9331B /* libGoogleAnalytics.a */,
 			);
 			path = GoogleAnalytics;

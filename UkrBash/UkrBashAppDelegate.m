@@ -14,7 +14,7 @@
 #import "UBNavigationController.h"
 #import "UBPublishedQuotesDataSource.h"
 #import "UBPublishedPicturesDataSource.h"
-#import "GANTracker.h"
+#import "GAI.h"
 #import "ApiKey.h"
 #import "SharingController.h"
 #import "FacebookSharingController.h"
@@ -91,14 +91,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[GANTracker sharedTracker] startTrackerWithAccountID:kGANAccountID
-                                           dispatchPeriod:kGANDispatchPeriodSec
-                                                 delegate:nil];
-    NSError * error = nil;
-    [[GANTracker sharedTracker] setCustomVariableAtIndex:1
-                                                    name:kGANCustomVariablePlatform
-                                                   value:[self deviceType]
-                                               withError:&error];
+#if TARGET_IPHONE_SIMULATOR
+    [[GAI sharedInstance] setDebug:YES];
+#endif
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:kGANAccountID];
+    [tracker setCustom:kGANCustomVariablePlatform dimension:[self deviceType]];
     
     [self.window makeKeyAndVisible];
     

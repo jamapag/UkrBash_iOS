@@ -13,7 +13,7 @@
 #import "UBCollectionViewLayout.h"
 #import "Model.h"
 #import "UBPictureCollectionReusableFooter.h"
-#import "GANTracker.h"
+#import "GAI.h"
 
 @interface UBPicturesCollectionViewController ()
 
@@ -202,8 +202,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [sharingController setAttachmentImagePreview:[[MediaCenter imageCenter] imageWithUrl:picture.image]];
     [sharingController showSharingDialog];
     
-    NSError * error = nil;
-    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"pictures" label:NSStringFromClass([sharingController class]) value:-1 withError:&error];
+    [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"sharing" withAction:@"pictures" withLabel:NSStringFromClass([sharingController class]) withValue:@(-1)];
 }
 
 #pragma mark - -

@@ -13,7 +13,7 @@
 #import "UBPicture.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UBPicturesScrollViewController.h"
-#import "GANTracker.h"
+#import "GAI.h"
 
 
 @implementation UBPicturesContainerController
@@ -286,8 +286,7 @@
     [viewLayer addAnimation:animationGroup forKey:@"animation"];
     
     
-    NSError * error = nil;
-    [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"/%@/%@/picture/", NSStringFromClass([self class]), self.title] withError:&error];
+    [[[GAI sharedInstance] defaultTracker] sendView:[NSString stringWithFormat:@"/%@/%@/picture/", NSStringFromClass([self class]), self.title]];
     if (viewer) {
         [viewer release], viewer = nil;
     }

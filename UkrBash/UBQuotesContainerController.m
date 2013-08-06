@@ -14,7 +14,7 @@
 #import "SharingController.h"
 #import "UkrBashAppDelegate.h"
 #import "EMailSharingController.h"
-#import "GANTracker.h"
+#import "GAI.h"
 #import "EGOUkrBashActivityIndicator.h"
 
 @implementation UBQuotesContainerController
@@ -89,8 +89,7 @@
     UBQuote *quote = [[dataSource items] objectAtIndex:selectedIndexPath.row];
     pasteboard.string = [quote text];
 
-    NSError * error = nil;
-    [[GANTracker sharedTracker] trackEvent:@"copying" action:@"quotes" label:@"quote" value:-1 withError:&error];
+    [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"copying" withAction:@"quotes" withLabel:@"quote" withValue:@(-1)];
 }
 
 - (void)copyURL:(id)sender
@@ -101,8 +100,7 @@
     NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%d", quote.quoteId];
     pasteboard.string = quoteUrl;
 
-    NSError * error = nil;
-    [[GANTracker sharedTracker] trackEvent:@"copying" action:@"quotes" label:@"url" value:-1 withError:&error];
+    [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"copying" withAction:@"quotes" withLabel:@"url" withValue:@(-1)];
 }
 
 #pragma mark - View lifecycle
@@ -355,8 +353,7 @@
     [sharingController setAttachmentDescription:quote.text];
     [sharingController showSharingDialog];
 
-    NSError * error = nil;
-    [[GANTracker sharedTracker] trackEvent:@"sharing" action:@"quotes" label:NSStringFromClass([sharingController class]) value:-1 withError:&error];
+    [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"sharing" withAction:@"quotes" withLabel:NSStringFromClass([sharingController class]) withValue:@(-1)];
 }
 
 #pragma mark - EGORefreshTableHeaderDelegate methods.

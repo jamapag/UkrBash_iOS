@@ -9,7 +9,7 @@
 #import "UBNavigationController.h"
 #import "UBViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "GANTracker.h"
+#import "GAI.h"
 
 #define BORDER_WIDTH 15.
 
@@ -59,8 +59,7 @@
 {
     NSAssert(_viewController == nil, @"Can't push two controllers in UBNavigationController");
     if (!_viewController) {
-        NSError * error = nil;
-        [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"/%@/%@/", NSStringFromClass([viewController class]), viewController.title] withError:&error];
+        [[[GAI sharedInstance] defaultTracker] sendView:[NSString stringWithFormat:@"/%@/%@/", NSStringFromClass([viewController class]), viewController.title]];
         
         _viewController = [viewController retain];
         _viewController.ubNavigationController = self;
@@ -90,8 +89,9 @@
 {
     NSAssert(_viewController != nil, @"Can't pop menu controller.");
     if (_viewController) {
-        NSError * error = nil;
-        [[GANTracker sharedTracker] trackPageview:@"/" withError:&error];
+//        NSError * error = nil;
+//        [[GANTracker sharedTracker] trackPageview:@"/" withError:&error];
+        [[[GAI sharedInstance] defaultTracker] sendView:@"/"];
         
         if (animated) {
             [UIView animateWithDuration:.5 animations:^(void) {
