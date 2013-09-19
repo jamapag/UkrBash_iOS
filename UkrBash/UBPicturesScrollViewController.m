@@ -64,7 +64,7 @@
 - (void)loadView
 {
     [super loadView];
-    
+
     scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     [scrollView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
     [scrollView setDelegate:self];
@@ -79,7 +79,15 @@
     tapGesture.numberOfTapsRequired = 1;
     [scrollView addGestureRecognizer:tapGesture];
     [tapGesture release];
- 
+    float topY = 0;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        // Load resources for iOS 6.1 or earlier;
+        topY = 0;
+    } else {
+        // Load resources for iOS 7 or later
+        topY = 20;
+    }
+
     CGFloat padding = 10.;
     infoView = [[UBPictureInfoView alloc] initWithFrame:CGRectMake(padding, self.view.frame.size.height - padding - 60., self.view.frame.size.width - 2 * padding, 60.)];
     infoView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
@@ -87,7 +95,7 @@
     
     CGFloat sharingButtonHeight = 32.;
     padding = 10.;
-    toolbar = [[UIView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, padding + sharingButtonHeight)];
+    toolbar = [[UIView alloc] initWithFrame:CGRectMake(0., topY, self.view.frame.size.width, padding + sharingButtonHeight)];
     toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     toolbar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:toolbar];
@@ -261,6 +269,7 @@
                      }
                      completion:^(BOOL finished) {
                          [self.view removeFromSuperview];
+                         [self.parentController childBackAction];
                      }];
 }
 

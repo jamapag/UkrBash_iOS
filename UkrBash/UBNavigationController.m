@@ -45,6 +45,16 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
+- (UIViewController *)childViewControllerForStatusBarStyle
+{
+    return _viewController;
+}
+
 - (void)dealloc
 {
     [_menuViewController release];
@@ -61,14 +71,26 @@
     if (!_viewController) {
         [[[GAI sharedInstance] defaultTracker] sendView:[NSString stringWithFormat:@"/%@/%@/", NSStringFromClass([viewController class]), viewController.title]];
         
+        float y = 0;
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+            // Load resources for iOS 6.1 or earlier;
+            y = 0;
+        } else {
+            // Load resources for iOS 7 or later
+            y = 20;
+        }
+
         _viewController = [viewController retain];
         _viewController.ubNavigationController = self;
+        
         _viewController.view.frame = CGRectMake(0., 0., self.view.bounds.size.width, self.view.bounds.size.height);
         _viewController.view.layer.shadowOffset = CGSizeMake(-15., 5.);
         _viewController.view.layer.shadowRadius = 10.;
         _viewController.view.layer.shadowColor = [[UIColor blackColor] CGColor];
         _viewController.view.layer.shadowOpacity = .5;
-        _viewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:_viewController.view.bounds].CGPath;
+        CGRect bezierRect = _viewController.view.bounds;
+        bezierRect.origin.y = y;
+        _viewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:bezierRect].CGPath;
         if (animated) {
             CGFloat x = _viewController.view.center.x + self.view.bounds.size.width - BORDER_WIDTH;
             _viewController.view.center = CGPointMake(x, _viewController.view.center.y);
@@ -89,10 +111,16 @@
 {
     NSAssert(_viewController != nil, @"Can't pop menu controller.");
     if (_viewController) {
-//        NSError * error = nil;
-//        [[GANTracker sharedTracker] trackPageview:@"/" withError:&error];
         [[[GAI sharedInstance] defaultTracker] sendView:@"/"];
         
+        float y = 0;
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+            // Load resources for iOS 6.1 or earlier;
+            y = 0;
+        } else {
+            // Load resources for iOS 7 or later
+            y = 20;
+        }
         if (animated) {
             [UIView animateWithDuration:.5 animations:^(void) {
                 CGFloat x = _viewController.view.center.x + self.view.bounds.size.width - BORDER_WIDTH;
@@ -106,7 +134,7 @@
                 if (height < self.view.bounds.size.width) {
                     height = self.view.bounds.size.width;
                 }
-                borderView.frame = CGRectMake(self.view.bounds.size.width - BORDER_WIDTH, -20., BORDER_WIDTH, height + 20);
+                borderView.frame = CGRectMake(self.view.bounds.size.width - BORDER_WIDTH, y, BORDER_WIDTH, height + 20);
                 [self.view addSubview:borderView];
             }];
         } else {
@@ -126,8 +154,16 @@
     [super loadView];
     
     self.view.clipsToBounds = YES;
+    float y = 0;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        // Load resources for iOS 6.1 or earlier;
+        y = 0;
+    } else {
+        // Load resources for iOS 7 or later
+        y = 20;
+    }
     
-    borderView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - BORDER_WIDTH, -20., BORDER_WIDTH, self.view.frame.size.height + 20)];
+    borderView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - BORDER_WIDTH, y, BORDER_WIDTH, self.view.frame.size.height + 20)];
     borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
     
     borderView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
@@ -135,7 +171,7 @@
     borderView.layer.shadowRadius = 10.;
     borderView.layer.shadowColor = [[UIColor blackColor] CGColor];
     borderView.layer.shadowOpacity = .5;
-    borderView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0., -20., borderView.frame.size.width + 20., borderView.frame.size.height + 40.)].CGPath;
+    borderView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0., 0, borderView.frame.size.width + 20., borderView.frame.size.height + 40.)].CGPath;
 
     if (_menuViewController) {
         _menuViewController.view.frame = CGRectMake(0., 0., self.view.frame.size.width, self.view.frame.size.height);

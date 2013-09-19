@@ -10,16 +10,15 @@
 
 @implementation UBMenuItemCell
 
-/*
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
- */
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -45,14 +44,20 @@
         }
     }
 }
-
-- (void)prepareForReuse
+- (void)layoutSubviews
 {
-    [super prepareForReuse];
-    
-    self.imageView.transform = CGAffineTransformIdentity;
-    self.indentationLevel = 1;
-    self.indentationWidth = 10.;
+    [super layoutSubviews];
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+    } else {
+        if (self.indentationLevel == 2) {
+            float indentPoints = self.indentationLevel * self.indentationWidth;
+            self.imageView.frame = CGRectMake(self.imageView.frame.origin.x + indentPoints,
+                                              self.imageView.frame.origin.y,
+                                              self.imageView.frame.size.width,
+                                              self.imageView.frame.size.height
+                                              );
+        }
+    }
 }
 
 @end

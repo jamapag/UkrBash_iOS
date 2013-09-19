@@ -14,6 +14,7 @@
 {
     UBPicturesDataSource *dataSource;
     UBPictureInfoView *infoView;
+    id _parentController;
     UIView *toolbar;
     UIButton *backButton;
     
@@ -26,6 +27,8 @@
     NSInteger currentPictureIndex;
     NSInteger pictureIndexBeforeRotation;
 }
+
+@property (nonatomic, assign) id parentController;
 
 - (id)initWithDataSource:(UBPicturesDataSource *)aDataSource andStartPictureIndex:(NSInteger)startIndex;
 

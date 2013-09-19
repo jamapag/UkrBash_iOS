@@ -90,15 +90,18 @@ enum UBSubMenuItems {
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 44., self.view.frame.size.width, self.view.frame.size.height - 44.) style:UITableViewStylePlain];
-    _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    _tableView.backgroundColor = [UIColor clearColor];
-    _tableView.rowHeight = 52.;
-    [self.view addSubview:_tableView];
-
-    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, 44.)];
+    float y = 0;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        // Load resources for iOS 6.1 or earlier;
+        NSLog(@"IOS6");
+        y = 0;
+    } else {
+        // Load resources for iOS 7 or later
+        y = 20;
+        NSLog(@"IOS7");
+    }
+    
+    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., y, self.view.frame.size.width, 44.)];
     headerView.userInteractionEnabled = YES;
     headerView.image = [UIImage imageNamed:@"header"];
     headerView.contentMode = UIViewContentModeTopLeft;
@@ -118,6 +121,15 @@ enum UBSubMenuItems {
     [headerView addSubview:logoButton];
     
     [self.view addSubview:headerView];
+
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., y + headerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - 44. - y) style:UITableViewStylePlain];
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.rowHeight = 52.;
+    [self.view addSubview:_tableView];
     [headerView release];
 }
 
@@ -215,36 +227,31 @@ enum UBSubMenuItems {
         cell.detailTextLabel.shadowColor = [UIColor whiteColor];
         cell.detailTextLabel.shadowOffset = CGSizeMake(0., 1.);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
+        cell.imageView.image = [UIImage imageNamed:@"menu-pin.png"];
     }
     
     cell.detailTextLabel.text = @"";
-    
+
     if (indexPath.section == UBMenuImagesSection && indexPath.row == UBSubMenuItemTitle) {
         cell.textLabel.text = @"Картинки";
 
         if (isImagesSectionFolded) {
-            cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin.png"];
         } else {
-            cell.imageView.image = [UIImage imageNamed:@"menu-pin-45"];
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin-45.png"];
         }
     } else if (indexPath.section == UBMenuQuotesSection && indexPath.row == UBSubMenuItemTitle) {
         cell.textLabel.text = @"Цитати";
 
         if (isQuotesSectionFolded) {
-            cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin.png"];
         } else {
-            cell.imageView.image = [UIImage imageNamed:@"menu-pin-45"];
+            cell.imageView.image = [UIImage imageNamed:@"menu-pin-45.png"];
         }
     } else {
-        cell.imageView.image = [UIImage imageNamed:@"menu-pin"];
+        cell.imageView.image = [UIImage imageNamed:@"menu-pin.png"];
     }
     if (indexPath.section == UBMenuImagesSection || indexPath.section == UBMenuQuotesSection) {
-        if (UBSubMenuItemTitle != indexPath.row) {
-            cell.indentationLevel = 2;
-        } else {
-            cell.indentationLevel = 0;
-        }
         if (UBSubMenuItemPublished == indexPath.row) {
             cell.textLabel.text = @"Опубліковане";
         } else if (UBSubMenuItemUnpublished == indexPath.row) {
@@ -255,7 +262,6 @@ enum UBSubMenuItems {
             cell.textLabel.text = @"Випадкове";
         }
     } else if (indexPath.section == UBMenuInfoSection) {
-        cell.indentationLevel = 0;
         if (indexPath.row == UBMenuItemDonate) {
             cell.textLabel.text = @"Підтримати розробку";
         } else if (indexPath.row == UBMenuItemRateApp) {
@@ -272,8 +278,19 @@ enum UBSubMenuItems {
     return cell;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == UBMenuImagesSection || indexPath.section == UBMenuQuotesSection) {
+        if (UBSubMenuItemTitle != indexPath.row) {
+            return 2;
+        }
+    }
+    return 0;
+}
+
 - (void)tableView:(UITableView *)tableView setFolding:(BOOL)isFolded forSection:(NSInteger)section
 {
+    [tableView beginUpdates];
     NSMutableArray *rows = [NSMutableArray array];
     for (NSInteger i = 1; i < UBSubMenuItemsCount; i++) {
         [rows addObject:[NSIndexPath indexPathForRow:i inSection:section]];
@@ -286,8 +303,9 @@ enum UBSubMenuItems {
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
     [UIView animateWithDuration:.3 animations:^{
-        cell.imageView.transform = CGAffineTransformRotate(cell.imageView.transform, -M_PI_4);
+        cell.imageView.image = isFolded ? [UIImage imageNamed:@"menu-pin.png"] : [UIImage imageNamed:@"menu-pin-45.png"];
     }];
+    [tableView endUpdates];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

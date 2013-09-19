@@ -113,35 +113,20 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
     
-    UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., -20., 50., self.view.frame.size.height + 20)];
+    float y = 0;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        // Load resources for iOS 6.1 or earlier;
+        y = 0;
+    } else {
+        // Load resources for iOS 7 or later
+        y = 20;
+    }
+    UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., y, 50., self.view.frame.size.height + 20)];
     borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
     [self.view addSubview:borderView];
     [borderView release];
-    
-    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 45., self.view.frame.size.width, self.view.frame.size.height - 45.)];
-    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    tableView.backgroundColor = [UIColor clearColor];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    // for starting loading automatically.
-    [tableView setContentInset:UIEdgeInsetsMake(1., 0., 0., 0.)];
-    
-    [self.view addSubview:tableView];
-    
-    
-    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - tableView.bounds.size.height, self.view.frame.size.width, tableView.bounds.size.height)];
-    _refreshHeaderView.delegate = self;
-    [tableView addSubview:_refreshHeaderView];
 
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(publishedQuotesUpdated:)
-                                                 name:kNotificationDataUpdated
-                                               object:nil];
-    
-    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, 44.)];
+    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., y, self.view.frame.size.width, 44.)];
     headerView.userInteractionEnabled = YES;
     headerView.image = [UIImage imageNamed:@"header"];
     headerView.contentMode = UIViewContentModeTopLeft;
@@ -173,6 +158,31 @@
     [titleLabel release];
     
     [self.view addSubview:headerView];
+
+    
+    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., y + headerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - headerView.frame.size.height - y)];
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    // for starting loading automatically.
+    [tableView setContentInset:UIEdgeInsetsMake(1., 0., 0., 0.)];
+    
+    [self.view addSubview:tableView];
+    
+    
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - tableView.bounds.size.height, self.view.frame.size.width, tableView.bounds.size.height)];
+    _refreshHeaderView.delegate = self;
+    [tableView addSubview:_refreshHeaderView];
+
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(publishedQuotesUpdated:)
+                                                 name:kNotificationDataUpdated
+                                               object:nil];
+    
     [headerView release];
 }
 

@@ -15,6 +15,11 @@
 #define IPHONE_CELL_PADDING 10
 #define IPAD_CELL_PADDING 20
 #define INFO_LABELS_HEIGHT 12.0f
+#define IS_PAD [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
+#define IS_IOS7 floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1
+#define GET_MARGIN() IS_PAD ? IPAD_CELL_CONTENT_MARGIN : CELL_CONTENT_MARGIN
+#define GET_FONT() IS_IOS7 ? [UIFont preferredFontForTextStyle:UIFontTextStyleBody] : IS_PAD ? [UIFont systemFontOfSize:IPAD_FONT_SIZE] : [UIFont systemFontOfSize:FONT_SIZE]
+
 
 CGFloat animationOffset = 52.;
 
@@ -30,24 +35,25 @@ CGFloat animationOffset = 52.;
 
 + (CGFloat)heightForQuoteText:(NSString*)text viewWidth:(CGFloat)width
 {
-    float margin = 0;
-    float fontSize = 0;
+    float margin = GET_MARGIN();
     
-    
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        fontSize = IPAD_FONT_SIZE;
-        margin = IPAD_CELL_CONTENT_MARGIN;
+    CGSize constraint = CGSizeMake((width - 20.) - (margin * 2), MAXFLOAT);
+    CGSize size;
+
+    if (IS_IOS7) {
+        NSDictionary *attributes = @{NSFontAttributeName:GET_FONT()};
+        NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
+        [context setMinimumScaleFactor:1];
+        CGRect rect = [text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:context];
+        size = rect.size;
     } else {
-        fontSize = FONT_SIZE;
-        margin = CELL_CONTENT_MARGIN;
+        size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     }
-    
-    CGSize constraint = CGSizeMake((width - 20.) - (margin * 2), 20000.0f);
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-    
+
+    size.height += 20;
     CGFloat height = MAX(size.height, 44.0f);
     
-    return height + (CELL_CONTENT_MARGIN * 4) + INFO_LABELS_HEIGHT * 2;
+    return height + (CELL_CONTENT_MARGIN * 2) + (INFO_LABELS_HEIGHT * 2);
 }
 
 - (void)shareWithFacebookAction:(id)sender
@@ -105,6 +111,7 @@ CGFloat animationOffset = 52.;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [UIColor clearColor];
         
         CGRect rect = self.bounds;
         rect.origin.x += 15;
@@ -122,13 +129,9 @@ CGFloat animationOffset = 52.;
         containerView.layer.shadowRadius = 3.0f;
         containerView.layer.masksToBounds = NO;
         containerView.backgroundColor = [UIColor whiteColor];
+
         
-        float margin = 0;
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-            margin = IPAD_CELL_CONTENT_MARGIN;
-        } else {
-            margin = CELL_CONTENT_MARGIN;
-        }
+        float margin = GET_MARGIN();
         
         CGFloat y = CELL_CONTENT_MARGIN;
         idLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin, y, (containerView.frame.size.width - margin * 2.) / 2., INFO_LABELS_HEIGHT)];
@@ -150,13 +153,7 @@ CGFloat animationOffset = 52.;
         quoteTextLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [quoteTextLabel setLineBreakMode:UILineBreakModeWordWrap];
         
-        float fontSize = 0;
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-            fontSize = IPAD_FONT_SIZE;
-        } else {
-            fontSize = FONT_SIZE;
-        }
-        [quoteTextLabel setFont:[UIFont systemFontOfSize:fontSize]];
+        [quoteTextLabel setFont:GET_FONT()];
         [quoteTextLabel setNumberOfLines:0];
         [quoteTextLabel setUserInteractionEnabled:YES];
         [containerView addSubview:quoteTextLabel];
@@ -276,12 +273,7 @@ CGFloat animationOffset = 52.;
     rect.size.height -= 10;
     containerView.frame = rect;
     
-    float margin = 0;
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        margin = IPAD_CELL_CONTENT_MARGIN;
-    } else {
-        margin = CELL_CONTENT_MARGIN;
-    }
+    float margin = GET_MARGIN();
     
     rect = idLabel.frame;
     rect.size.width = (containerView.frame.size.width - margin * 2) / 2;

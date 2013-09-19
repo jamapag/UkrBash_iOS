@@ -63,27 +63,21 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 {
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
-    
-    UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., -20., 50., self.view.frame.size.height + 20)];
+    float y = 0;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        // Load resources for iOS 6.1 or earlier;
+        y = 0;
+    } else {
+        // Load resources for iOS 7 or later
+        y = 20;
+    }
+
+    UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., y, 50., self.view.frame.size.height + 20)];
     borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
     [self.view addSubview:borderView];
     [borderView release];
     
-    UBCollectionViewLayout *layout = [[UBCollectionViewLayout alloc] init];
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 45., self.view.frame.size.width, self.view.frame.size.height - 45) collectionViewLayout:layout];
-    _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    _collectionView.backgroundColor = [UIColor clearColor];
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
-    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.minimumLineSpacing = 10.f;
-    layout.minimumInteritemSpacing = 5.f;
-    [layout release];
-    [self.view addSubview:_collectionView];
-    
-    [_collectionView registerClass:[UBPictureCollectionViewCell class] forCellWithReuseIdentifier:@"UBPictureCollectionViewCell"];
-    [_collectionView registerClass:[UBPictureCollectionReusableFooter class] forSupplementaryViewOfKind:UBCollectionElementKindSectionFooter withReuseIdentifier:@"UBPrictureCollectionViewFooter"];
-    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., self.view.frame.size.width, 44.)];
+    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., y, self.view.frame.size.width, 44.)];
     headerView.userInteractionEnabled = YES;
     headerView.image = [UIImage imageNamed:@"header"];
     headerView.contentMode = UIViewContentModeTopLeft;
@@ -113,8 +107,23 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     titleLabel.text = self.title;
     [headerView addSubview:titleLabel];
     [titleLabel release];
-
+    
     [self.view addSubview:headerView];
+
+    UBCollectionViewLayout *layout = [[UBCollectionViewLayout alloc] init];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, y + headerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - headerView.frame.size.height - y) collectionViewLayout:layout];
+    _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _collectionView.backgroundColor = [UIColor clearColor];
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.minimumLineSpacing = 10.f;
+    layout.minimumInteritemSpacing = 5.f;
+    [layout release];
+    [self.view addSubview:_collectionView];
+    
+    [_collectionView registerClass:[UBPictureCollectionViewCell class] forCellWithReuseIdentifier:@"UBPictureCollectionViewCell"];
+    [_collectionView registerClass:[UBPictureCollectionReusableFooter class] forSupplementaryViewOfKind:UBCollectionElementKindSectionFooter withReuseIdentifier:@"UBPrictureCollectionViewFooter"];
     [headerView release];
 }
 
