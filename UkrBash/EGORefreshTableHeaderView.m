@@ -88,6 +88,7 @@
 		
         EGOUkrBashActivityIndicator *view = [[EGOUkrBashActivityIndicator alloc] init];
         view.frame = CGRectMake(CGRectGetMidX(frame) - CGRectGetMidX(view.frame), frame.size.height - 48., view.frame.size.width, view.frame.size.height);
+        view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
 		[self addSubview:view];
 		_activityView = view;
 		[view release];
