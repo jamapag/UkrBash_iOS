@@ -36,8 +36,8 @@ CGFloat animationOffset = 52.;
 + (CGFloat)heightForQuoteText:(NSString*)text viewWidth:(CGFloat)width
 {
     float margin = GET_MARGIN();
-    
-    CGSize constraint = CGSizeMake((width - 20.) - (margin * 2), MAXFLOAT);
+    width = width - ((margin * 2) + 20);
+    CGSize constraint = CGSizeMake(width, MAXFLOAT);
     CGSize size;
 
     if (IS_IOS7) {
@@ -50,10 +50,9 @@ CGFloat animationOffset = 52.;
         size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     }
 
-    size.height += 20;
     CGFloat height = MAX(size.height, 44.0f);
     
-    return height + (CELL_CONTENT_MARGIN * 2) + (INFO_LABELS_HEIGHT * 2);
+    return height + (CELL_CONTENT_MARGIN * 2) + (INFO_LABELS_HEIGHT * 2) + 10;
 }
 
 - (void)shareWithFacebookAction:(id)sender
@@ -149,7 +148,7 @@ CGFloat animationOffset = 52.;
         [containerView addSubview:ratingLabel];
         
         y += ratingLabel.frame.size.height;
-        quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin, y, containerView.frame.size.width - margin * 2., containerView.frame.size.height - INFO_LABELS_HEIGHT * 2 - CELL_CONTENT_MARGIN * 2)];
+        quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin, y, containerView.frame.size.width - margin * 2., containerView.frame.size.height - (INFO_LABELS_HEIGHT * 2 + CELL_CONTENT_MARGIN * 2))];
         quoteTextLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [quoteTextLabel setLineBreakMode:UILineBreakModeWordWrap];
         
@@ -294,18 +293,22 @@ CGFloat animationOffset = 52.;
     rect.origin.y = quoteTextLabel.frame.origin.y + quoteTextLabel.frame.size.height;
     rect.size.width = (containerView.frame.size.width - margin * 2.) / 2;
     dateLabel.frame = rect;
-
-    CGSize size = containerView.bounds.size;
-    CGFloat curlFactor = 7.0f;
-    CGFloat shadowDepth = 3.0f;
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake(0.0f, 0.0f)];
-    [path addLineToPoint:CGPointMake(size.width, 0.0f)];
-    [path addLineToPoint:CGPointMake(size.width, size.height + shadowDepth)];
-    [path addCurveToPoint:CGPointMake(0.0f, size.height + shadowDepth)
-            controlPoint1:CGPointMake(size.width - curlFactor, size.height + shadowDepth - curlFactor)
-            controlPoint2:CGPointMake(curlFactor, size.height + shadowDepth - curlFactor)];
-    containerView.layer.shadowPath = path.CGPath;
+    
+    rect = quoteTextLabel.frame;
+    rect.size.height = containerView.frame.size.height - (CELL_CONTENT_MARGIN * 2 + INFO_LABELS_HEIGHT * 2);
+    quoteTextLabel.frame = rect;
+    
+//    CGSize size = containerView.bounds.size;
+//    CGFloat curlFactor = 7.0f;
+//    CGFloat shadowDepth = 3.0f;
+//    UIBezierPath *path = [UIBezierPath bezierPath];
+//    [path moveToPoint:CGPointMake(0.0f, 0.0f)];
+//    [path addLineToPoint:CGPointMake(size.width, 0.0f)];
+//    [path addLineToPoint:CGPointMake(size.width, size.height + shadowDepth)];
+//    [path addCurveToPoint:CGPointMake(0.0f, size.height + shadowDepth)
+//            controlPoint1:CGPointMake(size.width - curlFactor, size.height + shadowDepth - curlFactor)
+//            controlPoint2:CGPointMake(curlFactor, size.height + shadowDepth - curlFactor)];
+//    containerView.layer.shadowPath = path.CGPath;
 }
 
 @end
