@@ -12,14 +12,20 @@
 #define FONT_SIZE 14.0f
 #define IPAD_FONT_SIZE 18.0f
 
-#define IPHONE_CELL_PADDING 10
-#define IPAD_CELL_PADDING 20
 #define INFO_LABELS_HEIGHT 12.0f
-#define IS_PAD [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
-#define IS_IOS7 floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1
-#define GET_MARGIN() IS_PAD ? IPAD_CELL_CONTENT_MARGIN : CELL_CONTENT_MARGIN
+#define INFO_LABELS_PADDING (IS_PAD ? IPAD_INFO_LABELS_PADDING : IPHONE_INFO_LABELS_PADDING)
+
 #define GET_FONT() IS_IOS7 ? [UIFont preferredFontForTextStyle:UIFontTextStyleBody] : IS_PAD ? [UIFont systemFontOfSize:IPAD_FONT_SIZE] : [UIFont systemFontOfSize:FONT_SIZE]
 
+#define MARGIN_TOP IS_PAD ? IPAD_CELL_MARGIN_TOP : IPHONE_CELL_MARGIN_TOP
+#define MARGIN_BOTTOM IS_PAD ? IPAD_CELL_MARGIN_BOTTOM : IPHONE_CELL_MARGIN_BOTTOM
+#define MARGIN_LEFT IS_PAD ? IPAD_CELL_MARGIN_LEFT : IPHONE_CELL_MARGIN_LEFT
+#define MARGIN_RIGHT IS_PAD ? IPAD_CELL_MARGIN_RIGHT : IPHONE_CELL_MARGIN_RIGHT
+
+#define CONTENT_PADDING_TOP IS_PAD ? IPAD_CELL_CONTENT_PADDING_TOP : IPHONE_CELL_CONTENT_PADDING_TOP
+#define CONTENT_PADDING_BOTTOM IS_PAD ? IPAD_CELL_CONTENT_PADDING_BOTTOM : IPHONE_CELL_CONTENT_PADDING_BOTTOM
+#define CONTENT_PADDING_LEFT IS_PAD ? IPAD_CELL_CONTENT_PADDING_LEFT : IPHONE_CELL_CONTENT_PADDING_LEFT
+#define CONTENT_PADDING_RIGHT IS_PAD ? IPAD_CELL_CONTENT_PADDING_RIGHT : IPHONE_CELL_CONTENT_PADDING_RIGHT
 
 CGFloat animationOffset = 52.;
 
@@ -35,8 +41,7 @@ CGFloat animationOffset = 52.;
 
 + (CGFloat)heightForQuoteText:(NSString*)text viewWidth:(CGFloat)width
 {
-    float margin = GET_MARGIN();
-    width = width - ((margin * 2) + 20);
+    width = width - (((CONTENT_PADDING_LEFT) + (CONTENT_PADDING_RIGHT)) + (MARGIN_RIGHT) + (MARGIN_LEFT));
     CGSize constraint = CGSizeMake(width, MAXFLOAT);
     CGSize size;
 
@@ -52,7 +57,7 @@ CGFloat animationOffset = 52.;
 
     CGFloat height = MAX(size.height, 44.0f);
     
-    return height + (CELL_CONTENT_MARGIN * 2) + (INFO_LABELS_HEIGHT * 2) + 10;
+    return height + (INFO_LABELS_PADDING * 2) + (INFO_LABELS_HEIGHT * 2) + (CONTENT_PADDING_TOP) + (CONTENT_PADDING_BOTTOM) + (MARGIN_TOP) + (MARGIN_BOTTOM);
 }
 
 - (void)shareWithFacebookAction:(id)sender
@@ -113,33 +118,31 @@ CGFloat animationOffset = 52.;
         self.backgroundColor = [UIColor clearColor];
         
         CGRect rect = self.bounds;
-        rect.origin.x += 15;
-        rect.origin.y += 5;
-        rect.size.width -= 20;
-        rect.size.height -= 10;
+        rect.origin.x += (MARGIN_LEFT);
+        rect.origin.y += (MARGIN_TOP);
+        rect.size.width -= ((MARGIN_LEFT) + (MARGIN_RIGHT));
+        rect.size.height -= ((MARGIN_TOP) + (MARGIN_BOTTOM));
         containerView = [[UIView alloc] initWithFrame:rect];
         containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         containerView.layer.cornerRadius = 4.;
         containerView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         containerView.layer.borderWidth = .5;
         containerView.layer.shadowColor = [UIColor blackColor].CGColor;
-        containerView.layer.shadowOpacity = 0.7f;
-        containerView.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
-        containerView.layer.shadowRadius = 3.0f;
+        containerView.layer.shadowOpacity = 0.5f;
+        containerView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
+        containerView.layer.shadowRadius = 2.0f;
         containerView.layer.masksToBounds = NO;
         containerView.backgroundColor = [UIColor whiteColor];
 
         
-        float margin = GET_MARGIN();
-        
-        CGFloat y = CELL_CONTENT_MARGIN;
-        idLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin, y, (containerView.frame.size.width - margin * 2.) / 2., INFO_LABELS_HEIGHT)];
+        CGFloat y = INFO_LABELS_PADDING;
+        idLabel = [[UILabel alloc] initWithFrame:CGRectMake(INFO_LABELS_PADDING, y, (containerView.frame.size.width - INFO_LABELS_PADDING * 2.) / 2., INFO_LABELS_HEIGHT)];
         idLabel.font = [UIFont systemFontOfSize:10];
         idLabel.textColor = [UIColor grayColor];
         idLabel.backgroundColor = [UIColor clearColor];
         [containerView addSubview:idLabel];
         
-        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x + idLabel.frame.size.width, y, (containerView.frame.size.width - margin * 2.) / 2., INFO_LABELS_HEIGHT)];
+        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x + idLabel.frame.size.width, y, (containerView.frame.size.width - INFO_LABELS_PADDING * 2.) / 2., INFO_LABELS_HEIGHT)];
         ratingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         ratingLabel.textAlignment = UITextAlignmentRight;
         ratingLabel.font = [UIFont systemFontOfSize:10];
@@ -147,18 +150,17 @@ CGFloat animationOffset = 52.;
         ratingLabel.backgroundColor = [UIColor clearColor];
         [containerView addSubview:ratingLabel];
         
-        y += ratingLabel.frame.size.height;
-        quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin, y, containerView.frame.size.width - margin * 2., containerView.frame.size.height - (INFO_LABELS_HEIGHT * 2 + CELL_CONTENT_MARGIN * 2))];
+        y += ratingLabel.frame.size.height + (CONTENT_PADDING_TOP);
+        quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(CONTENT_PADDING_LEFT, y, containerView.frame.size.width - ((CONTENT_PADDING_LEFT) + (CONTENT_PADDING_RIGHT)), containerView.frame.size.height - (INFO_LABELS_HEIGHT * 2 + (INFO_LABELS_PADDING) * 2 + ((CONTENT_PADDING_TOP) + (CONTENT_PADDING_BOTTOM))))];
         quoteTextLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [quoteTextLabel setLineBreakMode:UILineBreakModeWordWrap];
-        
-        [quoteTextLabel setFont:GET_FONT()];
-        [quoteTextLabel setNumberOfLines:0];
-        [quoteTextLabel setUserInteractionEnabled:YES];
+        quoteTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+        quoteTextLabel.font = GET_FONT();
+        quoteTextLabel.numberOfLines = 0;
+        quoteTextLabel.userInteractionEnabled = YES;
         [containerView addSubview:quoteTextLabel];
         
         y += quoteTextLabel.frame.size.height + 1;
-        authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin, y, (containerView.frame.size.width - margin * 2.) / 2., INFO_LABELS_HEIGHT)];
+        authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(INFO_LABELS_PADDING, y, (containerView.frame.size.width - INFO_LABELS_PADDING * 2.) / 2., INFO_LABELS_HEIGHT)];
         authorLabel.font = ratingLabel.font;
         authorLabel.textColor = [UIColor grayColor];
         authorLabel.shadowColor = [UIColor darkGrayColor];
@@ -166,7 +168,7 @@ CGFloat animationOffset = 52.;
         authorLabel.backgroundColor = [UIColor clearColor];
         [containerView addSubview:authorLabel];
         
-        dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(authorLabel.frame.origin.x + authorLabel.frame.size.width, y, (containerView.frame.size.width - margin * 2.) / 2., INFO_LABELS_HEIGHT)];
+        dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(authorLabel.frame.origin.x + authorLabel.frame.size.width, y, (containerView.frame.size.width - INFO_LABELS_PADDING * 2.) / 2., INFO_LABELS_HEIGHT)];
         dateLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         dateLabel.font = ratingLabel.font;
         dateLabel.textColor = [UIColor grayColor];
@@ -266,49 +268,37 @@ CGFloat animationOffset = 52.;
     [super layoutSubviews];
     
     CGRect rect = self.bounds;
-    rect.origin.x += 15;
-    rect.origin.y += 5;
-    rect.size.width -= 20;
-    rect.size.height -= 10;
+    rect.origin.x += (MARGIN_LEFT);
+    rect.origin.y += (MARGIN_TOP);
+    rect.size.width -= ((MARGIN_LEFT) + (MARGIN_RIGHT));
+    rect.size.height -= ((MARGIN_TOP) + (MARGIN_BOTTOM));
     containerView.frame = rect;
     
-    float margin = GET_MARGIN();
-    
     rect = idLabel.frame;
-    rect.size.width = (containerView.frame.size.width - margin * 2) / 2;
+    rect.size.width = (containerView.frame.size.width - INFO_LABELS_PADDING * 2) / 2;
     idLabel.frame = rect;
     
     rect = ratingLabel.frame;
     rect.origin.x = idLabel.frame.origin.x + idLabel.frame.size.width;
-    rect.size.width = (containerView.frame.size.width - margin * 2.) / 2;
+    rect.size.width = (containerView.frame.size.width - INFO_LABELS_PADDING * 2.) / 2;
     ratingLabel.frame = rect;
     
     rect = authorLabel.frame;
-    rect.origin.y = quoteTextLabel.frame.origin.y + quoteTextLabel.frame.size.height;
-    rect.size.width = (containerView.frame.size.width - margin * 2) / 2;
+    rect.origin.y = (containerView.frame.size.height - (INFO_LABELS_PADDING + INFO_LABELS_HEIGHT));
+    rect.size.width = (containerView.frame.size.width - INFO_LABELS_PADDING * 2) / 2;
     authorLabel.frame = rect;
     
     rect = dateLabel.frame;
     rect.origin.x = authorLabel.frame.origin.x + authorLabel.frame.size.width;
-    rect.origin.y = quoteTextLabel.frame.origin.y + quoteTextLabel.frame.size.height;
-    rect.size.width = (containerView.frame.size.width - margin * 2.) / 2;
+    rect.origin.y = (containerView.frame.size.height - (INFO_LABELS_PADDING + INFO_LABELS_HEIGHT));
+    rect.size.width = (containerView.frame.size.width - INFO_LABELS_PADDING * 2.) / 2;
     dateLabel.frame = rect;
     
     rect = quoteTextLabel.frame;
-    rect.size.height = containerView.frame.size.height - (CELL_CONTENT_MARGIN * 2 + INFO_LABELS_HEIGHT * 2);
+    rect.origin.x = CONTENT_PADDING_LEFT;
+    rect.origin.y = INFO_LABELS_PADDING + INFO_LABELS_HEIGHT + (CONTENT_PADDING_TOP);
+    rect.size.height = containerView.frame.size.height - (INFO_LABELS_PADDING * 2 + INFO_LABELS_HEIGHT * 2 + ((CONTENT_PADDING_TOP) + (CONTENT_PADDING_BOTTOM)));
     quoteTextLabel.frame = rect;
-    
-//    CGSize size = containerView.bounds.size;
-//    CGFloat curlFactor = 7.0f;
-//    CGFloat shadowDepth = 3.0f;
-//    UIBezierPath *path = [UIBezierPath bezierPath];
-//    [path moveToPoint:CGPointMake(0.0f, 0.0f)];
-//    [path addLineToPoint:CGPointMake(size.width, 0.0f)];
-//    [path addLineToPoint:CGPointMake(size.width, size.height + shadowDepth)];
-//    [path addCurveToPoint:CGPointMake(0.0f, size.height + shadowDepth)
-//            controlPoint1:CGPointMake(size.width - curlFactor, size.height + shadowDepth - curlFactor)
-//            controlPoint2:CGPointMake(curlFactor, size.height + shadowDepth - curlFactor)];
-//    containerView.layer.shadowPath = path.CGPath;
 }
 
 @end

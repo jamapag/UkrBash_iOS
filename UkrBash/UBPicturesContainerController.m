@@ -77,7 +77,9 @@
 
 - (void)childBackAction
 {
-    [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+    if (IS_IOS7) {
+        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -324,7 +326,9 @@
     }];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+    if (IS_IOS7) {
+        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+    }
 }
 
 #pragma mark - UIScrollView delegate

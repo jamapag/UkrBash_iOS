@@ -39,20 +39,24 @@
         pictureTittleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width / 2 - 200, 420, 400, 65)];
         pictureTittleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [pictureTittleLabel setLineBreakMode:UILineBreakModeWordWrap];
-        [pictureTittleLabel setFont:[UIFont systemFontOfSize:18]];
+        if (IS_IOS7) {
+            [pictureTittleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+        } else {
+            [pictureTittleLabel setFont:[UIFont systemFontOfSize:18]];
+        }
         [pictureTittleLabel setNumberOfLines:0];
         [pictureTittleLabel setUserInteractionEnabled:YES];
         [pictureTittleLabel setTextAlignment:NSTextAlignmentCenter];
         [self.contentView addSubview:pictureTittleLabel];
         
         authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, self.frame.size.height - 40, 400, 20)];
-        [authorLabel setFont:[UIFont systemFontOfSize:18]];
+        [authorLabel setFont:[UIFont systemFontOfSize:14]];
         [authorLabel setNumberOfLines:1];
         authorLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:authorLabel];
         
         ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width / 2, self.frame.size.height - 40, (self.frame.size.width - 40) / 2, 20)];
-        [ratingLabel setFont:[UIFont systemFontOfSize:18]];
+        [ratingLabel setFont:[UIFont systemFontOfSize:14]];
         [ratingLabel setNumberOfLines:1];
         [ratingLabel setTextAlignment:NSTextAlignmentRight];
         ratingLabel.backgroundColor = [UIColor clearColor];
