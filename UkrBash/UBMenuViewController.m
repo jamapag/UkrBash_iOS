@@ -101,18 +101,17 @@ enum UBSubMenuItems {
         NSLog(@"IOS7");
     }
     
-    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., y, self.view.frame.size.width, 44.)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0., (y == 0) ? -20 : 0, self.view.frame.size.width, 64.)];
     headerView.userInteractionEnabled = YES;
-    headerView.image = [UIImage imageNamed:@"header"];
-    headerView.contentMode = UIViewContentModeTopLeft;
+    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header.png"]];
     headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., headerView.image.size.width, headerView.image.size.height)] CGPath];
+    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., headerView.frame.size.width, headerView.frame.size.height)] CGPath];
     headerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     headerView.layer.shadowRadius = 2.;
     headerView.layer.shadowOffset = CGSizeMake(0, 2.);
     headerView.layer.shadowOpacity = .3;
     
-    logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 4., 135., 30.)];
+    logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 24, 135., 30.)];
     logoButton.contentMode = UIViewContentModeScaleToFill;
     logoButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     logoButton.center = CGPointMake(self.view.frame.size.width / 2., logoButton.center.y);
@@ -123,7 +122,7 @@ enum UBSubMenuItems {
     [self.view addSubview:headerView];
 
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., y + headerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - 44. - y) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., headerView.frame.size.height + headerView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - headerView.frame.size.height - headerView.frame.origin.y) style:UITableViewStylePlain];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _tableView.dataSource = self;
     _tableView.delegate = self;

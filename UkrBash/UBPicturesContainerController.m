@@ -105,12 +105,12 @@
     [self.view addSubview:borderView];
     [borderView release];
     
-    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., y, self.view.frame.size.width, 44.)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0., (y == 0) ? -20 : 0, self.view.frame.size.width, 64.)];
     headerView.userInteractionEnabled = YES;
-    headerView.image = [UIImage imageNamed:@"header"];
+    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header.png"]];
     headerView.contentMode = UIViewContentModeTopLeft;
     headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., headerView.image.size.width, headerView.image.size.height)] CGPath];
+    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., headerView.frame.size.width, headerView.frame.size.height)] CGPath];
     headerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     headerView.layer.shadowRadius = 2.;
     headerView.layer.shadowOffset = CGSizeMake(0, 2.);
@@ -120,7 +120,7 @@
     menuButton.autoresizingMask = UIViewAutoresizingNone;
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(menuAction:) forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setFrame:CGRectMake(15., 2., 36., 36.)];
+    [menuButton setFrame:CGRectMake(15., 21., 36., 36.)];
     [headerView addSubview:menuButton];
     
     CGFloat x = menuButton.frame.origin.x + menuButton.frame.size.width + 5.;
@@ -138,7 +138,7 @@
     
     [self.view addSubview:headerView];
 
-    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., y + headerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - headerView.frame.size.height - y)];
+    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., headerView.frame.size.height + headerView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - headerView.frame.size.height - headerView.frame.origin.y)];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     tableView.delegate = self;
     tableView.dataSource = self;

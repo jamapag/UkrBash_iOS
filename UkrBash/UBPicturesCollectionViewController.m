@@ -77,12 +77,11 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [self.view addSubview:borderView];
     [borderView release];
     
-    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0., y, self.view.frame.size.width, 44.)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0., (y == 0) ? -20 : 0, self.view.frame.size.width, 64.)];
     headerView.userInteractionEnabled = YES;
-    headerView.image = [UIImage imageNamed:@"header"];
-    headerView.contentMode = UIViewContentModeTopLeft;
+    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header.png"]];
     headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., headerView.image.size.width, headerView.image.size.height)] CGPath];
+    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., headerView.frame.size.width, headerView.frame.size.height)] CGPath];
     headerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     headerView.layer.shadowRadius = 2.;
     headerView.layer.shadowOffset = CGSizeMake(0, 2.);
@@ -92,7 +91,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     menuButton.autoresizingMask = UIViewAutoresizingNone;
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(menuAction:) forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setFrame:CGRectMake(15., 2., 36., 36.)];
+    [menuButton setFrame:CGRectMake(15., 21., 36., 36.)];
     [headerView addSubview:menuButton];
     
     CGFloat x = menuButton.frame.origin.x + menuButton.frame.size.width + 5.;
@@ -111,7 +110,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [self.view addSubview:headerView];
 
     UBCollectionViewLayout *layout = [[UBCollectionViewLayout alloc] init];
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, y + headerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - headerView.frame.size.height - y) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, headerView.frame.size.height + headerView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - headerView.frame.size.height - headerView.frame.origin.y) collectionViewLayout:layout];
     _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _collectionView.backgroundColor = [UIColor clearColor];
     _collectionView.delegate = self;
