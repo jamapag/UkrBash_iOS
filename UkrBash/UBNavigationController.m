@@ -89,7 +89,7 @@
         _viewController.view.layer.shadowColor = [[UIColor blackColor] CGColor];
         _viewController.view.layer.shadowOpacity = .5;
         CGRect bezierRect = _viewController.view.bounds;
-        bezierRect.origin.y = y;
+        bezierRect.origin.y = 64 - ((y == 0) ? 20 : 0);
         _viewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:bezierRect].CGPath;
         if (animated) {
             CGFloat x = _viewController.view.center.x + self.view.bounds.size.width - BORDER_WIDTH;
@@ -134,7 +134,7 @@
                 if (height < self.view.bounds.size.width) {
                     height = self.view.bounds.size.width;
                 }
-                borderView.frame = CGRectMake(self.view.bounds.size.width - BORDER_WIDTH, y, BORDER_WIDTH, height + 20);
+                borderView.frame = CGRectMake(self.view.bounds.size.width - BORDER_WIDTH, 64 - ((y == 0) ? 20 : 0), BORDER_WIDTH, height + 20);
                 [self.view addSubview:borderView];
             }];
         } else {

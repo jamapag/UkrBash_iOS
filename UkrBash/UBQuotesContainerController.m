@@ -129,11 +129,9 @@
 
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0., (y == 0) ? -20 : 0, self.view.frame.size.width, 64.)];
     headerView.userInteractionEnabled = YES;
-//    headerView.image = [UIImage imageNamed:@"header"];
     headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header.png"]];
-    headerView.contentMode = UIViewContentModeTop;
     headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., headerView.frame.size.width, headerView.frame.size.height)] CGPath];
+    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., 2000, headerView.frame.size.height)] CGPath];
     headerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     headerView.layer.shadowRadius = 2.;
     headerView.layer.shadowOffset = CGSizeMake(0, 2.);

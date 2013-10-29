@@ -105,7 +105,7 @@ enum UBSubMenuItems {
     headerView.userInteractionEnabled = YES;
     headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header.png"]];
     headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., headerView.frame.size.width, headerView.frame.size.height)] CGPath];
+    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., 2000, headerView.frame.size.height)] CGPath];
     headerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     headerView.layer.shadowRadius = 2.;
     headerView.layer.shadowOffset = CGSizeMake(0, 2.);
