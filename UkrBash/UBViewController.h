@@ -17,4 +17,6 @@
 
 @property (nonatomic, assign) UBNavigationController *ubNavigationController;
 
+- (UIView *)headerViewWithMenuButtonAction:(SEL)menuActionSelector;
+
 @end

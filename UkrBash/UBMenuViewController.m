@@ -101,15 +101,8 @@ enum UBSubMenuItems {
         NSLog(@"IOS7");
     }
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0., (y == 0) ? -20 : 0, self.view.frame.size.width, 64.)];
-    headerView.userInteractionEnabled = YES;
-    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header.png"]];
-    headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    headerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:CGRectMake(0., 0., 2000, headerView.frame.size.height)] CGPath];
-    headerView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    headerView.layer.shadowRadius = 2.;
-    headerView.layer.shadowOffset = CGSizeMake(0, 2.);
-    headerView.layer.shadowOpacity = .3;
+    
+    UIView *headerView = [[self headerViewWithMenuButtonAction:nil] retain];
     
     logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 24, 135., 30.)];
     logoButton.contentMode = UIViewContentModeScaleToFill;
