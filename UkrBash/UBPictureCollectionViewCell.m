@@ -209,4 +209,18 @@
     }
 }
 
+- (void)copyUrlAction:(id)sender
+{
+    if (self.shareDelegate) {
+        [self.shareDelegate copyUrlActionForCell:self];
+    }
+}
+
+- (void)openInBrowserAction:(id)sender
+{
+    if (self.shareDelegate) {
+        [self.shareDelegate openInBrowserActionForCell:self];
+    }
+}
+
 @end

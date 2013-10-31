@@ -14,6 +14,8 @@
 @protocol UBQuoteCollectionCellDelegate <NSObject>
 
 - (void)quoteCell:(UBPictureCollectionViewCell *)cell shareQuoteWithType:(SharingNetworkType)shareType;
+- (void)copyUrlActionForCell:(UBPictureCollectionViewCell *)cell;
+- (void)openInBrowserActionForCell:(UBPictureCollectionViewCell *)cell;
 
 @end
 
@@ -36,5 +38,7 @@
 - (NSString *)pictureTitle;
 - (void)setPictureTitle:(NSString *)pictureTitle;
 - (void)hideSharingOverlay;
+- (void)copyUrlAction:(id)sender;
+- (void)openInBrowserAction:(id)sender;
 
 @end

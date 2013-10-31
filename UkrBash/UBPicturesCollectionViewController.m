@@ -80,6 +80,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     UIView *headerView = [[self headerViewWithMenuButtonAction:@selector(menuAction:)] retain];
     
     [self.view addSubview:headerView];
+    
 
     UBCollectionViewLayout *layout = [[UBCollectionViewLayout alloc] init];
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, headerView.frame.size.height + headerView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - headerView.frame.size.height - headerView.frame.origin.y) collectionViewLayout:layout];
@@ -101,6 +102,10 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIMenuItem *copyUrlMenuItem = [[UIMenuItem alloc] initWithTitle:@"Копіювати URL" action:@selector(copyUrlAction:)];
+    UIMenuItem *openInBrowserMenuItem = [[UIMenuItem alloc] initWithTitle:@"Відкрити в Safari" action:@selector(openInBrowserAction:)];
+    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObjects:copyUrlMenuItem, openInBrowserMenuItem, nil]];
     
     localImageLoadedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kImageCenterNotification_didLoadImage object:nil queue:nil usingBlock:^(NSNotification *note) {
         NSMutableArray *rows = [NSMutableArray array];
@@ -167,7 +172,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
+#pragma mark - UBQuoteCollectionCellDelegate methods.
 
 - (void)quoteCell:(UBPictureCollectionViewCell *)cell shareQuoteWithType:(SharingNetworkType)networkType
 {
@@ -185,7 +190,35 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"sharing" withAction:@"pictures" withLabel:NSStringFromClass([sharingController class]) withValue:@(-1)];
 }
 
-#pragma mark - -
+- (void)copyUrlActionForCell:(UBPictureCollectionViewCell *)cell
+{
+    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
+    [self copyUrlActionForIndexPath:indexPath];
+}
+
+- (void)openInBrowserActionForCell:(UBPictureCollectionViewCell *)cell
+{
+    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
+    [self openInBrowserActionForIndexPath:indexPath];
+}
+
+- (void)copyUrlActionForIndexPath:(NSIndexPath *)indexPath
+{
+    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = pictureUrl;
+}
+
+- (void)openInBrowserActionForIndexPath:(NSIndexPath *)indexPath
+{
+    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:pictureUrl]];
+}
+
+#pragma mark -
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [[dataSource items] count];
@@ -231,6 +264,33 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     return UIEdgeInsetsMake(10, 10, 10, 10);
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(copyUrlAction:) || action == @selector(openInBrowserAction:)) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(copyUrlAction:)) {
+        [self copyUrlActionForIndexPath:indexPath];
+    } else if (action == @selector(openInBrowserAction:)) {
+        [self openInBrowserActionForIndexPath:indexPath];
+    }
+}
+
+#pragma mark - UIMenuController required methods (Might not be needed on iOS 7)
+- (BOOL)canBecomeFirstResponder {
+    return YES;
 }
 
 #pragma mark - Rotation handling
