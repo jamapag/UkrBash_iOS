@@ -218,7 +218,8 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:pictureUrl]];
 }
 
-#pragma mark -
+#pragma mark - UICollectionViewDataSoruce methods.
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [[dataSource items] count];
@@ -249,6 +250,8 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     return footer;
 }
 
+#pragma mark - UICollectionViewDelegateFlowLayout methods.
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     if (shouldShowFooter) {
         return CGSizeMake(50, 50);
@@ -265,6 +268,8 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 {
     return UIEdgeInsetsMake(10, 10, 10, 10);
 }
+
+#pragma mark - UICollectionViewDelegate methods.
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -289,7 +294,9 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 }
 
 #pragma mark - UIMenuController required methods (Might not be needed on iOS 7)
-- (BOOL)canBecomeFirstResponder {
+
+- (BOOL)canBecomeFirstResponder
+{
     return YES;
 }
 
