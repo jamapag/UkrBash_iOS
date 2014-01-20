@@ -234,6 +234,7 @@
     details.shadowOffset = CGSizeMake(0., 1.);
     details.backgroundColor = [UIColor clearColor];
     details.numberOfLines = 0;
+    details.textAlignment = UITextAlignmentCenter;
     [footerView addSubview:details];
     [details release];
 

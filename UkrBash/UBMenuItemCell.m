@@ -28,6 +28,7 @@
         if (selected) {
             [UIView animateWithDuration:1. animations:^ {
                 self.textLabel.textColor = [UIColor colorWithRed:.04 green:.6 blue:.97 alpha:1.];
+                self.textLabel.textColor = [UIColor colorWithRed:.54 green:.18 blue:.16 alpha:1.];
             }];
         } else {
             [UIView animateWithDuration:1. animations:^ {
@@ -37,7 +38,8 @@
     } else {
         if (selected) {
             self.textLabel.textColor = [UIColor colorWithRed:.04 green:.6 blue:.97 alpha:1.];
-            self.textLabel.shadowOffset = CGSizeZero;
+            self.textLabel.textColor = [UIColor colorWithRed:.54 green:.18 blue:.16 alpha:1.];
+//            self.textLabel.shadowOffset = CGSizeZero;
         } else {
             self.textLabel.textColor = [UIColor colorWithWhite:.25 alpha:1.];
             self.textLabel.shadowOffset = CGSizeMake(0., 1.);

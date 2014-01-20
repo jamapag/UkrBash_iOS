@@ -55,7 +55,7 @@
     
     CGFloat lableHeight = 21.;
     CGFloat lableY = self.frame.size.height / 2. - lableHeight/2.;
-    _titleLabel.frame = CGRectMake(25., lableY, self.frame.size.width - 25. - 90., lableHeight);
+    _titleLabel.frame = CGRectMake(45., lableY, self.frame.size.width - 25. - 90., lableHeight);
     _valueLable.frame = CGRectMake(self.frame.size.width - 100., lableY, 80., lableHeight);
     _buttonBackground.frame = CGRectMake(_valueLable.frame.origin.x + 20, self.bounds.size.height / 2. - 18., 75., 36.);
 }
