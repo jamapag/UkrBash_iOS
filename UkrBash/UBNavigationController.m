@@ -164,7 +164,23 @@
     }
     
     borderView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - BORDER_WIDTH, y, BORDER_WIDTH, self.view.frame.size.height + 20)];
-    borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
+    
+    UIView *borderViewBackground = [[UIView alloc] initWithFrame:borderView.bounds];
+    borderViewBackground.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
+    CGRect rect = borderViewBackground.frame;
+    rect.origin.y = -44;
+    borderViewBackground.frame = rect;
+    
+    UIView *borderViewBackgroundWrapper = [[UIView alloc] initWithFrame:borderView.bounds];
+    [borderViewBackgroundWrapper addSubview:borderViewBackground];
+    borderViewBackgroundWrapper.clipsToBounds = YES;
+    
+    [borderView addSubview:borderViewBackgroundWrapper];
+    
+    [borderViewBackground release];
+    [borderViewBackgroundWrapper release];
+    
+    borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
     
     borderView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     borderView.layer.shadowOffset = CGSizeMake(-15., 5.);
