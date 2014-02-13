@@ -238,7 +238,11 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
         imageCell.imageView.image = image;
     }
     imageCell.authorLabel.text = picture.author;
-    imageCell.ratingLabel.text = [NSString stringWithFormat:@"%d", picture.rating];
+    if (picture.rating > 0) {
+        imageCell.ratingLabel.text = [NSString stringWithFormat:@"+%d", picture.rating];
+    } else if (picture.rating <= 0) {
+        imageCell.ratingLabel.text = [NSString stringWithFormat:@"%d", picture.rating];
+    }
     [imageCell setPictureTitle:picture.title];
     [imageCell hideSharingOverlay];
     return imageCell;
