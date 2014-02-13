@@ -13,8 +13,7 @@
 
 enum  {
     VKSharingViewNoAnimation = 0,
-    VKSharingViewShowAnimation,
-    VKSharingViewHideAnimation
+    VKSharingViewShowAnimation
 };
 
 #define kAnimationDuration  0.33
@@ -137,11 +136,12 @@ enum  {
     return [self initWithFrame:CGRectZero];
 }
 
-- (id)initWithVkontakte:(Vkontakte *)vkontakte
+- (id)initWithVkontakte:(Vkontakte *)vkontakte andRootViewController:(UIViewController *)rootViewController
 {
     self = [self initWithFrame:CGRectZero];
     if (self) {
         _vkontakte = [vkontakte retain];
+        _rootViewController = [rootViewController retain];
     }
     return self;
 }
@@ -152,9 +152,21 @@ enum  {
     if (!window) {
         window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     }
-    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    UIInterfaceOrientation statusBarOritentation = [[UIApplication sharedApplication] statusBarOrientation];
+    CGFloat statusBarHeight = 0;
+    CGFloat windowWidth = 0;
+    CGFloat windowHeight = 0;
+    if (UIInterfaceOrientationIsLandscape(statusBarOritentation)) {
+        statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.width;
+        windowWidth = window.frame.size.height;
+        windowHeight = window.frame.size.width;
+    } else {
+        statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+        windowWidth = window.frame.size.width;
+        windowHeight = window.frame.size.height;
+    }
     CGFloat padding = 10.;
-    self = [super initWithFrame:CGRectMake(padding, padding + statusBarHeight, window.frame.size.width - 2. * padding, window.frame.size.height - 2. * padding - statusBarHeight)];
+    self = [super initWithFrame:CGRectMake(padding, padding + statusBarHeight, windowWidth - 2. * padding, windowHeight - 2. * padding - statusBarHeight)];
     if (self) {
         self.layer.borderColor = [[UIColor colorWithWhite:0.75 alpha:0.6] CGColor];
         self.layer.borderWidth = 5.;
@@ -165,7 +177,7 @@ enum  {
         self.layer.shadowOffset = CGSizeMake(0., 0.);
         self.layer.shadowOpacity = 1.;
         self.backgroundColor = [UIColor vkSharingViewBackgroundColor];
-        self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
         CGFloat subviewsWidth = self.frame.size.width - 2. * padding;
         
@@ -173,6 +185,7 @@ enum  {
         _textView.backgroundColor = [UIColor whiteColor];
         _textView.layer.borderWidth = 1.;
         _textView.layer.borderColor = [[UIColor vkSharingViewInnerBlockBorderColor] CGColor];
+        _textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self addSubview:_textView];
         [_textView release];
         
@@ -181,11 +194,13 @@ enum  {
         [cancelInputTapGesture release];
 
         _attachmentContentView = [[VKSharingAttachmentContentView alloc] initWithFrame:CGRectMake(padding, CGRectGetMaxY(_textView.frame) + padding, subviewsWidth, 100.)];
+        _attachmentContentView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self addSubview:_attachmentContentView];
         [_attachmentContentView release];
         
         _friendsOnlySwitch = [[UISwitch alloc] init];
         _friendsOnlySwitch.frame = CGRectMake(self.frame.size.width - padding - _friendsOnlySwitch.frame.size.width, CGRectGetMaxY(_attachmentContentView.frame) + padding / 2., _friendsOnlySwitch.frame.size.width, _friendsOnlySwitch.frame.size.height);
+        _friendsOnlySwitch.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         [self addSubview:_friendsOnlySwitch];
         [_friendsOnlySwitch release];
         
@@ -205,6 +220,7 @@ enum  {
         _submitButton.layer.cornerRadius = 2.;
         [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_submitButton addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
+        _submitButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
         [self addSubview:_submitButton];
         [_submitButton release];
         
@@ -214,6 +230,7 @@ enum  {
         [_cancelButton setTitle:VKLocalizedString(@"VKSharingCancelButtonTitle", @"") forState:UIControlStateNormal];
         _cancelButton.backgroundColor = self.backgroundColor;
         [_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+        _cancelButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
         [self addSubview:_cancelButton];
         [_cancelButton release];
         
@@ -245,6 +262,7 @@ enum  {
 {
     [_attachment release];
     [_vkontakte release];
+    [_rootViewController release];
     Block_release(_successHandler);
     Block_release(_failHandler);
     [super dealloc];
@@ -274,7 +292,7 @@ enum  {
 
 - (void)show
 {
-    UIWindow * window =  [[UIApplication sharedApplication] keyWindow];
+    UIWindow *window =  [[UIApplication sharedApplication] keyWindow];
     if (!window) {
         window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     }
@@ -282,14 +300,14 @@ enum  {
     _backgroundView = [[UIView alloc] initWithFrame:window.frame];
     _backgroundView.backgroundColor = [UIColor clearColor];
     
-    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelAction:)];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelAction:)];
     [_backgroundView addGestureRecognizer:tapGesture];
     [tapGesture release];
     
-    [window addSubview:_backgroundView];
+    [_rootViewController.view addSubview:_backgroundView];
     [_backgroundView release];
 
-    [window addSubview:self];
+    [_rootViewController.view addSubview:self];
 
     CALayer *viewLayer = self.layer;
     CAKeyframeAnimation* popInAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
@@ -315,15 +333,15 @@ enum  {
 
 - (void)hide
 {
-    CALayer *viewLayer = self.layer;
-    CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    fadeInAnimation.fromValue = [NSNumber numberWithFloat:1.0];
-    fadeInAnimation.toValue = [NSNumber numberWithFloat:0.0];
-    fadeInAnimation.duration = kAnimationDuration;
-    fadeInAnimation.delegate = self;
-    fadeInAnimation.removedOnCompletion = NO;
-    [viewLayer addAnimation:fadeInAnimation forKey:@"opacity"];
-    _currentAnimation = VKSharingViewHideAnimation;
+    [UIView animateWithDuration:0.4
+                          delay:0.1
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         self.alpha = 0;
+                     } completion:^(BOOL finished) {
+                         [_backgroundView removeFromSuperview];
+                         [self removeFromSuperview];
+                     }];
 }
 
 - (void)setAttachment:(VKWallPostAttachment *)attachment
@@ -352,8 +370,9 @@ enum  {
 
 - (void)deviceDidChangeOrientationNotificationHandler:(NSNotification *)notification
 {
-    UIApplication * application = [UIApplication sharedApplication];
-    UIWindow * window =  [application keyWindow];
+    UIApplication *application = [UIApplication sharedApplication];
+    CGFloat statusBarHeight = 0;
+    UIWindow *window =  [application keyWindow];
     if (!window) {
         window = [[application windows] objectAtIndex:0];
     }
@@ -367,37 +386,17 @@ enum  {
         orientation == UIDeviceOrientationFaceDown) {
         orientation = application.statusBarOrientation;
     }
-
-    CGFloat windowWidth = window.bounds.size.width;
-    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) {
-        windowWidth = window.bounds.size.height;
-    }
-        
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    if (orientation == UIDeviceOrientationPortraitUpsideDown) {
-        transform = CGAffineTransformMakeRotation(M_PI);
-    }
-    else if (orientation == UIDeviceOrientationLandscapeLeft) {
-        transform = CGAffineTransformMakeRotation(M_PI_2);
-    }
-    else if (orientation == UIDeviceOrientationLandscapeRight) {
-        transform = CGAffineTransformMakeRotation(-M_PI_2);
-    }
     
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        statusBarHeight = [application statusBarFrame].size.width;
+    } else {
+        statusBarHeight = [application statusBarFrame].size.height;
+    }
+
+    CGFloat windowWidth = self.rootViewController.view.frame.size.width;
     [UIView animateWithDuration:0.25 animations:^{
-        if (orientation == UIDeviceOrientationPortraitUpsideDown || orientation == UIDeviceOrientationPortrait) {
-            CGFloat padding = application.statusBarFrame.size.height + 10.;
-            self.center = CGPointMake(windowWidth / 2., self.frame.size.height / 2. + padding);
-        }
-        else if (orientation == UIDeviceOrientationLandscapeLeft) {
-            CGFloat padding = 10.;
-            self.center = CGPointMake(self.bounds.size.height / 2. + padding, windowWidth / 2.);
-        }
-        else {
-            CGFloat padding = application.statusBarFrame.size.width + 10.;
-            self.center = CGPointMake(self.bounds.size.height / 2. + padding, windowWidth / 2.);
-        }
-        self.transform = transform;
+        CGFloat padding = statusBarHeight + 10.;
+        self.center = CGPointMake(windowWidth / 2., self.frame.size.height / 2. + padding);
     }];
 }
 
@@ -405,11 +404,7 @@ enum  {
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    if (_currentAnimation == VKSharingViewHideAnimation) {
-        [self removeFromSuperview];
-        [_backgroundView removeFromSuperview];
-    }
-    else if (_currentAnimation == VKSharingViewShowAnimation) {
+    if (_currentAnimation == VKSharingViewShowAnimation) {
         [_textView becomeFirstResponder];
     }
     _currentAnimation = VKSharingViewNoAnimation;

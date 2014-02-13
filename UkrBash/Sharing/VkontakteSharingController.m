@@ -99,7 +99,8 @@
 - (void)showSharingController
 {
     // sharing
-    VKSharingView * sharingView = [[VKSharingView alloc] initWithVkontakte:vkontakte];
+    VKSharingView * sharingView = [[VKSharingView alloc] initWithVkontakte:vkontakte andRootViewController:self.rootViewController];
+    
     [sharingView setAttachment:[VKWallPostAttachment wallPostAttachmentWithURL:[NSURL URLWithString:self.url]]];
     [sharingView setAttachmentDescription:attachmentDescription];
     [sharingView setAttachmentTitle:attachmentTitle];

@@ -17,8 +17,9 @@ typedef void(^VKSharingViewFailHandler) (NSError * error);
 
 @property (nonatomic, copy) VKSharingViewSuccessHandler successHandler;
 @property (nonatomic, copy) VKSharingViewFailHandler failHandler;
+@property (nonatomic, retain) UIViewController *rootViewController;
 
-- (id)initWithVkontakte:(Vkontakte *)vkontakte;
+- (id)initWithVkontakte:(Vkontakte *)vkontakte andRootViewController:(UIViewController *)rootViewController;
 - (void)setAttachment:(VKWallPostAttachment *)attachment;
 - (void)setAttachmentTitle:(NSString *)attachmentTitle;
 - (void)setAttachmentDescription:(NSString *)attachmentDescription;
