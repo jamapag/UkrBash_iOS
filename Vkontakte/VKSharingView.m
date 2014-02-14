@@ -66,6 +66,8 @@ enum  {
         [_descriptionLabel release];
         
         _previewImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _previewImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _previewImageView.clipsToBounds = YES;
         [self addSubview:_previewImageView];
         [_previewImageView release];
     }
@@ -90,6 +92,7 @@ enum  {
 
 - (void)layoutSubviews
 {
+    
     CGFloat padding = 10.;
     _headerLabel.frame = CGRectMake(padding, padding / 2., self.frame.size.width - 2. * padding, 18.);
 
@@ -165,9 +168,21 @@ enum  {
         windowWidth = window.frame.size.width;
         windowHeight = window.frame.size.height;
     }
+    
+    CGFloat viewWidth = 0;
+    CGFloat topPaddig = 0;
+    if (IS_PAD) {
+        viewWidth = windowWidth / 1.5;
+        topPaddig = 44;
+    } else {
+        viewWidth = windowWidth;
+    }
+    
     CGFloat padding = 10.;
-    self = [super initWithFrame:CGRectMake(padding, padding + statusBarHeight, windowWidth - 2. * padding, windowHeight - 2. * padding - statusBarHeight)];
+    self = [super initWithFrame:CGRectMake(padding, topPaddig + padding + statusBarHeight, viewWidth - 2. * padding, windowHeight - 2. * padding - statusBarHeight)];
     if (self) {
+        
+        
         self.layer.borderColor = [[UIColor colorWithWhite:0.75 alpha:0.6] CGColor];
         self.layer.borderWidth = 5.;
         self.layer.cornerRadius = 5.;
@@ -252,6 +267,7 @@ enum  {
         [_activityView release];
         
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, CGRectGetMaxY(_cancelButton.frame) + padding);
+        self.center = CGPointMake(windowWidth / 2, self.center.y);
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceDidChangeOrientationNotificationHandler:) name:UIDeviceOrientationDidChangeNotification object:nil];
     }
@@ -392,11 +408,29 @@ enum  {
     } else {
         statusBarHeight = [application statusBarFrame].size.height;
     }
+    
+    CGPathRef newShadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+    NSArray *animationsByName = [self.layer animationKeys];
+    if ([animationsByName count]&&[[animationsByName objectAtIndex:0] isKindOfClass:[NSString class]]) {
+        NSString *animationKey = [animationsByName objectAtIndex:0];
+        CAAnimation *existingUIKitAnimation = [self.layer animationForKey:animationKey];
+        CABasicAnimation *newShadowPathAnimation = [CABasicAnimation animationWithKeyPath:@"shadowPath"];
+        newShadowPathAnimation.duration = existingUIKitAnimation.duration;
+        newShadowPathAnimation.toValue = [NSValue valueWithPointer:newShadowPath];
+        newShadowPathAnimation.timingFunction = existingUIKitAnimation.timingFunction;
+        [self.layer addAnimation:newShadowPathAnimation forKey:@"shadowPath"];
+    }
+    
+    self.layer.shadowPath = newShadowPath;
 
     CGFloat windowWidth = self.rootViewController.view.frame.size.width;
+    CGFloat topPadding = 0;
+    if (IS_PAD) {
+        topPadding = 44.;
+    }
     [UIView animateWithDuration:0.25 animations:^{
         CGFloat padding = statusBarHeight + 10.;
-        self.center = CGPointMake(windowWidth / 2., self.frame.size.height / 2. + padding);
+        self.center = CGPointMake(windowWidth / 2., self.frame.size.height / 2. + padding + topPadding);
     }];
 }
 
