@@ -14,6 +14,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UBPicturesScrollViewController.h"
 #import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
 
 
 @implementation UBPicturesContainerController
@@ -284,7 +286,8 @@
     [viewLayer addAnimation:animationGroup forKey:@"animation"];
     
     
-    [[[GAI sharedInstance] defaultTracker] sendView:[NSString stringWithFormat:@"/%@/%@/picture/", NSStringFromClass([self class]), self.title]];
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:[NSString stringWithFormat:@"/%@/%@/picture/", NSStringFromClass([self class]), self.title]];
+    [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
     if (viewer) {
         [viewer release], viewer = nil;
     }

@@ -14,6 +14,7 @@
 #import "Model.h"
 #import "UBPictureCollectionReusableFooter.h"
 #import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface UBPicturesCollectionViewController ()
 
@@ -187,7 +188,10 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [sharingController setAttachmentImagePreview:[[MediaCenter imageCenter] imageWithUrl:picture.image]];
     [sharingController showSharingDialog];
     
-    [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"sharing" withAction:@"pictures" withLabel:NSStringFromClass([sharingController class]) withValue:@(-1)];
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"sharing"
+                                                                                        action:@"pictures"
+                                                                                         label:NSStringFromClass([sharingController class])
+                                                                                         value:@(-1)] build]];
 }
 
 - (void)copyUrlActionForCell:(UBPictureCollectionViewCell *)cell

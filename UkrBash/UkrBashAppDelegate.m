@@ -15,6 +15,8 @@
 #import "UBPublishedQuotesDataSource.h"
 #import "UBPublishedPicturesDataSource.h"
 #import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 #import "ApiKey.h"
 #import "SharingController.h"
 #import "FacebookSharingController.h"
@@ -48,6 +50,10 @@
     if ([platform isEqualToString:@"iPhone4,1"])    return @"iPhone 4S";
     if ([platform isEqualToString:@"iPhone5,1"])    return @"iPhone 5";
     if ([platform isEqualToString:@"iPhone5,2"])    return @"iPhone 5 CDMA";
+    if ([platform isEqualToString:@"iPhone5,3"])    return @"iPhone 5C";
+    if ([platform isEqualToString:@"iPhone5,4"])    return @"iPhone 5C CDMA";
+    if ([platform isEqualToString:@"iPhone6,1"])    return @"iPhone 5S";
+    if ([platform isEqualToString:@"iPhone6,2"])    return @"iPhone 5S CDMA";
     if ([platform isEqualToString:@"iPod1,1"])      return @"iPod Touch 1G";
     if ([platform isEqualToString:@"iPod2,1"])      return @"iPod Touch 2G";
     if ([platform isEqualToString:@"iPod3,1"])      return @"iPod Touch 3G";
@@ -61,6 +67,9 @@
     if ([platform isEqualToString:@"iPad3,1"])      return @"iPad-3G (WiFi)";
     if ([platform isEqualToString:@"iPad3,2"])      return @"iPad-3G (GSM)";
     if ([platform isEqualToString:@"iPad3,3"])      return @"iPad-3G (CDMA)";
+    if ([platform isEqualToString:@"iPad3,4"])      return @"iPad4Wifi";
+    if ([platform isEqualToString:@"iPad3,5"])      return @"iPad4GSM";
+    if ([platform isEqualToString:@"iPad3,6"])      return @"iPad4CDMA";
     if ([platform isEqualToString:@"i386"])         return @"Simulator";
     if ([platform isEqualToString:@"x86_64"])       return @"Simulator";
 
@@ -92,10 +101,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 #if TARGET_IPHONE_SIMULATOR
-    [[GAI sharedInstance] setDebug:YES];
+    [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
 #endif
     id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:kGANAccountID];
-    [tracker setCustom:kGANCustomVariablePlatform dimension:[self deviceType]];
+    [tracker set:[GAIFields customDimensionForIndex:1] value:[self deviceType]];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"copying"
+                                                          action:@"quotes"
+                                                           label:@"quote"
+                                                           value:@(-1)] build]];
     
     [self.window makeKeyAndVisible];
     

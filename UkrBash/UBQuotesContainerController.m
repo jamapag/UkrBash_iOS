@@ -15,6 +15,7 @@
 #import "UkrBashAppDelegate.h"
 #import "EMailSharingController.h"
 #import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 #import "EGOUkrBashActivityIndicator.h"
 
 @implementation UBQuotesContainerController
@@ -89,7 +90,10 @@
     UBQuote *quote = [[dataSource items] objectAtIndex:selectedIndexPath.row];
     pasteboard.string = [quote text];
 
-    [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"copying" withAction:@"quotes" withLabel:@"quote" withValue:@(-1)];
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"copying"
+                                                                                        action:@"quotes"
+                                                                                         label:@"quote"
+                                                                                         value:@(-1)] build]];
 }
 
 - (void)copyURL:(id)sender
@@ -100,7 +104,10 @@
     NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%d", quote.quoteId];
     pasteboard.string = quoteUrl;
 
-    [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"copying" withAction:@"quotes" withLabel:@"url" withValue:@(-1)];
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"sharing"
+                                                                                        action:@"quotes"
+                                                                                         label:@"url"
+                                                                                         value:@(-1)] build]];
 }
 
 #pragma mark - View lifecycle
@@ -334,7 +341,10 @@
     [sharingController setAttachmentDescription:quote.text];
     [sharingController showSharingDialog];
 
-    [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:@"sharing" withAction:@"quotes" withLabel:NSStringFromClass([sharingController class]) withValue:@(-1)];
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"sharing"
+                                                                                        action:@"quotes"
+                                                                                         label:NSStringFromClass([sharingController class])
+                                                                                         value:@(-1)] build]];
 }
 
 #pragma mark - EGORefreshTableHeaderDelegate methods.

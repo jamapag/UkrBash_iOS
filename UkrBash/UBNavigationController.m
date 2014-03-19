@@ -10,6 +10,8 @@
 #import "UBViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
 
 #define BORDER_WIDTH 15.
 
@@ -69,7 +71,8 @@
 {
     NSAssert(_viewController == nil, @"Can't push two controllers in UBNavigationController");
     if (!_viewController) {
-        [[[GAI sharedInstance] defaultTracker] sendView:[NSString stringWithFormat:@"/%@/%@/", NSStringFromClass([viewController class]), viewController.title]];
+        [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:[NSString stringWithFormat:@"/%@/%@/", NSStringFromClass([viewController class]), viewController.title]];
+        [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
         
         float y = 0;
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
@@ -111,7 +114,8 @@
 {
     NSAssert(_viewController != nil, @"Can't pop menu controller.");
     if (_viewController) {
-        [[[GAI sharedInstance] defaultTracker] sendView:@"/"];
+        [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"/"];
+        [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
         
         float y = 0;
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
