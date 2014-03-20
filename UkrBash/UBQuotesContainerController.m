@@ -101,7 +101,7 @@
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     
     UBQuote *quote = [[dataSource items] objectAtIndex:selectedIndexPath.row];
-    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%d", quote.quoteId];
+    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", (long)quote.quoteId];
     pasteboard.string = quoteUrl;
 
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"sharing"
@@ -331,13 +331,13 @@
 {
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
-    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%d", quote.quoteId];
+    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", (long)quote.quoteId];
     
     SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = quoteUrl;
     sharingController.message = (networkType == SharingEMailNetwork) ? quote.text : nil;
     sharingController.rootViewController = self;
-    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Цитата %d", quote.quoteId]];
+    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Цитата %ld", (long)quote.quoteId]];
     [sharingController setAttachmentDescription:quote.text];
     [sharingController showSharingDialog];
 

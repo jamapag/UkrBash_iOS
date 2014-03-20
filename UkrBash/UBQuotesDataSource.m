@@ -24,7 +24,7 @@
     UBQuoteCell *cell = (UBQuoteCell*)_cell;
     
     UBQuote *quote = (UBQuote *)[[self items] objectAtIndex:indexPath.row];
-    cell.idLabel.text = [NSString stringWithFormat:@"%d", quote.quoteId];
+    cell.idLabel.text = [NSString stringWithFormat:@"%ld", (long)quote.quoteId];
     cell.quoteTextLabel.text = quote.text;
     cell.ratingLabel.text = [self ratingStringFromRating:quote.rating];
     if (quote.pubDate) {

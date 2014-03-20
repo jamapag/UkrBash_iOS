@@ -34,7 +34,7 @@ NSString *kMediaCenterErrorDomain = @"MediaCenter";
 + (NSString*)md5:(NSString*)str {
 	const char *cStr = [str UTF8String];
 	unsigned char result[CC_MD5_DIGEST_LENGTH];
-	CC_MD5( cStr, strlen(cStr), result );
+	CC_MD5( cStr, (unsigned int)strlen(cStr), result );
 	
 	return [NSString 
 			stringWithFormat: @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
@@ -144,7 +144,7 @@ NSString *kMediaCenterErrorDomain = @"MediaCenter";
 
 -(void) pushUrlToQueue:(NSString*)url {
     @synchronized(self) {
-        int i;
+        NSInteger i;
         for(i=[urlStack count]-1;i>=0;i--) {
             if ([[[urlStack objectAtIndex:i] objectForKey:@"url"] isEqualToString:url]) {
                 [urlStack removeObjectAtIndex:i];

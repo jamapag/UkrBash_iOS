@@ -470,7 +470,7 @@ enum  {
     NSAssert(![_textView.text isEqualToString:@""] || _attachment != nil, @"nothing to post. message or attachment required.");
     
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    [NSString stringWithFormat:@"%d", _vkontakte.userId], @"owner_id",
+                                    [NSString stringWithFormat:@"%ld", (long)_vkontakte.userId], @"owner_id",
                                     (_friendsOnlySwitch.on) ? @(1) : @(0), @"friends_only",
                                     nil];
     if (![_textView.text isEqualToString:@""]) {

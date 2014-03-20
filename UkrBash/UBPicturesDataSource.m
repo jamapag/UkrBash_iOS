@@ -25,7 +25,7 @@
     UBPictureCell *cell = (UBPictureCell*)_cell;
     
     UBPicture *picture = (UBPicture *)[[self items] objectAtIndex:indexPath.row];
-    cell.idLabel.text = [NSString stringWithFormat:@"%d", picture.pictureId];
+    cell.idLabel.text = [NSString stringWithFormat:@"%ld", (long)picture.pictureId];
     cell.quoteTextLabel.text = picture.title;
     cell.ratingLabel.text = [self ratingStringFromRating:picture.rating];
     if (picture.pubDate) {
@@ -40,7 +40,7 @@
 - (void)configurePictureInfoView:(UBPictureInfoView *)infoView forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UBPicture *picture = (UBPicture *)[[self items] objectAtIndex:indexPath.row];
-    infoView.idLabel.text = [NSString stringWithFormat:@"%d", picture.pictureId];
+    infoView.idLabel.text = [NSString stringWithFormat:@"%ld", (long)picture.pictureId];
     infoView.textLabel.text = picture.title;
     infoView.ratingLabel.text = [self ratingStringFromRating:picture.rating];
     infoView.dateLabel.text = [[self dateFormatter] stringFromDate:picture.pubDate];

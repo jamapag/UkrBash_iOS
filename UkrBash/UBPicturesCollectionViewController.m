@@ -179,12 +179,12 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 {
     NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
     UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
+    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
     
     SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = pictureUrl;
     sharingController.rootViewController = self;
-    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Картинка %d", picture.pictureId]];
+    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Картинка %ld", (long)picture.pictureId]];
     [sharingController setAttachmentImagePreview:[[MediaCenter imageCenter] imageWithUrl:picture.image]];
     [sharingController showSharingDialog];
     
@@ -209,7 +209,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 - (void)copyUrlActionForIndexPath:(NSIndexPath *)indexPath
 {
     UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
+    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
     
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = pictureUrl;
@@ -218,7 +218,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 - (void)openInBrowserActionForIndexPath:(NSIndexPath *)indexPath
 {
     UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%d", picture.pictureId];
+    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:pictureUrl]];
 }
 
@@ -243,9 +243,9 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     }
     imageCell.authorLabel.text = picture.author;
     if (picture.rating > 0) {
-        imageCell.ratingLabel.text = [NSString stringWithFormat:@"+%d", picture.rating];
+        imageCell.ratingLabel.text = [NSString stringWithFormat:@"+%ld", (long)picture.rating];
     } else if (picture.rating <= 0) {
-        imageCell.ratingLabel.text = [NSString stringWithFormat:@"%d", picture.rating];
+        imageCell.ratingLabel.text = [NSString stringWithFormat:@"%ld", (long)picture.rating];
     }
     [imageCell setPictureTitle:picture.title];
     [imageCell hideSharingOverlay];

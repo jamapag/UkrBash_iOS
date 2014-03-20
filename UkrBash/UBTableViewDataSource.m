@@ -32,9 +32,9 @@
 - (NSString *)ratingStringFromRating:(NSInteger)rating
 {
     if (rating > 0) {
-        return [NSString stringWithFormat:@"+%d", rating];
+        return [NSString stringWithFormat:@"+%ld", (long)rating];
     } else if (rating < 0) {
-        return [NSString stringWithFormat:@"%d", rating];
+        return [NSString stringWithFormat:@"%ld", (long)rating];
     } else {
         return @"0";
     }

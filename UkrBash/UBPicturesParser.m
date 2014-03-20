@@ -40,7 +40,7 @@ static NSString *kName_Rating = @"rating";
     GDataXMLElement *picturesElement = [items objectAtIndex:0];
     NSArray *picturesArray = [picturesElement elementsForName:kName_Picture];
     
-    NSLog(@"Count: %d", [picturesArray count]);
+    NSLog(@"Count: %lu", (unsigned long)[picturesArray count]);
     
     for (GDataXMLElement *pictureElement in picturesArray) {
         UBPicture *picture = [[UBPicture alloc] init];
