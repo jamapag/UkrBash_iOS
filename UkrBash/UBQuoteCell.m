@@ -50,7 +50,8 @@ CGFloat animationOffset = 52.;
         NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
         [context setMinimumScaleFactor:1];
         CGRect rect = [text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:context];
-        size = rect.size;
+        size.width = ceilf(rect.size.width);
+        size.height  = ceilf(rect.size.height);
     } else {
         size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     }
