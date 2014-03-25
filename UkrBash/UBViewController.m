@@ -67,16 +67,16 @@
 
 - (UIView *)headerViewWithMenuButtonAction:(SEL)menuActionSelector
 {
-    float y = 0;
+    float iOS7offset = 0;
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         // Load resources for iOS 6.1 or earlier;
-        y = 0;
+        iOS7offset = 0;
     } else {
         // Load resources for iOS 7 or later
-        y = 20;
+        iOS7offset = 20;
     }
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0., (y == 0) ? -20 : 0, self.view.frame.size.width, 64.)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0., (iOS7offset == 0) ? -20 : 0, self.view.frame.size.width, 64.)];
     headerView.userInteractionEnabled = YES;
     headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header.png"]];
     headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -87,16 +87,10 @@
     headerView.layer.shadowOpacity = .3;
     
     if (menuActionSelector) {
-        UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        menuButton.autoresizingMask = UIViewAutoresizingNone;
-        [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
-        [menuButton addTarget:self action:menuActionSelector forControlEvents:UIControlEventTouchUpInside];
-        [menuButton setFrame:CGRectMake(15., 21, 36., 36.)];
-        [headerView addSubview:menuButton];
+        CGFloat menuButtonWidth = 25., menuButtonX = 15.;
         
-        
-        CGFloat x = menuButton.frame.origin.x + menuButton.frame.size.width + 5.;
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, menuButton.frame.origin.y, headerView.frame.size.width - x * 2, menuButton.frame.size.height)];
+        CGFloat x = menuButtonX + menuButtonWidth + 5.;
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, iOS7offset, headerView.frame.size.width - x * 2, headerView.frame.size.height - iOS7offset)];
         titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textAlignment = UITextAlignmentCenter;
@@ -107,6 +101,13 @@
         titleLabel.text = self.title;
         [headerView addSubview:titleLabel];
         [titleLabel release];
+        
+        UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        menuButton.autoresizingMask = UIViewAutoresizingNone;
+        [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
+        [menuButton addTarget:self action:menuActionSelector forControlEvents:UIControlEventTouchUpInside];
+        [menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 16.) / 2., menuButtonWidth, 16.)];
+        [headerView addSubview:menuButton];
     }
     
     return [headerView autorelease];
