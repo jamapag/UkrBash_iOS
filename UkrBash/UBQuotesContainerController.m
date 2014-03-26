@@ -17,6 +17,7 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "EGOUkrBashActivityIndicator.h"
+#import "Reachability.h"
 
 @implementation UBQuotesContainerController
 
@@ -184,6 +185,21 @@
     [_refreshHeaderView release], _refreshHeaderView = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -193,6 +209,17 @@
 - (BOOL)canBecomeFirstResponder
 {
     return YES;
+}
+
+- (void)reachabilityChanged:(NSNotification *)notification
+{
+    Reachability *reach = notification.object;
+    if ([reach isReachable]) {
+        [self loadNewItems];
+    }
+    else {
+        loading = NO;
+    }
 }
 
 - (void)publishedQuotesUpdated:(NSNotificationCenter *)notification

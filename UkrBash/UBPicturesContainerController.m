@@ -16,6 +16,7 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
+#import "Reachability.h"
 
 
 @implementation UBPicturesContainerController
@@ -163,6 +164,21 @@
     [_refreshHeaderView release], _refreshHeaderView = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
@@ -181,6 +197,17 @@
 {
     if (viewer) {
         [viewer willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    }
+}
+
+- (void)reachabilityChanged:(NSNotification *)notification
+{
+    Reachability *reach = notification.object;
+    if ([reach isReachable]) {
+        [self loadNewItems];
+    }
+    else {
+        loading = NO;
     }
 }
 

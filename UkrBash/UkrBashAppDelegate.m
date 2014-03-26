@@ -20,6 +20,7 @@
 #import "ApiKey.h"
 #import "SharingController.h"
 #import "FacebookSharingController.h"
+#import "Reachability.h"
 #import <sys/sysctl.h>
 
 
@@ -130,6 +131,23 @@
     self.window.rootViewController = navigationController;
     [self.window addSubview:navigationController.view];
     [menuController release];
+    
+    Reachability* reach = [Reachability reachabilityWithHostname:@"www.ukrbash.com"];
+    reach.unreachableBlock = ^(Reachability *reach) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray *titles = @[@"Невдача!", @"От халепа!"];
+            NSArray *messages = @[@"Щось не так зі зв`язком. Або з Інтернетом. Або із сайтом UkrBash. Або з телефоном.",
+                                  @"Не вдається вийти на зв`язок. Треба перевірити налаштування інтернетів."];
+            NSArray *buttons = @[@"Ну добре", @"OK", @"Зараз перевірю"];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[titles objectAtIndex:arc4random_uniform((u_int32_t)titles.count)]
+                                                            message:[messages objectAtIndex:arc4random_uniform((u_int32_t)messages.count)]
+                                                           delegate:nil
+                                                  cancelButtonTitle:[buttons objectAtIndex:arc4random_uniform((u_int32_t)buttons.count)]
+                                                  otherButtonTitles:nil];
+            [alert show];
+        });
+    };
+    [reach startNotifier];
     
     return YES;
 }

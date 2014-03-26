@@ -152,6 +152,7 @@
 		B0C0BB751670CB2500A2421B /* VKSharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C0BB741670CB2500A2421B /* VKSharingView.m */; };
 		B0C0BB821670D30A00A2421B /* UIColor+Vkontakte.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C0BB811670D30A00A2421B /* UIColor+Vkontakte.m */; };
 		B0D2BCC716761DCB00F4D771 /* VKWallPostAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D2BCC616761DCB00F4D771 /* VKWallPostAttachment.m */; };
+		B0D4596818E1CC2C00DDD98E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D4596718E1CC2C00DDD98E /* Reachability.m */; };
 		B0D8FD861524F15400D4A6EB /* UBPictureInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */; };
 		B0DA90B3164EDB860084D29A /* VKXMLResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */; };
 		B0DA90BA164EDB9A0084D29A /* VKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B6164EDB9A0084D29A /* VKLoginViewController.m */; };
@@ -442,6 +443,8 @@
 		B0D2BCD31676335500F4D771 /* upload5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload5@2x.png"; sourceTree = "<group>"; };
 		B0D2BCD41676335500F4D771 /* upload6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload6.png; sourceTree = "<group>"; };
 		B0D2BCD51676335500F4D771 /* upload6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload6@2x.png"; sourceTree = "<group>"; };
+		B0D4596618E1CC2C00DDD98E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Submodules/Reachability/Reachability.h; sourceTree = "<group>"; };
+		B0D4596718E1CC2C00DDD98E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Submodules/Reachability/Reachability.m; sourceTree = "<group>"; };
 		B0D8FD841524F15400D4A6EB /* UBPictureInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureInfoView.h; sourceTree = "<group>"; };
 		B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureInfoView.m; sourceTree = "<group>"; };
 		B0DA90B1164EDB860084D29A /* VKXMLResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKXMLResponseParser.h; sourceTree = "<group>"; };
@@ -625,6 +628,7 @@
 				2D33124E16307D5E00213BF2 /* facebook-ios-sdk.xcodeproj */,
 				B0DA90B4164EDB9A0084D29A /* Vkontakte */,
 				B0378CFA161B23AD00B9331B /* GoogleAnalytics */,
+				B0D4596B18E1CC3100DDD98E /* Reachability */,
 				2DB0FAB91416C8CF00EFD6BC /* UkrBash */,
 				B0FBF2C0166D3C4E007BFDC0 /* VkontakteTests */,
 				B0F7353116A8436F00381E5E /* Vkontakte iOS */,
@@ -901,6 +905,15 @@
 				B0D2BCD51676335500F4D771 /* upload6@2x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B0D4596B18E1CC3100DDD98E /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				B0D4596618E1CC2C00DDD98E /* Reachability.h */,
+				B0D4596718E1CC2C00DDD98E /* Reachability.m */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 		B0DA12EC1689F924008C407C /* Share icons */ = {
@@ -1297,6 +1310,7 @@
 				B0D2BCC716761DCB00F4D771 /* VKWallPostAttachment.m in Sources */,
 				B066EE2916AD83DB00A2A25C /* UBDonateViewController.m in Sources */,
 				B066EE2E16AD9E3900A2A25C /* UBDonateCell.m in Sources */,
+				B0D4596818E1CC2C00DDD98E /* Reachability.m in Sources */,
 				2D14843416D569A500002F9C /* UBPicturesCollectionViewController.m in Sources */,
 				2D14843816D56F7500002F9C /* UBPictureCollectionViewCell.m in Sources */,
 				2DE51AC116DE17BE0049F9A2 /* UBCollectionViewLayout.m in Sources */,
@@ -1417,6 +1431,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1432,6 +1447,7 @@
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1444,7 +1460,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";

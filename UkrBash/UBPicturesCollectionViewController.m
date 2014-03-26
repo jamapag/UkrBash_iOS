@@ -15,6 +15,7 @@
 #import "UBPictureCollectionReusableFooter.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import "Reachability.h"
 
 @interface UBPicturesCollectionViewController ()
 
@@ -130,6 +131,32 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [_refreshControl addTarget:self action:@selector(startRefresh:) forControlEvents:UIControlEventValueChanged];
     [_collectionView addSubview:_refreshControl];
     [self startRefresh:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+}
+
+- (void)reachabilityChanged:(NSNotification *)notification
+{
+    Reachability *reach = notification.object;
+    if ([reach isReachable]) {
+        [self startRefresh:nil];
+    }
+    else {
+        loading = NO;
+    }
 }
 
 - (void)startRefresh:(id)sender
