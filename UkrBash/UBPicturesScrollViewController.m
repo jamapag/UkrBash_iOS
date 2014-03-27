@@ -10,6 +10,7 @@
 #import "UBPictureView.h"
 #import "UBPicture.h"
 #import "MediaCenter.h"
+#import "Model.h"
 #import "SharingController.h"
 #import "UkrBashAppDelegate.h"
 
@@ -32,21 +33,25 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:localImageLoadedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:localPicturesLoadedObserver];
     [dataSource release];
     [scrollView release];
     [pictureViews release];
     [infoView release];
     [toolbar release];
     [backButton release];
+    [loadingIndicator release];
+    [activityView release];
     [super dealloc];
 }
 
-- (void)scrollToIndex:(NSInteger)index 
+- (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated
 {
     CGRect frame = scrollView.frame;
     frame.origin.x = frame.size.width * index;
     frame.origin.y = 0;
-    [scrollView scrollRectToVisible:frame animated:NO];
+    [scrollView scrollRectToVisible:frame animated:animated];
 }
 
 - (void)setScrollViewContentSize
@@ -160,7 +165,7 @@
         [pictureViews addObject:[NSNull null]];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:kImageCenterNotification_didLoadImage object:nil queue:nil usingBlock:^(NSNotification *note) {
+    localImageLoadedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kImageCenterNotification_didLoadImage object:nil queue:nil usingBlock:^(NSNotification *note) {
         
         for (NSString *url in [[note userInfo] objectForKey:@"imageUrl"]) {
             for (id pictureView in pictureViews) {
@@ -174,6 +179,21 @@
             }
         }
     }];
+    
+    localPicturesLoadedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kNotificationDataUpdated object:nil queue:nil usingBlock:^(NSNotification *note) {
+        loading = NO;
+        bool shouldMoveToNew = currentPictureIndex == pictureViews.count - 1 ? YES : NO;
+        [self hideMoreLoadingIndicator];
+        for (int i = pictureViews.count; i < [[dataSource items] count]; i++) {
+            [pictureViews addObject:[NSNull null]];
+        }
+        [self setScrollViewContentSize];
+        if (shouldMoveToNew) {
+            [self setCurrentPictureIndex:currentPictureIndex + 1];
+            [self scrollToIndex:currentPictureIndex animated:YES];
+        }
+    }];
+
     
 }
 
@@ -189,7 +209,7 @@
     
     [self setScrollViewContentSize];
     [self setCurrentPictureIndex:currentPictureIndex];
-    [self scrollToIndex:currentPictureIndex];
+    [self scrollToIndex:currentPictureIndex animated:NO];
 }
 
 - (void)updatePictureInfoView
@@ -212,7 +232,7 @@
         [pictureView setFrame:[self frameForPageAtIndex:[pictureView index]]];
     }
     
-    [self scrollToIndex:pictureIndexBeforeRotation];
+    [self scrollToIndex:pictureIndexBeforeRotation animated:NO];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
@@ -249,6 +269,37 @@
 }
 
 #pragma mark - Actions
+
+- (void)loadMorePictures
+{
+    loading = YES;
+    [dataSource loadMoreItems];
+    [self showMoreLoadingIndicator];
+}
+
+- (void)showMoreLoadingIndicator
+{
+    if (!activityView) {
+        activityView = [[UIView alloc] initWithFrame:[self frameForPageAtIndex:[[dataSource items] count]]];
+        loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [loadingIndicator startAnimating];
+        [activityView addSubview:loadingIndicator];
+        CGRect rect = activityView.frame;
+        rect.size.width = 30;
+        activityView.frame = rect;
+        loadingIndicator.center = CGPointMake(activityView.frame.size.width / 2, activityView.frame.size.height / 2);
+    }
+    [loadingIndicator startAnimating];
+    CGSize size = CGSizeMake(scrollView.contentSize.width + 30, scrollView.frame.size.height);
+    [scrollView setContentSize:size];
+    [scrollView addSubview:activityView];
+}
+
+- (void)hideMoreLoadingIndicator
+{
+    [loadingIndicator stopAnimating];
+    [activityView removeFromSuperview];
+}
 
 - (void)tapGestureHandler:(UITapGestureRecognizer *)tapGesture
 {
@@ -325,7 +376,7 @@
 
 - (void)loadPictureWithIndex:(NSInteger)index
 {
-    if (index < 0 || index >= [[dataSource items] count]) {
+    if (index < 0 || index >= (NSInteger)[[dataSource items] count]) {
         return;
     }
     
@@ -373,11 +424,16 @@
     }
 }
 
-#pragma mark -
-#pragma mark UIScrollViewDelegate
+#pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView 
 {
+    if (scrollView.contentSize.width - scrollView.frame.size.width < scrollView.contentOffset.x) {
+        if (!loading) {
+            [self loadMorePictures];
+        }
+        return;
+    }
     CGFloat pageWidth = scrollView.frame.size.width;
     float fractionalPage = scrollView.contentOffset.x / pageWidth;
     NSInteger page = floor(fractionalPage);

@@ -68,7 +68,6 @@
     
     fr = dateLabel.frame;
     fr.origin.x = authorLabel.frame.origin.x + authorLabel.frame.size.width;
-    fr.origin.y = quoteTextLabel.frame.origin.y + quoteTextLabel.frame.size.height;
     fr.size.width = (containerView.frame.size.width - margin - delta) / 2;
     dateLabel.frame = fr;
 }
