@@ -21,11 +21,17 @@
     int firstVisiblePageIndexBeforeRotation_;
     CGFloat percentScrolledIntoFirstVisiblePage_;
     
+    id localImageLoadedObserver;
+    id localPicturesLoadedObserver;
+    
+    bool loading;
     UIScrollView *scrollView;
     NSMutableArray *pictureViews;
     
     NSInteger currentPictureIndex;
     NSInteger pictureIndexBeforeRotation;
+    UIView *activityView;
+    UIActivityIndicatorView *loadingIndicator;
 }
 
 @property (nonatomic, assign) id parentController;
