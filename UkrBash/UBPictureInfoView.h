@@ -23,4 +23,6 @@
 @property (nonatomic, readonly) UILabel *authorLabel;
 @property (nonatomic, readonly) UILabel *dateLabel;
 
++ (CGFloat)preferedHeightForQuoteText:(NSString*)text viewWidth:(CGFloat)width;
+
 @end

@@ -48,7 +48,9 @@
     
     fr = quoteTextLabel.frame;
     fr.origin.x = delta;
+    fr.origin.y = idLabel.frame.origin.y + idLabel.frame.size.height;
     fr.size.width = containerView.frame.size.width - 2 * margin - delta;
+    fr.size.height = authorLabel.frame.origin.y - fr.origin.y;
     quoteTextLabel.frame = fr;
     
     fr = idLabel.frame;

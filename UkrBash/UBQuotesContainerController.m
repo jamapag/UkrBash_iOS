@@ -192,12 +192,18 @@
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
+    if (IS_IOS7) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+    if (IS_IOS7) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -220,6 +226,11 @@
     else {
         loading = NO;
     }
+}
+
+- (void)resize:(NSNotification *)notification
+{
+    [tableView reloadData];
 }
 
 - (void)publishedQuotesUpdated:(NSNotificationCenter *)notification
@@ -290,6 +301,7 @@
         [longPress release];
     }
     
+    cell.quoteTextLabel.font = GET_FONT();
     [dataSource configureCell:cell forRowAtIndexPath:indexPath];
     
     return cell;

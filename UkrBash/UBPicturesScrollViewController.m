@@ -13,6 +13,7 @@
 #import "Model.h"
 #import "SharingController.h"
 #import "UkrBashAppDelegate.h"
+#import "UBQuoteCell.h"
 
 @interface UBPicturesScrollViewController ()
 
@@ -210,13 +211,35 @@
     [self setScrollViewContentSize];
     [self setCurrentPictureIndex:currentPictureIndex];
     [self scrollToIndex:currentPictureIndex animated:NO];
+    if (IS_IOS7) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    if (IS_IOS7) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
+    }
 }
 
 - (void)updatePictureInfoView
 {
     if (currentPictureIndex >= 0 && currentPictureIndex < [[dataSource items] count]) {
         [dataSource configurePictureInfoView:infoView forRowAtIndexPath:[NSIndexPath indexPathForRow:currentPictureIndex inSection:0]];
+        CGFloat height = [UBPictureInfoView preferedHeightForQuoteText:infoView.textLabel.text viewWidth:infoView.frame.size.width];
+        CGRect fr = infoView.frame;
+        fr.size.height = height;
+        fr.origin.y = self.view.frame.size.height - height - 10.;
+        infoView.frame = fr;
+        infoView.textLabel.font = GET_FONT();
     }
+}
+
+- (void)resize:(NSNotification *)notification
+{
+    [self updatePictureInfoView];
 }
 
 #pragma mark -

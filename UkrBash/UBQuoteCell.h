@@ -34,6 +34,9 @@
 #define IPAD_CELL_MARGIN_RIGHT 5.0f
 #define IPAD_CELL_MARGIN_LEFT 15.0f
 
+#define FONT_SIZE 14.0f
+#define IPAD_FONT_SIZE 18.0f
+#define GET_FONT() IS_IOS7 ? [UIFont preferredFontForTextStyle:UIFontTextStyleBody] : IS_PAD ? [UIFont systemFontOfSize:IPAD_FONT_SIZE] : [UIFont systemFontOfSize:FONT_SIZE]
 
 @class UBQuoteCell;
 

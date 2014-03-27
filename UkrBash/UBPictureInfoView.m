@@ -8,6 +8,9 @@
 
 #import "UBPictureInfoView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UBQuoteCell.h"
+
+#define UBPictureInfoViewPadding 4.
 
 @implementation UBPictureInfoView
 
@@ -17,6 +20,26 @@
 @synthesize authorLabel;
 @synthesize dateLabel;
 
++ (CGFloat)preferedHeightForQuoteText:(NSString*)text viewWidth:(CGFloat)width
+{
+    CGSize constraint = CGSizeMake(width, MAXFLOAT);
+    CGSize size;
+
+    if (IS_IOS7) {
+        NSDictionary *attributes = @{NSFontAttributeName:GET_FONT()};
+        NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
+        [context setMinimumScaleFactor:1];
+        CGRect rect = [text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:context];
+        size.width = ceilf(rect.size.width);
+        size.height  = ceilf(rect.size.height);
+    } else {
+        size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    }
+    CGFloat height = MAX(size.height, UBPictureInfoViewPadding * 2);
+
+    return height + 16 * 2;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -25,14 +48,13 @@
         self.backgroundColor = [UIColor colorWithWhite:0. alpha:.6];
         self.layer.cornerRadius = 5.;
         
-        CGFloat padding = 4.;
-        idLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, padding, (self.frame.size.width - 2 * padding) / 2., 12.)];
+        idLabel = [[UILabel alloc] initWithFrame:CGRectMake(UBPictureInfoViewPadding, UBPictureInfoViewPadding, (self.frame.size.width - 2 * UBPictureInfoViewPadding) / 2., 12.)];
         idLabel.font = [UIFont systemFontOfSize:10];
         idLabel.backgroundColor = [UIColor clearColor];
         idLabel.textColor = [UIColor lightGrayColor];
         [self addSubview:idLabel];
         
-        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x + idLabel.frame.size.width, padding, idLabel.frame.size.width, idLabel.frame.size.height)];
+        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x + idLabel.frame.size.width, idLabel.frame.origin.y, idLabel.frame.size.width, idLabel.frame.size.height)];
         ratingLabel.font = idLabel.font;
         ratingLabel.backgroundColor = [UIColor clearColor];
         ratingLabel.textColor = [UIColor lightGrayColor];
@@ -40,15 +62,15 @@
         ratingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         [self addSubview:ratingLabel];
         
-        textLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, idLabel.frame.origin.y + idLabel.frame.size.height, self.frame.size.width - 2 * padding, self.frame.size.height - 2 * padding - 2 * idLabel.frame.size.height)];
-        textLabel.font = [UIFont systemFontOfSize:12.];
+        textLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x, idLabel.frame.origin.y + idLabel.frame.size.height, self.frame.size.width - 2 * UBPictureInfoViewPadding, self.frame.size.height - 2 * UBPictureInfoViewPadding - 2 * idLabel.frame.size.height)];
+        textLabel.font = GET_FONT();
         textLabel.backgroundColor = [UIColor clearColor];
         textLabel.textColor = [UIColor whiteColor];
         textLabel.numberOfLines = 0;
         textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self addSubview:textLabel];
         
-        authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, textLabel.frame.origin.y + textLabel.frame.size.height, idLabel.frame.size.width, idLabel.frame.size.height)];
+        authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x, textLabel.frame.origin.y + textLabel.frame.size.height, idLabel.frame.size.width, idLabel.frame.size.height)];
         authorLabel.font = idLabel.font;
         authorLabel.backgroundColor = [UIColor clearColor];
         authorLabel.textColor = [UIColor lightGrayColor];
@@ -73,6 +95,13 @@
     [authorLabel release];
     [dateLabel release];
     [super dealloc];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    authorLabel.frame = CGRectMake(idLabel.frame.origin.x, textLabel.frame.origin.y + textLabel.frame.size.height, idLabel.frame.size.width, idLabel.frame.size.height);
+    dateLabel.frame = CGRectMake(ratingLabel.frame.origin.x, authorLabel.frame.origin.y, ratingLabel.frame.size.width, authorLabel.frame.size.height);
 }
 
 /*

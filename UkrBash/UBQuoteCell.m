@@ -9,13 +9,9 @@
 #import "UBQuoteCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define FONT_SIZE 14.0f
-#define IPAD_FONT_SIZE 18.0f
 
 #define INFO_LABELS_HEIGHT 12.0f
 #define INFO_LABELS_PADDING (IS_PAD ? IPAD_INFO_LABELS_PADDING : IPHONE_INFO_LABELS_PADDING)
-
-#define GET_FONT() IS_IOS7 ? [UIFont preferredFontForTextStyle:UIFontTextStyleBody] : IS_PAD ? [UIFont systemFontOfSize:IPAD_FONT_SIZE] : [UIFont systemFontOfSize:FONT_SIZE]
 
 #define MARGIN_TOP IS_PAD ? IPAD_CELL_MARGIN_TOP : IPHONE_CELL_MARGIN_TOP
 #define MARGIN_BOTTOM IS_PAD ? IPAD_CELL_MARGIN_BOTTOM : IPHONE_CELL_MARGIN_BOTTOM
