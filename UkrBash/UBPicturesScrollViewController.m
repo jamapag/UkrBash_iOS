@@ -48,6 +48,9 @@
 
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated
 {
+    if (index >= [[dataSource items] count]) {
+        index = [[dataSource items] count] -1;
+    }
     CGRect frame = scrollView.frame;
     frame.origin.x = frame.size.width * index;
     frame.origin.y = 0;
@@ -228,8 +231,17 @@
     
     NSArray *subviews = [scrollView subviews];
     
-    for (UBPictureView *pictureView in subviews) {
-        [pictureView setFrame:[self frameForPageAtIndex:[pictureView index]]];
+    for (id pictureView in subviews) {
+        if ([pictureView isKindOfClass:[UBPictureView class]]) {
+            [pictureView setFrame:[self frameForPageAtIndex:[pictureView index]]];
+        }
+    }
+    
+    activityView.frame = [self frameForLoadingIndicatorView];
+    loadingIndicator.center = CGPointMake(activityView.frame.size.width / 2, activityView.frame.size.height / 2);
+    if ([activityView superview]) {
+        CGSize size = CGSizeMake(scrollView.contentSize.width + activityView.frame.size.width, scrollView.frame.size.height);
+        [scrollView setContentSize:size];
     }
     
     [self scrollToIndex:pictureIndexBeforeRotation animated:NO];
@@ -280,14 +292,10 @@
 - (void)showMoreLoadingIndicator
 {
     if (!activityView) {
-        activityView = [[UIView alloc] initWithFrame:[self frameForPageAtIndex:[[dataSource items] count]]];
+        activityView = [[UIView alloc] initWithFrame:[self frameForLoadingIndicatorView]];
         loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        [loadingIndicator startAnimating];
-        [activityView addSubview:loadingIndicator];
-        CGRect rect = activityView.frame;
-        rect.size.width = 30;
-        activityView.frame = rect;
         loadingIndicator.center = CGPointMake(activityView.frame.size.width / 2, activityView.frame.size.height / 2);
+        [activityView addSubview:loadingIndicator];
     }
     [loadingIndicator startAnimating];
     CGSize size = CGSizeMake(scrollView.contentSize.width + 30, scrollView.frame.size.height);
@@ -372,6 +380,13 @@
 //    pageFrame.size.width -= (2 * PADDING);
     pageFrame.origin.x = (bounds.size.width * index);// + PADDING;
     return pageFrame;
+}
+
+- (CGRect)frameForLoadingIndicatorView
+{
+    CGRect lastPageFrame = [self frameForPageAtIndex:[[dataSource items] count]];
+    lastPageFrame.size.width = 30;
+    return lastPageFrame;
 }
 
 - (void)loadPictureWithIndex:(NSInteger)index
