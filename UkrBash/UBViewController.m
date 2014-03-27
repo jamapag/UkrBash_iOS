@@ -87,10 +87,10 @@
     headerView.layer.shadowOpacity = .3;
     
     if (menuActionSelector) {
-        CGFloat menuButtonWidth = 25., menuButtonX = 15.;
+        CGFloat menuButtonWidth = 35., menuButtonX = 10.;
         
         CGFloat x = menuButtonX + menuButtonWidth + 5.;
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, iOS7offset, headerView.frame.size.width - x * 2, headerView.frame.size.height - iOS7offset)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, 20., headerView.frame.size.width - x * 2, headerView.frame.size.height - 24.)];
         titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textAlignment = UITextAlignmentCenter;
@@ -104,9 +104,10 @@
         
         UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
         menuButton.autoresizingMask = UIViewAutoresizingNone;
-        [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
+        menuButton.imageView.contentMode = UIViewContentModeCenter;
+        [menuButton setImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
         [menuButton addTarget:self action:menuActionSelector forControlEvents:UIControlEventTouchUpInside];
-        [menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 16.) / 2., menuButtonWidth, 16.)];
+        [menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 44.) / 2., menuButtonWidth, 4.)];
         [headerView addSubview:menuButton];
     }
     
