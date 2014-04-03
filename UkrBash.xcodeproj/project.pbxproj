@@ -130,7 +130,7 @@
 		B0604E3014D5F4AE00F8ADB0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */; };
 		B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */; };
 		B066EE2916AD83DB00A2A25C /* UBDonateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B066EE2816AD83DB00A2A25C /* UBDonateViewController.m */; };
-		B066EE2B16AD878600A2A25C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B066EE2A16AD878600A2A25C /* StoreKit.framework */; };
+		B066EE2B16AD878600A2A25C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B066EE2A16AD878600A2A25C /* StoreKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B066EE2E16AD9E3900A2A25C /* UBDonateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B066EE2D16AD9E3900A2A25C /* UBDonateCell.m */; };
 		B077FBA518901ED400934BB0 /* app-icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = B077FBA418901ED400934BB0 /* app-icon-152.png */; };
 		B077FBA718901FC700934BB0 /* app-icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = B077FBA618901FC700934BB0 /* app-icon-120.png */; };
@@ -481,11 +481,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B066EE2B16AD878600A2A25C /* StoreKit.framework in Frameworks */,
 				B01825D718D9FE91004263AD /* libz.dylib in Frameworks */,
 				2D92E78D17EB6099007E0B70 /* Security.framework in Frameworks */,
 				2DE25EA417EB6041007F0212 /* SystemConfiguration.framework in Frameworks */,
 				B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */,
-				B066EE2B16AD878600A2A25C /* StoreKit.framework in Frameworks */,
 				2D3312631630846700213BF2 /* AdSupport.framework in Frameworks */,
 				2D3312611630842A00213BF2 /* Accounts.framework in Frameworks */,
 				2D33125D16307DBF00213BF2 /* libfacebook_ios_sdk.a in Frameworks */,
