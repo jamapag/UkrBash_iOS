@@ -107,7 +107,7 @@
         menuButton.imageView.contentMode = UIViewContentModeCenter;
         [menuButton setImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
         [menuButton addTarget:self action:menuActionSelector forControlEvents:UIControlEventTouchUpInside];
-        [menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 44.) / 2., menuButtonWidth, 4.)];
+        [menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 44.) / 2., menuButtonWidth, 44.)];
         [headerView addSubview:menuButton];
     }
     
