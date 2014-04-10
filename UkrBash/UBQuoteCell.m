@@ -124,11 +124,6 @@ CGFloat animationOffset = 52.;
         containerView.layer.cornerRadius = 4.;
         containerView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         containerView.layer.borderWidth = .5;
-        containerView.layer.shadowColor = [UIColor blackColor].CGColor;
-        containerView.layer.shadowOpacity = 0.5f;
-        containerView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
-        containerView.layer.shadowRadius = 2.0f;
-        containerView.layer.masksToBounds = NO;
         containerView.backgroundColor = [UIColor whiteColor];
 
         

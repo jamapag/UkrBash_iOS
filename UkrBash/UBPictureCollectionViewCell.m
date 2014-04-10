@@ -25,11 +25,6 @@
         self.contentView.layer.cornerRadius = 4.;
         self.contentView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         self.contentView.layer.borderWidth = .5;
-        self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.contentView.layer.shadowOpacity = 0.7f;
-        self.contentView.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
-        self.contentView.layer.shadowRadius = 3.0f;
-        self.contentView.layer.masksToBounds = NO;
         
         imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width / 2 - 200, 10, 400, 400)];
         imageView.backgroundColor = [UIColor whiteColor];

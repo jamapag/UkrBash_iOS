@@ -345,7 +345,17 @@ enum UBSubMenuItems {
             [self.ubNavigationController pushViewController:donateViewController animated:YES];
             [donateViewController release];
         } else if (indexPath.row == UBMenuItemRateApp) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=517226573"]];
+            if ([SKStoreProductViewController class]) {
+                SKStoreProductViewController *controller = [[SKStoreProductViewController alloc] init];
+                controller.delegate = self;
+                [controller loadProductWithParameters:@{ SKStoreProductParameterITunesItemIdentifier:@"517226573" }
+                                      completionBlock:NULL];
+                [self presentViewController:controller animated:YES completion:nil];
+                [controller release];
+                return;
+            } else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/app/517226573?mt=8"]];
+            }
         } else if (indexPath.row == UBMenuItemWebsite) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
         } else if (indexPath.row == UBMenuItemContact) {
@@ -381,6 +391,13 @@ enum UBSubMenuItems {
         [alert show];
         [alert release];
     }
+}
+
+#pragma mark - SKStoreProductViewControllerDelegate
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
+{
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
