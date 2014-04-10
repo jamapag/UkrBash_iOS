@@ -22,11 +22,6 @@
         for (NSInteger pinIndex = 0; pinIndex < 3; pinIndex++) {
             UIImageView *pinImageView = [[UIImageView alloc] initWithFrame:CGRectMake(pinImage.size.width * pinIndex + padding * pinIndex, 0., pinImage.size.width, pinImage.size.height)];
             pinImageView.image = pinImage;
-            pinImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
-            pinImageView.layer.shadowRadius = 2.;
-            pinImageView.layer.shadowOffset = CGSizeMake(0, 0.);
-            pinImageView.layer.shadowOpacity = .3;
-            pinImageView.layer.shadowPath = [[UIBezierPath bezierPathWithOvalInRect:pinImageView.bounds] CGPath];
             [self addSubview:pinImageView];
             [pinImageView release];
         }
