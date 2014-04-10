@@ -19,7 +19,6 @@
 		2D23002D151B78950059BD2B /* EMailSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D23002C151B78950059BD2B /* EMailSharingController.m */; };
 		2D33125D16307DBF00213BF2 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D33125716307D5E00213BF2 /* libfacebook_ios_sdk.a */; };
 		2D3312611630842A00213BF2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3312601630842A00213BF2 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2D3312631630846700213BF2 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3312621630846700213BF2 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2D337F4E14D1AADB00DF225F /* UBPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F4D14D1AADB00DF225F /* UBPicture.m */; };
 		2D337F5114D1B2F600DF225F /* UBPublishedPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F5014D1B2F600DF225F /* UBPublishedPicturesDataSource.m */; };
 		2D439B321525BB860042D5D0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D439B301525BB860042D5D0 /* Default.png */; };
@@ -489,7 +488,6 @@
 				2D92E78D17EB6099007E0B70 /* Security.framework in Frameworks */,
 				2DE25EA417EB6041007F0212 /* SystemConfiguration.framework in Frameworks */,
 				B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */,
-				2D3312631630846700213BF2 /* AdSupport.framework in Frameworks */,
 				2D3312611630842A00213BF2 /* Accounts.framework in Frameworks */,
 				2D33125D16307DBF00213BF2 /* libfacebook_ios_sdk.a in Frameworks */,
 				B07CD485161C730A00DB5551 /* Social.framework in Frameworks */,
