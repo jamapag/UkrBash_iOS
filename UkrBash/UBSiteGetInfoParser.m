@@ -11,16 +11,16 @@
 
 @implementation UBSiteGetInfoParser
 
-static NSString *kName_QuotesPublished = @"quotes_published";
-static NSString *kName_QuotesUpcoming = @"quotes_upcoming";
-static NSString *kName_QuotesPublishedToday = @"quotes_published_today";
-static NSString *kName_QuotesUpcomingToday = @"quotes_upcoming_today";
-static NSString *kName_PicturesPublished = @"pictures_published";
-static NSString *kName_PicturesUpcoming = @"pictures_upcoming";
-static NSString *kName_PicturesPublishedToday = @"pictures_published_today";
-static NSString *kName_PicturesUpcomingToday = @"pictures_upcoming_today";
-static NSString *kName_Users = @"users";
-static NSString *kName_Mood = @"mood";
+__unused static NSString *kName_QuotesPublished = @"quotes_published";
+__unused static NSString *kName_QuotesUpcoming = @"quotes_upcoming";
+__unused static NSString *kName_QuotesPublishedToday = @"quotes_published_today";
+__unused static NSString *kName_QuotesUpcomingToday = @"quotes_upcoming_today";
+__unused static NSString *kName_PicturesPublished = @"pictures_published";
+__unused static NSString *kName_PicturesUpcoming = @"pictures_upcoming";
+__unused static NSString *kName_PicturesPublishedToday = @"pictures_published_today";
+__unused static NSString *kName_PicturesUpcomingToday = @"pictures_upcoming_today";
+__unused static NSString *kName_Users = @"users";
+__unused static NSString *kName_Mood = @"mood";
 
 
 @end

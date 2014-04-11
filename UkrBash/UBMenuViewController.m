@@ -362,13 +362,10 @@ enum UBSubMenuItems {
             if ([MFMailComposeViewController canSendMail]) {
                 MFMailComposeViewController * mailComposer = [[MFMailComposeViewController alloc] init];
                 mailComposer.mailComposeDelegate = self;
-                [mailComposer setToRecipients:[NSArray arrayWithObject:@"info@smile2mobile.net"]];
+//                [mailComposer setToRecipients:[NSArray arrayWithObject:@"info@smile2mobile.net"]];
+                [mailComposer setToRecipients:[NSArray arrayWithObject:@"mmarkovets@smile2mobile.net"]];
                 [mailComposer setSubject:@"UkrBash iOS feedback"];
-                if ([self.ubNavigationController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
-                    [self.ubNavigationController presentViewController:mailComposer animated:YES completion:nil];
-                } else {
-                    [self.ubNavigationController presentModalViewController:mailComposer animated:YES];
-                }
+                [self.ubNavigationController presentViewController:mailComposer animated:YES completion:nil];
             } else {
                 NSURL *url = [NSURL URLWithString:@"mailto:info@smile2mobile.net?subject=UkrBash%20iOS%20feedback"];
                 [[UIApplication sharedApplication] openURL:url];
@@ -381,11 +378,7 @@ enum UBSubMenuItems {
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    if ([self.ubNavigationController respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
-        [self.ubNavigationController dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        [self.ubNavigationController dismissModalViewControllerAnimated:YES];
-    }
+    [self.ubNavigationController dismissViewControllerAnimated:YES completion:nil];
     if (!error && result == MFMailComposeResultSent) {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Дякуєм!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];

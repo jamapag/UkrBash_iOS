@@ -11,9 +11,9 @@
 
 @implementation UBSiteGetTagsParser
 
-static NSString *kName_Id = @"id";
-static NSString *kName_Name = @"name";
-static NSString *kName_Url = @"url";
-static NSString *kName_Quotes = @"quotes";
+__unused static NSString *kName_Id = @"id";
+__unused static NSString *kName_Name = @"name";
+__unused static NSString *kName_Url = @"url";
+__unused static NSString *kName_Quotes = @"quotes";
 
 @end

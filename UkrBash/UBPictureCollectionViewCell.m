@@ -33,7 +33,7 @@
         
         pictureTittleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width / 2 - 200, 420, 400, 65)];
         pictureTittleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [pictureTittleLabel setLineBreakMode:UILineBreakModeWordWrap];
+        [pictureTittleLabel setLineBreakMode:NSLineBreakByWordWrapping];
         if (IS_IOS7) {
             [pictureTittleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
         } else {

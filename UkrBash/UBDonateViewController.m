@@ -97,7 +97,7 @@
     messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(40., 20., tableView.frame.size.width - 50., 100.)];
     messageLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     messageLabel.backgroundColor = [UIColor clearColor];
-    messageLabel.textAlignment = UITextAlignmentCenter;
+    messageLabel.textAlignment = NSTextAlignmentCenter;
     messageLabel.textColor = [UIColor darkGrayColor];
     messageLabel.shadowColor = [UIColor whiteColor];
     messageLabel.shadowOffset = CGSizeMake(0, 1.);
@@ -234,7 +234,7 @@
     details.shadowOffset = CGSizeMake(0., 1.);
     details.backgroundColor = [UIColor clearColor];
     details.numberOfLines = 0;
-    details.textAlignment = UITextAlignmentCenter;
+    details.textAlignment = NSTextAlignmentCenter;
     [footerView addSubview:details];
     [details release];
 

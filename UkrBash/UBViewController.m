@@ -93,7 +93,7 @@
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, 20., headerView.frame.size.width - x * 2, headerView.frame.size.height - 24.)];
         titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.textAlignment = UITextAlignmentCenter;
+        titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont boldSystemFontOfSize:21.];
         titleLabel.textColor = [UIColor darkGrayColor];
         titleLabel.shadowColor = [UIColor whiteColor];

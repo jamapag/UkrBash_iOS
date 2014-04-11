@@ -25,12 +25,7 @@
     [mailComposer setSubject:@""];
     NSString *body = [NSString stringWithFormat:@"%@ \n%@", (self.message) ? self.message : @"", self.url];
     [mailComposer setMessageBody:body isHTML:NO];
-    if ([self.rootViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
-        [self.rootViewController presentViewController:mailComposer animated:YES completion:nil];
-    }
-    else {
-        [self.rootViewController presentModalViewController:mailComposer animated:YES];
-    }
+    [self.rootViewController presentViewController:mailComposer animated:YES completion:nil];
     [mailComposer release];
     
     /**
@@ -43,12 +38,7 @@
 #pragma mark - mail composer delegate
 
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    if ([self.rootViewController respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
-        [self.rootViewController dismissViewControllerAnimated:YES completion:nil];
-    }
-    else {
-        [self.rootViewController dismissModalViewControllerAnimated:YES];
-    }
+    [self.rootViewController dismissViewControllerAnimated:YES completion:nil];
     /**
      * Mail compose view no more visible. Now we can release self.
      */

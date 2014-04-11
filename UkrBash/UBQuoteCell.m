@@ -49,7 +49,7 @@ CGFloat animationOffset = 52.;
         size.width = ceilf(rect.size.width);
         size.height  = ceilf(rect.size.height);
     } else {
-        size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
     }
 
     CGFloat height = MAX(size.height, 44.0f);
@@ -136,7 +136,7 @@ CGFloat animationOffset = 52.;
         
         ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(idLabel.frame.origin.x + idLabel.frame.size.width, y, (containerView.frame.size.width - INFO_LABELS_PADDING * 2.) / 2., INFO_LABELS_HEIGHT)];
         ratingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-        ratingLabel.textAlignment = UITextAlignmentRight;
+        ratingLabel.textAlignment = NSTextAlignmentRight;
         ratingLabel.font = [UIFont systemFontOfSize:10];
         ratingLabel.textColor = [UIColor grayColor];
         ratingLabel.backgroundColor = [UIColor clearColor];
@@ -145,7 +145,7 @@ CGFloat animationOffset = 52.;
         y += ratingLabel.frame.size.height + (CONTENT_PADDING_TOP);
         quoteTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(CONTENT_PADDING_LEFT, y, containerView.frame.size.width - ((CONTENT_PADDING_LEFT) + (CONTENT_PADDING_RIGHT)), containerView.frame.size.height - (INFO_LABELS_HEIGHT * 2 + (INFO_LABELS_PADDING) * 2 + ((CONTENT_PADDING_TOP) + (CONTENT_PADDING_BOTTOM))))];
         quoteTextLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        quoteTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+        quoteTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
         quoteTextLabel.font = GET_FONT();
         quoteTextLabel.numberOfLines = 0;
         quoteTextLabel.userInteractionEnabled = YES;
@@ -164,13 +164,15 @@ CGFloat animationOffset = 52.;
         dateLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         dateLabel.font = ratingLabel.font;
         dateLabel.textColor = [UIColor grayColor];
-        dateLabel.textAlignment = UITextAlignmentRight;
+        dateLabel.textAlignment = NSTextAlignmentRight;
         dateLabel.backgroundColor = [UIColor clearColor];
         [containerView addSubview:dateLabel];
         
         CGFloat x = containerView.frame.origin.x + 20.;
         CGFloat shareButtonWidth = 32.;
         UIButton *shareBtn = nil;
+        
+        animationOffset = 52.;
         
         if ([SharingController isSharingAvailableForNetworkType:SharingFacebookNetwork]) {
             shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];

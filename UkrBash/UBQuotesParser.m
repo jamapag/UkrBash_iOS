@@ -23,7 +23,7 @@ static NSString *kName_Author = @"author";
 static NSString *kName_AuthorId = @"author_id";
 static NSString *kName_Text = @"text";
 static NSString *kName_Rating = @"rating";
-static NSString *kName_Tags = @"tags";
+__unused static NSString *kName_Tags = @"tags";
 
 - (NSArray *)parseQuotesWithData:(NSData *)xmlData
 {

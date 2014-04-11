@@ -33,7 +33,7 @@
         size.width = ceilf(rect.size.width);
         size.height  = ceilf(rect.size.height);
     } else {
-        size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
     }
     CGFloat height = MAX(size.height, UBPictureInfoViewPadding * 2);
 
@@ -58,7 +58,7 @@
         ratingLabel.font = idLabel.font;
         ratingLabel.backgroundColor = [UIColor clearColor];
         ratingLabel.textColor = [UIColor lightGrayColor];
-        ratingLabel.textAlignment = UITextAlignmentRight;
+        ratingLabel.textAlignment = NSTextAlignmentRight;
         ratingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         [self addSubview:ratingLabel];
         
@@ -80,7 +80,7 @@
         dateLabel.font = idLabel.font;
         dateLabel.backgroundColor = [UIColor clearColor];
         dateLabel.textColor = [UIColor lightGrayColor];
-        dateLabel.textAlignment = UITextAlignmentRight;
+        dateLabel.textAlignment = NSTextAlignmentRight;
         dateLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         [self addSubview:dateLabel];
     }

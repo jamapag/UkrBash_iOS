@@ -26,7 +26,7 @@
         _titleLabel.textColor = [UIColor darkGrayColor];
         _titleLabel.shadowColor = [UIColor whiteColor];
         _titleLabel.shadowOffset = CGSizeMake(0., 1.);
-        _titleLabel.textAlignment = UITextAlignmentLeft;
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_titleLabel];
         [_titleLabel release];
         
@@ -40,7 +40,7 @@
         _valueLable.backgroundColor = [UIColor clearColor];
         _valueLable.shadowColor = [UIColor whiteColor];
         _valueLable.shadowOffset = CGSizeMake(0., 1.);
-        _valueLable.textAlignment = UITextAlignmentRight;
+        _valueLable.textAlignment = NSTextAlignmentRight;
         [self addSubview:_valueLable];
         [_valueLable release];
         

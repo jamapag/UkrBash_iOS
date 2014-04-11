@@ -15,10 +15,7 @@
 + (BOOL)isSharingAvailable
 {
     if ([SLComposeViewController class]) {
-        return [SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter];
-    }
-    else if ([TWTweetComposeViewController class]) {
-        return [TWTweetComposeViewController canSendTweet];
+        return YES;
     }
     return NO;
 }
@@ -33,36 +30,7 @@
         for (UIImage * image in images) {
             [composeViewController addImage:image];
         }
-        composeViewController.completionHandler = ^(TWTweetComposeViewControllerResult result) {
-            [self.rootViewController dismissModalViewControllerAnimated:YES];
-        };
-        if ([self.rootViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
-            [self.rootViewController presentViewController:composeViewController animated:YES completion:nil];
-        }
-        else {
-            composeViewController.completionHandler = ^(SLComposeViewControllerResult result) {
-                [self.rootViewController dismissModalViewControllerAnimated:YES];
-            };
-            [self.rootViewController presentModalViewController:composeViewController animated:YES];
-        }
-    }
-    else if ([TWTweetComposeViewController class]) {
-        TWTweetComposeViewController * composeViewController = [[TWTweetComposeViewController alloc] init];
-        [composeViewController setInitialText:self.message];
-        [composeViewController addURL:[NSURL URLWithString:self.url]];
-        for (UIImage * image in images) {
-            [composeViewController addImage:image];
-        }
-        composeViewController.completionHandler = ^(TWTweetComposeViewControllerResult result) {
-            [self.rootViewController dismissModalViewControllerAnimated:YES];
-        };
-        if ([self.rootViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
-            [self.rootViewController presentViewController:composeViewController animated:YES completion:nil];
-        }
-        else {
-            [self.rootViewController presentModalViewController:composeViewController animated:YES];
-        }
-        [composeViewController release];
+        [self.rootViewController presentViewController:composeViewController animated:YES completion:nil];
     }
 }
 

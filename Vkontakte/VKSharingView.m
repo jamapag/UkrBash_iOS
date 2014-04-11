@@ -407,6 +407,9 @@ enum  {
         statusBarHeight = [application statusBarFrame].size.width;
     } else {
         statusBarHeight = [application statusBarFrame].size.height;
+        if (!IS_PAD && orientation == UIDeviceOrientationPortraitUpsideDown) {
+            statusBarHeight = [application statusBarFrame].size.width;
+        }
     }
     
     CGPathRef newShadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
