@@ -48,6 +48,7 @@ CGFloat animationOffset = 52.;
         CGRect rect = [text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:context];
         size.width = ceilf(rect.size.width);
         size.height  = ceilf(rect.size.height);
+        [context release];
     } else {
         size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
     }
@@ -216,7 +217,6 @@ CGFloat animationOffset = 52.;
             [shareBtn setImage:[UIImage imageNamed:@"vk"] forState:UIControlStateNormal];
             [shareBtn addTarget:self action:@selector(shareWithVkontakteAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:shareBtn];
-            x += shareButtonWidth + 10.;
 
             animationOffset += shareButtonWidth + 10.;
         }

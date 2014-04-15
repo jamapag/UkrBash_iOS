@@ -32,6 +32,7 @@
         CGRect rect = [text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:context];
         size.width = ceilf(rect.size.width);
         size.height  = ceilf(rect.size.height);
+        [context release];
     } else {
         size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
     }

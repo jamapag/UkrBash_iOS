@@ -90,18 +90,6 @@ enum UBSubMenuItems {
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
     
-    float y = 0;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        // Load resources for iOS 6.1 or earlier;
-        NSLog(@"IOS6");
-        y = 0;
-    } else {
-        // Load resources for iOS 7 or later
-        y = 20;
-        NSLog(@"IOS7");
-    }
-    
-    
     UIView *headerView = [[self headerViewWithMenuButtonAction:nil] retain];
     
     logoButton = [[UIButton alloc] initWithFrame:CGRectMake(0., 24, 135., 30.)];

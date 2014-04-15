@@ -151,7 +151,6 @@
         [mailButton setImage:[UIImage imageNamed:@"vk"] forState:UIControlStateNormal];
         [mailButton addTarget:self action:@selector(vkontakteShareAction:) forControlEvents:UIControlEventTouchUpInside];
         [toolbar addSubview:mailButton];
-        x += sharingButtonHeight + padding;
     }
     
     [self updatePictureInfoView];
@@ -188,7 +187,7 @@
         loading = NO;
         bool shouldMoveToNew = currentPictureIndex == pictureViews.count - 1 ? YES : NO;
         [self hideMoreLoadingIndicator];
-        for (int i = pictureViews.count; i < [[dataSource items] count]; i++) {
+        for (NSUInteger i = pictureViews.count; i < [[dataSource items] count]; i++) {
             [pictureViews addObject:[NSNull null]];
         }
         [self setScrollViewContentSize];

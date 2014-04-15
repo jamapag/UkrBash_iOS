@@ -104,9 +104,9 @@
 
 - (void)dealloc
 {
-    [self.message release];
-    [self.url release];
-    [self.rootViewController release];
+    [message release];
+    [url release];
+    [_rootViewController release];
     [images release];
     [super dealloc];
 }
