@@ -9,83 +9,13 @@
 #import "FacebookSharingController.h"
 #import <Social/Social.h>
 
-/**
- * Protocol for private implementations of Facebook sharing.
- */
-@protocol FacebookControllerPrivateImplementation <NSObject>
-
-- (BOOL)handleOpenUrl:(NSURL*)url;
-
-@end
-
-@interface FacebookSocialController : SharingController <FacebookControllerPrivateImplementation>
-
-+ (id)instance;
-+ (BOOL)isSharingAvailable;
-
-@end
-
-#pragma mark -
-
 @implementation FacebookSharingController
-
-+ (BOOL)isSharingAvailable
-{
-    return [FacebookSocialController isSharingAvailable];
-}
-
-- (void)dealloc
-{
-    [super dealloc];
-}
-
-- (SharingController<FacebookControllerPrivateImplementation>*)privateImplementation
-{
-    if ([SLComposeViewController class]) {
-        return [FacebookSocialController instance];
-    } else {
-        return nil;
-    }
-}
-
-- (BOOL)handleOpenUrl:(NSURL *)url
-{
-    return [[self privateImplementation] handleOpenUrl:url];
-}
-
-- (void)showSharingDialog
-{
-    SharingController * privateImplementation = [self privateImplementation];
-    privateImplementation.rootViewController = self.rootViewController;
-    privateImplementation.message = self.message;
-    privateImplementation.url = self.url;
-    for (UIImage * image in images) {
-        [privateImplementation addImage:image];
-    }
-    [privateImplementation showSharingDialog];
-}
-
-@end
-
-#pragma mark -
-
-@implementation FacebookSocialController
-
-+ (id)instance
-{
-    return [[[self alloc] init] autorelease];
-}
 
 + (BOOL)isSharingAvailable
 {
     if ([SLComposeViewController class]) {
         return YES;
     }
-    return NO;
-}
-
-- (BOOL)handleOpenUrl:(NSURL *)url
-{
     return NO;
 }
 
