@@ -167,8 +167,8 @@
             
             [self.vkLoginDelegate vkLoginViewController:self didLoginWithAccessToken:accessTokenStr expirationDate:expirationDate userId:userId];
             
-            NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-            NSLog(@"cookies %@", [storage cookies]);
+//            NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//            NSLog(@"cookies %@", [storage cookies]);
         }
     }
 }

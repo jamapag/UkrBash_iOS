@@ -49,7 +49,7 @@ enum  {
         _headerLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         _headerLabel.font = [UIFont boldSystemFontOfSize:13.];
         _headerLabel.textColor = [UIColor vkSharingAttachmentHeaderTextColor];
-        _headerLabel.lineBreakMode = UILineBreakModeTailTruncation;
+        _headerLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _headerLabel.adjustsFontSizeToFitWidth = NO;
         [self addSubview:_headerLabel];
         [_headerLabel release];
@@ -58,7 +58,7 @@ enum  {
         CGFloat descriptionLabelHeight = MAX(0., frame.size.height - descriptionLabelY - padding);
         _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, descriptionLabelY, frame.size.width - 2. * padding, descriptionLabelHeight)];
         _descriptionLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        _descriptionLabel.lineBreakMode = UILineBreakModeTailTruncation;
+        _descriptionLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _descriptionLabel.adjustsFontSizeToFitWidth = NO;
         _descriptionLabel.numberOfLines = 4;
         _descriptionLabel.font = [UIFont systemFontOfSize:12.];

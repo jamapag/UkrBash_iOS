@@ -92,7 +92,8 @@
     VKLoginViewController * loginController = [[VKLoginViewController alloc] initWithAppId:kVKApplicationID
                                                                             andPermissions:@[@"offline", @"wall"]];
     loginController.vkLoginDelegate = self;
-    [self.rootViewController presentModalViewController:loginController animated:YES];
+//    [self.rootViewController presentModalViewController:loginController animated:YES];
+    [self.rootViewController presentViewController:loginController animated:YES completion:nil];
     [loginController release];
 }
 
@@ -205,13 +206,15 @@
     [vkontakte setResponseParser:vkontakteResponseParser];
     [vkontakteResponseParser release];
 
-    [self.rootViewController dismissModalViewControllerAnimated:YES];
+//    [self.rootViewController dismissModalViewControllerAnimated:YES];
+    [self.rootViewController dismissViewControllerAnimated:YES completion:nil];
     [self showSharingController];
 }
 
 - (void)vkLoginViewController:(VKLoginViewController *)loginViewController didFailWithError:(NSError *)error
 {
-    [self.rootViewController dismissModalViewControllerAnimated:YES];
+//    [self.rootViewController dismissModalViewControllerAnimated:YES];
+    [self.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
