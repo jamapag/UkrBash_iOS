@@ -88,7 +88,7 @@
     else {
         paramsString = [NSString stringWithFormat:@"%@&access_token=%@", paramsString, self.accessToken];
     }
-    return [NSURL URLWithString:[NSString stringWithFormat:VK_API_URL_SCHEMA, self.method, @"xml", paramsString]];
+    return [NSURL URLWithString:[NSString stringWithFormat:VK_API_URL_SCHEMA, self.method, @"json", paramsString]];
 }
 
 - (void)performRequestWithHandler:(VKRequestHandler)handler

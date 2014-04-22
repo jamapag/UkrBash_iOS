@@ -8,7 +8,6 @@
 
 #import "UBQuotesRequest.h"
 #import "ApiKey.h"
-#import "UBQuotesParser.h"
 
 @implementation UBQuotesRequest
 

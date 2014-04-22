@@ -47,6 +47,7 @@
 		2D5A4E8D151B36BD002ABFA2 /* SharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A4E8C151B36BD002ABFA2 /* SharingController.m */; };
 		2D5A4E91151B374D002ABFA2 /* FacebookSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A4E90151B374D002ABFA2 /* FacebookSharingController.m */; };
 		2D6E4DA7170B329800353843 /* UBPictureCollectionReusableFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E4DA6170B329800353843 /* UBPictureCollectionReusableFooter.m */; };
+		2D756A711906B2360057E7AA /* VKJsonResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D756A701906B2360057E7AA /* VKJsonResponseParser.m */; };
 		2D81D12F17EF5C760005CD42 /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D81D12D17EF5C760005CD42 /* menu-button.png */; };
 		2D81D13017EF5C760005CD42 /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D81D12E17EF5C760005CD42 /* menu-button@2x.png */; };
 		2D81D14F17EF5D180005CD42 /* category-button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D81D13317EF5D180005CD42 /* category-button-bg.png */; };
@@ -79,6 +80,11 @@
 		2D81D16A17EF5D180005CD42 /* vk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D81D14E17EF5D180005CD42 /* vk@2x.png */; };
 		2D81D16D17EF5D420005CD42 /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D81D16B17EF5D420005CD42 /* app-icon.png */; };
 		2D81D16E17EF5D420005CD42 /* app-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D81D16C17EF5D420005CD42 /* app-icon@2x.png */; };
+		2D8808521906EE6700EB8814 /* VKJsonResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D756A701906B2360057E7AA /* VKJsonResponseParser.m */; };
+		2D8808551906F1B300EB8814 /* VKJsonResponseParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8808541906F1B300EB8814 /* VKJsonResponseParserTests.m */; };
+		2D8808571906F3CD00EB8814 /* error_response_example.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D8808561906F3CD00EB8814 /* error_response_example.json */; };
+		2D8808591906F70800EB8814 /* success_response_example_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D8808581906F70800EB8814 /* success_response_example_list.json */; };
+		2D88085B1906F89C00EB8814 /* success_response_example_not_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D88085A1906F89C00EB8814 /* success_response_example_not_list.json */; };
 		2D92E78D17EB6099007E0B70 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5397EB177B5096002018F2 /* Security.framework */; };
 		2D9F6E0E14A158C40012D690 /* UBQuotesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */; };
 		2DADD34714A3FA4A00808AA6 /* UBQuoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */; };
@@ -91,13 +97,9 @@
 		2DB0FAC41416C8CF00EFD6BC /* UkrBashAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB0FAC31416C8CF00EFD6BC /* UkrBashAppDelegate.m */; };
 		2DB0FAC71416C8CF00EFD6BC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB0FAC51416C8CF00EFD6BC /* MainWindow.xib */; };
 		2DB0FACA1416C8CF00EFD6BC /* UkrBash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DB0FAC81416C8CF00EFD6BC /* UkrBash.xcdatamodeld */; };
-		2DB323DD1417A1FA001440B7 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323DC1417A1FA001440B7 /* GDataXMLNode.m */; };
 		2DB323E11417BA02001440B7 /* UBParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323E01417BA02001440B7 /* UBParser.m */; };
-		2DB323E41417BBAD001440B7 /* UBQuotesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323E31417BBAD001440B7 /* UBQuotesParser.m */; };
-		2DB323E71417BBEC001440B7 /* UBPicturesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323E61417BBEC001440B7 /* UBPicturesParser.m */; };
 		2DB323EA1417BC1E001440B7 /* UBSiteGetInfoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323E91417BC1E001440B7 /* UBSiteGetInfoParser.m */; };
 		2DB323ED1417BC4E001440B7 /* UBSiteGetTagsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323EC1417BC4E001440B7 /* UBSiteGetTagsParser.m */; };
-		2DB323F01417BC71001440B7 /* UBErrorsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323EF1417BC70001440B7 /* UBErrorsParser.m */; };
 		2DDED39A14A3649D003B315D /* UBQuote.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DDED39914A3649D003B315D /* UBQuote.m */; };
 		2DE25EA417EB6041007F0212 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DE25EA317EB6041007F0212 /* SystemConfiguration.framework */; };
 		2DE4917F15A5C14000002488 /* UBPicturesScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE4917E15A5C14000002488 /* UBPicturesScrollViewController.m */; };
@@ -105,6 +107,8 @@
 		2DE54AFF14C83FF800CB04CB /* UBPublishedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54AFE14C83FF800CB04CB /* UBPublishedQuotesDataSource.m */; };
 		2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */; };
 		2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */; };
+		2DEDABD118FED6F90013D26C /* UBJsonQuotesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDABD018FED6F90013D26C /* UBJsonQuotesParser.m */; };
+		2DEDABD418FEE7850013D26C /* UBJsonPicturesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDABD318FEE7850013D26C /* UBJsonPicturesParser.m */; };
 		2DF27D9E1455D2670011168F /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF27D9D1455D2670011168F /* libxml2.dylib */; };
 		B00510851517BBFA00D6D69B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00510841517BBFA00D6D69B /* QuartzCore.framework */; };
 		B008F69E150E942000556346 /* UBPicturesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B008F69D150E942000556346 /* UBPicturesContainerController.m */; };
@@ -117,13 +121,10 @@
 		B056CE70166E3716002E8EDD /* VKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B8164EDB9A0084D29A /* VKRequest.m */; };
 		B056CE71166E371A002E8EDD /* Vkontakte.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE6B166E30C0002E8EDD /* Vkontakte.m */; };
 		B056CE72166E371D002E8EDD /* VKError.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FBF2B1166CF367007BFDC0 /* VKError.m */; };
-		B056CE73166E372A002E8EDD /* VKXMLResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */; };
-		B056CE74166E3752002E8EDD /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB323DC1417A1FA001440B7 /* GDataXMLNode.m */; };
 		B056CE75166E3762002E8EDD /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF27D9D1455D2670011168F /* libxml2.dylib */; };
 		B056CE82166E3931002E8EDD /* VKURLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FBF2C7166D3C4F007BFDC0 /* VKURLParserTests.m */; };
 		B056CE85166E397D002E8EDD /* VKRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE84166E397D002E8EDD /* VKRequestTests.m */; };
 		B056CE88166E48E2002E8EDD /* FBTestBlocker.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE87166E48E2002E8EDD /* FBTestBlocker.m */; };
-		B056CE8B166E4E44002E8EDD /* VKXMLResponseParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE8A166E4E44002E8EDD /* VKXMLResponseParserTests.m */; };
 		B0604E2D14D5F4A500F8ADB0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2C14D5F4A500F8ADB0 /* MessageUI.framework */; };
 		B0604E3014D5F4AE00F8ADB0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */; };
 		B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B060544C14C48BFB004B8ED9 /* UBMenuItemCell.m */; };
@@ -132,9 +133,6 @@
 		B066EE2E16AD9E3900A2A25C /* UBDonateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B066EE2D16AD9E3900A2A25C /* UBDonateCell.m */; };
 		B077FBA518901ED400934BB0 /* app-icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = B077FBA418901ED400934BB0 /* app-icon-152.png */; };
 		B077FBA718901FC700934BB0 /* app-icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = B077FBA618901FC700934BB0 /* app-icon-120.png */; };
-		B07BD5EA166F903900D318B0 /* error_response_example.xml in Resources */ = {isa = PBXBuildFile; fileRef = B07BD5E7166F903900D318B0 /* error_response_example.xml */; };
-		B07BD5EB166F903900D318B0 /* success_response_example_list.xml in Resources */ = {isa = PBXBuildFile; fileRef = B07BD5E8166F903900D318B0 /* success_response_example_list.xml */; };
-		B07BD5EC166F903900D318B0 /* success_response_example_not_list.xml in Resources */ = {isa = PBXBuildFile; fileRef = B07BD5E9166F903900D318B0 /* success_response_example_not_list.xml */; };
 		B07CD485161C730A00DB5551 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B07CD484161C730A00DB5551 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B07EE72415D0236C0004B8E2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B07EE72315D0236C0004B8E2 /* Localizable.strings */; };
 		B08934771891260000AE6B19 /* app-icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = B08934751891260000AE6B19 /* app-icon-72.png */; };
@@ -152,7 +150,6 @@
 		B0D2BCC716761DCB00F4D771 /* VKWallPostAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D2BCC616761DCB00F4D771 /* VKWallPostAttachment.m */; };
 		B0D4596818E1CC2C00DDD98E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D4596718E1CC2C00DDD98E /* Reachability.m */; };
 		B0D8FD861524F15400D4A6EB /* UBPictureInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */; };
-		B0DA90B3164EDB860084D29A /* VKXMLResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */; };
 		B0DA90BA164EDB9A0084D29A /* VKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B6164EDB9A0084D29A /* VKLoginViewController.m */; };
 		B0DA90BB164EDB9A0084D29A /* VKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B8164EDB9A0084D29A /* VKRequest.m */; };
 		B0DCA88614BF22C7007132B6 /* UBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DCA88514BF22C7007132B6 /* UBNavigationController.m */; };
@@ -265,6 +262,8 @@
 		2D6CAB0517BD05E00052B5D9 /* UkrBash.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UkrBash.entitlements; sourceTree = "<group>"; };
 		2D6E4DA5170B329800353843 /* UBPictureCollectionReusableFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureCollectionReusableFooter.h; sourceTree = "<group>"; };
 		2D6E4DA6170B329800353843 /* UBPictureCollectionReusableFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureCollectionReusableFooter.m; sourceTree = "<group>"; };
+		2D756A6F1906B2360057E7AA /* VKJsonResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKJsonResponseParser.h; sourceTree = "<group>"; };
+		2D756A701906B2360057E7AA /* VKJsonResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKJsonResponseParser.m; sourceTree = "<group>"; };
 		2D81D12D17EF5C760005CD42 /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-button.png"; path = "Images/menu-button.png"; sourceTree = "<group>"; };
 		2D81D12E17EF5C760005CD42 /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-button@2x.png"; path = "Images/menu-button@2x.png"; sourceTree = "<group>"; };
 		2D81D13317EF5D180005CD42 /* category-button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "category-button-bg.png"; path = "Images/category-button-bg.png"; sourceTree = "<group>"; };
@@ -297,6 +296,11 @@
 		2D81D14E17EF5D180005CD42 /* vk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vk@2x.png"; path = "Images/vk@2x.png"; sourceTree = "<group>"; };
 		2D81D16B17EF5D420005CD42 /* app-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon.png"; path = "Images/app-icon.png"; sourceTree = "<group>"; };
 		2D81D16C17EF5D420005CD42 /* app-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon@2x.png"; path = "Images/app-icon@2x.png"; sourceTree = "<group>"; };
+		2D8808531906F1B300EB8814 /* VKJsonResponseParserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKJsonResponseParserTests.h; sourceTree = "<group>"; };
+		2D8808541906F1B300EB8814 /* VKJsonResponseParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKJsonResponseParserTests.m; sourceTree = "<group>"; };
+		2D8808561906F3CD00EB8814 /* error_response_example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error_response_example.json; sourceTree = "<group>"; };
+		2D8808581906F70800EB8814 /* success_response_example_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success_response_example_list.json; sourceTree = "<group>"; };
+		2D88085A1906F89C00EB8814 /* success_response_example_not_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success_response_example_not_list.json; sourceTree = "<group>"; };
 		2D9F6E0C14A158C40012D690 /* UBQuotesContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesContainerController.h; sourceTree = "<group>"; };
 		2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesContainerController.m; sourceTree = "<group>"; };
 		2DADD34514A3FA4A00808AA6 /* UBQuoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuoteCell.h; sourceTree = "<group>"; };
@@ -314,20 +318,12 @@
 		2DB0FAC31416C8CF00EFD6BC /* UkrBashAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkrBashAppDelegate.m; sourceTree = "<group>"; };
 		2DB0FAC61416C8CF00EFD6BC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		2DB0FAC91416C8CF00EFD6BC /* UkrBash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UkrBash.xcdatamodel; sourceTree = "<group>"; };
-		2DB323DB1417A1FA001440B7 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		2DB323DC1417A1FA001440B7 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		2DB323DF1417BA02001440B7 /* UBParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBParser.h; sourceTree = "<group>"; };
 		2DB323E01417BA02001440B7 /* UBParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBParser.m; sourceTree = "<group>"; };
-		2DB323E21417BBAD001440B7 /* UBQuotesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesParser.h; sourceTree = "<group>"; };
-		2DB323E31417BBAD001440B7 /* UBQuotesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesParser.m; sourceTree = "<group>"; };
-		2DB323E51417BBEC001440B7 /* UBPicturesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesParser.h; sourceTree = "<group>"; };
-		2DB323E61417BBEC001440B7 /* UBPicturesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesParser.m; sourceTree = "<group>"; };
 		2DB323E81417BC1E001440B7 /* UBSiteGetInfoParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBSiteGetInfoParser.h; sourceTree = "<group>"; };
 		2DB323E91417BC1E001440B7 /* UBSiteGetInfoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSiteGetInfoParser.m; sourceTree = "<group>"; };
 		2DB323EB1417BC4E001440B7 /* UBSiteGetTagsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBSiteGetTagsParser.h; sourceTree = "<group>"; };
 		2DB323EC1417BC4E001440B7 /* UBSiteGetTagsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSiteGetTagsParser.m; sourceTree = "<group>"; };
-		2DB323EE1417BC70001440B7 /* UBErrorsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBErrorsParser.h; sourceTree = "<group>"; };
-		2DB323EF1417BC70001440B7 /* UBErrorsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBErrorsParser.m; sourceTree = "<group>"; };
 		2DDC236514A27527000B407F /* ApiKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiKey.h; sourceTree = "<group>"; };
 		2DDED39814A3649D003B315D /* UBQuote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuote.h; sourceTree = "<group>"; };
 		2DDED39914A3649D003B315D /* UBQuote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuote.m; sourceTree = "<group>"; };
@@ -343,6 +339,10 @@
 		2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBBestQuotesDataSource.m; sourceTree = "<group>"; };
 		2DE54B0314C847FD00CB04CB /* UBRandomQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRandomQuotesDataSource.h; sourceTree = "<group>"; };
 		2DE54B0414C847FD00CB04CB /* UBRandomQuotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRandomQuotesDataSource.m; sourceTree = "<group>"; };
+		2DEDABCF18FED6F90013D26C /* UBJsonQuotesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBJsonQuotesParser.h; sourceTree = "<group>"; };
+		2DEDABD018FED6F90013D26C /* UBJsonQuotesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBJsonQuotesParser.m; sourceTree = "<group>"; };
+		2DEDABD218FEE7850013D26C /* UBJsonPicturesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBJsonPicturesParser.h; sourceTree = "<group>"; };
+		2DEDABD318FEE7850013D26C /* UBJsonPicturesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBJsonPicturesParser.m; sourceTree = "<group>"; };
 		2DF27D9D1455D2670011168F /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		B00510841517BBFA00D6D69B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B008F69C150E942000556346 /* UBPicturesContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesContainerController.h; sourceTree = "<group>"; };
@@ -362,8 +362,6 @@
 		B056CE84166E397D002E8EDD /* VKRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKRequestTests.m; sourceTree = "<group>"; };
 		B056CE86166E48E2002E8EDD /* FBTestBlocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTestBlocker.h; sourceTree = "<group>"; };
 		B056CE87166E48E2002E8EDD /* FBTestBlocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTestBlocker.m; sourceTree = "<group>"; };
-		B056CE89166E4E44002E8EDD /* VKXMLResponseParserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKXMLResponseParserTests.h; sourceTree = "<group>"; };
-		B056CE8A166E4E44002E8EDD /* VKXMLResponseParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKXMLResponseParserTests.m; sourceTree = "<group>"; };
 		B0604E2C14D5F4A500F8ADB0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B0604E2F14D5F4AE00F8ADB0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		B060544B14C48BFB004B8ED9 /* UBMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMenuItemCell.h; sourceTree = "<group>"; };
@@ -375,9 +373,6 @@
 		B066EE2D16AD9E3900A2A25C /* UBDonateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBDonateCell.m; sourceTree = "<group>"; };
 		B077FBA418901ED400934BB0 /* app-icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon-152.png"; path = "Images/app-icon-152.png"; sourceTree = "<group>"; };
 		B077FBA618901FC700934BB0 /* app-icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon-120.png"; path = "Images/app-icon-120.png"; sourceTree = "<group>"; };
-		B07BD5E7166F903900D318B0 /* error_response_example.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = error_response_example.xml; sourceTree = "<group>"; };
-		B07BD5E8166F903900D318B0 /* success_response_example_list.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = success_response_example_list.xml; sourceTree = "<group>"; };
-		B07BD5E9166F903900D318B0 /* success_response_example_not_list.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = success_response_example_not_list.xml; sourceTree = "<group>"; };
 		B07CD484161C730A00DB5551 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		B07EE72315D0236C0004B8E2 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		B08934751891260000AE6B19 /* app-icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon-72.png"; path = "Images/app-icon-72.png"; sourceTree = "<group>"; };
@@ -416,8 +411,6 @@
 		B0D4596718E1CC2C00DDD98E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Submodules/Reachability/Reachability.m; sourceTree = "<group>"; };
 		B0D8FD841524F15400D4A6EB /* UBPictureInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureInfoView.h; sourceTree = "<group>"; };
 		B0D8FD851524F15400D4A6EB /* UBPictureInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureInfoView.m; sourceTree = "<group>"; };
-		B0DA90B1164EDB860084D29A /* VKXMLResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKXMLResponseParser.h; sourceTree = "<group>"; };
-		B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKXMLResponseParser.m; sourceTree = "<group>"; };
 		B0DA90B5164EDB9A0084D29A /* VKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKLoginViewController.h; sourceTree = "<group>"; };
 		B0DA90B6164EDB9A0084D29A /* VKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKLoginViewController.m; sourceTree = "<group>"; };
 		B0DA90B7164EDB9A0084D29A /* VKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKRequest.h; sourceTree = "<group>"; };
@@ -640,7 +633,6 @@
 				2D144DD71419071D009E1DBA /* Requests */,
 				2DB323F11417C9C1001440B7 /* Controllers */,
 				2DB323DE1417B19A001440B7 /* Parsers */,
-				2DB323D91417A1BD001440B7 /* GDataXML */,
 				2DB0FAC21416C8CF00EFD6BC /* UkrBashAppDelegate.h */,
 				2DB0FAC31416C8CF00EFD6BC /* UkrBashAppDelegate.m */,
 				2D12630414F6E789001C9DA0 /* UIKitExtentions.h */,
@@ -677,32 +669,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2DB323D91417A1BD001440B7 /* GDataXML */ = {
-			isa = PBXGroup;
-			children = (
-				2DB323DB1417A1FA001440B7 /* GDataXMLNode.h */,
-				2DB323DC1417A1FA001440B7 /* GDataXMLNode.m */,
-			);
-			name = GDataXML;
-			sourceTree = "<group>";
-		};
 		2DB323DE1417B19A001440B7 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
 				2DB323DF1417BA02001440B7 /* UBParser.h */,
 				2DB323E01417BA02001440B7 /* UBParser.m */,
-				2DB323E21417BBAD001440B7 /* UBQuotesParser.h */,
-				2DB323E31417BBAD001440B7 /* UBQuotesParser.m */,
-				2DB323E51417BBEC001440B7 /* UBPicturesParser.h */,
-				2DB323E61417BBEC001440B7 /* UBPicturesParser.m */,
 				2DB323E81417BC1E001440B7 /* UBSiteGetInfoParser.h */,
 				2DB323E91417BC1E001440B7 /* UBSiteGetInfoParser.m */,
 				2DB323EB1417BC4E001440B7 /* UBSiteGetTagsParser.h */,
 				2DB323EC1417BC4E001440B7 /* UBSiteGetTagsParser.m */,
-				2DB323EE1417BC70001440B7 /* UBErrorsParser.h */,
-				2DB323EF1417BC70001440B7 /* UBErrorsParser.m */,
-				B0DA90B1164EDB860084D29A /* VKXMLResponseParser.h */,
-				B0DA90B2164EDB860084D29A /* VKXMLResponseParser.m */,
+				2DEDABCF18FED6F90013D26C /* UBJsonQuotesParser.h */,
+				2DEDABD018FED6F90013D26C /* UBJsonQuotesParser.m */,
+				2DEDABD218FEE7850013D26C /* UBJsonPicturesParser.h */,
+				2DEDABD318FEE7850013D26C /* UBJsonPicturesParser.m */,
+				2D756A6F1906B2360057E7AA /* VKJsonResponseParser.h */,
+				2D756A701906B2360057E7AA /* VKJsonResponseParser.m */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -802,9 +783,9 @@
 		B07BD5E6166F903900D318B0 /* TestData */ = {
 			isa = PBXGroup;
 			children = (
-				B07BD5E7166F903900D318B0 /* error_response_example.xml */,
-				B07BD5E8166F903900D318B0 /* success_response_example_list.xml */,
-				B07BD5E9166F903900D318B0 /* success_response_example_not_list.xml */,
+				2D8808561906F3CD00EB8814 /* error_response_example.json */,
+				2D8808581906F70800EB8814 /* success_response_example_list.json */,
+				2D88085A1906F89C00EB8814 /* success_response_example_not_list.json */,
 			);
 			path = TestData;
 			sourceTree = "<group>";
@@ -938,8 +919,8 @@
 				B0FBF2C7166D3C4F007BFDC0 /* VKURLParserTests.m */,
 				B056CE83166E397D002E8EDD /* VKRequestTests.h */,
 				B056CE84166E397D002E8EDD /* VKRequestTests.m */,
-				B056CE89166E4E44002E8EDD /* VKXMLResponseParserTests.h */,
-				B056CE8A166E4E44002E8EDD /* VKXMLResponseParserTests.m */,
+				2D8808531906F1B300EB8814 /* VKJsonResponseParserTests.h */,
+				2D8808541906F1B300EB8814 /* VKJsonResponseParserTests.m */,
 			);
 			path = VkontakteTests;
 			sourceTree = "<group>";
@@ -1148,9 +1129,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0FBF2C5166D3C4E007BFDC0 /* InfoPlist.strings in Resources */,
-				B07BD5EA166F903900D318B0 /* error_response_example.xml in Resources */,
-				B07BD5EB166F903900D318B0 /* success_response_example_list.xml in Resources */,
-				B07BD5EC166F903900D318B0 /* success_response_example_not_list.xml in Resources */,
+				2D88085B1906F89C00EB8814 /* success_response_example_not_list.json in Resources */,
+				2D8808571906F3CD00EB8814 /* error_response_example.json in Resources */,
+				2D8808591906F70800EB8814 /* success_response_example_list.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1180,18 +1161,15 @@
 				2DB0FAC11416C8CF00EFD6BC /* main.m in Sources */,
 				2DB0FAC41416C8CF00EFD6BC /* UkrBashAppDelegate.m in Sources */,
 				2DB0FACA1416C8CF00EFD6BC /* UkrBash.xcdatamodeld in Sources */,
-				2DB323DD1417A1FA001440B7 /* GDataXMLNode.m in Sources */,
 				2DB323E11417BA02001440B7 /* UBParser.m in Sources */,
-				2DB323E41417BBAD001440B7 /* UBQuotesParser.m in Sources */,
-				2DB323E71417BBEC001440B7 /* UBPicturesParser.m in Sources */,
 				2DB323EA1417BC1E001440B7 /* UBSiteGetInfoParser.m in Sources */,
 				2DB323ED1417BC4E001440B7 /* UBSiteGetTagsParser.m in Sources */,
-				2DB323F01417BC71001440B7 /* UBErrorsParser.m in Sources */,
 				2D144DDA1419073B009E1DBA /* UBRequest.m in Sources */,
 				2D57274C1455F5EE00A6DAE4 /* Model.m in Sources */,
 				2D57274F1456017900A6DAE4 /* UBQuotesRequest.m in Sources */,
 				2D9F6E0E14A158C40012D690 /* UBQuotesContainerController.m in Sources */,
 				2DDED39A14A3649D003B315D /* UBQuote.m in Sources */,
+				2D756A711906B2360057E7AA /* VKJsonResponseParser.m in Sources */,
 				2DADD34714A3FA4A00808AA6 /* UBQuoteCell.m in Sources */,
 				B0DCA88614BF22C7007132B6 /* UBNavigationController.m in Sources */,
 				B0DCA89214BF3279007132B6 /* UBMenuViewController.m in Sources */,
@@ -1199,12 +1177,14 @@
 				2D07888414C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m in Sources */,
 				2DE54AFF14C83FF800CB04CB /* UBPublishedQuotesDataSource.m in Sources */,
 				2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */,
+				2DEDABD418FEE7850013D26C /* UBJsonPicturesParser.m in Sources */,
 				2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */,
 				B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */,
 				2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */,
 				2D337F4E14D1AADB00DF225F /* UBPicture.m in Sources */,
 				2D337F5114D1B2F600DF225F /* UBPublishedPicturesDataSource.m in Sources */,
 				B09B37C414DC7649003E732D /* UBPictureCell.m in Sources */,
+				2DEDABD118FED6F90013D26C /* UBJsonQuotesParser.m in Sources */,
 				B09B37C914DC783F003E732D /* UBTableViewDataSource.m in Sources */,
 				B09B37CC14DC7B97003E732D /* UBQuotesDataSource.m in Sources */,
 				B09B37CF14DC8410003E732D /* UBPicturesDataSource.m in Sources */,
@@ -1223,7 +1203,6 @@
 				B09CFA98152C7CD600316B7C /* EGORefreshTableHeaderView.m in Sources */,
 				2D0D814D15A49E0A00AAB0B5 /* UBPictureView.m in Sources */,
 				2DE4917F15A5C14000002488 /* UBPicturesScrollViewController.m in Sources */,
-				B0DA90B3164EDB860084D29A /* VKXMLResponseParser.m in Sources */,
 				B0DA90BA164EDB9A0084D29A /* VKLoginViewController.m in Sources */,
 				B0DA90BB164EDB9A0084D29A /* VKRequest.m in Sources */,
 				B0FBF2AC166CE4FB007BFDC0 /* VkontakteSharingController.m in Sources */,
@@ -1255,16 +1234,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B056CE74166E3752002E8EDD /* GDataXMLNode.m in Sources */,
-				B056CE73166E372A002E8EDD /* VKXMLResponseParser.m in Sources */,
+				2D8808521906EE6700EB8814 /* VKJsonResponseParser.m in Sources */,
 				B056CE72166E371D002E8EDD /* VKError.m in Sources */,
+				2D8808551906F1B300EB8814 /* VKJsonResponseParserTests.m in Sources */,
 				B056CE71166E371A002E8EDD /* Vkontakte.m in Sources */,
 				B056CE70166E3716002E8EDD /* VKRequest.m in Sources */,
 				B0FBF2CD166D401C007BFDC0 /* VKURLParser.m in Sources */,
 				B056CE82166E3931002E8EDD /* VKURLParserTests.m in Sources */,
 				B056CE85166E397D002E8EDD /* VKRequestTests.m in Sources */,
 				B056CE88166E48E2002E8EDD /* FBTestBlocker.m in Sources */,
-				B056CE8B166E4E44002E8EDD /* VKXMLResponseParserTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

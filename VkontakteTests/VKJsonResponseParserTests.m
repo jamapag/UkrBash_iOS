@@ -1,28 +1,28 @@
 //
-//  VKXMLResponseParserTests.m
-//  UkrBash
+//  VKJsonResponseParserTests.m
+//  VkontakteTests
 //
-//  Created by Michail Grebionkin on 04.12.12.
+//  Created by maks on 22.04.14.
 //
 //
 
-#import "VKXMLResponseParserTests.h"
-#import "VKXMLResponseParser.h"
+#import "VKJsonResponseParserTests.h"
+#import "VKJsonResponseParser.h"
 
-@interface VKXMLResponseParserTests()
+@interface VKJsonResponseParserTests()
 {
-    VKXMLResponseParser * parser;
+    VKJsonResponseParser *parser;
 }
 
 @end
 
-@implementation VKXMLResponseParserTests
+@implementation VKJsonResponseParserTests
 
 - (void)setUp
 {
     [super setUp];
     
-    parser = [[VKXMLResponseParser alloc] init];
+    parser = [[VKJsonResponseParser alloc] init];
 }
 
 - (void)tearDown
@@ -33,22 +33,22 @@
 
 /**
  * Test of parsing typical error response.
- * @see TestsData/error_response_example.xml
+ * @see TestsData/error_response_example.json
  */
 - (void)testErrorResponseParsing
 {
-    NSError * error = nil;
-    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"error_response_example" ofType:@"xml"];
-    NSData * inputData = [NSData dataWithContentsOfFile:path];
+    NSError *error = nil;
+    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"error_response_example" ofType:@"json"];
+    NSData *inputData = [NSData dataWithContentsOfFile:path];
     STAssertNotNil(inputData, @"test data not loaded");
     
-    NSDictionary * results = [parser dictionaryFromData:inputData error:&error];
+    NSDictionary *results = [parser dictionaryFromData:inputData error:&error];
     STAssertNil(error, @"error == nil");
     STAssertNotNil(results, @"results == nil");
     STAssertNotNil([results objectForKey:@"error"], @"error not set");
     STAssertTrue([[results objectForKey:@"error"] isKindOfClass:[NSDictionary class]], @"error is not a dictionary");
     
-    NSDictionary * resultsError = [results objectForKey:@"error"];
+    NSDictionary *resultsError = [results objectForKey:@"error"];
     STAssertNotNil([resultsError objectForKey:@"error_code"], @"error_code not set");
     STAssertNotNil([resultsError objectForKey:@"error_msg"], @"error_msg not set");
     STAssertNotNil([resultsError objectForKey:@"request_params"], @"request_params not set");
@@ -57,17 +57,17 @@
 /**
  * Test of parsing typical success response with list data.
  * Example data from wall.get documentation example.
- * @see http://vk.com/developers.php?oid=-1&p=wall.get
- * @see TestsData/success_response_example_list.xml
+ * @see http://vk.com/dev/wall.get
+ * @see TestsData/success_response_example_list.json
  */
 - (void)testSuccessResponseListParsing
 {
-    NSError * error = nil;
-    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"success_response_example_list" ofType:@"xml"];
-    NSData * inputData = [NSData dataWithContentsOfFile:path];
+    NSError *error = nil;
+    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"success_response_example_list" ofType:@"json"];
+    NSData *inputData = [NSData dataWithContentsOfFile:path];
     STAssertNotNil(inputData, @"test data not loaded");
     
-    NSDictionary * results = [parser dictionaryFromData:inputData error:&error];
+    NSDictionary *results = [parser dictionaryFromData:inputData error:&error];
     STAssertNil(error, @"error != nil");
     STAssertNotNil(results, @"results == nil");
     
@@ -82,13 +82,13 @@
 /**
  * Test of parsing typical success response with not list data.
  * Example data from notes.getById documentation example.
- * @see http://vk.com/developers.php?o=-1&p=notes.getById
- * @see TestsData/success_response_example_not_list.xml
+ * @see http://vk.com/dev/notes.getById
+ * @see TestsData/success_response_example_not_list.json
  */
 - (void)testSuccessResponseNotListParsing
 {
     NSError * error = nil;
-    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"success_response_example_not_list" ofType:@"xml"];
+    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"success_response_example_not_list" ofType:@"json"];
     NSData * inputData = [NSData dataWithContentsOfFile:path];
     STAssertNotNil(inputData, @"test data not loaded");
     
@@ -98,7 +98,7 @@
     
     NSDictionary * response = [results objectForKey:@"response"];
     STAssertNotNil(response, @"response == nil");
-    STAssertTrue([[response objectForKey:@"note"] isKindOfClass:[NSDictionary class]], @"response[note] not a dictionary");
+    STAssertTrue([[response objectForKey:@"title"] isEqualToString:@"Title was there"], @"response[title] is wrong");
 }
 
 @end

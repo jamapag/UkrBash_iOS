@@ -8,11 +8,10 @@
 
 #import "Model.h"
 #import "UBQuotesRequest.h"
-#import "UBQuotesParser.h"
-#import "UBPicturesParser.h"
+#import "UBJsonQuotesParser.h"
+#import "UBJsonPicturesParser.h"
 #import "UBImagesRequest.h"
 #import "UBQuote.h"
-#import "UBErrorsParser.h"
 
 NSString *const kNotificationDataUpdated = @"kNotificationDataUpdated";
 
@@ -258,20 +257,17 @@ static Model *sharedModel = nil;
     // TODO: Add errors parser
     NSArray *array = nil;
     if ([request isKindOfClass:[UBQuotesRequest class]]) {
-        UBQuotesParser *parser = [[UBQuotesParser alloc] init];
+        UBJsonQuotesParser *parser = [[UBJsonQuotesParser alloc] init];
         array = [parser parseQuotesWithData:data];
         [parser release];
     } else {
-        UBPicturesParser *parser = [[UBPicturesParser alloc] init];
+        UBJsonPicturesParser *parser = [[UBJsonPicturesParser alloc] init];
         array = [parser parsePicturesWithData:data];
         [parser release];
     }
     
     if (array == nil) {
-        UBErrorsParser *parser = [[UBErrorsParser alloc] init];
-        NSDictionary *errorDictionary = [parser parseErrorWithData:data];
-        NSLog(@"Error code: %@", [errorDictionary objectForKey:@"code"]);
-        [parser release];
+        NSLog(@"Some error happen");
     }
     
     if ([request.method isEqualToString:kQuotes_getPublished]) {

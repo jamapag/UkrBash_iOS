@@ -7,7 +7,6 @@
 //
 
 #import "UBRequest.h"
-#import "UBQuotesParser.h"
 #import "ApiKey.h"
 
 @implementation UBRequest
@@ -16,7 +15,7 @@
 @synthesize method;
 @synthesize addToTop;
 
-// Sample http://api.ukrbash.org/1/quotes.getPublished.xml?client=apiKey
+// Sample http://api.ukrbash.org/1/quotes.getPublished.json?client=apiKey
 // Base API Url
 const NSString *kAPIBaseURL = @"http://api.ukrbash.org/1/";
 
@@ -36,7 +35,7 @@ NSString *const kSite_getTags = @"site.getTags";
 NSString *const kSite_getSearch = @"site.getSearch";
 
 // Format
-NSString *const kFormat = @".xml";
+NSString *const kFormat = @".json";
 
 // Params
 NSString *const kClient = @"client";

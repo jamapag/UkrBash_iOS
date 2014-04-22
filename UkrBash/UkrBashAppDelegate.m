@@ -152,14 +152,6 @@
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [[SharingController sharingControllerForNetworkType:SharingFacebookNetwork] handleOpenUrl:url];
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [[SharingController sharingControllerForNetworkType:SharingFacebookNetwork] handleOpenUrl:url];
-}
-
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*

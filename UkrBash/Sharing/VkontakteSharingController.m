@@ -11,7 +11,7 @@
 #import "ApiKey.h"
 #import "Vkontakte.h"
 #import "VKSharingView.h"
-#import "VKXMLResponseParser.h"
+#import "VKJsonResponseParser.h"
 #import "VKError.h"
 
 #define VK_ACCESS_TOKEN_KEY @"VK_ACCESS_TOKEN_KEY"
@@ -68,7 +68,8 @@
     vkontakte = [[Vkontakte alloc] initWithAccessToken:[userDefaults objectForKey:VK_ACCESS_TOKEN_KEY]
                                         expirationDate:[userDefaults objectForKey:VK_ACCESS_TOKEN_EXPIRATION_DATE_KEY]
                                                 userId:[userDefaults integerForKey:VK_USER_ID_KEY]];
-    VKXMLResponseParser * vkontakteResponseParser = [[VKXMLResponseParser alloc] init];
+    VKJsonResponseParser *vkontakteResponseParser = [[VKJsonResponseParser alloc] init];
+    
     [vkontakte setResponseParser:vkontakteResponseParser];
     [vkontakteResponseParser release];
 }
@@ -202,18 +203,16 @@
     
     vkontakte = [[Vkontakte alloc] initWithAccessToken:accessToken expirationDate:expirationDate userId:userId];
 
-    VKXMLResponseParser * vkontakteResponseParser = [[VKXMLResponseParser alloc] init];
+    VKJsonResponseParser *vkontakteResponseParser = [[VKJsonResponseParser alloc] init];
     [vkontakte setResponseParser:vkontakteResponseParser];
     [vkontakteResponseParser release];
 
-//    [self.rootViewController dismissModalViewControllerAnimated:YES];
     [self.rootViewController dismissViewControllerAnimated:YES completion:nil];
     [self showSharingController];
 }
 
 - (void)vkLoginViewController:(VKLoginViewController *)loginViewController didFailWithError:(NSError *)error
 {
-//    [self.rootViewController dismissModalViewControllerAnimated:YES];
     [self.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
