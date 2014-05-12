@@ -51,7 +51,7 @@ static NSString *kName_Rating = @"rating";
             [picture release];
         }
     }
-    return pictures;
+    return [pictures autorelease];
 }
 
 @end

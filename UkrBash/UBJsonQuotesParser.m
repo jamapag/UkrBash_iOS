@@ -47,7 +47,7 @@ __unused static NSString *kName_Tags = @"tags";
             [quote release];
         }
     }
-    return quotes;
+    return [quotes autorelease];
 }
 
 @end

@@ -11,6 +11,14 @@
 
 @implementation UBPublishedQuotesDataSource
 
+- (id)init
+{
+    if (self = [super init]) {
+        [[Model sharedModel] clearPublishedQuotes];
+    }
+    return self;
+}
+
 - (NSArray *)items
 {
     return [[Model sharedModel] publishedQuotes];

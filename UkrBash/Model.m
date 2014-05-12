@@ -12,11 +12,13 @@
 #import "UBJsonPicturesParser.h"
 #import "UBImagesRequest.h"
 #import "UBQuote.h"
+#import "UkrBashAppDelegate.h"
+#import "Quote.h"
 
 NSString *const kNotificationDataUpdated = @"kNotificationDataUpdated";
 
-NSInteger const kNumberOfQuotesToLoad = 25;
-NSInteger const kNumberOfPicturesToLoad = 26;
+NSInteger const kNumberOfQuotesToLoad = 100;
+NSInteger const kNumberOfPicturesToLoad = 100;
 
 
 @implementation Model
@@ -249,6 +251,49 @@ static Model *sharedModel = nil;
     [request release];
 }
 
+- (void)clearPublishedQuotes
+{
+    [self.publishedQuotes removeAllObjects];
+}
+
+- (void)clearUpcomingQuotes
+{
+    [self.unpablishedQuotes removeAllObjects];
+}
+
+- (void)clearBestQuotes;
+{
+    [self.bestQuotes removeAllObjects];
+}
+
+- (void)clearRandomQuotes;
+{
+    [self.randomQuotes removeAllObjects];
+}
+
+- (void)favoritizeQuotes:(NSArray *)quotes
+{
+    // TODO: move this code to cellForRowAtIndexPath, and change this method for autualize/syncronize quotes with core data.
+    for (UBQuote *quote in quotes) {
+        NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Quote" inManagedObjectContext:context];
+        [fetchRequest setEntity:entity];
+        NSPredicate *predicate  = [NSPredicate predicateWithFormat:@"quoteId == %@ and favorite = %@", [NSNumber numberWithInteger:quote.quoteId], [NSNumber numberWithBool:YES]];
+        [fetchRequest setPredicate:predicate];
+        NSError *error;
+        Quote *cdQuote;
+        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        if ([fetchedObjects count] > 0) {
+            cdQuote = [fetchedObjects objectAtIndex:0];
+            cdQuote.rating = [NSNumber numberWithInteger:quote.rating];
+            cdQuote.pubDate = quote.pubDate;
+            cdQuote.status = [NSNumber numberWithInteger:quote.status];
+            quote.favorite = YES;
+        }
+        [fetchRequest release];
+    }
+}
 
 #pragma mark - UBQuotesRequestDelegate
 - (void)request:(UBRequest *)request didFinishWithData:(NSData *)data
@@ -260,6 +305,7 @@ static Model *sharedModel = nil;
         UBJsonQuotesParser *parser = [[UBJsonQuotesParser alloc] init];
         array = [parser parseQuotesWithData:data];
         [parser release];
+        [self favoritizeQuotes:array];
     } else {
         UBJsonPicturesParser *parser = [[UBJsonPicturesParser alloc] init];
         array = [parser parsePicturesWithData:data];
@@ -269,6 +315,7 @@ static Model *sharedModel = nil;
     if (array == nil) {
         NSLog(@"Some error happen");
     }
+    
     
     if ([request.method isEqualToString:kQuotes_getPublished]) {
         if (request.addToTop) {

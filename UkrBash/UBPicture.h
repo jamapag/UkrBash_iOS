@@ -21,6 +21,7 @@
     NSString *thumbnail; // картинка 150х150
     NSString *title; // назва картинки
     NSInteger rating; // рейтинг
+    BOOL favorite;
 }
 
 @property (nonatomic, assign) NSInteger pictureId;
@@ -34,5 +35,6 @@
 @property (nonatomic, retain) NSString *thumbnail;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, assign) NSInteger rating;
+@property (nonatomic, assign) BOOL favorite;
 
 @end

@@ -43,6 +43,7 @@
 @protocol UBQuoteCellDelegate <NSObject>
 
 - (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(SharingNetworkType)shareType;
+- (void)favoriteActionForCell:(UBQuoteCell *)cell;
 
 @end
 
@@ -53,6 +54,7 @@
     UILabel *authorLabel;
     UILabel *dateLabel;
     UILabel *idLabel;
+    UIButton *favoriteButton;
     UIView *containerView;
     BOOL shareButtonsVisible;
     id <UBQuoteCellDelegate> shareDelegate;
@@ -63,6 +65,7 @@
 @property (nonatomic, readonly) UILabel *dateLabel;
 @property (nonatomic, readonly) UILabel *authorLabel;
 @property (nonatomic, readonly) UILabel *idLabel;
+@property (nonatomic, readonly) UIButton *favoriteButton;
 @property (nonatomic, readonly) BOOL shareButtonsVisible;
 
 @property (nonatomic, assign) id <UBQuoteCellDelegate> shareDelegate;

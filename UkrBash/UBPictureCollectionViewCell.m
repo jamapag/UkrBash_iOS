@@ -2,17 +2,19 @@
 //  UBPictureCollectionViewCell.m
 //  UkrBash
 //
-//  Created by maks on 20.02.13.
+//  Created by Maks Markovets on 08.05.14.
 //
 //
 
 #import "UBPictureCollectionViewCell.h"
-#import <QuartzCore/QuartzCore.h>
 
 @implementation UBPictureCollectionViewCell
+
 @synthesize imageView;
 @synthesize authorLabel;
 @synthesize ratingLabel;
+@synthesize dateLabel;
+@synthesize favoriteButton;
 @synthesize shareDelegate;
 
 - (id)initWithFrame:(CGRect)frame
@@ -26,12 +28,28 @@
         self.contentView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         self.contentView.layer.borderWidth = .5;
         
-        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width / 2 - 200, 10, 400, 400)];
-        imageView.backgroundColor = [UIColor whiteColor];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        float imageWidth = self.frame.size.width;
+        
+        authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, (self.frame.size.width - 20) / 2, 20)];
+        [authorLabel setFont:[UIFont systemFontOfSize:14]];
+        [authorLabel setNumberOfLines:1];
+        authorLabel.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:authorLabel];
+        
+        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width / 2, authorLabel.frame.origin.y, (self.frame.size.width - 20) / 2, 20)];
+        [ratingLabel setFont:[UIFont systemFontOfSize:14]];
+        [ratingLabel setNumberOfLines:1];
+        [ratingLabel setTextAlignment:NSTextAlignmentRight];
+        ratingLabel.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:ratingLabel];
+        
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 40, imageWidth - 4, imageWidth - 4)];
+        imageView.backgroundColor = [UIColor lightGrayColor];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
         [self.contentView addSubview:imageView];
         
-        pictureTittleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width / 2 - 200, 420, 400, 65)];
+        pictureTittleLabel = [[UILabel alloc] initWithFrame:CGRectMake(2, imageWidth + 40 - 65, imageWidth-4, 65)];
         pictureTittleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [pictureTittleLabel setLineBreakMode:NSLineBreakByWordWrapping];
         if (IS_IOS7) {
@@ -42,41 +60,45 @@
         [pictureTittleLabel setNumberOfLines:0];
         [pictureTittleLabel setUserInteractionEnabled:YES];
         [pictureTittleLabel setTextAlignment:NSTextAlignmentCenter];
+        [pictureTittleLabel setTextColor:[UIColor whiteColor]];
+        
+        
+        CAGradientLayer *maskLayer = [CAGradientLayer layer];
+        
+        CGColorRef outerColor = [UIColor colorWithWhite:0. alpha:0.0].CGColor;
+        CGColorRef innerColor = [UIColor colorWithWhite:0. alpha:1.0].CGColor;
+        
+        maskLayer.colors = [NSArray arrayWithObjects:(id)outerColor,
+                            (id)innerColor, nil];
+        maskLayer.frame = pictureTittleLabel.frame;
+        [self.contentView.layer insertSublayer:maskLayer atIndex:3];
+        [self.contentView.layer insertSublayer:maskLayer above:imageView.layer];
         [self.contentView addSubview:pictureTittleLabel];
         
-        authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, self.frame.size.height - 40, 400, 20)];
-        [authorLabel setFont:[UIFont systemFontOfSize:14]];
-        [authorLabel setNumberOfLines:1];
-        authorLabel.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:authorLabel];
         
-        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width / 2, self.frame.size.height - 40, (self.frame.size.width - 40) / 2, 20)];
-        [ratingLabel setFont:[UIFont systemFontOfSize:14]];
-        [ratingLabel setNumberOfLines:1];
-        [ratingLabel setTextAlignment:NSTextAlignmentRight];
-        ratingLabel.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:ratingLabel];
+        favoriteButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        favoriteButton.frame = CGRectMake(10., self.frame.size.height - 30, 20, 20);
+        [favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+        [favoriteButton addTarget:self action:@selector(favoriteAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:favoriteButton];
         
-        UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
-        gestureRecognizer.numberOfTapsRequired = 1;
-        [self.contentView addGestureRecognizer:gestureRecognizer];
-        [gestureRecognizer release];
+        
+        dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width / 2, self.frame.size.height - 30, (self.frame.size.width - 20) / 2, 20)];
+        dateLabel.font = [UIFont systemFontOfSize:14];
+        dateLabel.numberOfLines = 1;
+        dateLabel.textAlignment = NSTextAlignmentRight;
+        [self.contentView addSubview:dateLabel];
         
     }
     return self;
 }
 
-- (void)handleTapGesture:(UIGestureRecognizer *)tapGesture
-{
-    if (tapGesture.state == UIGestureRecognizerStateEnded) {
-        [self shareButtonAction:nil];
-    }
-}
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    imageView.frame = CGRectMake(self.frame.size.width / 2 - 200, 10, 400, 400);
+    
+    float imageWidth = self.frame.size.width;
+    imageView.frame = CGRectMake(2, 40, imageWidth - 4, imageWidth - 4);
 }
 
 - (void)dealloc {
@@ -84,7 +106,8 @@
     [pictureTittleLabel release];
     [authorLabel release];
     [ratingLabel release];
-    [sharingOverlay release];
+    [dateLabel release];
+    [favoriteButton release];
     [super dealloc];
 }
 
@@ -96,77 +119,6 @@
 - (void)setPictureTitle:(NSString *)pictureTitle
 {
     pictureTittleLabel.text = pictureTitle;
-}
-
-- (void)shareButtonAction:(id)sender
-{
-    self.selected = !self.selected;
-    if (self.selected) {
-        if (!sharingOverlay) {
-            sharingOverlay = [[UIView alloc] initWithFrame:pictureTittleLabel.frame];
-            sharingOverlay.backgroundColor = [UIColor whiteColor];
-            UIView *buttonsBox = [[UIView alloc] initWithFrame:CGRectZero];
-            UIButton *shareBtn = nil;
-            CGFloat shareButtonWidth = 44.;
-            CGFloat sharingOverlayHeight = sharingOverlay.frame.size.height;
-            float y = (sharingOverlayHeight / 2) - (shareButtonWidth / 2);
-            float x = 5;
-            if ([SharingController isSharingAvailableForNetworkType:SharingFacebookNetwork]) {
-                shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                shareBtn.frame = CGRectMake(x, y, shareButtonWidth, shareButtonWidth);
-                shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-                [shareBtn setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
-                [shareBtn addTarget:self action:@selector(shareWithFacebookAction:) forControlEvents:UIControlEventTouchUpInside];
-                [buttonsBox addSubview:shareBtn];
-                x += shareButtonWidth + 5.;
-            }
-            
-            if ([SharingController isSharingAvailableForNetworkType:SharingTwitterNetwork]) {
-                shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                shareBtn.frame = CGRectMake(x, y, shareButtonWidth, shareButtonWidth);
-                shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-                [shareBtn setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
-                [shareBtn addTarget:self action:@selector(shareWithTwitterAction:) forControlEvents:UIControlEventTouchUpInside];
-                [buttonsBox addSubview:shareBtn];
-                x += shareButtonWidth + 5.;
-            }
-            
-            if ([SharingController isSharingAvailableForNetworkType:SharingEMailNetwork]) {
-                shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                shareBtn.frame = CGRectMake(x, y, shareButtonWidth, shareButtonWidth);
-                shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-                [shareBtn setImage:[UIImage imageNamed:@"gmail"] forState:UIControlStateNormal];
-                [shareBtn addTarget:self action:@selector(shareWithEmailAction:) forControlEvents:UIControlEventTouchUpInside];
-                [buttonsBox addSubview:shareBtn];
-                x += shareButtonWidth + 5.;
-            }
-            
-            if ([SharingController isSharingAvailableForNetworkType:SharingVkontakteNetwork]) {
-                shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                shareBtn.frame = CGRectMake(x, y, shareButtonWidth, shareButtonWidth);
-                shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-                [shareBtn setImage:[UIImage imageNamed:@"vk"] forState:UIControlStateNormal];
-                [shareBtn addTarget:self action:@selector(shareWithVkontakteAction:) forControlEvents:UIControlEventTouchUpInside];
-                [buttonsBox addSubview:shareBtn];
-                x += shareButtonWidth + 5.;
-            }
-            buttonsBox.frame = CGRectMake(sharingOverlay.frame.size.width / 2 - (x / 2), 0, x, sharingOverlay.frame.size.height);
-            [sharingOverlay addSubview:buttonsBox];
-            [buttonsBox release];
-        }
-        
-        sharingOverlay.alpha = 0;
-        [self.contentView addSubview:sharingOverlay];
-        [UIView animateWithDuration:.4 animations:^ {
-            sharingOverlay.alpha = 1;
-        }];
-    } else {
-        [UIView animateWithDuration:.4 animations:^ {
-            sharingOverlay.alpha = 0;
-        } completion:^ (BOOL finished) {
-            [sharingOverlay removeFromSuperview];
-        }];
-    }
 }
 
 - (void)shareWithFacebookAction:(id)sender
@@ -197,13 +149,6 @@
     }
 }
 
-- (void)hideSharingOverlay
-{
-    if (sharingOverlay) {
-        [sharingOverlay removeFromSuperview];
-    }
-}
-
 - (void)copyUrlAction:(id)sender
 {
     if (self.shareDelegate) {
@@ -215,6 +160,13 @@
 {
     if (self.shareDelegate) {
         [self.shareDelegate openInBrowserActionForCell:self];
+    }
+}
+
+- (void)favoriteAction:(id)sender
+{
+    if (self.shareDelegate) {
+        [self.shareDelegate favoriteActionForCell:self];
     }
 }
 

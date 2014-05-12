@@ -32,6 +32,12 @@
     } else {
         cell.dateLabel.text = [[self dateFormatter] stringFromDate:quote.addDate];
     }
+    
+    if (quote.favorite) {
+        [cell.favoriteButton setImage:[UIImage imageNamed:@"favorite_active"] forState:UIControlStateNormal];
+    } else {
+        [cell.favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+    }
 
     cell.authorLabel.text = quote.author;
 }

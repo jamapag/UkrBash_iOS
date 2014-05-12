@@ -16,6 +16,8 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "Reachability.h"
+#import "UkrBashAppDelegate.h"
+#import "Picture.h"
 
 @interface UBPicturesCollectionViewController ()
 
@@ -152,7 +154,9 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 {
     Reachability *reach = notification.object;
     if ([reach isReachable]) {
-        [self startRefresh:nil];
+        if (!loading) {
+            [self startRefresh:nil];
+        }
     }
     else {
         loading = NO;
@@ -249,6 +253,56 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:pictureUrl]];
 }
 
+- (void)favoriteActionForCell:(UBPictureCollectionViewCell *)cell
+{
+    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
+    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    
+    NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Picture" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate  = [NSPredicate predicateWithFormat:@"pictureId == %@", [NSNumber numberWithInteger:picture.pictureId]];
+    [fetchRequest setPredicate:predicate];
+    NSError *error;
+    Picture *cdPicture;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if ([fetchedObjects count] > 0) {
+        cdPicture = [fetchedObjects objectAtIndex:0];
+    }
+    [fetchRequest release];
+    
+    if (!picture.favorite) {
+        NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+        cdPicture = [NSEntityDescription insertNewObjectForEntityForName:@"Picture" inManagedObjectContext:context];
+        cdPicture.pictureId = [NSNumber numberWithInteger:picture.pictureId];
+        cdPicture.status = [NSNumber numberWithInteger:picture.status];
+        cdPicture.type = picture.type;
+        cdPicture.addDate = picture.addDate;
+        cdPicture.pubDate = picture.pubDate;
+        cdPicture.author = picture.author;
+        cdPicture.authorId = [NSNumber numberWithInteger:picture.authorId];
+        cdPicture.title = picture.title;
+        cdPicture.thumbnail = picture.thumbnail;
+        cdPicture.image = picture.image;
+        cdPicture.rating = [NSNumber numberWithInteger:picture.rating];
+        cdPicture.favorite = [NSNumber numberWithBool:YES];
+        picture.favorite = YES;
+    } else {
+        cdPicture.favorite = [NSNumber numberWithBool:NO];
+        picture.favorite = NO;
+    }
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    } else {
+        if (picture.favorite) {
+            [cell.favoriteButton setImage:[UIImage imageNamed:@"favorite_active"] forState:UIControlStateNormal];
+        } else {
+            [cell.favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+        }
+    }
+}
+
 #pragma mark - UICollectionViewDataSoruce methods.
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -274,12 +328,18 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     } else if (picture.rating <= 0) {
         imageCell.ratingLabel.text = [NSString stringWithFormat:@"%ld", (long)picture.rating];
     }
+    imageCell.dateLabel.text = [[dataSource dateFormatter] stringFromDate:picture.addDate];
     [imageCell setPictureTitle:picture.title];
-    [imageCell hideSharingOverlay];
+    if (picture.favorite) {
+        [imageCell.favoriteButton setImage:[UIImage imageNamed:@"favorite_active"] forState:UIControlStateNormal];
+    } else {
+        [imageCell.favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+    }
     return imageCell;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
     
     UBPictureCollectionReusableFooter *footer = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"UBPrictureCollectionViewFooter" forIndexPath:indexPath];
     return footer;
@@ -287,7 +347,8 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 
 #pragma mark - UICollectionViewDelegateFlowLayout methods.
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
     if (shouldShowFooter) {
         return CGSizeMake(50, 50);
     }
@@ -296,7 +357,11 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(495, 525);
+    if (IS_PAD) {
+        return CGSizeMake(495, 575);
+    } else {
+        return CGSizeMake(300, 380);
+    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -342,7 +407,8 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     rotating = YES;
 }
 
-- (void)viewDidLayoutSubviews {
+- (void)viewDidLayoutSubviews
+{
     rotating = NO;
 }
 
@@ -370,7 +436,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     }
     
     float reload_distance = 10;
-    if(y > h + reload_distance) {
+    if(y > h + reload_distance && size.height > bounds.size.height) {
         if (!loading) {
             NSLog(@"load more rows");
             [self loadMorePictures];

@@ -2,42 +2,41 @@
 //  UBPictureCollectionViewCell.h
 //  UkrBash
 //
-//  Created by Maks Markovets on 08.05.14.
+//  Created by maks on 20.02.13.
 //
 //
 
 #import <UIKit/UIKit.h>
 #import "SharingController.h"
+#import "UBPictureCollectionViewCell.h"
 
-@protocol UBQuoteCollectionCellDelegate <NSObject>
+//@protocol UBQuoteCollectionCellDelegate <NSObject>
+//
+//- (void)quoteCell:(id)cell shareQuoteWithType:(SharingNetworkType)shareType;
+//- (void)copyUrlActionForCell:(id)cell;
+//- (void)openInBrowserActionForCell:(id)cell;
+//- (void)favoriteActionForCell:(id)cell;
+//
+//@end
 
-- (void)quoteCell:(id)cell shareQuoteWithType:(SharingNetworkType)shareType;
-- (void)copyUrlActionForCell:(id)cell;
-- (void)openInBrowserActionForCell:(id)cell;
-- (void)favoriteActionForCell:(id)cell;
-
-@end
-
-@interface UBPictureCollectionViewCell : UICollectionViewCell
+@interface UBPictureCollectionViewCellOld : UICollectionViewCell
 {
     UIImageView *imageView;
-    UILabel *dateLabel;
     UILabel *pictureTittleLabel;
     UILabel *authorLabel;
     UILabel *ratingLabel;
-    UIButton *favoriteButton;
+    UIView *sharingOverlay;
     id<UBQuoteCollectionCellDelegate> shareDelegate;
 }
 
 @property (nonatomic, retain) UIImageView *imageView;
 @property (nonatomic, readonly) UILabel *authorLabel;
 @property (nonatomic, readonly) UILabel *ratingLabel;
-@property (nonatomic, readonly) UILabel *dateLabel;
-@property (nonatomic, readonly) UIButton *favoriteButton;
 @property (nonatomic, assign) id<UBQuoteCollectionCellDelegate> shareDelegate;
 
 - (NSString *)pictureTitle;
 - (void)setPictureTitle:(NSString *)pictureTitle;
+- (void)hideSharingOverlay;
 - (void)copyUrlAction:(id)sender;
 - (void)openInBrowserAction:(id)sender;
 

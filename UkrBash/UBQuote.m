@@ -19,6 +19,25 @@
 @synthesize authorId;
 @synthesize rating;
 @synthesize text;
+@synthesize favorite;
+
+
+- (id)initWithQuote:(Quote *)quote
+{
+    if (self = [super init]) {
+        self.quoteId = [quote.quoteId integerValue];
+        self.status = [quote.status integerValue];
+        self.type = quote.type;
+        self.addDate = quote.addDate;
+        self.pubDate = quote.pubDate;
+        self.author = quote.author;
+        self.authorId = [quote.authorId integerValue];
+        self.rating = [quote.rating integerValue];
+        self.text = quote.text;
+        self.favorite = [quote.favorite boolValue];
+    }
+    return self;
+}
 
 - (void)dealloc
 {

@@ -18,6 +18,7 @@
 #import "GAIDictionaryBuilder.h"
 #import "EGOUkrBashActivityIndicator.h"
 #import "Reachability.h"
+#import "UBFavoriteQuotesDataSource.h"
 
 @implementation UBQuotesContainerController
 
@@ -147,7 +148,11 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // for starting loading automatically.
-    [tableView setContentInset:UIEdgeInsetsMake(1., 0., 0., 0.)];
+//    [tableView setContentInset:UIEdgeInsetsMake(1., 0., 0., 0.)];
+    
+    if ([dataSource isKindOfClass:[UBFavoriteQuotesDataSource class]]) {
+        [(UBFavoriteQuotesDataSource *)dataSource setTableView:tableView];
+    }
     
     [self.view addSubview:tableView];
     
@@ -163,6 +168,7 @@
                                                object:nil];
     
     [headerView release];
+    
 }
 
 /*
@@ -195,6 +201,10 @@
     if (IS_IOS7) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
     }
+    
+    if ([[dataSource items] count] == 0) {
+        [self loadNewItems];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -221,7 +231,9 @@
 {
     Reachability *reach = notification.object;
     if ([reach isReachable]) {
-        [self loadNewItems];
+        if (!loading) {
+            [self loadNewItems];
+        }
     }
     else {
         loading = NO;
@@ -246,6 +258,7 @@
     [self showFooter];
     loading = YES;
     [dataSource loadMoreItems];
+    [tableView reloadData];
 }
 
 - (void)loadNewItems
@@ -352,7 +365,7 @@
     }
     
     float reload_distance = 10;
-    if(y > h + reload_distance) {
+    if(y > h + reload_distance && size.height > bounds.size.height) { // Added checking (size.height > bounds.size.height) TODO: need to add to other controllers.
         if (!loading) {
             NSLog(@"load more rows");
             [self loadMoreQuotes];
@@ -364,7 +377,7 @@
 	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
 
-#pragma mark -
+#pragma mark - UBQuoteCellDelegate methods.
 
 - (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(SharingNetworkType)networkType
 {
@@ -372,7 +385,7 @@
     UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
     NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", (long)quote.quoteId];
     
-    SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
+    SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = quoteUrl;
     sharingController.message = (networkType == SharingEMailNetwork) ? quote.text : nil;
     sharingController.rootViewController = self;
@@ -384,6 +397,54 @@
                                                                                         action:@"quotes"
                                                                                          label:NSStringFromClass([sharingController class])
                                                                                          value:@(-1)] build]];
+}
+
+- (void)favoriteActionForCell:(UBQuoteCell *)cell
+{
+    NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+    UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
+    
+    NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Quote" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate  = [NSPredicate predicateWithFormat:@"quoteId == %@", [NSNumber numberWithInteger:quote.quoteId]];
+    [fetchRequest setPredicate:predicate];
+    NSError *error;
+    Quote *cdQuote;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if ([fetchedObjects count] > 0) {
+        cdQuote = [fetchedObjects objectAtIndex:0];
+    }
+    [fetchRequest release];
+    
+    if (!quote.favorite) {
+        NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+        cdQuote = [NSEntityDescription insertNewObjectForEntityForName:@"Quote" inManagedObjectContext:context];
+        cdQuote.quoteId = [NSNumber numberWithInteger:quote.quoteId];
+        cdQuote.status = [NSNumber numberWithInteger:quote.status];
+        cdQuote.type = quote.type;
+        cdQuote.addDate = quote.addDate;
+        cdQuote.pubDate = quote.pubDate;
+        cdQuote.author = quote.author;
+        cdQuote.authorId = [NSNumber numberWithInteger:quote.authorId];
+        cdQuote.text = quote.text;
+        cdQuote.rating = [NSNumber numberWithInteger:quote.rating];
+        cdQuote.favorite = [NSNumber numberWithBool:YES];
+        quote.favorite = YES;
+    } else {
+        cdQuote.favorite = [NSNumber numberWithBool:NO];
+        quote.favorite = NO;
+    }
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    } else {
+        if (quote.favorite) {
+            [cell.favoriteButton setImage:[UIImage imageNamed:@"favorite_active"] forState:UIControlStateNormal];
+        } else {
+            [cell.favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+        }
+    }
 }
 
 #pragma mark - EGORefreshTableHeaderDelegate methods.

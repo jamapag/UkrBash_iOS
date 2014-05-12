@@ -15,19 +15,23 @@
 #import "UBUnpablishedQuotesDataSource.h"
 #import "UBBestQuotesDataSource.h"
 #import "UBRandomQuotesDataSource.h"
+#import "UBFavoriteQuotesDataSource.h"
 #import "UBMenuItemCell.h"
 #import "UBPublishedPicturesDataSource.h"
 #import "UBUnpablishedPicturesDataSource.h"
 #import "UBRandomPicturesDataSource.h"
 #import "UBBestPicturesDataSource.h"
+#import "UBFavoritePicturesDataSource.h"
 #import "UBDonateViewController.h"
 #import "UBPicturesCollectionViewController.h"
+#import "UBQuotesController.h"
+#import "UBPicturesController.h"
 
 enum UBMenuSections {
     UBMenuQuotesSection,
     UBMenuImagesSection,
     UBMenuInfoSection,
-    UBMenuSectionsCount
+    UBMenuSectionsCount,
 };
 
 enum UBMenuItems {
@@ -44,6 +48,7 @@ enum UBSubMenuItems {
     UBSubMenuItemUnpublished,
     UBSubMenuItemBest,
     UBSubMenuItemRandom,
+    UBSubMenuItemFavorite,
     UBSubMenuItemsCount
 };
 
@@ -143,10 +148,17 @@ enum UBSubMenuItems {
     [userDefaults setValue:UBContainerTypeQuotes forKey:UBContainerTypeKey];
     [userDefaults synchronize];
     
-    UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:dataSourceClass];
-    quotesContainer.title = title;
-    [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-    [quotesContainer release];
+    if ([dataSourceClass isSubclassOfClass:[UBFavoriteQuotesDataSource class]]) {
+        UBQuotesController *quotesController = [[UBQuotesController alloc] initWithDataSourceClass:dataSourceClass];
+        quotesController.title = title;
+        [self.ubNavigationController pushViewController:quotesController animated:YES];
+        [quotesController release];
+    } else {
+        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:dataSourceClass];
+        quotesContainer.title = title;
+        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
+        [quotesContainer release];
+    }
 }
 
 - (void)pushPicturesContainerWithDataSourceClass:(Class)dataSourceClass title:(NSString*)title
@@ -156,12 +168,18 @@ enum UBSubMenuItems {
     [userDefaults setValue:NSStringFromClass(dataSourceClass) forKey:UBContainerDataSourceKey];
     [userDefaults setValue:UBContainerTypePictures forKey:UBContainerTypeKey];
     [userDefaults synchronize];
+    
 
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone || ![UICollectionView class]) {
-        UBPicturesContainerController *picturesContainer = [[UBPicturesContainerController alloc] initWithDataSourceClass:dataSourceClass];
-        picturesContainer.title = title;
-        [self.ubNavigationController pushViewController:picturesContainer animated:YES];
-        [picturesContainer release];
+    if ([dataSourceClass isSubclassOfClass:[UBFavoritePicturesDataSource class]]) {
+        UBPicturesController *picturesController = [[UBPicturesController alloc] initWithDataSourceClass:dataSourceClass];
+        picturesController.title = title;
+        [self.ubNavigationController pushViewController:picturesController animated:YES];
+        [picturesController release];
+//    } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone || ![UICollectionView class]) {
+//        UBPicturesContainerController *picturesContainer = [[UBPicturesContainerController alloc] initWithDataSourceClass:dataSourceClass];
+//        picturesContainer.title = title;
+//        [self.ubNavigationController pushViewController:picturesContainer animated:YES];
+//        [picturesContainer release];
     } else {
         UBPicturesCollectionViewController *collecitonController = [[UBPicturesCollectionViewController alloc] initWithDataSourceClass:dataSourceClass];
         collecitonController.title = title;
@@ -240,6 +258,8 @@ enum UBSubMenuItems {
             cell.textLabel.text = @"Найкраще";
         } else if (UBSubMenuItemRandom == indexPath.row) {
             cell.textLabel.text = @"Випадкове";
+        } else if (UBSubMenuItemFavorite == indexPath.row) {
+            cell.textLabel.text = @"Улюблене";
         }
     } else if (indexPath.section == UBMenuInfoSection) {
         if (indexPath.row == UBMenuItemDonate) {
@@ -305,6 +325,8 @@ enum UBSubMenuItems {
                 [self pushQuotesContainerWithDataSourceClass:[UBBestQuotesDataSource class] title:title];
             } else if (UBSubMenuItemRandom == indexPath.row) {
                 [self pushQuotesContainerWithDataSourceClass:[UBRandomQuotesDataSource class] title:title];
+            } else if (UBSubMenuItemFavorite == indexPath.row) {
+                [self pushQuotesContainerWithDataSourceClass:[UBFavoriteQuotesDataSource class] title:title];
             }
         }
     }
@@ -323,6 +345,8 @@ enum UBSubMenuItems {
                 [self pushPicturesContainerWithDataSourceClass:[UBRandomPicturesDataSource class] title:title];
             } else if (UBSubMenuItemBest == indexPath.row) {
                 [self pushPicturesContainerWithDataSourceClass:[UBBestPicturesDataSource class] title:title];
+            } else if (UBSubMenuItemFavorite == indexPath.row) {
+                [self pushPicturesContainerWithDataSourceClass:[UBFavoritePicturesDataSource class] title:title];
             }
         }
     }

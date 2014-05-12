@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Quote.h"
 
 @interface UBQuote : NSObject
 {
@@ -19,6 +20,7 @@
     NSInteger authorId;
     NSString *text;
     NSInteger rating;
+    BOOL favorite;
 }
 
 @property (nonatomic, assign) NSInteger quoteId;
@@ -30,5 +32,8 @@
 @property (nonatomic, assign) NSInteger authorId;
 @property (nonatomic, assign) NSInteger rating;
 @property (nonatomic, retain) NSString *text;
+@property (nonatomic, assign) BOOL favorite;
+
+- (id)initWithQuote:(Quote *)quote;
 
 @end

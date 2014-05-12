@@ -14,6 +14,8 @@
 #import "UBNavigationController.h"
 #import "UBPublishedQuotesDataSource.h"
 #import "UBPublishedPicturesDataSource.h"
+#import "UBFetchedPicturesDataSource.h"
+#import "UBFavoritePicturesDataSource.h"
 #import "GAI.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
@@ -21,6 +23,9 @@
 #import "SharingController.h"
 #import "FacebookSharingController.h"
 #import "Reachability.h"
+#import "Quote.h"
+#import "UBQuotesController.h"
+#import "UBPicturesController.h"
 #import <sys/sysctl.h>
 
 
@@ -85,10 +90,16 @@
         if (!dataSource) {
             dataSource = NSStringFromClass([UBPublishedQuotesDataSource class]);
         }
+        if ([dataSource isEqualToString:@"UBFavoriteQuotesDataSource"]) {
+            return [[[UBQuotesController alloc] initWithDataSourceClass:NSClassFromString(dataSource)] autorelease];
+        }
         return [[[UBQuotesContainerController alloc] initWithDataSourceClass:NSClassFromString(dataSource)] autorelease];
     } else if ([type isEqualToString:UBContainerTypePictures]) {
         if (!dataSource) {
             dataSource = NSStringFromClass([UBPublishedPicturesDataSource class]);
+        }
+        if ([dataSource isEqualToString:@"UBFavoritePicturesDataSource"]) {
+            return [[[UBPicturesController alloc] initWithDataSourceClass:NSClassFromString(dataSource)] autorelease];
         }
         if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [UICollectionViewController class]) {
             return [[[UBPicturesCollectionViewController alloc] initWithDataSourceClass:NSClassFromString(dataSource)] autorelease];
@@ -132,7 +143,7 @@
     [self.window addSubview:navigationController.view];
     [menuController release];
     
-    Reachability* reach = [Reachability reachabilityWithHostname:@"www.ukrbash.com"];
+    Reachability *reach = [Reachability reachabilityWithHostname:@"www.ukrbash.com"];
     reach.unreachableBlock = ^(Reachability *reach) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSArray *titles = @[@"Невдача!", @"От халепа!"];
@@ -145,10 +156,37 @@
                                                   cancelButtonTitle:[buttons objectAtIndex:arc4random_uniform((u_int32_t)buttons.count)]
                                                   otherButtonTitles:nil];
             [alert show];
+            [alert release];
         });
     };
     [reach startNotifier];
     
+//    NSManagedObjectContext *context = [self managedObjectContext];
+//    Quote *quote = [NSEntityDescription insertNewObjectForEntityForName:@"Quote" inManagedObjectContext:context];
+//    quote.quoteId = [NSNumber numberWithInteger:1];
+//    quote.status = [NSNumber numberWithInteger:1];
+//    quote.type = @"quote";
+//    quote.addDate = [NSDate date];
+//    quote.pubDate = [NSDate date];
+//    quote.author = @"Authos";
+//    quote.authorId = [NSNumber numberWithInteger:0];
+//    quote.text = @"Text hererere";
+//    quote.rating = [NSNumber numberWithInteger:101];
+//    NSError *error;
+//    if (![context save:&error]) {
+//        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+//    }
+//    
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Quote" inManagedObjectContext:context];
+//    [fetchRequest setEntity:entity];
+//    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+//    for (Quote *quoteL in fetchedObjects) {
+//        NSLog(@"Text: %@", quoteL.text);
+//        NSLog(@"Rating: %@", quoteL.rating);
+//        NSLog(@"author: %@", quoteL.author);
+//    }
+
     return YES;
 }
 

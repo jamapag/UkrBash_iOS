@@ -20,5 +20,6 @@
 - (void)loadNewItems;
 - (NSDateFormatter*)dateFormatter;
 - (NSString*)ratingStringFromRating:(NSInteger)rating;
+- (BOOL)isNoMore;
 
 @end

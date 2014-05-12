@@ -66,4 +66,9 @@
     NSAssert(NO, @"this method should be overloaded by subclasses");
 }
 
+- (BOOL)isNoMore
+{
+    return false;
+}
+
 @end

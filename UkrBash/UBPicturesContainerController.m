@@ -17,6 +17,8 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 #import "Reachability.h"
+#import "UkrBashAppDelegate.h"
+#import "Picture.h"
 
 
 @implementation UBPicturesContainerController
@@ -210,7 +212,9 @@
 {
     Reachability *reach = notification.object;
     if ([reach isReachable]) {
-        [self loadNewItems];
+        if (!loading) {
+            [self loadNewItems];
+        }
     }
     else {
         loading = NO;
@@ -305,6 +309,49 @@
 
 - (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+   // Lets add pictures to favorite there;
+    
+    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    
+    NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Picture" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate  = [NSPredicate predicateWithFormat:@"pictureId == %@", [NSNumber numberWithInteger:picture.pictureId]];
+    [fetchRequest setPredicate:predicate];
+    NSError *error;
+    Picture *cdPicture;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if ([fetchedObjects count] > 0) {
+        cdPicture = [fetchedObjects objectAtIndex:0];
+    }
+    [fetchRequest release];
+    
+    if (!picture.favorite) {
+        NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+        cdPicture = [NSEntityDescription insertNewObjectForEntityForName:@"Picture" inManagedObjectContext:context];
+        cdPicture.pictureId = [NSNumber numberWithInteger:picture.pictureId];
+        cdPicture.status = [NSNumber numberWithInteger:picture.status];
+        cdPicture.type = picture.type;
+        cdPicture.addDate = picture.addDate;
+        cdPicture.pubDate = picture.pubDate;
+        cdPicture.author = picture.author;
+        cdPicture.authorId = [NSNumber numberWithInteger:picture.authorId];
+        cdPicture.title = picture.title;
+        cdPicture.thumbnail = picture.thumbnail;
+        cdPicture.image = picture.image;
+        cdPicture.rating = [NSNumber numberWithInteger:picture.rating];
+        cdPicture.favorite = [NSNumber numberWithBool:YES];
+        picture.favorite = YES;
+    } else {
+        cdPicture.favorite = [NSNumber numberWithBool:NO];
+        picture.favorite = NO;
+    }
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    // End setting favorites.
+    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     CALayer *viewLayer = cell.layer;
     

@@ -21,6 +21,7 @@
 @synthesize thumbnail;
 @synthesize title;
 @synthesize rating;
+@synthesize favorite;
 
 - (void)dealloc
 {

@@ -32,6 +32,7 @@ CGFloat animationOffset = 52.;
 @synthesize dateLabel;
 @synthesize authorLabel;
 @synthesize idLabel;
+@synthesize favoriteButton;
 @synthesize shareButtonsVisible;
 @synthesize shareDelegate;
 
@@ -83,6 +84,13 @@ CGFloat animationOffset = 52.;
 {
     if (self.shareDelegate) {
         [self.shareDelegate quoteCell:self shareQuoteWithType:SharingVkontakteNetwork];
+    }
+}
+
+-(void)favoriteAction:(id)sender
+{
+    if (self.shareDelegate) {
+        [self.shareDelegate favoriteActionForCell:self];
     }
 }
 
@@ -217,9 +225,18 @@ CGFloat animationOffset = 52.;
             [shareBtn setImage:[UIImage imageNamed:@"vk"] forState:UIControlStateNormal];
             [shareBtn addTarget:self action:@selector(shareWithVkontakteAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:shareBtn];
+            x += shareButtonWidth + 10.;
 
             animationOffset += shareButtonWidth + 10.;
         }
+        
+        favoriteButton = [[UIButton buttonWithType:UIButtonTypeCustom]  retain];
+        favoriteButton.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
+        favoriteButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+        [favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+        [favoriteButton addTarget:self action:@selector(favoriteAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:favoriteButton];
+        animationOffset += shareButtonWidth + 10.;
         
         [self.contentView addSubview:containerView];
     }
@@ -234,6 +251,7 @@ CGFloat animationOffset = 52.;
     [dateLabel release];
     [authorLabel release];
     [idLabel release];
+    [favoriteButton release];
     shareDelegate = nil;
     [super dealloc];
 }
