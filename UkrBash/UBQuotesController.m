@@ -120,9 +120,9 @@
 {
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     Quote *quote = [dataSource objectAtIndexPath:indexPath];
-    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", [quote.quoteId longValue]];
+    NSURL *quoteUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", [quote.quoteId longValue]]];
     
-    SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
+    SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = quoteUrl;
     sharingController.message = (networkType == SharingEMailNetwork) ? quote.text : nil;
     sharingController.rootViewController = self;

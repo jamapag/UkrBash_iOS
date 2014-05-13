@@ -26,8 +26,8 @@
     if ([SLComposeViewController class]) {
         SLComposeViewController * composeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         [composeViewController setInitialText:self.message];
-        [composeViewController addURL:[NSURL URLWithString:self.url]];
-        for (UIImage * image in images) {
+        [composeViewController addURL:self.url];
+        for (UIImage *image in images) {
             [composeViewController addImage:image];
         }
         [self.rootViewController presentViewController:composeViewController animated:YES completion:nil];

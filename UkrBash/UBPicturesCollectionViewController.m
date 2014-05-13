@@ -18,6 +18,7 @@
 #import "Reachability.h"
 #import "UkrBashAppDelegate.h"
 #import "Picture.h"
+#import "UBVkontakteActivity.h"
 
 @interface UBPicturesCollectionViewController ()
 
@@ -197,7 +198,6 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [_collectionView.collectionViewLayout invalidateLayout];
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -206,13 +206,34 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 
 #pragma mark - UBQuoteCollectionCellDelegate methods.
 
+- (void)shareActionForCell:(UBPictureCollectionViewCell *)cell andRectForPopover:(CGRect)rect
+{
+    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
+    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    NSString *pictureUrlString = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
+    NSURL *pictureUrl = [NSURL URLWithString:pictureUrlString];
+    UIImage *image = [[MediaCenter imageCenter] imageWithUrl:picture.image];
+    
+    UBVkontakteActivity *vkActivity = [[UBVkontakteActivity alloc] init];
+    vkActivity.parentViewController = self;
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[picture.title, pictureUrl, image] applicationActivities:@[vkActivity]];
+    [vkActivity release];
+    [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (IS_IOS7) {
+            [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+        }
+    }];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+    [activityViewController release];
+}
+
 - (void)quoteCell:(UBPictureCollectionViewCell *)cell shareQuoteWithType:(SharingNetworkType)networkType
 {
     NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
     UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
+    NSURL *pictureUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId]];
     
-    SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
+    SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = pictureUrl;
     sharingController.rootViewController = self;
     [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Картинка %ld", (long)picture.pictureId]];
@@ -265,7 +286,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     NSPredicate *predicate  = [NSPredicate predicateWithFormat:@"pictureId == %@", [NSNumber numberWithInteger:picture.pictureId]];
     [fetchRequest setPredicate:predicate];
     NSError *error;
-    Picture *cdPicture;
+    Picture *cdPicture = nil;
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     if ([fetchedObjects count] > 0) {
         cdPicture = [fetchedObjects objectAtIndex:0];

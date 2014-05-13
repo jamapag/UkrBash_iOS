@@ -15,6 +15,7 @@
 - (void)copyUrlActionForCell:(id)cell;
 - (void)openInBrowserActionForCell:(id)cell;
 - (void)favoriteActionForCell:(id)cell;
+- (void)shareActionForCell:(id)cell andRectForPopover:(CGRect)rect;
 
 @end
 

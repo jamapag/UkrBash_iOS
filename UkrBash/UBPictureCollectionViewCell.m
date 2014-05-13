@@ -77,10 +77,16 @@
         
         
         favoriteButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-        favoriteButton.frame = CGRectMake(10., self.frame.size.height - 30, 20, 20);
+        favoriteButton.frame = CGRectMake(10., self.frame.size.height - 35, 30, 30);
         [favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
         [favoriteButton addTarget:self action:@selector(favoriteAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:favoriteButton];
+        
+        UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareButton.frame = CGRectMake(favoriteButton.frame.origin.x + favoriteButton.frame.size.width + 10, favoriteButton.frame.origin.y, 22, 30);
+        [shareButton setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+        [shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:shareButton];
         
         
         dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width / 2, self.frame.size.height - 30, (self.frame.size.width - 20) / 2, 20)];
@@ -121,31 +127,10 @@
     pictureTittleLabel.text = pictureTitle;
 }
 
-- (void)shareWithFacebookAction:(id)sender
+- (void)shareAction:(UIButton *)sender
 {
     if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingFacebookNetwork];
-    }
-}
-
-- (void)shareWithTwitterAction:(id)sender
-{
-    if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingTwitterNetwork];
-    }
-}
-
-- (void)shareWithEmailAction:(id)sender
-{
-    if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingEMailNetwork];
-    }
-}
-
-- (void)shareWithVkontakteAction:(id)sender
-{
-    if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingVkontakteNetwork];
+        [self.shareDelegate shareActionForCell:self andRectForPopover:sender.frame];
     }
 }
 

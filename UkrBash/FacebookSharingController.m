@@ -24,7 +24,7 @@
     NSAssert(self.rootViewController != nil, @"");
     SLComposeViewController * composeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
     [composeViewController setInitialText:self.message];
-    [composeViewController addURL:[NSURL URLWithString:self.url]];
+    [composeViewController addURL:self.url];
     for (UIImage * image in images) {
         [composeViewController addImage:image];
     }

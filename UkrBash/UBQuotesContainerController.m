@@ -383,7 +383,7 @@
 {
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
-    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", (long)quote.quoteId];
+    NSURL *quoteUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", (long)quote.quoteId]];
     
     SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = quoteUrl;
@@ -411,7 +411,7 @@
     NSPredicate *predicate  = [NSPredicate predicateWithFormat:@"quoteId == %@", [NSNumber numberWithInteger:quote.quoteId]];
     [fetchRequest setPredicate:predicate];
     NSError *error;
-    Quote *cdQuote;
+    Quote *cdQuote = nil;
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     if ([fetchedObjects count] > 0) {
         cdQuote = [fetchedObjects objectAtIndex:0];

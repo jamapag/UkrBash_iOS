@@ -23,6 +23,9 @@
 		2D337F4E14D1AADB00DF225F /* UBPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F4D14D1AADB00DF225F /* UBPicture.m */; };
 		2D337F5114D1B2F600DF225F /* UBPublishedPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F5014D1B2F600DF225F /* UBPublishedPicturesDataSource.m */; };
 		2D3AD32A190EE20C00C3A3BE /* UBQuotesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3AD329190EE20C00C3A3BE /* UBQuotesController.m */; };
+		2D3D639F1922611700FB9F8B /* UBVkontakteActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3D639E1922611700FB9F8B /* UBVkontakteActivity.m */; };
+		2D3D63A219226D7800FB9F8B /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D3D63A019226D7800FB9F8B /* share.png */; };
+		2D3D63A319226D7800FB9F8B /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D3D63A119226D7800FB9F8B /* share@2x.png */; };
 		2D439B321525BB860042D5D0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D439B301525BB860042D5D0 /* Default.png */; };
 		2D439B331525BB860042D5D0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D439B311525BB860042D5D0 /* Default@2x.png */; };
 		2D439B411525BC4E0042D5D0 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D439B391525BC4E0042D5D0 /* blackArrow.png */; };
@@ -241,6 +244,10 @@
 		2D337F5014D1B2F600DF225F /* UBPublishedPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPublishedPicturesDataSource.m; sourceTree = "<group>"; };
 		2D3AD328190EE20C00C3A3BE /* UBQuotesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesController.h; sourceTree = "<group>"; };
 		2D3AD329190EE20C00C3A3BE /* UBQuotesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesController.m; sourceTree = "<group>"; };
+		2D3D639D1922611700FB9F8B /* UBVkontakteActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBVkontakteActivity.h; sourceTree = "<group>"; };
+		2D3D639E1922611700FB9F8B /* UBVkontakteActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBVkontakteActivity.m; sourceTree = "<group>"; };
+		2D3D63A019226D7800FB9F8B /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share.png; path = Images/share.png; sourceTree = "<group>"; };
+		2D3D63A119226D7800FB9F8B /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "share@2x.png"; path = "Images/share@2x.png"; sourceTree = "<group>"; };
 		2D439B301525BB860042D5D0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2D439B311525BB860042D5D0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		2D439B341525BBDC0042D5D0 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -585,6 +592,8 @@
 				2D23002C151B78950059BD2B /* EMailSharingController.m */,
 				B0FBF2AA166CE4FB007BFDC0 /* VkontakteSharingController.h */,
 				B0FBF2AB166CE4FB007BFDC0 /* VkontakteSharingController.m */,
+				2D3D639D1922611700FB9F8B /* UBVkontakteActivity.h */,
+				2D3D639E1922611700FB9F8B /* UBVkontakteActivity.m */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -766,6 +775,8 @@
 		2DBF09FD14B669FD00A8949B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2D3D63A019226D7800FB9F8B /* share.png */,
+				2D3D63A119226D7800FB9F8B /* share@2x.png */,
 				2D80C48E191041DF00832BB6 /* favorite_active.png */,
 				2D80C48F191041DF00832BB6 /* favorite_active@2x.png */,
 				2D80C490191041DF00832BB6 /* favorite.png */,
@@ -1118,6 +1129,7 @@
 				2D81D16417EF5D180005CD42 /* menu-pin@2x.png in Resources */,
 				2DB0FAC71416C8CF00EFD6BC /* MainWindow.xib in Resources */,
 				2D81D15517EF5D180005CD42 /* back-btn.png in Resources */,
+				2D3D63A219226D7800FB9F8B /* share.png in Resources */,
 				2D80C495191041DF00832BB6 /* favorite@2x.png in Resources */,
 				2D81D15617EF5D180005CD42 /* back-btn@2x.png in Resources */,
 				2D81D16917EF5D180005CD42 /* vk.png in Resources */,
@@ -1137,6 +1149,7 @@
 				2D81D16A17EF5D180005CD42 /* vk@2x.png in Resources */,
 				2D439B321525BB860042D5D0 /* Default.png in Resources */,
 				2D81D15017EF5D180005CD42 /* category-button-bg@2x.png in Resources */,
+				2D3D63A319226D7800FB9F8B /* share@2x.png in Resources */,
 				2D439B331525BB860042D5D0 /* Default@2x.png in Resources */,
 				2D439B411525BC4E0042D5D0 /* blackArrow.png in Resources */,
 				2D81D15417EF5D180005CD42 /* left.png in Resources */,
@@ -1278,6 +1291,7 @@
 				B09CFA98152C7CD600316B7C /* EGORefreshTableHeaderView.m in Sources */,
 				2D0D814D15A49E0A00AAB0B5 /* UBPictureView.m in Sources */,
 				2DE4917F15A5C14000002488 /* UBPicturesScrollViewController.m in Sources */,
+				2D3D639F1922611700FB9F8B /* UBVkontakteActivity.m in Sources */,
 				B0DA90BA164EDB9A0084D29A /* VKLoginViewController.m in Sources */,
 				B0DA90BB164EDB9A0084D29A /* VKRequest.m in Sources */,
 				B0FBF2AC166CE4FB007BFDC0 /* VkontakteSharingController.m in Sources */,

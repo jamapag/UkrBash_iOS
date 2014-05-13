@@ -291,9 +291,9 @@
 - (void)sharePictureWithIndex:(NSInteger)index withSharingNetwork:(SharingNetworkType)networkType
 {
     UBPicture *picture = [[dataSource items] objectAtIndex:index];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
+    NSURL *pictureUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId]];
     
-    SharingController * sharingController = [SharingController sharingControllerForNetworkType:networkType];
+    SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = pictureUrl;
     sharingController.rootViewController = self;
     [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Картинка %ld", (long)picture.pictureId]];

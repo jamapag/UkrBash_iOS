@@ -98,12 +98,25 @@
     [loginController release];
 }
 
+- (UIViewController *)getLoginController
+{
+    VKLoginViewController * loginController = [[VKLoginViewController alloc] initWithAppId:kVKApplicationID
+                                                                            andPermissions:@[@"offline", @"wall"]];
+    loginController.vkLoginDelegate = self;
+    return [loginController autorelease];
+}
+
+- (UIViewController *)getSharingController
+{
+    return nil;
+}
+
 - (void)showSharingController
 {
     // sharing
     VKSharingView * sharingView = [[VKSharingView alloc] initWithVkontakte:vkontakte andRootViewController:self.rootViewController];
     
-    [sharingView setAttachment:[VKWallPostAttachment wallPostAttachmentWithURL:[NSURL URLWithString:self.url]]];
+    [sharingView setAttachment:[VKWallPostAttachment wallPostAttachmentWithURL:self.url]];
     [sharingView setAttachmentDescription:attachmentDescription];
     [sharingView setAttachmentTitle:attachmentTitle];
     [sharingView setAttachmentImagePreview:attachmentPreviewImage];

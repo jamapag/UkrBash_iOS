@@ -20,12 +20,12 @@ typedef enum {
 
 @interface SharingController : NSObject
 {
-    NSMutableArray * images;
+    NSMutableArray *images;
 }
 
-@property (nonatomic, retain) UIViewController * rootViewController;
-@property (nonatomic, retain) NSString * message;
-@property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain) UIViewController *rootViewController;
+@property (nonatomic, retain) NSString *message;
+@property (nonatomic, retain) NSURL *url;
 @property (nonatomic, readonly) SharingNetworkType networkType;
 
 /**
@@ -36,9 +36,9 @@ typedef enum {
 
 + (id)sharingControllerForNetworkType:(SharingNetworkType)networkType;
 
-- (id)initWithRootViewController:(UIViewController*)rootViewController;
+- (id)initWithRootViewController:(UIViewController *)rootViewController;
 
-- (void)addImage:(UIImage*)image;
+- (void)addImage:(UIImage *)image;
 - (void)removeAllImages;
 - (void)showSharingDialog;
 

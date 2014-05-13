@@ -15,6 +15,7 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "UkrBashAppDelegate.h"
+#import "UBVkontakteActivity.h"
 
 @implementation UBPicturesController
 
@@ -257,12 +258,32 @@
 }
 
 #pragma mark - UBQuoteCollectionCellDelegate methods.
+- (void)shareActionForCell:(UBPictureCollectionViewCell *)cell andRectForPopover:(CGRect)rect
+{
+    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
+    Picture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    NSString *pictureUrlString = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", [picture.pictureId longValue]];
+    NSURL *pictureUrl = [NSURL URLWithString:pictureUrlString];
+    UIImage *image = [[MediaCenter imageCenter] imageWithUrl:picture.image];
+    
+    UBVkontakteActivity *vkActivity = [[UBVkontakteActivity alloc] init];
+    vkActivity.parentViewController = self;
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[picture.title, pictureUrl, image] applicationActivities:@[vkActivity]];
+    [vkActivity release];
+    [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (IS_IOS7) {
+            [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+        }
+    }];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+    [activityViewController release];
+}
 
 - (void)quoteCell:(UBPictureCollectionViewCell *)cell shareQuoteWithType:(SharingNetworkType)networkType
 {
     NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
     Picture *picture = [dataSource objectAtIndexPath:indexPath];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", [picture.pictureId longValue]];
+    NSURL *pictureUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", [picture.pictureId longValue]]];
     
     SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
     sharingController.url = pictureUrl;
