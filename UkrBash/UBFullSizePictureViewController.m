@@ -143,6 +143,7 @@
 - (void)setCurrentPictureIndex:(NSInteger)pictureIndex
 {
     [pageViewController setViewControllers:@[[self photoViewControllerForIndex:pictureIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    [self updatePictureInfoView];
 }
 
 - (void)backAction:(id)sender
