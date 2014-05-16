@@ -35,6 +35,7 @@
     [dataSource release];
     [pendingImages release];
     [_collectionView release];
+    [fullSizeController release];
     [super dealloc];
 }
 
@@ -100,16 +101,6 @@
             [_collectionView reloadItemsAtIndexPaths:rows];
         }
     }];
-//    localPicturesLoadedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kNotificationDataUpdated object:nil queue:nil usingBlock:^(NSNotification *note) {
-//        loading = NO;
-//        [self hideFooter];
-//        [_refreshControl endRefreshing];
-//        [_collectionView reloadData];
-//    }];
-//    _refreshControl = [[UIRefreshControl alloc] init];
-//    [_refreshControl addTarget:self action:@selector(startRefresh:) forControlEvents:UIControlEventValueChanged];
-//    [_collectionView addSubview:_refreshControl];
-//    [self startRefresh:nil];
     
     [dataSource loadNewItems];
 }
@@ -216,6 +207,47 @@
 
 #pragma mark - UICollectionViewDelegate methods.
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    if (IS_IOS7) {
+        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+    }
+    
+    UICollectionViewCell *cell = [_collectionView cellForItemAtIndexPath:indexPath];
+    CALayer *viewLayer = cell.layer;
+    
+    CGFloat animationDuration = .4;
+    
+    CABasicAnimation* popInAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    popInAnimation.duration = animationDuration;
+    [popInAnimation setToValue:[NSNumber numberWithFloat:1.5]];
+    
+    CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeAnimation.duration = animationDuration;
+    [fadeAnimation setToValue:[NSNumber numberWithFloat:0.]];
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.animations = [NSArray arrayWithObjects:popInAnimation, fadeAnimation, nil];
+    animationGroup.duration = animationDuration;
+	
+    [viewLayer addAnimation:animationGroup forKey:@"animation"];
+    
+    if (!fullSizeController) {
+        fullSizeController = [[UBFullSizePictureViewController alloc] initWithDataSource:dataSource andInitPicuteIndex:indexPath.row];
+        fullSizeController.dataSource = dataSource;
+        fullSizeController.view.frame = self.view.bounds;
+    } else {
+        fullSizeController.view.frame = self.view.bounds;
+        [fullSizeController setCurrentPictureIndex:indexPath.row];
+    }
+    fullSizeController.view.alpha = 0;
+    [self.view addSubview:fullSizeController.view];
+    [UIView animateWithDuration:animationDuration animations:^{
+        fullSizeController.view.alpha = 1;
+    }];
+}
+
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
@@ -261,7 +293,7 @@
 - (void)shareActionForCell:(UBPictureCollectionViewCell *)cell andRectForPopover:(CGRect)rect
 {
     NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
-    Picture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    Picture *picture = [dataSource objectAtIndexPath:indexPath];
     NSString *pictureUrlString = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", [picture.pictureId longValue]];
     NSURL *pictureUrl = [NSURL URLWithString:pictureUrlString];
     UIImage *image = [[MediaCenter imageCenter] imageWithUrl:picture.image];

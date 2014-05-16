@@ -87,7 +87,7 @@
     headerView.layer.shadowOpacity = .3;
     
     if (menuActionSelector) {
-        CGFloat menuButtonWidth = 35., menuButtonX = 10.;
+        CGFloat menuButtonWidth = 35., menuButtonX = 0.;
         
         CGFloat x = menuButtonX + menuButtonWidth + 5.;
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, 20., headerView.frame.size.width - x * 2, headerView.frame.size.height - 24.)];
@@ -107,7 +107,7 @@
         menuButton.imageView.contentMode = UIViewContentModeCenter;
         [menuButton setImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
         [menuButton addTarget:self action:menuActionSelector forControlEvents:UIControlEventTouchUpInside];
-        [menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 44.) / 2., menuButtonWidth, 44.)];
+        [menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 44.) / 2., menuButtonWidth + 20, 44.)];
         [headerView addSubview:menuButton];
     }
     

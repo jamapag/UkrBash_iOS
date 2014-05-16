@@ -14,10 +14,8 @@
     NSManagedObjectContext *managedObjectContext;
 }
 
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, retain) UICollectionView *collectionView;
 
-- (id)objectAtIndexPath:(NSIndexPath *)indexPath;
-- (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (NSFetchedResultsController *)fetchedResultsController;
 
 @end

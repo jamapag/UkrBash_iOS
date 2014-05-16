@@ -13,13 +13,15 @@
     NSDateFormatter *dateFormatter;
 }
 
-- (UITableViewCell*)cellWithReuesIdentifier:(NSString*)reuseIdent;
-- (void)configureCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath;
-- (NSArray*)items;
+- (UITableViewCell *)cellWithReuesIdentifier:(NSString *)reuseIdent;
+- (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSArray *)items;
+- (id)objectAtIndexPath:(NSIndexPath *)indexPath;
+- (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (void)loadMoreItems;
 - (void)loadNewItems;
-- (NSDateFormatter*)dateFormatter;
-- (NSString*)ratingStringFromRating:(NSInteger)rating;
+- (NSDateFormatter *)dateFormatter;
+- (NSString *)ratingStringFromRating:(NSInteger)rating;
 - (BOOL)isNoMore;
 
 @end

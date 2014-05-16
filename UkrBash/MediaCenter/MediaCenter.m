@@ -434,6 +434,31 @@ static NSMutableArray *downloadedImages = nil;
 	return [self imageWithUrl:imageUrl priority:NSOperationQueuePriorityNormal];
 }
 
+- (UIImage *)imageWithUrl:(NSString *)imageUrl andCompletion:(UBImageDownloadedCallback)completion
+{
+    UIImage *image = nil;
+    NSURL *url = [NSURL URLWithString:imageUrl];
+    if (url == nil) {
+        return nil;
+    }
+    
+    if ([url isFileURL]) {
+        image = [self imageFromCacheByURL:url];
+    } else {
+        image = [self imageFromCacheByURL:url];
+        if (image) {
+            return image;
+        } else {
+			DownloadImageOperation *operation = [[DownloadImageOperation alloc] initWithURLString:imageUrl];
+            operation.completion = completion;
+			[operation setQueuePriority:NSOperationQueuePriorityNormal];
+			[downloadQueue addOperation:operation];
+			[operation release];
+        }
+    }
+    return image;
+}
+
 
 - (void)cancelLoadingImagesWithURLs:(NSArray*)URLs {
     for (DownloadImageOperation *downloadOperation in [downloadQueue operations]) {

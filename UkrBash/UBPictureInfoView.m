@@ -68,6 +68,7 @@
         textLabel.backgroundColor = [UIColor clearColor];
         textLabel.textColor = [UIColor whiteColor];
         textLabel.numberOfLines = 0;
+        textLabel.textAlignment = NSTextAlignmentCenter;
         textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self addSubview:textLabel];
         

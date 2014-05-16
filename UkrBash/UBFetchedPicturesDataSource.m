@@ -22,6 +22,7 @@
 - (void)dealloc
 {
     [_fetchedResultsController release];
+    [_collectionView release];
     [super dealloc];
 }
 

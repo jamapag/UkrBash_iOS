@@ -9,6 +9,7 @@
 #import "UBViewController.h"
 #import "UBPicturesDataSource.h"
 #import "UBPictureCollectionViewCell.h"
+#import "UBFullSizePictureViewController.h"
 
 
 @interface UBPicturesCollectionViewController : UBViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UBQuoteCollectionCellDelegate>
@@ -18,6 +19,8 @@
     
     UBPicturesDataSource *dataSource;
     NSMutableDictionary *pendingImages;
+    
+    UBFullSizePictureViewController *fullSizeController;
     id localImageLoadedObserver;
     id localPicturesLoadedObserver;
     

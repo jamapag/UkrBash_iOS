@@ -23,9 +23,17 @@
 		2D337F4E14D1AADB00DF225F /* UBPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F4D14D1AADB00DF225F /* UBPicture.m */; };
 		2D337F5114D1B2F600DF225F /* UBPublishedPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D337F5014D1B2F600DF225F /* UBPublishedPicturesDataSource.m */; };
 		2D3AD32A190EE20C00C3A3BE /* UBQuotesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3AD329190EE20C00C3A3BE /* UBQuotesController.m */; };
+		2D3C127719265E4F007F0F1A /* vk-icon-43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D3C127119265E4F007F0F1A /* vk-icon-43.png */; };
+		2D3C127819265E4F007F0F1A /* vk-icon-43@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D3C127219265E4F007F0F1A /* vk-icon-43@2x.png */; };
+		2D3C127919265E4F007F0F1A /* vk-icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D3C127319265E4F007F0F1A /* vk-icon-60.png */; };
+		2D3C127A19265E4F007F0F1A /* vk-icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D3C127419265E4F007F0F1A /* vk-icon-60@2x.png */; };
+		2D3C127B19265E4F007F0F1A /* vk-icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D3C127519265E4F007F0F1A /* vk-icon-76.png */; };
+		2D3C127C19265E4F007F0F1A /* vk-icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D3C127619265E4F007F0F1A /* vk-icon-76@2x.png */; };
 		2D3D639F1922611700FB9F8B /* UBVkontakteActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3D639E1922611700FB9F8B /* UBVkontakteActivity.m */; };
 		2D3D63A219226D7800FB9F8B /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D3D63A019226D7800FB9F8B /* share.png */; };
 		2D3D63A319226D7800FB9F8B /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D3D63A119226D7800FB9F8B /* share@2x.png */; };
+		2D3D63A619227EB400FB9F8B /* UBFullSizePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3D63A519227EB400FB9F8B /* UBFullSizePictureViewController.m */; };
+		2D3D63A91922809500FB9F8B /* UBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3D63A81922809500FB9F8B /* UBPictureViewController.m */; };
 		2D439B321525BB860042D5D0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D439B301525BB860042D5D0 /* Default.png */; };
 		2D439B331525BB860042D5D0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D439B311525BB860042D5D0 /* Default@2x.png */; };
 		2D439B411525BC4E0042D5D0 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D439B391525BC4E0042D5D0 /* blackArrow.png */; };
@@ -244,10 +252,20 @@
 		2D337F5014D1B2F600DF225F /* UBPublishedPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPublishedPicturesDataSource.m; sourceTree = "<group>"; };
 		2D3AD328190EE20C00C3A3BE /* UBQuotesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesController.h; sourceTree = "<group>"; };
 		2D3AD329190EE20C00C3A3BE /* UBQuotesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesController.m; sourceTree = "<group>"; };
+		2D3C127119265E4F007F0F1A /* vk-icon-43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vk-icon-43.png"; path = "Images/vk-icon-43.png"; sourceTree = "<group>"; };
+		2D3C127219265E4F007F0F1A /* vk-icon-43@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vk-icon-43@2x.png"; path = "Images/vk-icon-43@2x.png"; sourceTree = "<group>"; };
+		2D3C127319265E4F007F0F1A /* vk-icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vk-icon-60.png"; path = "Images/vk-icon-60.png"; sourceTree = "<group>"; };
+		2D3C127419265E4F007F0F1A /* vk-icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vk-icon-60@2x.png"; path = "Images/vk-icon-60@2x.png"; sourceTree = "<group>"; };
+		2D3C127519265E4F007F0F1A /* vk-icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vk-icon-76.png"; path = "Images/vk-icon-76.png"; sourceTree = "<group>"; };
+		2D3C127619265E4F007F0F1A /* vk-icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vk-icon-76@2x.png"; path = "Images/vk-icon-76@2x.png"; sourceTree = "<group>"; };
 		2D3D639D1922611700FB9F8B /* UBVkontakteActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBVkontakteActivity.h; sourceTree = "<group>"; };
 		2D3D639E1922611700FB9F8B /* UBVkontakteActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBVkontakteActivity.m; sourceTree = "<group>"; };
 		2D3D63A019226D7800FB9F8B /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share.png; path = Images/share.png; sourceTree = "<group>"; };
 		2D3D63A119226D7800FB9F8B /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "share@2x.png"; path = "Images/share@2x.png"; sourceTree = "<group>"; };
+		2D3D63A419227EB400FB9F8B /* UBFullSizePictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFullSizePictureViewController.h; sourceTree = "<group>"; };
+		2D3D63A519227EB400FB9F8B /* UBFullSizePictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFullSizePictureViewController.m; sourceTree = "<group>"; };
+		2D3D63A71922809500FB9F8B /* UBPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureViewController.h; sourceTree = "<group>"; };
+		2D3D63A81922809500FB9F8B /* UBPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureViewController.m; sourceTree = "<group>"; };
 		2D439B301525BB860042D5D0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2D439B311525BB860042D5D0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		2D439B341525BBDC0042D5D0 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -266,6 +284,7 @@
 		2D471AE1188DE051000A27B9 /* Default7-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default7-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		2D48CDF014C8DF2500C5696B /* UBImagesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBImagesRequest.h; sourceTree = "<group>"; };
 		2D48CDF114C8DF2500C5696B /* UBImagesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBImagesRequest.m; sourceTree = "<group>"; };
+		2D4AEF301923D76C000B0371 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
 		2D52D6C414DCADFB00E6A744 /* UBUnpablishedPicturesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnpablishedPicturesDataSource.h; sourceTree = "<group>"; };
 		2D52D6C514DCADFC00E6A744 /* UBUnpablishedPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnpablishedPicturesDataSource.m; sourceTree = "<group>"; };
 		2D52D6C714DCAE1A00E6A744 /* UBBestPicturesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBBestPicturesDataSource.h; sourceTree = "<group>"; };
@@ -656,6 +675,7 @@
 		2DB0FAB01416C8CF00EFD6BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D4AEF301923D76C000B0371 /* libSystem.B.dylib */,
 				B01825D618D9FE91004263AD /* libz.dylib */,
 				2DE25EA317EB6041007F0212 /* SystemConfiguration.framework */,
 				2D5397EB177B5096002018F2 /* Security.framework */,
@@ -768,6 +788,10 @@
 				2D3AD329190EE20C00C3A3BE /* UBQuotesController.m */,
 				2DD8A02F1918E43B00197EC2 /* UBPicturesController.h */,
 				2DD8A0301918E43B00197EC2 /* UBPicturesController.m */,
+				2D3D63A419227EB400FB9F8B /* UBFullSizePictureViewController.h */,
+				2D3D63A519227EB400FB9F8B /* UBFullSizePictureViewController.m */,
+				2D3D63A71922809500FB9F8B /* UBPictureViewController.h */,
+				2D3D63A81922809500FB9F8B /* UBPictureViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -932,6 +956,12 @@
 		B0DA12EC1689F924008C407C /* Share icons */ = {
 			isa = PBXGroup;
 			children = (
+				2D3C127119265E4F007F0F1A /* vk-icon-43.png */,
+				2D3C127219265E4F007F0F1A /* vk-icon-43@2x.png */,
+				2D3C127319265E4F007F0F1A /* vk-icon-60.png */,
+				2D3C127419265E4F007F0F1A /* vk-icon-60@2x.png */,
+				2D3C127519265E4F007F0F1A /* vk-icon-76.png */,
+				2D3C127619265E4F007F0F1A /* vk-icon-76@2x.png */,
 				2D81D14B17EF5D180005CD42 /* twitter.png */,
 				2D81D14C17EF5D180005CD42 /* twitter@2x.png */,
 				2D81D13D17EF5D180005CD42 /* facebook.png */,
@@ -1132,6 +1162,7 @@
 				2D3D63A219226D7800FB9F8B /* share.png in Resources */,
 				2D80C495191041DF00832BB6 /* favorite@2x.png in Resources */,
 				2D81D15617EF5D180005CD42 /* back-btn@2x.png in Resources */,
+				2D3C127719265E4F007F0F1A /* vk-icon-43.png in Resources */,
 				2D81D16917EF5D180005CD42 /* vk.png in Resources */,
 				2D81D15E17EF5D180005CD42 /* header@2x.png in Resources */,
 				2D81D16517EF5D180005CD42 /* texture.png in Resources */,
@@ -1140,6 +1171,7 @@
 				2D81D16817EF5D180005CD42 /* twitter@2x.png in Resources */,
 				2D81D16117EF5D180005CD42 /* menu-pin-45.png in Resources */,
 				2D81D15317EF5D180005CD42 /* right.png in Resources */,
+				2D3C127A19265E4F007F0F1A /* vk-icon-60@2x.png in Resources */,
 				B077FBA718901FC700934BB0 /* app-icon-120.png in Resources */,
 				2D81D15A17EF5D180005CD42 /* facebook@2x.png in Resources */,
 				2D81D12F17EF5C760005CD42 /* menu-button.png in Resources */,
@@ -1151,10 +1183,13 @@
 				2D81D15017EF5D180005CD42 /* category-button-bg@2x.png in Resources */,
 				2D3D63A319226D7800FB9F8B /* share@2x.png in Resources */,
 				2D439B331525BB860042D5D0 /* Default@2x.png in Resources */,
+				2D3C127919265E4F007F0F1A /* vk-icon-60.png in Resources */,
 				2D439B411525BC4E0042D5D0 /* blackArrow.png in Resources */,
 				2D81D15417EF5D180005CD42 /* left.png in Resources */,
+				2D3C127C19265E4F007F0F1A /* vk-icon-76@2x.png in Resources */,
 				2D439B421525BC4E0042D5D0 /* blackArrow@2x.png in Resources */,
 				2D439B431525BC4E0042D5D0 /* blueArrow.png in Resources */,
+				2D3C127B19265E4F007F0F1A /* vk-icon-76.png in Resources */,
 				2D439B441525BC4E0042D5D0 /* blueArrow@2x.png in Resources */,
 				2D439B451525BC4E0042D5D0 /* grayArrow.png in Resources */,
 				2D471ADA188DDA99000A27B9 /* Default-Portrait@2x~ipad.png in Resources */,
@@ -1169,6 +1204,7 @@
 				2D81D16217EF5D180005CD42 /* menu-pin-45@2x.png in Resources */,
 				2D81D15817EF5D180005CD42 /* border@2x.png in Resources */,
 				2D81D15917EF5D180005CD42 /* facebook.png in Resources */,
+				2D3C127819265E4F007F0F1A /* vk-icon-43@2x.png in Resources */,
 				2D81D16717EF5D180005CD42 /* twitter.png in Resources */,
 				B08934781891260000AE6B19 /* app-icon-76.png in Resources */,
 				2D81D16017EF5D180005CD42 /* logo@2x.png in Resources */,
@@ -1264,6 +1300,7 @@
 				2DEDABD418FEE7850013D26C /* UBJsonPicturesParser.m in Sources */,
 				2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */,
 				B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */,
+				2D3D63A91922809500FB9F8B /* UBPictureViewController.m in Sources */,
 				2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */,
 				2DD8A02E1918E30000197EC2 /* UBFavoritePicturesDataSource.m in Sources */,
 				2D3AD32A190EE20C00C3A3BE /* UBQuotesController.m in Sources */,
@@ -1287,6 +1324,7 @@
 				2D5A4E91151B374D002ABFA2 /* FacebookSharingController.m in Sources */,
 				2D230026151B69820059BD2B /* TwitterSharingController.m in Sources */,
 				2D23002D151B78950059BD2B /* EMailSharingController.m in Sources */,
+				2D3D63A619227EB400FB9F8B /* UBFullSizePictureViewController.m in Sources */,
 				B0D8FD861524F15400D4A6EB /* UBPictureInfoView.m in Sources */,
 				B09CFA98152C7CD600316B7C /* EGORefreshTableHeaderView.m in Sources */,
 				2D0D814D15A49E0A00AAB0B5 /* UBPictureView.m in Sources */,

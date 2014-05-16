@@ -26,19 +26,27 @@
     return NSLocalizedString(@"Vkontakte", nil);
 }
 
-- (UIImage *)activityImage
+- (UIImage *)_activityImage
 {
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-        return [UIImage imageNamed:@"Default"];
+    if (!IS_PAD) {
+        if (IS_LATER_IOS6) {
+            return [UIImage imageNamed:@"vk-icon-60.png"];
+        } else {
+            return [UIImage imageNamed:@"vk-icon-43"];
+        }
     } else {
-        return [UIImage imageNamed:@"Default"];
+        if (IS_LATER_IOS6) {
+            return [UIImage imageNamed:@"vk-icon-76"];
+        } else {
+            return [UIImage imageNamed:@"vk-icon-60"];
+        }
     }
 }
 
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems
 {
-    // TODO:
+    // TODO: add activity items checking.
     return YES;
 }
 

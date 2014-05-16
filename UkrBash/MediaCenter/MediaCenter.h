@@ -12,6 +12,8 @@
 extern NSString *kMediaCenterErrorDomain;
 
 
+typedef void (^UBImageDownloadedCallback)(UIImage *decompressedImage);
+
 typedef enum {
 	MediaCenterErrorNoError = 0,
 	MediaCenterErrorWrongMIMEType
@@ -59,6 +61,7 @@ extern NSString *kImageCenterLoadImageAction;
 
 - (UIImage*)imageWithUrl:(NSString*)imageUrl;
 -(UIImage *) imageWithUrl: (NSString *) imageUrl priority:(NSOperationQueuePriority)priority;
+- (UIImage *)imageWithUrl:(NSString *)imageUrl andCompletion:(UBImageDownloadedCallback)completion;
 
 - (void)imageWithUrlDownloadEnded:(NSString *)imageUrl;
 

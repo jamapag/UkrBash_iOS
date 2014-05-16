@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MediaCenter.h"
 
 
 @interface DownloadImageOperation : NSOperation {
@@ -16,6 +17,7 @@
 
 @property (nonatomic, readonly) NSString *urlString;
 @property (nonatomic, readonly) NSString *actionType;
+@property (nonatomic, copy) UBImageDownloadedCallback completion;
 
 - (id)initWithURLString:(NSString*)urlString;
 

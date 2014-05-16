@@ -19,6 +19,14 @@
 	return kImageCenterLoadImageAction;
 }
 
+//- (void)setCompletion:(UBImageDownloadedCallback)completion
+//{
+//    if (_completion) {
+//        Block_release(_completion);
+//    }
+//    _completion = Block_copy(completion);
+//}
+
 
 - (id)initWithURLString:(NSString*)_urlString {
 	self = [super init];
@@ -34,6 +42,7 @@
 - (void)dealloc {
 	[urlString release];
 	[fileData release];
+    [_completion release];
 	[super dealloc];
 }
 
@@ -93,6 +102,12 @@
 	[[MediaCenter imageCenter] imageWithUrlDownloadEnded:urlString];
 	[url release];
 	done = YES;
+    if (self.completion) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *image = [UIImage imageWithData:fileData];
+            self.completion(image);
+        });
+    }
 }
 
 

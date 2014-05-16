@@ -16,7 +16,7 @@
     [super dealloc];
 }
 
-- (NSDateFormatter*)dateFormatter
+- (NSDateFormatter *)dateFormatter
 {
     if (!dateFormatter)
     {
@@ -50,10 +50,22 @@
     NSAssert(NO, @"this method should be overloaded by subclasses");
 }
 
-- (NSArray*)items
+- (NSArray *)items
 {
     NSAssert(NO, @"this method should be overloaded by subclasses");
     return nil;
+}
+
+- (id)objectAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"this method should be overloaded by subclasses");
+    return nil;
+}
+
+- (NSInteger)numberOfRowsInSection:(NSInteger)section
+{
+    NSAssert(NO, @"this method should be overloaded by subclasses");
+    return 0;
 }
 
 - (void)loadMoreItems

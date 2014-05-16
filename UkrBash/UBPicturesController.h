@@ -9,10 +9,12 @@
 #import "UBViewController.h"
 #import "UBFetchedPicturesDataSource.h"
 #import "UBPictureCollectionViewCell.h"
+#import "UBFullSizePictureViewController.h"
 
 @interface UBPicturesController : UBViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UBQuoteCollectionCellDelegate>
 {
     UICollectionView *_collectionView;
+    UBFullSizePictureViewController *fullSizeController;
     
     id localImageLoadedObserver;
     

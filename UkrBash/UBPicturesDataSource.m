@@ -9,9 +9,20 @@
 #import "UBPicturesDataSource.h"
 #import "UBPictureCell.h"
 #import "UBPicture.h"
+#import "Picture.h"
 #import "MediaCenter.h"
 
 @implementation UBPicturesDataSource
+
+- (id)objectAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [[self items] objectAtIndex:indexPath.row];
+}
+
+- (NSInteger)numberOfRowsInSection:(NSInteger)section
+{
+    return [[self items] count];
+}
 
 - (UITableViewCell *)cellWithReuesIdentifier:(NSString *)reuseIdent
 {
@@ -39,12 +50,24 @@
 
 - (void)configurePictureInfoView:(UBPictureInfoView *)infoView forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UBPicture *picture = (UBPicture *)[[self items] objectAtIndex:indexPath.row];
-    infoView.idLabel.text = [NSString stringWithFormat:@"%ld", (long)picture.pictureId];
-    infoView.textLabel.text = picture.title;
-    infoView.ratingLabel.text = [self ratingStringFromRating:picture.rating];
-    infoView.dateLabel.text = [[self dateFormatter] stringFromDate:picture.pubDate];
-    infoView.authorLabel.text = picture.author;
+    id picture = [self objectAtIndexPath:indexPath];
+    if ([picture isKindOfClass:[UBPicture class]]) {
+        UBPicture *ubPicture = (UBPicture *)picture;
+        infoView.idLabel.text = [NSString stringWithFormat:@"%ld", (long)ubPicture.pictureId];
+        infoView.textLabel.text = ubPicture.title;
+        infoView.ratingLabel.text = [self ratingStringFromRating:ubPicture.rating];
+        infoView.dateLabel.text = [[self dateFormatter] stringFromDate:ubPicture.addDate];
+        infoView.authorLabel.text = ubPicture.author;
+    } else if ([picture isKindOfClass:[Picture class]]) {
+        Picture *cdPicture = (Picture *)picture;
+        infoView.idLabel.text = [NSString stringWithFormat:@"%ld", [cdPicture.pictureId longValue]];
+        infoView.textLabel.text = cdPicture.title;
+        infoView.ratingLabel.text = [self ratingStringFromRating:[cdPicture.rating integerValue]];
+        infoView.dateLabel.text = [[self dateFormatter] stringFromDate:cdPicture.addDate];
+        infoView.authorLabel.text = cdPicture.author;
+    }
+    
+    infoView.textLabel.font = GET_FONT();
 }
 
 @end

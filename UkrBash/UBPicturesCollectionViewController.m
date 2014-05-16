@@ -54,6 +54,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [_refreshControl release];
     [dataSource release];
     [pendingImages release];
+    [fullSizeController release];
     [super dealloc];
 }
 
@@ -209,7 +210,8 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 - (void)shareActionForCell:(UBPictureCollectionViewCell *)cell andRectForPopover:(CGRect)rect
 {
     NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
-    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+//    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    UBPicture *picture = [dataSource objectAtIndexPath:indexPath];
     NSString *pictureUrlString = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
     NSURL *pictureUrl = [NSURL URLWithString:pictureUrlString];
     UIImage *image = [[MediaCenter imageCenter] imageWithUrl:picture.image];
@@ -328,14 +330,15 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[dataSource items] count];
+//    return [[dataSource items] count];
+    return [dataSource numberOfRowsInSection:section];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UBPictureCollectionViewCell *imageCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UBPictureCollectionViewCell" forIndexPath:indexPath];
     imageCell.shareDelegate = self;
-    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
+    UBPicture *picture = [dataSource objectAtIndexPath:indexPath];
     UIImage *image = [[MediaCenter imageCenter] imageWithUrl:picture.image];
     if (!image && ![pendingImages objectForKey:picture.image]) {
         [pendingImages setObject:indexPath forKey:picture.image];
@@ -392,6 +395,49 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 
 #pragma mark - UICollectionViewDelegate methods.
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    if (IS_IOS7) {
+        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+    }
+    
+    
+    UICollectionViewCell *cell = [_collectionView cellForItemAtIndexPath:indexPath];
+    CALayer *viewLayer = cell.layer;
+    
+    CGFloat animationDuration = .4;
+    
+    CABasicAnimation* popInAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    popInAnimation.duration = animationDuration;
+    [popInAnimation setToValue:[NSNumber numberWithFloat:1.5]];
+    
+    CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeAnimation.duration = animationDuration;
+    [fadeAnimation setToValue:[NSNumber numberWithFloat:0.]];
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.animations = [NSArray arrayWithObjects:popInAnimation, fadeAnimation, nil];
+    animationGroup.duration = animationDuration;
+	
+    [viewLayer addAnimation:animationGroup forKey:@"animation"];
+    
+    if (!fullSizeController) {
+        fullSizeController = [[UBFullSizePictureViewController alloc] initWithDataSource:dataSource andInitPicuteIndex:indexPath.row];
+        fullSizeController.dataSource = dataSource;
+        fullSizeController.view.frame = self.view.bounds;
+    } else {
+        fullSizeController.view.frame = self.view.bounds;
+        [fullSizeController setCurrentPictureIndex:indexPath.row];
+    }
+    fullSizeController.view.alpha = 0;
+    [self.view addSubview:fullSizeController.view];
+    [UIView animateWithDuration:animationDuration animations:^{
+        fullSizeController.view.alpha = 1;
+    }];
+
+}
+
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
@@ -425,11 +471,23 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [fullSizeController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     rotating = YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [fullSizeController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 - (void)viewDidLayoutSubviews
 {
+    [super viewDidLayoutSubviews];
+    // TODO: add ios 6 support.
+    // FORCE collectionView frame because of broken layout after rotate (sometimes).
+    _collectionView.frame = CGRectMake(0, 64., self.view.frame.size.width, self.view.frame.size.height - 64.);
     rotating = NO;
 }
 
