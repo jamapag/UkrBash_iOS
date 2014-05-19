@@ -315,6 +315,7 @@
 }
 
 #pragma mark - UBQuoteCollectionCellDelegate methods.
+
 - (void)shareActionForCell:(UBPictureCollectionViewCell *)cell andRectForPopover:(CGRect)rect
 {
     NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
@@ -334,25 +335,6 @@
     }];
     [self presentViewController:activityViewController animated:YES completion:nil];
     [activityViewController release];
-}
-
-- (void)quoteCell:(UBPictureCollectionViewCell *)cell shareQuoteWithType:(SharingNetworkType)networkType
-{
-    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
-    Picture *picture = [dataSource objectAtIndexPath:indexPath];
-    NSURL *pictureUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", [picture.pictureId longValue]]];
-    
-    SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
-    sharingController.url = pictureUrl;
-    sharingController.rootViewController = self;
-    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Картинка %ld", [picture.pictureId longValue]]];
-    [sharingController setAttachmentImagePreview:[[MediaCenter imageCenter] imageWithUrl:picture.image]];
-    [sharingController showSharingDialog];
-    
-    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"sharing"
-                                                                                        action:@"pictures"
-                                                                                         label:NSStringFromClass([sharingController class])
-                                                                                         value:@(-1)] build]];
 }
 
 - (void)copyUrlActionForCell:(UBPictureCollectionViewCell *)cell

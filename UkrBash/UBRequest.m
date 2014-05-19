@@ -87,7 +87,7 @@ NSString *const kStats = @"stats";
         }
     }
     urlString = [urlString stringByAppendingString:paramsSting];
-    NSLog(@"URL: %@", urlString);
+//    NSLog(@"URL: %@", urlString);
     request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     return [request autorelease];
 }

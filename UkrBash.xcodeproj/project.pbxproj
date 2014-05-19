@@ -15,7 +15,6 @@
 		2D126B771911401100E4CC00 /* UBFetchedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D126B761911401100E4CC00 /* UBFetchedQuotesDataSource.m */; };
 		2D144DDA1419073B009E1DBA /* UBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D144DD91419073B009E1DBA /* UBRequest.m */; };
 		2D14843416D569A500002F9C /* UBPicturesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14843316D569A500002F9C /* UBPicturesCollectionViewController.m */; };
-		2D14843816D56F7500002F9C /* UBPictureCollectionViewCellOld.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14843716D56F7500002F9C /* UBPictureCollectionViewCellOld.m */; };
 		2D190F031926824F00435040 /* UBEmptyListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D190F021926824F00435040 /* UBEmptyListView.m */; };
 		2D230026151B69820059BD2B /* TwitterSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D230025151B69820059BD2B /* TwitterSharingController.m */; };
 		2D23002D151B78950059BD2B /* EMailSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D23002C151B78950059BD2B /* EMailSharingController.m */; };
@@ -237,8 +236,6 @@
 		2D144DD91419073B009E1DBA /* UBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRequest.m; sourceTree = "<group>"; };
 		2D14843216D569A500002F9C /* UBPicturesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesCollectionViewController.h; sourceTree = "<group>"; };
 		2D14843316D569A500002F9C /* UBPicturesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesCollectionViewController.m; sourceTree = "<group>"; };
-		2D14843616D56F7500002F9C /* UBPictureCollectionViewCellOld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureCollectionViewCellOld.h; sourceTree = "<group>"; };
-		2D14843716D56F7500002F9C /* UBPictureCollectionViewCellOld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureCollectionViewCellOld.m; sourceTree = "<group>"; };
 		2D190F011926824F00435040 /* UBEmptyListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBEmptyListView.h; sourceTree = "<group>"; };
 		2D190F021926824F00435040 /* UBEmptyListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBEmptyListView.m; sourceTree = "<group>"; };
 		2D230024151B69820059BD2B /* TwitterSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterSharingController.h; sourceTree = "<group>"; };
@@ -639,8 +636,6 @@
 				2D0D814C15A49E0A00AAB0B5 /* UBPictureView.m */,
 				B066EE2C16AD9E3900A2A25C /* UBDonateCell.h */,
 				B066EE2D16AD9E3900A2A25C /* UBDonateCell.m */,
-				2D14843616D56F7500002F9C /* UBPictureCollectionViewCellOld.h */,
-				2D14843716D56F7500002F9C /* UBPictureCollectionViewCellOld.m */,
 				2DFE071D191BAF4900808F74 /* UBPictureCollectionViewCell.h */,
 				2DFE071E191BAF4900808F74 /* UBPictureCollectionViewCell.m */,
 				2DE51ABF16DE17BE0049F9A2 /* UBCollectionViewLayout.h */,
@@ -1351,7 +1346,6 @@
 				2DD3FF9819086536008BCB01 /* UBFavoriteQuotesDataSource.m in Sources */,
 				2D14843416D569A500002F9C /* UBPicturesCollectionViewController.m in Sources */,
 				2DD8A0311918E43B00197EC2 /* UBPicturesController.m in Sources */,
-				2D14843816D56F7500002F9C /* UBPictureCollectionViewCellOld.m in Sources */,
 				2D190F031926824F00435040 /* UBEmptyListView.m in Sources */,
 				2DE51AC116DE17BE0049F9A2 /* UBCollectionViewLayout.m in Sources */,
 				2D6E4DA7170B329800353843 /* UBPictureCollectionReusableFooter.m in Sources */,

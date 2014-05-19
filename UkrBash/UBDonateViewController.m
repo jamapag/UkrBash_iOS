@@ -158,9 +158,9 @@
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-    NSLog(@"prodcuts response: %@", response);
-    NSLog(@"\t%@", response.products);
-    NSLog(@"\t%@", response.invalidProductIdentifiers);
+//    NSLog(@"prodcuts response: %@", response);
+//    NSLog(@"\t%@", response.products);
+//    NSLog(@"\t%@", response.invalidProductIdentifiers);
     for (SKProduct *product in response.products) {
         [products addObject:product];
     }

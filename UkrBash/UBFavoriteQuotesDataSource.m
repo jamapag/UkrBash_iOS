@@ -16,7 +16,7 @@
 
 - (NSArray *)items
 {
-    NSLog(@"Itemscalled");
+//    NSLog(@"Itemscalled");
     return [[[_fetchedResultsController sections] objectAtIndex:0] objects];
 }
 
@@ -28,7 +28,7 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
 	}
-    NSLog(@"AFTER PERFORM FETCH");
+//    NSLog(@"AFTER PERFORM FETCH");
     [self.tableView reloadData];
 }
 
@@ -76,15 +76,12 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    NSLog(@"Begin updates");
     [self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
-    NSLog(@"UPDATING");
-    
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
@@ -131,7 +128,6 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    NSLog(@"end updates");
     [self.tableView endUpdates];
 }
 

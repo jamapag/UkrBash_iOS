@@ -191,9 +191,10 @@
         CGPoint location = [gesture locationInView:gesture.view];
         UIMenuItem *copy = [[[UIMenuItem alloc] initWithTitle:@"Копіювати" action:@selector(copyQuote:)] autorelease];
         UIMenuItem *copyURLItem = [[[UIMenuItem alloc] initWithTitle:@"Копіювати URL" action:@selector(copyURL:)] autorelease];
+        UIMenuItem *openInBrowser = [[[UIMenuItem alloc] initWithTitle:@"Відкрити в Safari" action:@selector(openInBrowser:)] autorelease];
         
         UIMenuController *sharedMenu = [UIMenuController sharedMenuController];
-        [sharedMenu setMenuItems:[NSArray arrayWithObjects:copy, copyURLItem, nil]];
+        [sharedMenu setMenuItems:[NSArray arrayWithObjects:copy, copyURLItem, openInBrowser, nil]];
         [sharedMenu setTargetRect:CGRectMake(location.x, location.y, 0., 0.) inView:gesture.view];
         [sharedMenu setMenuVisible:YES animated:YES];
     }
@@ -224,6 +225,13 @@
                                                                                         action:@"quotes"
                                                                                          label:@"url"
                                                                                          value:@(-1)] build]];
+}
+
+- (void)openInBrowser:(id)sender
+{
+    Quote *quote = [dataSource objectAtIndexPath:selectedIndexPath];
+    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", [quote.quoteId longValue]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:quoteUrl]];
 }
 
 #pragma mark - UITableViewDelegate methods.

@@ -20,7 +20,7 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
 	}
-    NSLog(@"AFTER PERFORM FETCH");
+//    NSLog(@"AFTER PERFORM FETCH");
     [self.collectionView reloadData];
 }
 

@@ -11,7 +11,7 @@
 
 @protocol UBQuoteCollectionCellDelegate <NSObject>
 
-- (void)quoteCell:(id)cell shareQuoteWithType:(SharingNetworkType)shareType;
+//- (void)quoteCell:(id)cell shareQuoteWithType:(SharingNetworkType)shareType;
 - (void)copyUrlActionForCell:(id)cell;
 - (void)openInBrowserActionForCell:(id)cell;
 - (void)favoriteActionForCell:(id)cell;
