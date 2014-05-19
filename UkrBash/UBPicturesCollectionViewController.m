@@ -210,7 +210,6 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 - (void)shareActionForCell:(UBPictureCollectionViewCell *)cell andRectForPopover:(CGRect)rect
 {
     NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
-//    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
     UBPicture *picture = [dataSource objectAtIndexPath:indexPath];
     NSString *pictureUrlString = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
     NSURL *pictureUrl = [NSURL URLWithString:pictureUrlString];
@@ -229,25 +228,6 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [activityViewController release];
 }
 
-- (void)quoteCell:(UBPictureCollectionViewCell *)cell shareQuoteWithType:(SharingNetworkType)networkType
-{
-    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
-    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
-    NSURL *pictureUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId]];
-    
-    SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
-    sharingController.url = pictureUrl;
-    sharingController.rootViewController = self;
-    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Картинка %ld", (long)picture.pictureId]];
-    [sharingController setAttachmentImagePreview:[[MediaCenter imageCenter] imageWithUrl:picture.image]];
-    [sharingController showSharingDialog];
-    
-    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"sharing"
-                                                                                        action:@"pictures"
-                                                                                         label:NSStringFromClass([sharingController class])
-                                                                                         value:@(-1)] build]];
-}
-
 - (void)copyUrlActionForCell:(UBPictureCollectionViewCell *)cell
 {
     NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
@@ -262,8 +242,15 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 
 - (void)copyUrlActionForIndexPath:(NSIndexPath *)indexPath
 {
-    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
+    id picture = [dataSource objectAtIndexPath:indexPath];
+    NSString *pictureUrl;
+    if ([picture isKindOfClass:[UBPicture class]]) {
+        UBPicture *ubPicture = (UBPicture *)picture;
+        pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)ubPicture.pictureId];
+    } else {
+        Picture *cdPicture = (Picture *)picture;
+        pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", [cdPicture.pictureId longValue]];
+    }
     
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = pictureUrl;
@@ -271,8 +258,15 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 
 - (void)openInBrowserActionForIndexPath:(NSIndexPath *)indexPath
 {
-    UBPicture *picture = [[dataSource items] objectAtIndex:indexPath.row];
-    NSString *pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
+    id picture = [dataSource objectAtIndexPath:indexPath];
+    NSString *pictureUrl;
+    if ([picture isKindOfClass:[UBPicture class]]) {
+        UBPicture *ubPicture = (UBPicture *)picture;
+        pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)ubPicture.pictureId];
+    } else {
+        Picture *cdPicture = (Picture *)picture;
+        pictureUrl = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", [cdPicture.pictureId longValue]];
+    }
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:pictureUrl]];
 }
 

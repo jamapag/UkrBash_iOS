@@ -14,6 +14,8 @@
 #import "UBQuote.h"
 #import "UkrBashAppDelegate.h"
 #import "Quote.h"
+#import "UBPicture.h"
+#import "Picture.h"
 
 NSString *const kNotificationDataUpdated = @"kNotificationDataUpdated";
 
@@ -295,6 +297,30 @@ static Model *sharedModel = nil;
     }
 }
 
+- (void)favoritizePictures:(NSArray *)pictures
+{
+    for (UBPicture *picture in pictures) {
+        NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Picture" inManagedObjectContext:context];
+        [fetchRequest setEntity:entity];
+        NSPredicate *predicate  = [NSPredicate predicateWithFormat:@"pictureId == %@ and favorite = %@", [NSNumber numberWithInteger:picture.pictureId], [NSNumber numberWithBool:YES]];
+        [fetchRequest setPredicate:predicate];
+        NSError *error;
+        Picture *cdPicture;
+        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        if ([fetchedObjects count] > 0) {
+            cdPicture = [fetchedObjects objectAtIndex:0];
+            cdPicture.rating = [NSNumber numberWithInteger:picture.rating];
+            cdPicture.pubDate = picture.pubDate;
+            cdPicture.status = [NSNumber numberWithInteger:picture.status];
+            picture.favorite = YES;
+        }
+        [fetchRequest release];
+    }
+    
+}
+
 #pragma mark - UBQuotesRequestDelegate
 - (void)request:(UBRequest *)request didFinishWithData:(NSData *)data
 {
@@ -310,6 +336,7 @@ static Model *sharedModel = nil;
         UBJsonPicturesParser *parser = [[UBJsonPicturesParser alloc] init];
         array = [parser parsePicturesWithData:data];
         [parser release];
+        [self favoritizePictures:array];
     }
     
     if (array == nil) {

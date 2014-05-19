@@ -230,7 +230,7 @@
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
+    Quote *quote = [dataSource objectAtIndexPath:indexPath];
     return [UBQuoteCell heightForQuoteText:quote.text viewWidth:tableView.frame.size.width];
 }
 
