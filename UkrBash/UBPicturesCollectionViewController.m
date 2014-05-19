@@ -393,15 +393,18 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
+
 #pragma mark - UICollectionViewDelegate methods.
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     if (IS_IOS7) {
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
         [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+    } else {
+        // iOS 6
+        // Do nothing
     }
-    
     
     UICollectionViewCell *cell = [_collectionView cellForItemAtIndexPath:indexPath];
     CALayer *viewLayer = cell.layer;
@@ -487,7 +490,16 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     [super viewDidLayoutSubviews];
     // TODO: add ios 6 support.
     // FORCE collectionView frame because of broken layout after rotate (sometimes).
-    _collectionView.frame = CGRectMake(0, 64., self.view.frame.size.width, self.view.frame.size.height - 64.);
+    
+    float y = 0;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        // Load resources for iOS 6.1 or earlier;
+        y = 0;
+    } else {
+        // Load resources for iOS 7 or later
+        y = 20;
+    }
+    _collectionView.frame = CGRectMake(0, y + 44., self.view.frame.size.width, self.view.frame.size.height - (y + 44.));
     rotating = NO;
 }
 

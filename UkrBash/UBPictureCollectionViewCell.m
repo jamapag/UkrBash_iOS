@@ -61,6 +61,7 @@
         [pictureTittleLabel setUserInteractionEnabled:YES];
         [pictureTittleLabel setTextAlignment:NSTextAlignmentCenter];
         [pictureTittleLabel setTextColor:[UIColor whiteColor]];
+        pictureTittleLabel.backgroundColor = [UIColor clearColor];
         
         
         CAGradientLayer *maskLayer = [CAGradientLayer layer];
@@ -68,10 +69,8 @@
         CGColorRef outerColor = [UIColor colorWithWhite:0. alpha:0.0].CGColor;
         CGColorRef innerColor = [UIColor colorWithWhite:0. alpha:1.0].CGColor;
         
-        maskLayer.colors = [NSArray arrayWithObjects:(id)outerColor,
-                            (id)innerColor, nil];
+        maskLayer.colors = [NSArray arrayWithObjects:(id)outerColor, (id)innerColor, nil];
         maskLayer.frame = pictureTittleLabel.frame;
-        [self.contentView.layer insertSublayer:maskLayer atIndex:3];
         [self.contentView.layer insertSublayer:maskLayer above:imageView.layer];
         [self.contentView addSubview:pictureTittleLabel];
         
