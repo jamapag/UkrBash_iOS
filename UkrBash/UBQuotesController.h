@@ -11,12 +11,14 @@
 #import "UBFetchedQuotesDataSource.h"
 #import "EGORefreshTableHeaderView.h"
 #import "UBQuoteCell.h"
+#import "UBEmptyListView.h"
 
 @interface UBQuotesController : UBViewController <UITableViewDataSource, UITableViewDelegate, UBQuoteCellDelegate>
 {
     UITableView *tableView;
     NSIndexPath *activeCell;
     NSIndexPath *selectedIndexPath;
+    UBEmptyListView *emptyView;
     
     UBFetchedQuotesDataSource *dataSource;
     EGORefreshTableHeaderView *refreshHeaderView;

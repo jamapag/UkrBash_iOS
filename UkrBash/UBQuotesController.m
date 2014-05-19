@@ -102,6 +102,26 @@
     return YES;
 }
 
+- (void)showEmptyView
+{
+    if (!emptyView) {
+        emptyView = [[UBEmptyListView alloc] initWithFrame:CGRectMake(10, 70, 300, self.view.frame.size.height - 80)
+                                          andEmptyViewType:UBEmptyListViewFavoriteQuotesType];
+        emptyView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    }
+    if (!emptyView.superview) {
+        [self.view addSubview:emptyView];
+        emptyView.center = self.view.center;
+    }
+}
+
+- (void)hideEmptyView
+{
+    if (emptyView.superview) {
+        [emptyView removeFromSuperview];
+    }
+}
+
 #pragma mark - Actions.
 
 - (void)menuAction:(id)sender
@@ -234,6 +254,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if ([dataSource numberOfRowsInSection:section] == 0) {
+        [self showEmptyView];
+    } else {
+        [self hideEmptyView];
+    }
     return [dataSource numberOfRowsInSection:section];
 }
 
