@@ -162,6 +162,56 @@
                      }];
 }
 
+- (void)fbShareAction:(id)sender
+{
+    [self sharePictureWithIndex:currentPictureIndex withSharingNetwork:SharingFacebookNetwork];
+}
+
+- (void)twShareAction:(id)sender
+{
+    [self sharePictureWithIndex:currentPictureIndex withSharingNetwork:SharingTwitterNetwork];
+}
+
+- (void)mailShareAction:(id)sender
+{
+    [self sharePictureWithIndex:currentPictureIndex withSharingNetwork:SharingEMailNetwork];
+}
+
+- (void)vkontakteShareAction:(id)sender
+{
+    [self sharePictureWithIndex:currentPictureIndex withSharingNetwork:SharingVkontakteNetwork];
+}
+
+- (void)sharePictureWithIndex:(NSInteger)index withSharingNetwork:(SharingNetworkType)networkType
+{
+    id picture = [dataSource objectAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    NSString *title;
+    NSString *description;
+    NSString *imageUrlString;
+    NSURL *pictureUrl;
+    if ([picture isKindOfClass:[UBPicture class]]) {
+        UBPicture *ubPicture = (UBPicture *)picture;
+        title = [NSString stringWithFormat:@"Картинка %ld", (long)ubPicture.pictureId];
+        description = ubPicture.title;
+        imageUrlString = ubPicture.thumbnail;
+        pictureUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)ubPicture.pictureId]];
+    } else {
+        Picture *cdPicture = (Picture *)picture;
+        title = [NSString stringWithFormat:@"Картинка %ld", [cdPicture.pictureId longValue]];
+        description = cdPicture.title;
+        imageUrlString = cdPicture.thumbnail;
+        pictureUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", [cdPicture.pictureId longValue]]];
+    }
+    
+    SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
+    sharingController.url = pictureUrl;
+    sharingController.rootViewController = self;
+    [sharingController setAttachmentTitle:title];
+    [sharingController setAttachmentDescription:description];
+    [sharingController setAttachmentImagePreview:[[MediaCenter imageCenter] imageWithUrl:imageUrlString]];
+    [sharingController showSharingDialog];
+}
+
 - (void)tapGestureHandler:(UITapGestureRecognizer *)tapGesture
 {
     if (tapGesture.numberOfTapsRequired == 1 && tapGesture.state == UIGestureRecognizerStateEnded) {

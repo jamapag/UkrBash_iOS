@@ -30,6 +30,9 @@
     [dataSource release];
     [tableView release];
     [refreshHeaderView release];
+    [emptyView release];
+    [activeCell release];
+    [selectedIndexPath release];
     [super dealloc];
 }
 
@@ -213,8 +216,8 @@
 {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     
-    UBQuote *quote = [[dataSource items] objectAtIndex:selectedIndexPath.row];
-    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", (long)quote.quoteId];
+    Quote *quote = [dataSource objectAtIndexPath:selectedIndexPath];
+    NSString *quoteUrl = [NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", [quote.quoteId longValue]];
     pasteboard.string = quoteUrl;
 
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"sharing"

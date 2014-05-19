@@ -22,6 +22,7 @@
         generalLabel.shadowOffset = CGSizeMake(0., 1.);
         generalLabel.text = [NSString stringWithFormat:@"Список улюблених %@ пустий.", listType == UBEmptyListViewFavoriteQuotesType ? @"цитат" : @"картинок"] ;
         [self addSubview:generalLabel];
+        [generalLabel release];
         
         UILabel *pressLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, generalLabel.frame.origin.y + generalLabel.frame.size.height + 10, (self.frame.size.width / 2) - 31, 50)];
         pressLabel.font = [UIFont systemFontOfSize:20];
@@ -32,10 +33,12 @@
         pressLabel.shadowOffset = CGSizeMake(0., 1.);
         pressLabel.text = @"Натискайте";
         [self addSubview:pressLabel];
+        [pressLabel release];
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"favorite.png"]];
         imageView.frame = CGRectMake(self.frame.size.width / 2 - 16, pressLabel.center.y - 16, 32, 32);
         [self addSubview:imageView];
+        [imageView release];
         
         UILabel *toAddLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - 130, pressLabel.frame.origin.y, self.frame.size.width / 2 - 31, 50)];
         toAddLabel.font = [UIFont systemFontOfSize:20];
@@ -50,6 +53,7 @@
         CGRect newFrame = self.frame;
         newFrame.size.height = toAddLabel.frame.origin.y + toAddLabel.frame.size.height + 10;
         self.frame = newFrame;
+        [toAddLabel release];
     }
     return self;
 }
