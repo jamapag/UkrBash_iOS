@@ -327,6 +327,7 @@
     UBVkontakteActivity *vkActivity = [[UBVkontakteActivity alloc] init];
     vkActivity.parentViewController = self;
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[picture.title, pictureUrl, image] applicationActivities:@[vkActivity]];
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
     [vkActivity release];
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
         if (IS_IOS7) {
