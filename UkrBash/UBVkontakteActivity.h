@@ -14,6 +14,7 @@ static NSString * const UBVkontakteActivityType = @"net.smile2mobile.activity.UB
 
 @property (nonatomic, retain) UIViewController *parentViewController;
 @property (nonatomic, retain) NSString *attachmentTitle;
+@property (nonatomic, retain) NSString *attachmentDescription;
 @property (nonatomic, retain) NSURL *url;
 @property (nonatomic, retain) UIImage *attachmentImage;
 

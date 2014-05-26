@@ -59,38 +59,17 @@ CGFloat animationOffset = 52.;
     return height + (INFO_LABELS_PADDING * 2) + (INFO_LABELS_HEIGHT * 2) + (CONTENT_PADDING_TOP) + (CONTENT_PADDING_BOTTOM) + (MARGIN_TOP) + (MARGIN_BOTTOM);
 }
 
-- (void)shareWithFacebookAction:(id)sender
-{
-    if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingFacebookNetwork];
-    }
-}
-
-- (void)shareWithTwitterAction:(id)sender
-{
-    if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingTwitterNetwork];
-    }
-}
-
-- (void)shareWithEmailAction:(id)sender
-{
-    if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingEMailNetwork];
-    }
-}
-
-- (void)shareWithVkontakteAction:(id)sender
-{
-    if (self.shareDelegate) {
-        [self.shareDelegate quoteCell:self shareQuoteWithType:SharingVkontakteNetwork];
-    }
-}
-
 -(void)favoriteAction:(id)sender
 {
     if (self.shareDelegate) {
         [self.shareDelegate favoriteActionForCell:self];
+    }
+}
+
+- (void)shareAction:(UIButton *)sender
+{
+    if (self.shareDelegate) {
+        [self.shareDelegate shareActionForCell:self andRectForPopover:sender.frame];
     }
 }
 
@@ -183,52 +162,14 @@ CGFloat animationOffset = 52.;
         
         animationOffset = 52.;
         
-        if ([SharingController isSharingAvailableForNetworkType:SharingFacebookNetwork]) {
-            shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
-            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-            [shareBtn setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
-            [shareBtn addTarget:self action:@selector(shareWithFacebookAction:) forControlEvents:UIControlEventTouchUpInside];
-            [self.contentView addSubview:shareBtn];
-            x += shareButtonWidth + 10.;
-            animationOffset = x;
-        }
-
-        if ([SharingController isSharingAvailableForNetworkType:SharingTwitterNetwork]) {
-            shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
-            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-            [shareBtn setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
-            [shareBtn addTarget:self action:@selector(shareWithTwitterAction:) forControlEvents:UIControlEventTouchUpInside];
-            [self.contentView addSubview:shareBtn];
-            x += shareButtonWidth + 10.;
-            
-            animationOffset += shareButtonWidth + 10.;
-        }
-        
-        if ([SharingController isSharingAvailableForNetworkType:SharingEMailNetwork]) {
-            shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
-            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-            [shareBtn setImage:[UIImage imageNamed:@"gmail"] forState:UIControlStateNormal];
-            [shareBtn addTarget:self action:@selector(shareWithEmailAction:) forControlEvents:UIControlEventTouchUpInside];
-            [self.contentView addSubview:shareBtn];
-            x += shareButtonWidth + 10.;
-
-            animationOffset += shareButtonWidth + 10.;
-        }
-        
-        if ([SharingController isSharingAvailableForNetworkType:SharingVkontakteNetwork]) {
-            shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            shareBtn.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
-            shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-            [shareBtn setImage:[UIImage imageNamed:@"vk"] forState:UIControlStateNormal];
-            [shareBtn addTarget:self action:@selector(shareWithVkontakteAction:) forControlEvents:UIControlEventTouchUpInside];
-            [self.contentView addSubview:shareBtn];
-            x += shareButtonWidth + 10.;
-
-            animationOffset += shareButtonWidth + 10.;
-        }
+        shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(x, 10, shareButtonWidth, shareButtonWidth);
+        shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+        [shareBtn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+        [shareBtn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:shareBtn];
+        x += shareButtonWidth + 10.;
+        animationOffset = x;
         
         favoriteButton = [[UIButton buttonWithType:UIButtonTypeCustom]  retain];
         favoriteButton.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);

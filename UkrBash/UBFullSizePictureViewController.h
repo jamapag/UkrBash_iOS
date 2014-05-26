@@ -11,6 +11,15 @@
 #import "UBPictureInfoView.h"
 #import "UBViewController.h"
 
+@class UBFullSizePictureViewController;
+
+@protocol UBFullSizePictureViewControllerDelegate <NSObject>
+
+- (void)userDidScroll:(UBFullSizePictureViewController *)viewController toPictureAtIndex:(NSInteger)index;
+- (void)updatePictureAtIndex:(NSInteger)index;
+
+@end
+
 @interface UBFullSizePictureViewController : UBViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 {
     UIPageViewController *pageViewController;
@@ -19,12 +28,15 @@
     UBPictureInfoView *infoView;
     UIView *toolbar;
     UIButton *backButton;
+    UIButton *favoriteButton;
     
+    id <UBFullSizePictureViewControllerDelegate> delegate;
     
     NSInteger currentPictureIndex;
     NSInteger initPictureIndex;
 }
 
+@property (nonatomic, assign) id <UBFullSizePictureViewControllerDelegate> delegate;
 @property (nonatomic, retain) UBPicturesDataSource *dataSource;
 
 - (id)initWithDataSource:(UBPicturesDataSource *)aDataSource andInitPicuteIndex:(NSInteger)index;

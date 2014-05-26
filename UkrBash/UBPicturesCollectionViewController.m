@@ -214,10 +214,13 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     NSString *pictureUrlString = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)picture.pictureId];
     NSURL *pictureUrl = [NSURL URLWithString:pictureUrlString];
     UIImage *image = [[MediaCenter imageCenter] imageWithUrl:picture.image];
+    NSString *title = [NSString stringWithFormat:@"Картинка %ld", (long)picture.pictureId];
+    NSString *description = picture.title == nil ? @"" : picture.title;
     
     UBVkontakteActivity *vkActivity = [[UBVkontakteActivity alloc] init];
+    vkActivity.attachmentTitle = title;
     vkActivity.parentViewController = self;
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[picture.title, pictureUrl, image] applicationActivities:@[vkActivity]];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[description, pictureUrl, image] applicationActivities:@[vkActivity]];
     activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
     [vkActivity release];
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
@@ -290,8 +293,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     }
     [fetchRequest release];
     
-    if (!picture.favorite) {
-        NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    if (cdPicture == nil) {
         cdPicture = [NSEntityDescription insertNewObjectForEntityForName:@"Picture" inManagedObjectContext:context];
         cdPicture.pictureId = [NSNumber numberWithInteger:picture.pictureId];
         cdPicture.status = [NSNumber numberWithInteger:picture.status];
@@ -304,6 +306,14 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
         cdPicture.thumbnail = picture.thumbnail;
         cdPicture.image = picture.image;
         cdPicture.rating = [NSNumber numberWithInteger:picture.rating];
+        cdPicture.favorite = [NSNumber numberWithBool:YES];
+    } else {
+        // update some fileds if object already in db.
+        cdPicture.status = [NSNumber numberWithInteger:picture.status];
+        cdPicture.pubDate = picture.pubDate;
+        cdPicture.rating = [NSNumber numberWithInteger:picture.rating];
+    }
+    if (!picture.favorite) {
         cdPicture.favorite = [NSNumber numberWithBool:YES];
         picture.favorite = YES;
     } else {
@@ -423,6 +433,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     if (!fullSizeController) {
         fullSizeController = [[UBFullSizePictureViewController alloc] initWithDataSource:dataSource andInitPicuteIndex:indexPath.row];
         fullSizeController.dataSource = dataSource;
+        fullSizeController.delegate = self;
         fullSizeController.view.frame = self.view.bounds;
     } else {
         fullSizeController.view.frame = self.view.bounds;
@@ -530,5 +541,16 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     }
 }
 
+#pragma mark - UBFullSizePictureViewControllerDelegate Methods.
+
+- (void)userDidScroll:(UBFullSizePictureViewController *)viewController toPictureAtIndex:(NSInteger)index
+{
+    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:NO];
+}
+
+- (void)updatePictureAtIndex:(NSInteger)index
+{
+    [_collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:index inSection:0]]];
+}
 
 @end

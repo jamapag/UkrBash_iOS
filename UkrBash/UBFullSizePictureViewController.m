@@ -13,9 +13,12 @@
 #import "MediaCenter/MediaCenter.h"
 #import "SharingController.h"
 #import "UBQuoteCell.h"
+#import "UBVkontakteActivity.h"
+#import "UkrBashAppDelegate.h"
 
 @implementation UBFullSizePictureViewController
 
+@synthesize delegate;
 @synthesize dataSource;
 
 - (id)initWithDataSource:(UBPicturesDataSource *)aDataSource andInitPicuteIndex:(NSInteger)index
@@ -33,6 +36,7 @@
 
 - (void)dealloc
 {
+    [favoriteButton release];
     [pageViewController release];
     [backButton release];
     [toolbar release];
@@ -95,42 +99,22 @@
     padding += 10.;
     x += sharingButtonHeight + padding;
     
-    if ([SharingController isSharingAvailableForNetworkType:SharingFacebookNetwork]) {
-        UIButton *fbButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        fbButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
-        [fbButton setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
-        [fbButton addTarget:self action:@selector(fbShareAction:) forControlEvents:UIControlEventTouchUpInside];
-        [toolbar addSubview:fbButton];
-        x += sharingButtonHeight + padding;
-    }
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
+    [shareButton setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    shareButton.backgroundColor = [UIColor whiteColor];
+    [shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+    [toolbar addSubview:shareButton];
     
-    if ([SharingController isSharingAvailableForNetworkType:SharingTwitterNetwork]) {
-        UIButton *twButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        twButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
-        [twButton setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
-        [twButton addTarget:self action:@selector(twShareAction:) forControlEvents:UIControlEventTouchUpInside];
-        [toolbar addSubview:twButton];
-        x += sharingButtonHeight + padding;
-    }
+    x += sharingButtonHeight + padding;
     
-    if ([SharingController isSharingAvailableForNetworkType:SharingEMailNetwork]) {
-        UIButton *mailButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        mailButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
-        [mailButton setImage:[UIImage imageNamed:@"gmail"] forState:UIControlStateNormal];
-        [mailButton addTarget:self action:@selector(mailShareAction:) forControlEvents:UIControlEventTouchUpInside];
-        [toolbar addSubview:mailButton];
-        x += sharingButtonHeight + padding;
-    }
-    
-    if ([SharingController isSharingAvailableForNetworkType:SharingVkontakteNetwork]) {
-        UIButton *mailButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        mailButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
-        [mailButton setImage:[UIImage imageNamed:@"vk"] forState:UIControlStateNormal];
-        [mailButton addTarget:self action:@selector(vkontakteShareAction:) forControlEvents:UIControlEventTouchUpInside];
-        [toolbar addSubview:mailButton];
-    }
-    
-    
+    favoriteButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+    favoriteButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
+    [favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+    favoriteButton.backgroundColor = [UIColor whiteColor];
+    [favoriteButton addTarget:self action:@selector(favoriteAction:) forControlEvents:UIControlEventTouchUpInside];
+    [toolbar addSubview:favoriteButton];
+
     padding = 10.;
     infoView = [[UBPictureInfoView alloc] initWithFrame:CGRectMake(padding, self.view.frame.size.height - padding - 80., self.view.frame.size.width - 2 * padding, 80.)];
     infoView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
@@ -162,54 +146,133 @@
                      }];
 }
 
-- (void)fbShareAction:(id)sender
+- (void)shareAction:(id)sender
 {
-    [self sharePictureWithIndex:currentPictureIndex withSharingNetwork:SharingFacebookNetwork];
-}
-
-- (void)twShareAction:(id)sender
-{
-    [self sharePictureWithIndex:currentPictureIndex withSharingNetwork:SharingTwitterNetwork];
-}
-
-- (void)mailShareAction:(id)sender
-{
-    [self sharePictureWithIndex:currentPictureIndex withSharingNetwork:SharingEMailNetwork];
-}
-
-- (void)vkontakteShareAction:(id)sender
-{
-    [self sharePictureWithIndex:currentPictureIndex withSharingNetwork:SharingVkontakteNetwork];
-}
-
-- (void)sharePictureWithIndex:(NSInteger)index withSharingNetwork:(SharingNetworkType)networkType
-{
-    id picture = [dataSource objectAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:currentPictureIndex inSection:0];
+    id picture = [dataSource objectAtIndexPath:indexPath];
     NSString *title;
     NSString *description;
-    NSString *imageUrlString;
     NSURL *pictureUrl;
+    NSString *pictureUrlString;
+    
     if ([picture isKindOfClass:[UBPicture class]]) {
         UBPicture *ubPicture = (UBPicture *)picture;
         title = [NSString stringWithFormat:@"Картинка %ld", (long)ubPicture.pictureId];
         description = ubPicture.title;
-        imageUrlString = ubPicture.thumbnail;
+        pictureUrlString = [ubPicture.image stringByReplacingOccurrencesOfString:@"/400/" withString:@"/600/"];
         pictureUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", (long)ubPicture.pictureId]];
     } else {
         Picture *cdPicture = (Picture *)picture;
         title = [NSString stringWithFormat:@"Картинка %ld", [cdPicture.pictureId longValue]];
         description = cdPicture.title;
-        imageUrlString = cdPicture.thumbnail;
+        pictureUrlString = [cdPicture.image stringByReplacingOccurrencesOfString:@"/400/" withString:@"/600/"];
         pictureUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", [cdPicture.pictureId longValue]]];
     }
     
-    SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
-    sharingController.url = pictureUrl;
-    sharingController.rootViewController = self;
-    [sharingController setAttachmentTitle:title];
-    [sharingController setAttachmentDescription:description];
-    [sharingController setAttachmentImagePreview:[[MediaCenter imageCenter] imageWithUrl:imageUrlString]];
-    [sharingController showSharingDialog];
+    UIImage *image = [[MediaCenter imageCenter] imageWithUrl:pictureUrlString];
+
+    if (description == nil) {
+        description = @"";
+    }
+    UBVkontakteActivity *vkActivity = [[UBVkontakteActivity alloc] init];
+    vkActivity.attachmentTitle = title;
+    vkActivity.parentViewController = self;
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[description, pictureUrl, image] applicationActivities:@[vkActivity]];
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
+    [vkActivity release];
+    [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (IS_IOS7) {
+            [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+        }
+    }];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+    [activityViewController release];
+}
+
+- (void)favoriteAction:(id)sender
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:currentPictureIndex inSection:0];
+
+    id picture = [dataSource objectAtIndexPath:indexPath];
+    NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSError *error = nil;
+
+    if ([picture isKindOfClass:[UBPicture class]]) {
+        UBPicture *ubPicture = (UBPicture *)picture;
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Picture" inManagedObjectContext:context];
+        [fetchRequest setEntity:entity];
+        NSPredicate *predicate  = [NSPredicate predicateWithFormat:@"pictureId == %@", [NSNumber numberWithInteger:ubPicture.pictureId]];
+        [fetchRequest setPredicate:predicate];
+
+        Picture *cdPicture = nil;
+        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        if ([fetchedObjects count] > 0) {
+            cdPicture = [fetchedObjects objectAtIndex:0];
+        }
+        [fetchRequest release];
+    
+        if (!cdPicture) {
+            cdPicture = [NSEntityDescription insertNewObjectForEntityForName:@"Picture" inManagedObjectContext:context];
+            cdPicture.pictureId = [NSNumber numberWithInteger:ubPicture.pictureId];
+            cdPicture.status = [NSNumber numberWithInteger:ubPicture.status];
+            cdPicture.type = ubPicture.type;
+            cdPicture.addDate = ubPicture.addDate;
+            cdPicture.pubDate = ubPicture.pubDate;
+            cdPicture.author = ubPicture.author;
+            cdPicture.authorId = [NSNumber numberWithInteger:ubPicture.authorId];
+            cdPicture.title = ubPicture.title;
+            cdPicture.thumbnail = ubPicture.thumbnail;
+            cdPicture.image = ubPicture.image;
+            cdPicture.rating = [NSNumber numberWithInteger:ubPicture.rating];
+        } else {
+            // update some fileds if object already in db.
+            cdPicture.status = [NSNumber numberWithInteger:ubPicture.status];
+            cdPicture.pubDate = ubPicture.pubDate;
+            cdPicture.rating = [NSNumber numberWithInteger:ubPicture.rating];
+        }
+        
+        if (!ubPicture.favorite) {
+            cdPicture.favorite = [NSNumber numberWithBool:YES];
+            ubPicture.favorite = YES;
+        } else {
+            cdPicture.favorite = [NSNumber numberWithBool:NO];
+            ubPicture.favorite = NO;
+        }
+    } else {
+        Picture *cdPicture = (Picture *)picture;
+        if (![cdPicture.favorite boolValue]) {
+            cdPicture.favorite = [NSNumber numberWithBool:YES];
+        } else {
+            cdPicture.favorite = [NSNumber numberWithBool:NO];
+        }
+    }
+    
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    } else {
+        if ([picture isKindOfClass:[UBPicture class]]) {
+            UBPicture *ubPicture = (UBPicture *)picture;
+            if (ubPicture.favorite) {
+                [favoriteButton setImage:[UIImage imageNamed:@"favorite_active"] forState:UIControlStateNormal];
+            } else {
+                [favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+            }
+            if (delegate) {
+                [delegate updatePictureAtIndex:currentPictureIndex];
+            }
+        } else {
+            if ([dataSource numberOfRowsInSection:0] > 0) {
+                if (currentPictureIndex < [dataSource numberOfRowsInSection:0]) {
+                    [self setCurrentPictureIndex:currentPictureIndex];
+                } else {
+                    [self setCurrentPictureIndex:currentPictureIndex - 1];
+                }
+            } else {
+                [self backAction:nil];
+            }
+        }
+    }
 }
 
 - (void)tapGestureHandler:(UITapGestureRecognizer *)tapGesture
@@ -259,6 +322,17 @@
 {
     currentPictureIndex = [pageViewController.viewControllers.firstObject pictureIndex];
     if (currentPictureIndex >= 0 && currentPictureIndex < [dataSource numberOfRowsInSection:0]) {
+        id picture = [dataSource objectAtIndexPath:[NSIndexPath indexPathForRow:currentPictureIndex inSection:0]];
+        if ([picture isKindOfClass:[UBPicture class]]) {
+            UBPicture *ubPicture = (UBPicture *)picture;
+            if (ubPicture.favorite) {
+                [favoriteButton setImage:[UIImage imageNamed:@"favorite_active"] forState:UIControlStateNormal];
+            } else {
+                [favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+            }
+        } else {
+            [favoriteButton setImage:[UIImage imageNamed:@"favorite_active"] forState:UIControlStateNormal];
+        }
         [dataSource configurePictureInfoView:infoView forRowAtIndexPath:[NSIndexPath indexPathForRow:currentPictureIndex inSection:0]];
     }
 }
@@ -273,6 +347,10 @@
         for (UBPictureViewController *pictureController in previousViewControllers) {
             [pictureController zoomOutIfNeeded];
         }
+    }
+    
+    if (delegate) {
+        [delegate userDidScroll:self toPictureAtIndex:currentPictureIndex];
     }
 }
 

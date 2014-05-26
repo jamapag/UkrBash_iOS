@@ -54,7 +54,7 @@
 {
     for (id object in activityItems) {
         if ([object isKindOfClass:[NSString class]]) {
-            self.attachmentTitle = object;
+            self.attachmentDescription = object;
         } else if ([object isKindOfClass:[UIImage class]]) {
             self.attachmentImage = object;
         } else if ([object isKindOfClass:[NSURL class]]) {
@@ -69,6 +69,7 @@
         SharingController *sharingController = [SharingController sharingControllerForNetworkType:SharingVkontakteNetwork];
         sharingController.url = self.url;
         sharingController.rootViewController = self.parentViewController;
+        [sharingController setAttachmentDescription:self.attachmentDescription];
         [sharingController setAttachmentTitle:self.attachmentTitle];
         [sharingController setAttachmentImagePreview:self.attachmentImage];
         [sharingController showSharingDialog];

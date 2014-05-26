@@ -13,7 +13,7 @@
 #import "UBQuoteCell.h"
 #import "UBEmptyListView.h"
 
-@interface UBQuotesController : UBViewController <UITableViewDataSource, UITableViewDelegate, UBQuoteCellDelegate>
+@interface UBQuotesController : UBViewController <UITableViewDataSource, UITableViewDelegate, UBQuoteCellDelegate, UIActivityItemSource>
 {
     UITableView *tableView;
     NSIndexPath *activeCell;

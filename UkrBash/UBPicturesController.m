@@ -261,6 +261,7 @@
     if (!fullSizeController) {
         fullSizeController = [[UBFullSizePictureViewController alloc] initWithDataSource:dataSource andInitPicuteIndex:indexPath.row];
         fullSizeController.dataSource = dataSource;
+        fullSizeController.delegate = self;
         fullSizeController.view.frame = self.view.bounds;
     } else {
         fullSizeController.view.frame = self.view.bounds;
@@ -323,10 +324,14 @@
     NSString *pictureUrlString = [NSString stringWithFormat:@"http://ukrbash.org/picture/%ld", [picture.pictureId longValue]];
     NSURL *pictureUrl = [NSURL URLWithString:pictureUrlString];
     UIImage *image = [[MediaCenter imageCenter] imageWithUrl:picture.image];
+    NSString *title = [NSString stringWithFormat:@"Картинка %ld", [picture.pictureId longValue]];
+    NSString *description = picture.title == nil ? @"" : picture.title;
+
     
     UBVkontakteActivity *vkActivity = [[UBVkontakteActivity alloc] init];
+    vkActivity.attachmentTitle = title;
     vkActivity.parentViewController = self;
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[picture.title, pictureUrl, image] applicationActivities:@[vkActivity]];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[description, pictureUrl, image] applicationActivities:@[vkActivity]];
     activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
     [vkActivity release];
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
@@ -383,4 +388,15 @@
     }
 }
 
+#pragma mark - UBFullSizePictureViewControllerDelegate Methods.
+
+- (void)userDidScroll:(UBFullSizePictureViewController *)viewController toPictureAtIndex:(NSInteger)index
+{
+    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:NO];
+}
+
+- (void)updatePictureAtIndex:(NSInteger)index
+{
+    // Currently used only for favorites, so do nothing.
+}
 @end

@@ -12,7 +12,7 @@
 #import "UBFullSizePictureViewController.h"
 #import "UBEmptyListView.h"
 
-@interface UBPicturesController : UBViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UBQuoteCollectionCellDelegate>
+@interface UBPicturesController : UBViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UBQuoteCollectionCellDelegate, UBFullSizePictureViewControllerDelegate>
 {
     UICollectionView *_collectionView;
     UBFullSizePictureViewController *fullSizeController;

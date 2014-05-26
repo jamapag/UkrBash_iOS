@@ -12,7 +12,7 @@
 #import "UBFullSizePictureViewController.h"
 
 
-@interface UBPicturesCollectionViewController : UBViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UBQuoteCollectionCellDelegate>
+@interface UBPicturesCollectionViewController : UBViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UBQuoteCollectionCellDelegate, UBFullSizePictureViewControllerDelegate>
 {
     UICollectionView *_collectionView;
     UIRefreshControl *_refreshControl;

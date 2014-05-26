@@ -42,8 +42,9 @@
 
 @protocol UBQuoteCellDelegate <NSObject>
 
-- (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(SharingNetworkType)shareType;
+//- (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(SharingNetworkType)shareType;
 - (void)favoriteActionForCell:(UBQuoteCell *)cell;
+- (void)shareActionForCell:(id)cell andRectForPopover:(CGRect)rect;
 
 @end
 

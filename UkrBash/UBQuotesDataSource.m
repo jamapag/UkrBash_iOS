@@ -12,6 +12,11 @@
 
 @implementation UBQuotesDataSource
 
+- (id)objectAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [[self items] objectAtIndex:indexPath.row];
+}
+
 - (UITableViewCell *)cellWithReuesIdentifier:(NSString *)reuseIdent
 {
     return [[[UBQuoteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdent] autorelease];

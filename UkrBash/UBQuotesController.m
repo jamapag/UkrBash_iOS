@@ -12,6 +12,7 @@
 #import "UkrBashAppDelegate.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import "UBVkontakteActivity.h"
 
 @implementation UBQuotesController
 
@@ -139,24 +140,27 @@
 
 #pragma mark - UBQuoteCellDelegate methods.
 
-- (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(SharingNetworkType)networkType
+- (void)shareActionForCell:(id)cell andRectForPopover:(CGRect)rect
 {
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     Quote *quote = [dataSource objectAtIndexPath:indexPath];
     NSURL *quoteUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", [quote.quoteId longValue]]];
     
-    SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
-    sharingController.url = quoteUrl;
-    sharingController.message = (networkType == SharingEMailNetwork) ? quote.text : nil;
-    sharingController.rootViewController = self;
-    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Цитата %ld", [quote.quoteId longValue]]];
-    [sharingController setAttachmentDescription:quote.text];
-    [sharingController showSharingDialog];
+    UBVkontakteActivity *vkActivity = [[UBVkontakteActivity alloc] init];
+    vkActivity.parentViewController = self;
+    vkActivity.attachmentTitle = [NSString stringWithFormat:@"Цитата %ld", [quote.quoteId longValue]];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self, quoteUrl] applicationActivities:@[vkActivity]];
+    [activityViewController setValue:[NSString stringWithFormat:@"Цитата %ld", [quote.quoteId longValue]] forKey:@"subject"];
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
+    [vkActivity release];
+    [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (IS_IOS7) {
+            [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+        }
+    }];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+    [activityViewController release];
     
-    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"sharing"
-                                                                                        action:@"quotes"
-                                                                                         label:NSStringFromClass([sharingController class])
-                                                                                         value:@(-1)] build]];
 }
 
 - (void)favoriteActionForCell:(UBQuoteCell *)cell
@@ -292,5 +296,25 @@
     
     return cell;
 }
+
+#pragma mark - UIActivityItemSource Methods.
+
+- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
+{
+    Quote *quote = [dataSource objectAtIndexPath:activeCell];
+    NSString *shareText = quote.text;
+    if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
+        if ([shareText length] > 109) {
+            shareText = [shareText substringToIndex:108];
+        }
+    }
+    return shareText;
+}
+
+- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
+{
+    return nil;
+}
+
 
 @end

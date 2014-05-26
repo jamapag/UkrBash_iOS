@@ -19,6 +19,7 @@
 #import "EGOUkrBashActivityIndicator.h"
 #import "Reachability.h"
 #import "UBFavoriteQuotesDataSource.h"
+#import "UBVkontakteActivity.h"
 
 @implementation UBQuotesContainerController
 
@@ -387,25 +388,29 @@
 
 #pragma mark - UBQuoteCellDelegate methods.
 
-- (void)quoteCell:(UBQuoteCell *)cell shareQuoteWithType:(SharingNetworkType)networkType
+- (void)shareActionForCell:(id)cell andRectForPopover:(CGRect)rect
 {
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
-    UBQuote *quote = [[dataSource items] objectAtIndex:indexPath.row];
+    UBQuote *quote = [dataSource objectAtIndexPath:indexPath];
     NSURL *quoteUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ukrbash.org/quote/%ld", (long)quote.quoteId]];
     
-    SharingController *sharingController = [SharingController sharingControllerForNetworkType:networkType];
-    sharingController.url = quoteUrl;
-    sharingController.message = (networkType == SharingEMailNetwork) ? quote.text : nil;
-    sharingController.rootViewController = self;
-    [sharingController setAttachmentTitle:[NSString stringWithFormat:@"Цитата %ld", (long)quote.quoteId]];
-    [sharingController setAttachmentDescription:quote.text];
-    [sharingController showSharingDialog];
+    UBVkontakteActivity *vkActivity = [[UBVkontakteActivity alloc] init];
+    vkActivity.parentViewController = self;
+    vkActivity.attachmentTitle = [NSString stringWithFormat:@"Цитата %ld", (long)quote.quoteId];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self, quoteUrl] applicationActivities:@[vkActivity]];
+    [activityViewController setValue:[NSString stringWithFormat:@"Цитата %ld", (long)quote.quoteId] forKey:@"subject"];
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
+    [vkActivity release];
+    [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (IS_IOS7) {
+            [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+        }
+    }];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+    [activityViewController release];
 
-    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"sharing"
-                                                                                        action:@"quotes"
-                                                                                         label:NSStringFromClass([sharingController class])
-                                                                                         value:@(-1)] build]];
 }
+
 
 - (void)favoriteActionForCell:(UBQuoteCell *)cell
 {
@@ -426,8 +431,7 @@
     }
     [fetchRequest release];
     
-    if (!quote.favorite) {
-        NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    if (!cdQuote) {
         cdQuote = [NSEntityDescription insertNewObjectForEntityForName:@"Quote" inManagedObjectContext:context];
         cdQuote.quoteId = [NSNumber numberWithInteger:quote.quoteId];
         cdQuote.status = [NSNumber numberWithInteger:quote.status];
@@ -438,6 +442,14 @@
         cdQuote.authorId = [NSNumber numberWithInteger:quote.authorId];
         cdQuote.text = quote.text;
         cdQuote.rating = [NSNumber numberWithInteger:quote.rating];
+    } else {
+        // update some fields:
+        cdQuote.status = [NSNumber numberWithInt:quote.status];
+        cdQuote.pubDate = quote.pubDate;
+        cdQuote.rating = [NSNumber numberWithInteger:quote.rating];
+    }
+    
+    if (!quote.favorite) {
         cdQuote.favorite = [NSNumber numberWithBool:YES];
         quote.favorite = YES;
     } else {
@@ -453,6 +465,25 @@
             [cell.favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
         }
     }
+}
+
+#pragma mark - UIActivityItemSource Methods.
+
+- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
+{
+    UBQuote *quote = [dataSource objectAtIndexPath:activeCell];
+    NSString *shareText = quote.text;
+    if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
+        if ([shareText length] > 109) {
+            shareText = [shareText substringToIndex:108];
+        }
+    }
+    return shareText;
+}
+
+- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
+{
+    return nil;
 }
 
 #pragma mark - EGORefreshTableHeaderDelegate methods.
