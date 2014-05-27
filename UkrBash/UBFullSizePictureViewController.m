@@ -126,9 +126,25 @@
 
 #pragma mark - Actions.
 
-- (void)setCurrentPictureIndex:(NSInteger)pictureIndex
+- (void)setCurrentPictureIndex:(NSInteger)pictureIndex animated:(BOOL)animated
 {
-    [pageViewController setViewControllers:@[[self photoViewControllerForIndex:pictureIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
+    // Because of http://stackoverflow.com/a/18602186/397911
+    __block UIPageViewController *pvcw = pageViewController;
+    [pageViewController setViewControllers:@[[self photoViewControllerForIndex:pictureIndex]]
+                  direction:UIPageViewControllerNavigationDirectionForward
+                   animated:animated completion:^(BOOL finished) {
+                       UIPageViewController *pvcs = pvcw;
+                       if (!pvcs) return;
+                       dispatch_async(dispatch_get_main_queue(), ^{
+                           [pvcs setViewControllers:@[[self photoViewControllerForIndex:pictureIndex]]
+                                          direction:UIPageViewControllerNavigationDirectionForward
+                                           animated:NO completion:nil];
+                       });
+                   }];
+
+//    [pageViewController setViewControllers:@[[self photoViewControllerForIndex:pictureIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];    
+    
     [self updatePictureInfoView];
 }
 
@@ -180,7 +196,12 @@
     vkActivity.attachmentTitle = title;
     vkActivity.parentViewController = self;
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[description, pictureUrl, image] applicationActivities:@[vkActivity]];
-    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
+    if (IS_IOS7) {
+        activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
+    } else {
+        activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact];
+        
+    }
     [vkActivity release];
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
         if (IS_IOS7) {
@@ -198,6 +219,7 @@
     id picture = [dataSource objectAtIndexPath:indexPath];
     NSManagedObjectContext *context = [(UkrBashAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     NSError *error = nil;
+    BOOL shouldUpdateCurrentPictureIndex = NO;
 
     if ([picture isKindOfClass:[UBPicture class]]) {
         UBPicture *ubPicture = (UBPicture *)picture;
@@ -247,13 +269,24 @@
             cdPicture.favorite = [NSNumber numberWithBool:YES];
         } else {
             cdPicture.favorite = [NSNumber numberWithBool:NO];
+            shouldUpdateCurrentPictureIndex = YES;
         }
     }
     
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     } else {
-        if ([picture isKindOfClass:[UBPicture class]]) {
+        if (shouldUpdateCurrentPictureIndex) {
+            if ([dataSource numberOfRowsInSection:0] > 0) {
+                if (currentPictureIndex < [dataSource numberOfRowsInSection:0]) {
+                    [self setCurrentPictureIndex:currentPictureIndex animated:YES];
+                } else {
+                    [self setCurrentPictureIndex:currentPictureIndex - 1 animated:YES];
+                }
+            } else {
+                [self backAction:nil];
+            }
+        } else {
             UBPicture *ubPicture = (UBPicture *)picture;
             if (ubPicture.favorite) {
                 [favoriteButton setImage:[UIImage imageNamed:@"favorite-active-white"] forState:UIControlStateNormal];
@@ -262,16 +295,6 @@
             }
             if (delegate) {
                 [delegate updatePictureAtIndex:currentPictureIndex];
-            }
-        } else {
-            if ([dataSource numberOfRowsInSection:0] > 0) {
-                if (currentPictureIndex < [dataSource numberOfRowsInSection:0]) {
-                    [self setCurrentPictureIndex:currentPictureIndex];
-                } else {
-                    [self setCurrentPictureIndex:currentPictureIndex - 1];
-                }
-            } else {
-                [self backAction:nil];
             }
         }
     }

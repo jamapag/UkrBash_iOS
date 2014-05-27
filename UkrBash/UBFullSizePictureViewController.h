@@ -40,6 +40,6 @@
 @property (nonatomic, retain) UBPicturesDataSource *dataSource;
 
 - (id)initWithDataSource:(UBPicturesDataSource *)aDataSource andInitPicuteIndex:(NSInteger)index;
-- (void)setCurrentPictureIndex:(NSInteger)pictureIndex;
+- (void)setCurrentPictureIndex:(NSInteger)pictureIndex animated:(BOOL)animated;
 
 @end

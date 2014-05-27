@@ -221,7 +221,11 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     vkActivity.attachmentTitle = title;
     vkActivity.parentViewController = self;
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[description, pictureUrl, image] applicationActivities:@[vkActivity]];
-    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
+    if (IS_IOS7) {
+        activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
+    } else {
+        activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact];
+    }
     [vkActivity release];
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
         if (IS_IOS7) {
@@ -437,7 +441,7 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
         fullSizeController.view.frame = self.view.bounds;
     } else {
         fullSizeController.view.frame = self.view.bounds;
-        [fullSizeController setCurrentPictureIndex:indexPath.row];
+        [fullSizeController setCurrentPictureIndex:indexPath.row animated:NO];
     }
     fullSizeController.view.alpha = 0;
     [self.view addSubview:fullSizeController.view];

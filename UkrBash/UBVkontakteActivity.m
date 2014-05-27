@@ -29,17 +29,9 @@
 - (UIImage *)_activityImage
 {
     if (!IS_PAD) {
-        if (IS_LATER_IOS6) {
-            return [UIImage imageNamed:@"vk-icon-60.png"];
-        } else {
-            return [UIImage imageNamed:@"vk-icon-43"];
-        }
+        return [UIImage imageNamed:@"vk-icon-60.png"];
     } else {
-        if (IS_LATER_IOS6) {
-            return [UIImage imageNamed:@"vk-icon-76"];
-        } else {
-            return [UIImage imageNamed:@"vk-icon-60"];
-        }
+        return [UIImage imageNamed:@"vk-icon-76"];
     }
 }
 

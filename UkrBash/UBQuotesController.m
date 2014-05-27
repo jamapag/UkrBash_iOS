@@ -150,8 +150,12 @@
     vkActivity.parentViewController = self;
     vkActivity.attachmentTitle = [NSString stringWithFormat:@"Цитата %ld", [quote.quoteId longValue]];
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self, quoteUrl] applicationActivities:@[vkActivity]];
-    [activityViewController setValue:[NSString stringWithFormat:@"Цитата %ld", [quote.quoteId longValue]] forKey:@"subject"];
-    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
+    [activityViewController setValue:[NSString stringWithFormat:@"Цитата %ld", [quote.quoteId longValue]] forKey:@"subject"];\
+    if (IS_IOS7) {
+        activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
+    } else {
+        activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact];
+    }
     [vkActivity release];
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
         if (IS_IOS7) {

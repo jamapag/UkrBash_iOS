@@ -20,6 +20,7 @@
         generalLabel.textColor = [UIColor darkGrayColor];
         generalLabel.shadowColor = [UIColor whiteColor];
         generalLabel.shadowOffset = CGSizeMake(0., 1.);
+        generalLabel.backgroundColor = [UIColor clearColor];
         generalLabel.text = [NSString stringWithFormat:@"Список улюблених %@ пустий.", listType == UBEmptyListViewFavoriteQuotesType ? @"цитат" : @"картинок"] ;
         [self addSubview:generalLabel];
         [generalLabel release];
@@ -31,6 +32,7 @@
         pressLabel.textColor = [UIColor darkGrayColor];
         pressLabel.shadowColor = [UIColor whiteColor];
         pressLabel.shadowOffset = CGSizeMake(0., 1.);
+        pressLabel.backgroundColor = [UIColor clearColor];
         pressLabel.text = @"Натискайте";
         [self addSubview:pressLabel];
         [pressLabel release];
@@ -47,6 +49,7 @@
         toAddLabel.textColor = [UIColor darkGrayColor];
         toAddLabel.shadowColor = [UIColor whiteColor];
         toAddLabel.shadowOffset = CGSizeMake(0., 1.);
+        toAddLabel.backgroundColor = [UIColor clearColor];
         toAddLabel.text = @"щоб додати.";
         [self addSubview:toAddLabel];
         
