@@ -61,13 +61,13 @@
     [tapGesture release];
     
     float topY = 0;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        // Load resources for iOS 6.1 or earlier;
-        topY = 0;
-    } else {
-        // Load resources for iOS 7 or later
-        topY = 20;
-    }
+//    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+//        // Load resources for iOS 6.1 or earlier;
+//        topY = 0;
+//    } else {
+//        // Load resources for iOS 7 or later
+////        topY = 20;
+//    }
 
     CGFloat padding = 10.;
     
@@ -85,33 +85,35 @@
     [self.view addSubview:pageViewController.view];
     
     CGFloat sharingButtonHeight = 32.;
-    toolbar = [[UIView alloc] initWithFrame:CGRectMake(0., topY, self.view.frame.size.width, padding + sharingButtonHeight)];
+    toolbar = [[UIView alloc] initWithFrame:CGRectMake(0., topY, self.view.frame.size.width, 2 * padding + sharingButtonHeight)];
     toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    toolbar.backgroundColor = [UIColor clearColor];
+    toolbar.backgroundColor = [UIColor colorWithWhite:.0 alpha:.5];
     [self.view addSubview:toolbar];
     
     CGFloat x = padding, y = padding;
     backButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
     backButton.frame = CGRectMake(x - 5, y - 5, sharingButtonHeight + 10, sharingButtonHeight + 10);
     [backButton setImage:[UIImage imageNamed:@"back-btn"] forState:UIControlStateNormal];
+    backButton.imageView.contentMode = UIViewContentModeCenter;
     [backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [toolbar addSubview:backButton];
     padding += 10.;
     x += sharingButtonHeight + padding;
     
+    x = self.view.frame.size.width - padding - sharingButtonHeight;
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     shareButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
-    [shareButton setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-    shareButton.backgroundColor = [UIColor whiteColor];
+    [shareButton setImage:[UIImage imageNamed:@"share-white"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
     [toolbar addSubview:shareButton];
     
-    x += sharingButtonHeight + padding;
+    x -= sharingButtonHeight + padding;
     
     favoriteButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+    favoriteButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     favoriteButton.frame = CGRectMake(x, y, sharingButtonHeight, sharingButtonHeight);
-    [favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
-    favoriteButton.backgroundColor = [UIColor whiteColor];
+    [favoriteButton setImage:[UIImage imageNamed:@"favorite-white"] forState:UIControlStateNormal];
     [favoriteButton addTarget:self action:@selector(favoriteAction:) forControlEvents:UIControlEventTouchUpInside];
     [toolbar addSubview:favoriteButton];
 
@@ -254,9 +256,9 @@
         if ([picture isKindOfClass:[UBPicture class]]) {
             UBPicture *ubPicture = (UBPicture *)picture;
             if (ubPicture.favorite) {
-                [favoriteButton setImage:[UIImage imageNamed:@"favorite_active"] forState:UIControlStateNormal];
+                [favoriteButton setImage:[UIImage imageNamed:@"favorite-active-white"] forState:UIControlStateNormal];
             } else {
-                [favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+                [favoriteButton setImage:[UIImage imageNamed:@"favorite-white"] forState:UIControlStateNormal];
             }
             if (delegate) {
                 [delegate updatePictureAtIndex:currentPictureIndex];
@@ -279,11 +281,27 @@
 {
     if (tapGesture.numberOfTapsRequired == 1 && tapGesture.state == UIGestureRecognizerStateEnded) {
         if (toolbar.hidden) {
+            toolbar.alpha = 0;
+            infoView.alpha = 0;
             toolbar.hidden = NO;
             infoView.hidden = NO;
+            [UIView animateWithDuration:.2
+                             animations:^{
+                                 toolbar.alpha = 1;
+                                 infoView.alpha = 1;
+                             }];
         } else {
-            toolbar.hidden = YES;
-            infoView.hidden = YES;
+            [UIView animateWithDuration:.2
+                             animations:^{
+                                 toolbar.alpha = 0;
+                                 infoView.alpha = 0;
+                             }
+                             completion:^(BOOL finished) {
+                                 toolbar.hidden = YES;
+                                 infoView.hidden = YES;
+                                 toolbar.alpha = 1;
+                                 infoView.alpha = 1;
+                             }];
         }
     } else if (tapGesture.numberOfTapsRequired == 2 && tapGesture.state == UIGestureRecognizerStateEnded) {
         [pageViewController.viewControllers.firstObject doubleTapAtPoint:[tapGesture locationInView:tapGesture.view]];
@@ -326,12 +344,12 @@
         if ([picture isKindOfClass:[UBPicture class]]) {
             UBPicture *ubPicture = (UBPicture *)picture;
             if (ubPicture.favorite) {
-                [favoriteButton setImage:[UIImage imageNamed:@"favorite_active"] forState:UIControlStateNormal];
+                [favoriteButton setImage:[UIImage imageNamed:@"favorite-active-white"] forState:UIControlStateNormal];
             } else {
-                [favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+                [favoriteButton setImage:[UIImage imageNamed:@"favorite-white"] forState:UIControlStateNormal];
             }
         } else {
-            [favoriteButton setImage:[UIImage imageNamed:@"favorite_active"] forState:UIControlStateNormal];
+            [favoriteButton setImage:[UIImage imageNamed:@"favorite-active-white"] forState:UIControlStateNormal];
         }
         [dataSource configurePictureInfoView:infoView forRowAtIndexPath:[NSIndexPath indexPathForRow:currentPictureIndex inSection:0]];
     }

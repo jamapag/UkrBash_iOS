@@ -157,27 +157,30 @@ CGFloat animationOffset = 52.;
         [containerView addSubview:dateLabel];
         
         CGFloat x = containerView.frame.origin.x + 20.;
-        CGFloat shareButtonWidth = 32.;
+        CGFloat shareButtonWidth = 34.;
         UIButton *shareBtn = nil;
         
         animationOffset = 52.;
         
-        shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.frame = CGRectMake(x, 10, shareButtonWidth, shareButtonWidth);
-        shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-        [shareBtn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-        [shareBtn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:shareBtn];
-        x += shareButtonWidth + 10.;
-        animationOffset = x;
-        
         favoriteButton = [[UIButton buttonWithType:UIButtonTypeCustom]  retain];
-        favoriteButton.frame = CGRectMake(x, 10., shareButtonWidth, shareButtonWidth);
+        favoriteButton.frame = CGRectMake(x, 15., shareButtonWidth, shareButtonWidth);
         favoriteButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+        favoriteButton.imageView.contentMode = UIViewContentModeCenter;
         [favoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
         [favoriteButton addTarget:self action:@selector(favoriteAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:favoriteButton];
-        animationOffset += shareButtonWidth + 10.;
+        x += shareButtonWidth + 15.;
+        animationOffset = x;
+        
+        shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(x, 15, shareButtonWidth, shareButtonWidth);
+        shareBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+        shareBtn.imageView.contentMode = UIViewContentModeCenter;
+        [shareBtn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+        [shareBtn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:shareBtn];
+        x += shareButtonWidth + 15.;
+        animationOffset = x - 5;
         
         [self.contentView addSubview:containerView];
     }

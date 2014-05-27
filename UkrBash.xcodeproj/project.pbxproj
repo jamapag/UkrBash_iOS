@@ -141,6 +141,12 @@
 		B02855CE14C0CDEE00FAA8A8 /* UBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */; };
 		B0378D08161B2DAE00B9331B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B0378D07161B2DAE00B9331B /* libsqlite3.dylib */; };
 		B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0378D09161B2DE600B9331B /* CFNetwork.framework */; };
+		B048C6EB1934C24100862304 /* favorite-active-white.png in Resources */ = {isa = PBXBuildFile; fileRef = B048C6E51934C24100862304 /* favorite-active-white.png */; };
+		B048C6EC1934C24100862304 /* favorite-active-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B048C6E61934C24100862304 /* favorite-active-white@2x.png */; };
+		B048C6ED1934C24100862304 /* favorite-white.png in Resources */ = {isa = PBXBuildFile; fileRef = B048C6E71934C24100862304 /* favorite-white.png */; };
+		B048C6EE1934C24100862304 /* favorite-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B048C6E81934C24100862304 /* favorite-white@2x.png */; };
+		B048C6EF1934C24100862304 /* share-white.png in Resources */ = {isa = PBXBuildFile; fileRef = B048C6E91934C24100862304 /* share-white.png */; };
+		B048C6F01934C24100862304 /* share-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B048C6EA1934C24100862304 /* share-white@2x.png */; };
 		B056CE6C166E30C0002E8EDD /* Vkontakte.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE6B166E30C0002E8EDD /* Vkontakte.m */; };
 		B056CE70166E3716002E8EDD /* VKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DA90B8164EDB9A0084D29A /* VKRequest.m */; };
 		B056CE71166E371A002E8EDD /* Vkontakte.m in Sources */ = {isa = PBXBuildFile; fileRef = B056CE6B166E30C0002E8EDD /* Vkontakte.m */; };
@@ -417,6 +423,12 @@
 		B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBViewController.m; sourceTree = "<group>"; };
 		B0378D07161B2DAE00B9331B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		B0378D09161B2DE600B9331B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		B048C6E51934C24100862304 /* favorite-active-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite-active-white.png"; sourceTree = "<group>"; };
+		B048C6E61934C24100862304 /* favorite-active-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite-active-white@2x.png"; sourceTree = "<group>"; };
+		B048C6E71934C24100862304 /* favorite-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite-white.png"; sourceTree = "<group>"; };
+		B048C6E81934C24100862304 /* favorite-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite-white@2x.png"; sourceTree = "<group>"; };
+		B048C6E91934C24100862304 /* share-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-white.png"; sourceTree = "<group>"; };
+		B048C6EA1934C24100862304 /* share-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-white@2x.png"; sourceTree = "<group>"; };
 		B056CE6A166E30C0002E8EDD /* Vkontakte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vkontakte.h; sourceTree = "<group>"; };
 		B056CE6B166E30C0002E8EDD /* Vkontakte.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vkontakte.m; sourceTree = "<group>"; };
 		B056CE83166E397D002E8EDD /* VKRequestTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKRequestTests.h; sourceTree = "<group>"; };
@@ -799,6 +811,12 @@
 		2DBF09FD14B669FD00A8949B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B048C6E51934C24100862304 /* favorite-active-white.png */,
+				B048C6E61934C24100862304 /* favorite-active-white@2x.png */,
+				B048C6E71934C24100862304 /* favorite-white.png */,
+				B048C6E81934C24100862304 /* favorite-white@2x.png */,
+				B048C6E91934C24100862304 /* share-white.png */,
+				B048C6EA1934C24100862304 /* share-white@2x.png */,
 				2D3D63A019226D7800FB9F8B /* share.png */,
 				2D3D63A119226D7800FB9F8B /* share@2x.png */,
 				2D80C48E191041DF00832BB6 /* favorite_active.png */,
@@ -1149,14 +1167,17 @@
 			files = (
 				2D80C493191041DF00832BB6 /* favorite_active@2x.png in Resources */,
 				B0F7354A16A84AF600381E5E /* Vkontakte iOS.bundle in Resources */,
+				B048C6F01934C24100862304 /* share-white@2x.png in Resources */,
 				2D81D13017EF5C760005CD42 /* menu-button@2x.png in Resources */,
 				2D81D15D17EF5D180005CD42 /* header.png in Resources */,
 				2DB0FABE1416C8CF00EFD6BC /* InfoPlist.strings in Resources */,
 				2D471AE0188DDE68000A27B9 /* Default7-Portrait@2x~ipad.png in Resources */,
 				2D471AE2188DE051000A27B9 /* Default7-Landscape@2x~ipad.png in Resources */,
 				2D59CD0B188DBFA500A8852E /* Default7-Landscape~ipad.png in Resources */,
+				B048C6EE1934C24100862304 /* favorite-white@2x.png in Resources */,
 				2D81D16D17EF5D420005CD42 /* app-icon.png in Resources */,
 				2D81D16417EF5D180005CD42 /* menu-pin@2x.png in Resources */,
+				B048C6EC1934C24100862304 /* favorite-active-white@2x.png in Resources */,
 				2DB0FAC71416C8CF00EFD6BC /* MainWindow.xib in Resources */,
 				2D81D15517EF5D180005CD42 /* back-btn.png in Resources */,
 				2D3D63A219226D7800FB9F8B /* share.png in Resources */,
@@ -1167,6 +1188,7 @@
 				2D81D15E17EF5D180005CD42 /* header@2x.png in Resources */,
 				2D81D16517EF5D180005CD42 /* texture.png in Resources */,
 				2D81D15117EF5D180005CD42 /* view-background.png in Resources */,
+				B048C6EF1934C24100862304 /* share-white.png in Resources */,
 				B089347C1891260900AE6B19 /* app-icon-144.png in Resources */,
 				2D81D16817EF5D180005CD42 /* twitter@2x.png in Resources */,
 				2D81D16117EF5D180005CD42 /* menu-pin-45.png in Resources */,
@@ -1204,6 +1226,7 @@
 				2D81D16217EF5D180005CD42 /* menu-pin-45@2x.png in Resources */,
 				2D81D15817EF5D180005CD42 /* border@2x.png in Resources */,
 				2D81D15917EF5D180005CD42 /* facebook.png in Resources */,
+				B048C6ED1934C24100862304 /* favorite-white.png in Resources */,
 				2D3C127819265E4F007F0F1A /* vk-icon-43@2x.png in Resources */,
 				2D81D16717EF5D180005CD42 /* twitter.png in Resources */,
 				B08934781891260000AE6B19 /* app-icon-76.png in Resources */,
@@ -1216,6 +1239,7 @@
 				2D471ADE188DDC38000A27B9 /* Default-Landscape@2x~ipad.png in Resources */,
 				2D81D15717EF5D180005CD42 /* border.png in Resources */,
 				2D81D14F17EF5D180005CD42 /* category-button-bg.png in Resources */,
+				B048C6EB1934C24100862304 /* favorite-active-white.png in Resources */,
 				2D80C492191041DF00832BB6 /* favorite_active.png in Resources */,
 				2D59CD07188DB8AF00A8852E /* Default-Portrait~ipad.png in Resources */,
 				B077FBA518901ED400934BB0 /* app-icon-152.png in Resources */,
