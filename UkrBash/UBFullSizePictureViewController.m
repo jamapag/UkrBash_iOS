@@ -98,7 +98,6 @@
     [backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [toolbar addSubview:backButton];
     padding += 10.;
-    x += sharingButtonHeight + padding;
     
     x = self.view.frame.size.width - padding - sharingButtonHeight;
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
