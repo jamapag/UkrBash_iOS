@@ -23,9 +23,9 @@ typedef enum {
     id <VKResponseParser> responseParser;
 }
 
-@property (nonatomic, copy) NSString * accessToken;
-@property (nonatomic, copy) NSString * method;
-@property (nonatomic, retain) NSDictionary * params;
+@property (nonatomic, copy) NSString *accessToken;
+@property (nonatomic, copy) NSString *method;
+@property (nonatomic, retain) NSDictionary *params;
 @property (nonatomic) VKRequestMethod requestMethod;
 
 - (id)initWithResponseParser:(id<VKResponseParser>)parser;

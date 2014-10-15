@@ -57,14 +57,7 @@
     self.title = @"Підтримати розробку";
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
 
-    float y = 0;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        // Load resources for iOS 6.1 or earlier;
-        y = 0;
-    } else {
-        // Load resources for iOS 7 or later
-        y = 20;
-    }
+    float y = 20;
 
     UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., y, 50., self.view.frame.size.height + 20)];
     borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];

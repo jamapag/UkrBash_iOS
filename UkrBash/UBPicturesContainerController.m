@@ -82,9 +82,7 @@
 
 - (void)childBackAction
 {
-    if (IS_IOS7) {
-        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
-    }
+    [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark - View lifecycle
@@ -96,14 +94,7 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
     
-    float y = 0;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        // Load resources for iOS 6.1 or earlier;
-        y = 0;
-    } else {
-        // Load resources for iOS 7 or later
-        y = 20;
-    }
+    float y = 20;
 
     UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., y, 50., self.view.frame.size.height + 20)];
     borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
@@ -173,18 +164,14 @@
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
-    if (IS_IOS7) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
-    if (IS_IOS7) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -343,10 +330,8 @@
         viewer.view.alpha = 1;
     }];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    if (IS_IOS7) {
-        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
-    }
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark - UIScrollView delegate
@@ -388,7 +373,8 @@
     }
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
 	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
 

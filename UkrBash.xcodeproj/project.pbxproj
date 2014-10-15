@@ -49,6 +49,7 @@
 		2D471AE0188DDE68000A27B9 /* Default7-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D471ADF188DDE68000A27B9 /* Default7-Portrait@2x~ipad.png */; };
 		2D471AE2188DE051000A27B9 /* Default7-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D471AE1188DE051000A27B9 /* Default7-Landscape@2x~ipad.png */; };
 		2D48CDF214C8DF2500C5696B /* UBImagesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D48CDF114C8DF2500C5696B /* UBImagesRequest.m */; };
+		2D524BB11958C3F90000D92F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D524BB01958C3F90000D92F /* Security.framework */; };
 		2D52D6C614DCADFC00E6A744 /* UBUnpablishedPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D52D6C514DCADFC00E6A744 /* UBUnpablishedPicturesDataSource.m */; };
 		2D52D6C914DCAE1B00E6A744 /* UBBestPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D52D6C814DCAE1A00E6A744 /* UBBestPicturesDataSource.m */; };
 		2D52D6CC14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D52D6CB14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m */; };
@@ -103,7 +104,6 @@
 		2D8808571906F3CD00EB8814 /* error_response_example.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D8808561906F3CD00EB8814 /* error_response_example.json */; };
 		2D8808591906F70800EB8814 /* success_response_example_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D8808581906F70800EB8814 /* success_response_example_list.json */; };
 		2D88085B1906F89C00EB8814 /* success_response_example_not_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D88085A1906F89C00EB8814 /* success_response_example_not_list.json */; };
-		2D92E78D17EB6099007E0B70 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5397EB177B5096002018F2 /* Security.framework */; };
 		2D9F6E0E14A158C40012D690 /* UBQuotesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */; };
 		2DADD34714A3FA4A00808AA6 /* UBQuoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */; };
 		2DB0FAB21416C8CF00EFD6BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */; };
@@ -140,7 +140,7 @@
 		B01825D718D9FE91004263AD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B01825D618D9FE91004263AD /* libz.dylib */; };
 		B02855CE14C0CDEE00FAA8A8 /* UBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */; };
 		B0378D08161B2DAE00B9331B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B0378D07161B2DAE00B9331B /* libsqlite3.dylib */; };
-		B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0378D09161B2DE600B9331B /* CFNetwork.framework */; };
+		B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0378D09161B2DE600B9331B /* CFNetwork.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B048C6EB1934C24100862304 /* favorite-active-white.png in Resources */ = {isa = PBXBuildFile; fileRef = B048C6E51934C24100862304 /* favorite-active-white.png */; };
 		B048C6EC1934C24100862304 /* favorite-active-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B048C6E61934C24100862304 /* favorite-active-white@2x.png */; };
 		B048C6ED1934C24100862304 /* favorite-white.png in Resources */ = {isa = PBXBuildFile; fileRef = B048C6E71934C24100862304 /* favorite-white.png */; };
@@ -291,13 +291,13 @@
 		2D48CDF014C8DF2500C5696B /* UBImagesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBImagesRequest.h; sourceTree = "<group>"; };
 		2D48CDF114C8DF2500C5696B /* UBImagesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBImagesRequest.m; sourceTree = "<group>"; };
 		2D4AEF301923D76C000B0371 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
+		2D524BB01958C3F90000D92F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2D52D6C414DCADFB00E6A744 /* UBUnpablishedPicturesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnpablishedPicturesDataSource.h; sourceTree = "<group>"; };
 		2D52D6C514DCADFC00E6A744 /* UBUnpablishedPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnpablishedPicturesDataSource.m; sourceTree = "<group>"; };
 		2D52D6C714DCAE1A00E6A744 /* UBBestPicturesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBBestPicturesDataSource.h; sourceTree = "<group>"; };
 		2D52D6C814DCAE1A00E6A744 /* UBBestPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBBestPicturesDataSource.m; sourceTree = "<group>"; };
 		2D52D6CA14DCAE2A00E6A744 /* UBRandomPicturesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRandomPicturesDataSource.h; sourceTree = "<group>"; };
 		2D52D6CB14DCAE2A00E6A744 /* UBRandomPicturesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRandomPicturesDataSource.m; sourceTree = "<group>"; };
-		2D5397EB177B5096002018F2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		2D57274A1455F5EE00A6DAE4 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		2D57274B1455F5EE00A6DAE4 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		2D57274D1456017900A6DAE4 /* UBQuotesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesRequest.h; sourceTree = "<group>"; };
@@ -519,9 +519,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D524BB11958C3F90000D92F /* Security.framework in Frameworks */,
 				B066EE2B16AD878600A2A25C /* StoreKit.framework in Frameworks */,
 				B01825D718D9FE91004263AD /* libz.dylib in Frameworks */,
-				2D92E78D17EB6099007E0B70 /* Security.framework in Frameworks */,
 				2DE25EA417EB6041007F0212 /* SystemConfiguration.framework in Frameworks */,
 				B0378D0A161B2DE600B9331B /* CFNetwork.framework in Frameworks */,
 				2D3312611630842A00213BF2 /* Accounts.framework in Frameworks */,
@@ -687,10 +687,10 @@
 		2DB0FAB01416C8CF00EFD6BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D524BB01958C3F90000D92F /* Security.framework */,
 				2D4AEF301923D76C000B0371 /* libSystem.B.dylib */,
 				B01825D618D9FE91004263AD /* libz.dylib */,
 				2DE25EA317EB6041007F0212 /* SystemConfiguration.framework */,
-				2D5397EB177B5096002018F2 /* Security.framework */,
 				2D3312621630846700213BF2 /* AdSupport.framework */,
 				2D3312601630842A00213BF2 /* Accounts.framework */,
 				B07CD484161C730A00DB5551 /* Social.framework */,
@@ -1115,7 +1115,7 @@
 			name = VkontakteTests;
 			productName = VkontakteTests;
 			productReference = B0FBF2BB166D3C4E007BFDC0 /* VkontakteTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1455,7 +1455,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -1471,7 +1471,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1491,7 +1491,7 @@
 				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "UkrBash/UkrBash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAnalytics\"",
@@ -1519,7 +1519,7 @@
 				GCC_PREFIX_HEADER = "UkrBash/UkrBash-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "UkrBash/UkrBash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAnalytics\"",

@@ -49,16 +49,13 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-    } else {
-        if (self.indentationLevel == 2) {
-            float indentPoints = self.indentationLevel * self.indentationWidth;
-            self.imageView.frame = CGRectMake(self.imageView.frame.origin.x + indentPoints,
-                                              self.imageView.frame.origin.y,
-                                              self.imageView.frame.size.width,
-                                              self.imageView.frame.size.height
-                                              );
-        }
+    if (self.indentationLevel == 2) {
+        float indentPoints = self.indentationLevel * self.indentationWidth;
+        self.imageView.frame = CGRectMake(self.imageView.frame.origin.x + indentPoints,
+                                          self.imageView.frame.origin.y,
+                                          self.imageView.frame.size.width,
+                                          self.imageView.frame.size.height
+                                          );
     }
 }
 

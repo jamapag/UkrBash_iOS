@@ -131,14 +131,7 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
     
-    float y = 0;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        // Load resources for iOS 6.1 or earlier;
-        y = 0;
-    } else {
-        // Load resources for iOS 7 or later
-        y = 20;
-    }
+    float y = 20;
     UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., y, 50., self.view.frame.size.height + 20)];
     borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
     [self.view addSubview:borderView];
@@ -207,9 +200,7 @@
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
-    if (IS_IOS7) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
     
     if ([[dataSource items] count] == 0) {
         [self loadNewItems];
@@ -220,9 +211,7 @@
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
-    if (IS_IOS7) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -399,16 +388,10 @@
     vkActivity.attachmentTitle = [NSString stringWithFormat:@"Цитата %ld", (long)quote.quoteId];
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self, quoteUrl] applicationActivities:@[vkActivity]];
     [activityViewController setValue:[NSString stringWithFormat:@"Цитата %ld", (long)quote.quoteId] forKey:@"subject"];
-    if (IS_IOS7) {
-        activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
-    } else {
-        activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact];
-    }
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
     [vkActivity release];
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
-        if (IS_IOS7) {
-            [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
-        }
+        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
     }];
     [self presentViewController:activityViewController animated:YES completion:nil];
     [activityViewController release];
@@ -448,7 +431,7 @@
         cdQuote.rating = [NSNumber numberWithInteger:quote.rating];
     } else {
         // update some fields:
-        cdQuote.status = [NSNumber numberWithInt:quote.status];
+        cdQuote.status = [NSNumber numberWithInteger:quote.status];
         cdQuote.pubDate = quote.pubDate;
         cdQuote.rating = [NSNumber numberWithInteger:quote.rating];
     }

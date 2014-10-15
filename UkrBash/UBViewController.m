@@ -67,14 +67,7 @@
 
 - (UIView *)headerViewWithMenuButtonAction:(SEL)menuActionSelector
 {
-    float iOS7offset = 0;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        // Load resources for iOS 6.1 or earlier;
-        iOS7offset = 0;
-    } else {
-        // Load resources for iOS 7 or later
-        iOS7offset = 20;
-    }
+    float iOS7offset = 20;
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0., (iOS7offset == 0) ? -20 : 0, self.view.frame.size.width, 64.)];
     headerView.userInteractionEnabled = YES;

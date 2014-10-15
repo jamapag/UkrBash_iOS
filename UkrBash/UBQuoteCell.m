@@ -42,17 +42,13 @@ CGFloat animationOffset = 52.;
     CGSize constraint = CGSizeMake(width, MAXFLOAT);
     CGSize size;
 
-    if (IS_IOS7) {
-        NSDictionary *attributes = @{NSFontAttributeName:GET_FONT()};
-        NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-        [context setMinimumScaleFactor:1];
-        CGRect rect = [text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:context];
-        size.width = ceilf(rect.size.width);
-        size.height  = ceilf(rect.size.height);
-        [context release];
-    } else {
-        size = [text sizeWithFont:GET_FONT() constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
-    }
+    NSDictionary *attributes = @{NSFontAttributeName:GET_FONT()};
+    NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
+    [context setMinimumScaleFactor:1];
+    CGRect rect = [text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:context];
+    size.width = ceilf(rect.size.width);
+    size.height  = ceilf(rect.size.height);
+    [context release];
 
     CGFloat height = MAX(size.height, 44.0f);
     

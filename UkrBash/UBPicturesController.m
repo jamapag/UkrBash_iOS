@@ -45,14 +45,7 @@
 {
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
-    float y = 0;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        // Load resources for iOS 6.1 or earlier;
-        y = 0;
-    } else {
-        // Load resources for iOS 7 or later
-        y = 20;
-    }
+    float y = 20;
 
     UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., y, 50., self.view.frame.size.height + 20)];
     borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
@@ -109,17 +102,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (IS_IOS7) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    if (IS_IOS7) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -235,10 +224,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    if (IS_IOS7) {
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
-    }
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
     
     UICollectionViewCell *cell = [_collectionView cellForItemAtIndexPath:indexPath];
     CALayer *viewLayer = cell.layer;
@@ -333,16 +320,10 @@
     vkActivity.attachmentTitle = title;
     vkActivity.parentViewController = self;
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[description, pictureUrl, image] applicationActivities:@[vkActivity]];
-    if (IS_IOS7) {
-        activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
-    } else {
-        activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact];
-    }
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
     [vkActivity release];
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
-        if (IS_IOS7) {
-            [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
-        }
+        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
     }];
     [self presentViewController:activityViewController animated:YES completion:nil];
     [activityViewController release];

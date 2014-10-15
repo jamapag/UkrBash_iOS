@@ -39,9 +39,9 @@
 
 - (void)dealloc
 {
-    [self.accessToken release];
-    [self.params release];
-    [self.method release];
+    [accessToken release];
+    [params release];
+    [method release];
     [responseParser release];
     [super dealloc];
 }

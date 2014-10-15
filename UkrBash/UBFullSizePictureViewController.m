@@ -61,13 +61,6 @@
     [tapGesture release];
     
     float topY = 0;
-//    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-//        // Load resources for iOS 6.1 or earlier;
-//        topY = 0;
-//    } else {
-//        // Load resources for iOS 7 or later
-////        topY = 20;
-//    }
 
     CGFloat padding = 10.;
     
@@ -150,9 +143,7 @@
 - (void)backAction:(id)sender
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    if (IS_IOS7) {
-        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
-    }
+    [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
     
     [UIView animateWithDuration:.3
                      animations:^{
@@ -195,17 +186,10 @@
     vkActivity.attachmentTitle = title;
     vkActivity.parentViewController = self;
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[description, pictureUrl, image] applicationActivities:@[vkActivity]];
-    if (IS_IOS7) {
-        activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
-    } else {
-        activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact];
-        
-    }
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
     [vkActivity release];
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
-        if (IS_IOS7) {
-            [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
-        }
+        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
     }];
     [self presentViewController:activityViewController animated:YES completion:nil];
     [activityViewController release];

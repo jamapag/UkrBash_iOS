@@ -88,14 +88,7 @@
     tapGesture.numberOfTapsRequired = 1;
     [scrollView addGestureRecognizer:tapGesture];
     [tapGesture release];
-    float topY = 0;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        // Load resources for iOS 6.1 or earlier;
-        topY = 0;
-    } else {
-        // Load resources for iOS 7 or later
-        topY = 20;
-    }
+    float topY = 20;
 
     CGFloat padding = 10.;
     infoView = [[UBPictureInfoView alloc] initWithFrame:CGRectMake(padding, self.view.frame.size.height - padding - 60., self.view.frame.size.width - 2 * padding, 60.)];
@@ -213,17 +206,13 @@
     [self setScrollViewContentSize];
     [self setCurrentPictureIndex:currentPictureIndex];
     [self scrollToIndex:currentPictureIndex animated:NO];
-    if (IS_IOS7) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    if (IS_IOS7) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 - (void)updatePictureInfoView

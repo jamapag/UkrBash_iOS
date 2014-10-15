@@ -74,14 +74,7 @@
         [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:[NSString stringWithFormat:@"/%@/%@/", NSStringFromClass([viewController class]), viewController.title]];
         [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
         
-        float y = 0;
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-            // Load resources for iOS 6.1 or earlier;
-            y = 0;
-        } else {
-            // Load resources for iOS 7 or later
-            y = 20;
-        }
+        float y = 20;
 
         _viewController = [viewController retain];
         _viewController.ubNavigationController = self;
@@ -117,14 +110,7 @@
         [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"/"];
         [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
         
-        float y = 0;
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-            // Load resources for iOS 6.1 or earlier;
-            y = 0;
-        } else {
-            // Load resources for iOS 7 or later
-            y = 20;
-        }
+        float y = 20;
         if (animated) {
             [UIView animateWithDuration:.5 animations:^(void) {
                 CGFloat x = _viewController.view.center.x + self.view.bounds.size.width - BORDER_WIDTH;
@@ -158,14 +144,7 @@
     [super loadView];
     
     self.view.clipsToBounds = YES;
-    float y = 0;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        // Load resources for iOS 6.1 or earlier;
-        y = 0;
-    } else {
-        // Load resources for iOS 7 or later
-        y = 20;
-    }
+    float y = 20;
     
     borderView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - BORDER_WIDTH, y, BORDER_WIDTH, self.view.frame.size.height + 20)];
     
