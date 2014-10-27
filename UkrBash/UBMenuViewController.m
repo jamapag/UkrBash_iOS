@@ -10,7 +10,6 @@
 #import "UBNavigationController.h"
 #import "UBViewController.h"
 #import "UBQuotesContainerController.h"
-#import "UBPicturesContainerController.h"
 #import "UBPublishedQuotesDataSource.h"
 #import "UBUnpablishedQuotesDataSource.h"
 #import "UBBestQuotesDataSource.h"
@@ -175,11 +174,6 @@ enum UBSubMenuItems {
         picturesController.title = title;
         [self.ubNavigationController pushViewController:picturesController animated:YES];
         [picturesController release];
-//    } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone || ![UICollectionView class]) {
-//        UBPicturesContainerController *picturesContainer = [[UBPicturesContainerController alloc] initWithDataSourceClass:dataSourceClass];
-//        picturesContainer.title = title;
-//        [self.ubNavigationController pushViewController:picturesContainer animated:YES];
-//        [picturesContainer release];
     } else {
         UBPicturesCollectionViewController *collecitonController = [[UBPicturesCollectionViewController alloc] initWithDataSourceClass:dataSourceClass];
         collecitonController.title = title;

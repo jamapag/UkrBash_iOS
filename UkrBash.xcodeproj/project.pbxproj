@@ -135,7 +135,6 @@
 		2DF27D9E1455D2670011168F /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF27D9D1455D2670011168F /* libxml2.dylib */; };
 		2DFE071F191BAF4900808F74 /* UBPictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFE071E191BAF4900808F74 /* UBPictureCollectionViewCell.m */; };
 		B00510851517BBFA00D6D69B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00510841517BBFA00D6D69B /* QuartzCore.framework */; };
-		B008F69E150E942000556346 /* UBPicturesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B008F69D150E942000556346 /* UBPicturesContainerController.m */; };
 		B01825D518D9FDE1004263AD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B01825D418D9FDE1004263AD /* libGoogleAnalyticsServices.a */; };
 		B01825D718D9FE91004263AD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B01825D618D9FE91004263AD /* libz.dylib */; };
 		B02855CE14C0CDEE00FAA8A8 /* UBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02855CD14C0CDEE00FAA8A8 /* UBViewController.m */; };
@@ -412,8 +411,6 @@
 		2DFE071D191BAF4900808F74 /* UBPictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureCollectionViewCell.h; sourceTree = "<group>"; };
 		2DFE071E191BAF4900808F74 /* UBPictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureCollectionViewCell.m; sourceTree = "<group>"; };
 		B00510841517BBFA00D6D69B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		B008F69C150E942000556346 /* UBPicturesContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesContainerController.h; sourceTree = "<group>"; };
-		B008F69D150E942000556346 /* UBPicturesContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesContainerController.m; sourceTree = "<group>"; };
 		B01825D118D9FDE1004263AD /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		B01825D218D9FDE1004263AD /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
 		B01825D318D9FDE1004263AD /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
@@ -784,8 +781,6 @@
 				2DE4917E15A5C14000002488 /* UBPicturesScrollViewController.m */,
 				2D9F6E0C14A158C40012D690 /* UBQuotesContainerController.h */,
 				2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */,
-				B008F69C150E942000556346 /* UBPicturesContainerController.h */,
-				B008F69D150E942000556346 /* UBPicturesContainerController.m */,
 				B0DCA88414BF22C7007132B6 /* UBNavigationController.h */,
 				B0DCA88514BF22C7007132B6 /* UBNavigationController.m */,
 				B0DCA89014BF3279007132B6 /* UBMenuViewController.h */,
@@ -1342,7 +1337,6 @@
 				2D12630214F6E6DA001C9DA0 /* DownloadOperations.m in Sources */,
 				2D12630314F6E6DA001C9DA0 /* MediaCenter.m in Sources */,
 				2D12630614F6E78A001C9DA0 /* UIKitExtentions.m in Sources */,
-				B008F69E150E942000556346 /* UBPicturesContainerController.m in Sources */,
 				2DD8A02B1918E0E500197EC2 /* UBFetchedPicturesDataSource.m in Sources */,
 				2D5A4E8D151B36BD002ABFA2 /* SharingController.m in Sources */,
 				2D5A4E91151B374D002ABFA2 /* FacebookSharingController.m in Sources */,
