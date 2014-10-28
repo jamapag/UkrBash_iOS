@@ -10,9 +10,10 @@
 #import "UBPicturesDataSource.h"
 #import "UBPictureCollectionViewCell.h"
 #import "UBFullSizePictureViewController.h"
+#import "UBCenterViewController.h"
 
 
-@interface UBPicturesCollectionViewController : UBViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UBQuoteCollectionCellDelegate, UBFullSizePictureViewControllerDelegate>
+@interface UBPicturesCollectionViewController : UBCenterViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UBQuoteCollectionCellDelegate, UBFullSizePictureViewControllerDelegate>
 {
     UICollectionView *_collectionView;
     UIRefreshControl *_refreshControl;

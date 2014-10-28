@@ -133,6 +133,9 @@
 		2DEDABD118FED6F90013D26C /* UBJsonQuotesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDABD018FED6F90013D26C /* UBJsonQuotesParser.m */; };
 		2DEDABD418FEE7850013D26C /* UBJsonPicturesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDABD318FEE7850013D26C /* UBJsonPicturesParser.m */; };
 		2DF27D9E1455D2670011168F /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF27D9D1455D2670011168F /* libxml2.dylib */; };
+		2DFAD45419FE98B200C13DBD /* UBMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAD45319FE98B200C13DBD /* UBMainViewController.m */; };
+		2DFAD45719FE9DAE00C13DBD /* UBCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAD45619FE9DAE00C13DBD /* UBCenterViewController.m */; };
+		2DFAD45A19FE9E5400C13DBD /* UBLeftPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAD45919FE9E5400C13DBD /* UBLeftPanelViewController.m */; };
 		2DFE071F191BAF4900808F74 /* UBPictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFE071E191BAF4900808F74 /* UBPictureCollectionViewCell.m */; };
 		B00510851517BBFA00D6D69B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00510841517BBFA00D6D69B /* QuartzCore.framework */; };
 		B01825D518D9FDE1004263AD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B01825D418D9FDE1004263AD /* libGoogleAnalyticsServices.a */; };
@@ -408,6 +411,12 @@
 		2DEDABD218FEE7850013D26C /* UBJsonPicturesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBJsonPicturesParser.h; sourceTree = "<group>"; };
 		2DEDABD318FEE7850013D26C /* UBJsonPicturesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBJsonPicturesParser.m; sourceTree = "<group>"; };
 		2DF27D9D1455D2670011168F /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		2DFAD45219FE98B200C13DBD /* UBMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBMainViewController.h; sourceTree = "<group>"; };
+		2DFAD45319FE98B200C13DBD /* UBMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBMainViewController.m; sourceTree = "<group>"; };
+		2DFAD45519FE9DAE00C13DBD /* UBCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBCenterViewController.h; sourceTree = "<group>"; };
+		2DFAD45619FE9DAE00C13DBD /* UBCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBCenterViewController.m; sourceTree = "<group>"; };
+		2DFAD45819FE9E5400C13DBD /* UBLeftPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBLeftPanelViewController.h; sourceTree = "<group>"; };
+		2DFAD45919FE9E5400C13DBD /* UBLeftPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBLeftPanelViewController.m; sourceTree = "<group>"; };
 		2DFE071D191BAF4900808F74 /* UBPictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPictureCollectionViewCell.h; sourceTree = "<group>"; };
 		2DFE071E191BAF4900808F74 /* UBPictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPictureCollectionViewCell.m; sourceTree = "<group>"; };
 		B00510841517BBFA00D6D69B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -799,6 +808,12 @@
 				2D3D63A519227EB400FB9F8B /* UBFullSizePictureViewController.m */,
 				2D3D63A71922809500FB9F8B /* UBPictureViewController.h */,
 				2D3D63A81922809500FB9F8B /* UBPictureViewController.m */,
+				2DFAD45219FE98B200C13DBD /* UBMainViewController.h */,
+				2DFAD45319FE98B200C13DBD /* UBMainViewController.m */,
+				2DFAD45519FE9DAE00C13DBD /* UBCenterViewController.h */,
+				2DFAD45619FE9DAE00C13DBD /* UBCenterViewController.m */,
+				2DFAD45819FE9E5400C13DBD /* UBLeftPanelViewController.h */,
+				2DFAD45919FE9E5400C13DBD /* UBLeftPanelViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1297,6 +1312,8 @@
 			files = (
 				2D2A6DDB1908261E0087C56A /* Quote.m in Sources */,
 				2DB0FAC11416C8CF00EFD6BC /* main.m in Sources */,
+				2DFAD45A19FE9E5400C13DBD /* UBLeftPanelViewController.m in Sources */,
+				2DFAD45419FE98B200C13DBD /* UBMainViewController.m in Sources */,
 				2DB0FAC41416C8CF00EFD6BC /* UkrBashAppDelegate.m in Sources */,
 				2DB0FACA1416C8CF00EFD6BC /* UkrBash.xcdatamodeld in Sources */,
 				2DB323E11417BA02001440B7 /* UBParser.m in Sources */,
@@ -1316,6 +1333,7 @@
 				2D07888414C76F8700AC07D4 /* UBUnpablishedQuotesDataSource.m in Sources */,
 				2DE54AFF14C83FF800CB04CB /* UBPublishedQuotesDataSource.m in Sources */,
 				2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */,
+				2DFAD45719FE9DAE00C13DBD /* UBCenterViewController.m in Sources */,
 				2DEDABD418FEE7850013D26C /* UBJsonPicturesParser.m in Sources */,
 				2DE54B0514C847FD00CB04CB /* UBRandomQuotesDataSource.m in Sources */,
 				B060544D14C48BFB004B8ED9 /* UBMenuItemCell.m in Sources */,
@@ -1477,7 +1495,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lidia Rudyuk (ZNYUJ46SEU)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1493,7 +1511,7 @@
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "e8fd767d-2564-48c5-9283-cb5d5042a39b";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1506,7 +1524,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lidia Rudyuk (ZNYUJ46SEU)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1521,7 +1539,7 @@
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "e8fd767d-2564-48c5-9283-cb5d5042a39b";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Submodules/**";

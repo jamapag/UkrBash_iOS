@@ -137,51 +137,6 @@ enum UBSubMenuItems {
     return YES;
 }
 
-#pragma mark - Navigation methods
-
-- (void)pushQuotesContainerWithDataSourceClass:(Class)dataSourceClass title:(NSString*)title
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setValue:title forKey:UBContainerTitleKey];
-    [userDefaults setValue:NSStringFromClass(dataSourceClass) forKey:UBContainerDataSourceKey];
-    [userDefaults setValue:UBContainerTypeQuotes forKey:UBContainerTypeKey];
-    [userDefaults synchronize];
-    
-    if ([dataSourceClass isSubclassOfClass:[UBFavoriteQuotesDataSource class]]) {
-        UBQuotesController *quotesController = [[UBQuotesController alloc] initWithDataSourceClass:dataSourceClass];
-        quotesController.title = title;
-        [self.ubNavigationController pushViewController:quotesController animated:YES];
-        [quotesController release];
-    } else {
-        UBQuotesContainerController *quotesContainer = [[UBQuotesContainerController alloc] initWithDataSourceClass:dataSourceClass];
-        quotesContainer.title = title;
-        [self.ubNavigationController pushViewController:quotesContainer animated:YES];
-        [quotesContainer release];
-    }
-}
-
-- (void)pushPicturesContainerWithDataSourceClass:(Class)dataSourceClass title:(NSString*)title
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setValue:title forKey:UBContainerTitleKey];
-    [userDefaults setValue:NSStringFromClass(dataSourceClass) forKey:UBContainerDataSourceKey];
-    [userDefaults setValue:UBContainerTypePictures forKey:UBContainerTypeKey];
-    [userDefaults synchronize];
-    
-
-    if ([dataSourceClass isSubclassOfClass:[UBFavoritePicturesDataSource class]]) {
-        UBPicturesController *picturesController = [[UBPicturesController alloc] initWithDataSourceClass:dataSourceClass];
-        picturesController.title = title;
-        [self.ubNavigationController pushViewController:picturesController animated:YES];
-        [picturesController release];
-    } else {
-        UBPicturesCollectionViewController *collecitonController = [[UBPicturesCollectionViewController alloc] initWithDataSourceClass:dataSourceClass];
-        collecitonController.title = title;
-        [self.ubNavigationController pushViewController:collecitonController animated:YES];
-        [collecitonController release];
-    }
-}
-
 #pragma mark - Table View Datasource/Delegate methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -311,17 +266,24 @@ enum UBSubMenuItems {
         } else {
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             NSString *title = cell.textLabel.text;
+            Class dataSourceClass = nil;
             if (UBSubMenuItemPublished == indexPath.row) {
-                [self pushQuotesContainerWithDataSourceClass:[UBPublishedQuotesDataSource class] title:title];
+                dataSourceClass = [UBPublishedQuotesDataSource class];
             } else if (UBSubMenuItemUnpublished == indexPath.row) {
-                [self pushQuotesContainerWithDataSourceClass:[UBUnpablishedQuotesDataSource class] title:title];
+                dataSourceClass = [UBUnpablishedQuotesDataSource class];
             } else if (UBSubMenuItemBest == indexPath.row) {
-                [self pushQuotesContainerWithDataSourceClass:[UBBestQuotesDataSource class] title:title];
+                dataSourceClass = [UBBestQuotesDataSource class];
             } else if (UBSubMenuItemRandom == indexPath.row) {
-                [self pushQuotesContainerWithDataSourceClass:[UBRandomQuotesDataSource class] title:title];
+                dataSourceClass = [UBRandomQuotesDataSource class];
             } else if (UBSubMenuItemFavorite == indexPath.row) {
-                [self pushQuotesContainerWithDataSourceClass:[UBFavoriteQuotesDataSource class] title:title];
+                dataSourceClass = [UBFavoriteQuotesDataSource class];
             }
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setValue:title forKey:UBContainerTitleKey];
+            [userDefaults setValue:NSStringFromClass(dataSourceClass) forKey:UBContainerDataSourceKey];
+            [userDefaults setValue:UBContainerTypeQuotes forKey:UBContainerTypeKey];
+            [userDefaults synchronize];
+            [self.delegate quotesWithDataSourceSelected:dataSourceClass withTitle:title];
         }
     }
     if (UBMenuImagesSection == indexPath.section) {
@@ -331,25 +293,30 @@ enum UBSubMenuItems {
         } else {
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             NSString *title = cell.textLabel.text;
+            Class dataSourceClass = nil;
             if (UBSubMenuItemPublished == indexPath.row) {
-                [self pushPicturesContainerWithDataSourceClass:[UBPublishedPicturesDataSource class] title:title];
+                dataSourceClass = [UBPublishedPicturesDataSource class];
             } else if (UBSubMenuItemUnpublished == indexPath.row) {
-                [self pushPicturesContainerWithDataSourceClass:[UBUnpablishedPicturesDataSource class] title:title];
+                dataSourceClass = [UBUnpablishedPicturesDataSource class];
             } else if (UBSubMenuItemRandom == indexPath.row) {
-                [self pushPicturesContainerWithDataSourceClass:[UBRandomPicturesDataSource class] title:title];
+                dataSourceClass = [UBRandomPicturesDataSource class];
             } else if (UBSubMenuItemBest == indexPath.row) {
-                [self pushPicturesContainerWithDataSourceClass:[UBBestPicturesDataSource class] title:title];
+                dataSourceClass = [UBBestPicturesDataSource class];
             } else if (UBSubMenuItemFavorite == indexPath.row) {
-                [self pushPicturesContainerWithDataSourceClass:[UBFavoritePicturesDataSource class] title:title];
+                dataSourceClass = [UBFavoritePicturesDataSource class];
             }
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setValue:title forKey:UBContainerTitleKey];
+            [userDefaults setValue:NSStringFromClass(dataSourceClass) forKey:UBContainerDataSourceKey];
+            [userDefaults setValue:UBContainerTypePictures forKey:UBContainerTypeKey];
+            [userDefaults synchronize];
+            [self.delegate picturesWithDataSourceSelected:dataSourceClass withTitle:title];
         }
     }
 
     if (UBMenuInfoSection == indexPath.section) {
         if (indexPath.row == UBMenuItemDonate) {
-            UBDonateViewController *donateViewController = [[UBDonateViewController alloc] init];
-            [self.ubNavigationController pushViewController:donateViewController animated:YES];
-            [donateViewController release];
+            [self.delegate donateControllerSelected];
         } else if (indexPath.row == UBMenuItemRateApp) {
             if ([SKStoreProductViewController class]) {
                 SKStoreProductViewController *controller = [[SKStoreProductViewController alloc] init];
@@ -366,12 +333,11 @@ enum UBSubMenuItems {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ukrbash.org/"]];
         } else if (indexPath.row == UBMenuItemContact) {
             if ([MFMailComposeViewController canSendMail]) {
-                MFMailComposeViewController * mailComposer = [[MFMailComposeViewController alloc] init];
+                MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
                 mailComposer.mailComposeDelegate = self;
-//                [mailComposer setToRecipients:[NSArray arrayWithObject:@"info@smile2mobile.net"]];
-                [mailComposer setToRecipients:[NSArray arrayWithObject:@"mmarkovets@smile2mobile.net"]];
+                [mailComposer setToRecipients:[NSArray arrayWithObject:@"info@smile2mobile.net"]];
                 [mailComposer setSubject:@"UkrBash iOS feedback"];
-                [self.ubNavigationController presentViewController:mailComposer animated:YES completion:nil];
+                [self presentViewController:mailComposer animated:YES completion:nil];
             } else {
                 NSURL *url = [NSURL URLWithString:@"mailto:info@smile2mobile.net?subject=UkrBash%20iOS%20feedback"];
                 [[UIApplication sharedApplication] openURL:url];
@@ -384,7 +350,7 @@ enum UBSubMenuItems {
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    [self.ubNavigationController dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
     if (!error && result == MFMailComposeResultSent) {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Дякуєм!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];

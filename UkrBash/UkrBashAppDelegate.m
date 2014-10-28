@@ -25,6 +25,7 @@
 #import "Quote.h"
 #import "UBQuotesController.h"
 #import "UBPicturesController.h"
+#import "UBMainViewController.h"
 #import <sys/sysctl.h>
 
 
@@ -81,7 +82,7 @@
     return platform;
 }
 
-- (UBViewController*)containerWithType:(NSString*)type dataSource:(NSString*)dataSource
+- (UBCenterViewController *)containerWithType:(NSString*)type dataSource:(NSString*)dataSource
 {
     if (!type) {
         return [[[UBQuotesContainerController alloc] initWithDataSourceClass:[UBPublishedQuotesDataSource class]] autorelease];
@@ -127,16 +128,11 @@
         containerTitle = @"Опубліковане";
     }
     
-    UBMenuViewController *menuController = [[UBMenuViewController alloc] init];
-    navigationController = [[UBNavigationController alloc] initWithMenuViewController:menuController];
-    
-    UBViewController *container = [self containerWithType:containerType dataSource:containerDataSource];
-    container.title = containerTitle;
-    [navigationController pushViewController:container animated:NO];
-    
-    self.window.rootViewController = navigationController;
-    [self.window addSubview:navigationController.view];
-    [menuController release];
+    UBCenterViewController *containerController = [self containerWithType:containerType dataSource:containerDataSource];
+    containerController.title = containerTitle;
+    UBMainViewController *mainViewController = [[UBMainViewController alloc] initWithContainerController:containerController];
+    self.window.rootViewController = mainViewController;
+    [self.window addSubview:mainViewController.view];
     
     Reachability *reach = [Reachability reachabilityWithHostname:@"www.ukrbash.com"];
     reach.unreachableBlock = ^(Reachability *reach) {

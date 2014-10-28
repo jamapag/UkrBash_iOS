@@ -119,11 +119,6 @@
 
 #pragma mark - Actions.
 
-- (void)menuAction:(id)sender
-{
-    [self.ubNavigationController popViewControllerAnimated:YES];
-}
-
 - (void)resize:(NSNotification *)notification
 {
     [tableView reloadData];

@@ -58,11 +58,6 @@
 
 #pragma mark - actions
 
-- (void)menuAction:(id)sender
-{
-    [self.ubNavigationController popViewControllerAnimated:YES];
-}
-
 - (void)showCopyMenu:(UILongPressGestureRecognizer*)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan) {
@@ -128,14 +123,6 @@
 - (void)loadView
 {
     [super loadView];
-    
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture.png"]];
-    
-    float y = 20;
-    UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., y, 50., self.view.frame.size.height + 20)];
-    borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
-    [self.view addSubview:borderView];
-    [borderView release];
 
     UIView *headerView = [[self headerViewWithMenuButtonAction:@selector(menuAction:)] retain];
     

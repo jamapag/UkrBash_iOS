@@ -10,6 +10,7 @@
 #import <MessageUI/MessageUI.h>
 #import <StoreKit/StoreKit.h>
 #import "UBViewController.h"
+#import "UBLeftPanelViewController.h"
 
 #define UBContainerTypeKey @"UBContainerTypeKey"
 #define UBContainerTypeQuotes @"quotes"
@@ -18,7 +19,7 @@
 #define UBContainerDataSourceKey @"UBContainerDataSourceKey"
 #define UBContainerTitleKey @"UBContainerTitleKey"
 
-@interface UBMenuViewController : UBViewController <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, SKStoreProductViewControllerDelegate>
+@interface UBMenuViewController : UBLeftPanelViewController <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, SKStoreProductViewControllerDelegate>
 {
     UITableView *_tableView;
     UIButton *logoButton;

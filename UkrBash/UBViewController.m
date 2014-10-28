@@ -32,17 +32,17 @@
 - (void)dealloc
 {
     ubNavigationController = nil;
+    [_menuButton release];
     [super dealloc];
 }
 
 #pragma mark - View lifecycle
 
-/*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
+    [super loadView];
 }
-*/
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -62,7 +62,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return YES;// (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 - (UIView *)headerViewWithMenuButtonAction:(SEL)menuActionSelector
@@ -95,13 +95,14 @@
         [headerView addSubview:titleLabel];
         [titleLabel release];
         
-        UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        menuButton.autoresizingMask = UIViewAutoresizingNone;
-        menuButton.imageView.contentMode = UIViewContentModeCenter;
-        [menuButton setImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
-        [menuButton addTarget:self action:menuActionSelector forControlEvents:UIControlEventTouchUpInside];
-        [menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 44.) / 2., menuButtonWidth + 20, 44.)];
-        [headerView addSubview:menuButton];
+        self.menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _menuButton.tag = 1;
+        _menuButton.autoresizingMask = UIViewAutoresizingNone;
+        _menuButton.imageView.contentMode = UIViewContentModeCenter;
+        [_menuButton setImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
+        [_menuButton addTarget:self action:menuActionSelector forControlEvents:UIControlEventTouchUpInside];
+        [_menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 44.) / 2., menuButtonWidth + 20, 44.)];
+        [headerView addSubview:_menuButton];
     }
     
     return [headerView autorelease];

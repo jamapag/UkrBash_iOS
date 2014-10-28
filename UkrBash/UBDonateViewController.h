@@ -6,10 +6,10 @@
 //
 //
 
-#import "UBViewController.h"
 #import <StoreKit/StoreKit.h>
+#import "UBCenterViewController.h"
 
-@interface UBDonateViewController : UBViewController
+@interface UBDonateViewController : UBCenterViewController
 <
     UITableViewDelegate,
     UITableViewDataSource,

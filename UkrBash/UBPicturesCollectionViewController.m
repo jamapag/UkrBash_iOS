@@ -60,11 +60,6 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
 
 #pragma mark - actions
 
-- (void)menuAction:(id)sender
-{
-    [self.ubNavigationController popViewControllerAnimated:YES];
-}
-
 - (void)loadView
 {
     [super loadView];

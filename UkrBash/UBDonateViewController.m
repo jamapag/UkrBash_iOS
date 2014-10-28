@@ -140,12 +140,6 @@
     [tableView addSubview:activityIndicatorView];
 }
 
-#pragma mark - Actions
-
-- (void)menuAction:(id)sender
-{
-    [self.ubNavigationController popViewControllerAnimated:YES];
-}
 
 #pragma mark - SKRequestDelegate methods
 

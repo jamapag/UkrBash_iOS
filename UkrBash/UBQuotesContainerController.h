@@ -11,8 +11,9 @@
 #import "UBQuoteCell.h"
 #import "UBTableViewDataSource.h"
 #import "EGORefreshTableHeaderView.h"
+#import "UBCenterViewController.h"
 
-@interface UBQuotesContainerController : UBViewController <UITableViewDelegate, UITableViewDataSource, UBQuoteCellDelegate, EGORefreshTableHeaderDelegate, UIActivityItemSource>
+@interface UBQuotesContainerController : UBCenterViewController <UITableViewDelegate, UITableViewDataSource, UBQuoteCellDelegate, EGORefreshTableHeaderDelegate, UIActivityItemSource>
 {
     UITableView *tableView;
     NSIndexPath *activeCell;
