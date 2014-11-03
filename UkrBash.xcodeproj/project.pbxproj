@@ -105,6 +105,7 @@
 		2D8808591906F70800EB8814 /* success_response_example_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D8808581906F70800EB8814 /* success_response_example_list.json */; };
 		2D88085B1906F89C00EB8814 /* success_response_example_not_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D88085A1906F89C00EB8814 /* success_response_example_not_list.json */; };
 		2D9F6E0E14A158C40012D690 /* UBQuotesContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */; };
+		2DAA15541A07DBFF0086A33C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DAA15531A07DBFF0086A33C /* Images.xcassets */; };
 		2DADD34714A3FA4A00808AA6 /* UBQuoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */; };
 		2DB0FAB21416C8CF00EFD6BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB11416C8CF00EFD6BC /* UIKit.framework */; };
 		2DB0FAB41416C8CF00EFD6BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB0FAB31416C8CF00EFD6BC /* Foundation.framework */; };
@@ -359,6 +360,7 @@
 		2D88085A1906F89C00EB8814 /* success_response_example_not_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success_response_example_not_list.json; sourceTree = "<group>"; };
 		2D9F6E0C14A158C40012D690 /* UBQuotesContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesContainerController.h; sourceTree = "<group>"; };
 		2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuotesContainerController.m; sourceTree = "<group>"; };
+		2DAA15531A07DBFF0086A33C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2DADD34514A3FA4A00808AA6 /* UBQuoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuoteCell.h; sourceTree = "<group>"; };
 		2DADD34614A3FA4A00808AA6 /* UBQuoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuoteCell.m; sourceTree = "<group>"; };
 		2DB0FAAD1416C8CF00EFD6BC /* UkrBash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UkrBash.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -731,6 +733,7 @@
 				2D12630514F6E789001C9DA0 /* UIKitExtentions.m */,
 				2DB0FAC51416C8CF00EFD6BC /* MainWindow.xib */,
 				2DB0FAC81416C8CF00EFD6BC /* UkrBash.xcdatamodeld */,
+				2DAA15531A07DBFF0086A33C /* Images.xcassets */,
 				2DB0FABA1416C8CF00EFD6BC /* Supporting Files */,
 			);
 			path = UkrBash;
@@ -1221,6 +1224,7 @@
 				2D439B451525BC4E0042D5D0 /* grayArrow.png in Resources */,
 				2D471ADA188DDA99000A27B9 /* Default-Portrait@2x~ipad.png in Resources */,
 				2D439B461525BC4E0042D5D0 /* grayArrow@2x.png in Resources */,
+				2DAA15541A07DBFF0086A33C /* Images.xcassets in Resources */,
 				2D439B471525BC4E0042D5D0 /* whiteArrow.png in Resources */,
 				2D81D15F17EF5D180005CD42 /* logo.png in Resources */,
 				2D439B481525BC4E0042D5D0 /* whiteArrow@2x.png in Resources */,
@@ -1489,6 +1493,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lidia Rudyuk (ZNYUJ46SEU)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1518,6 +1524,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lidia Rudyuk (ZNYUJ46SEU)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
