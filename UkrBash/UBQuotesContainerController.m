@@ -380,6 +380,10 @@
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
         [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
     }];
+    if (IS_IOS8_AND_LATER) {
+        activityViewController.popoverPresentationController.sourceView = cell;
+        activityViewController.popoverPresentationController.sourceRect = rect;
+    }
     [self presentViewController:activityViewController animated:YES completion:nil];
     [activityViewController release];
 

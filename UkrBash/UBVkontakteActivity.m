@@ -26,6 +26,15 @@
     return NSLocalizedString(@"Vkontakte", nil);
 }
 
+- (UIImage *)activityImage
+{
+    if (!IS_PAD) {
+        return [UIImage imageNamed:@"vk-icon-60.png"];
+    } else {
+        return [UIImage imageNamed:@"vk-icon-76"];
+    }
+}
+
 - (UIImage *)_activityImage
 {
     if (!IS_PAD) {
@@ -57,15 +66,14 @@
 
 - (void)performActivity
 {
-    [self.parentViewController.presentedViewController dismissViewControllerAnimated:YES completion:^{
-        SharingController *sharingController = [SharingController sharingControllerForNetworkType:SharingVkontakteNetwork];
-        sharingController.url = self.url;
-        sharingController.rootViewController = self.parentViewController;
-        [sharingController setAttachmentDescription:self.attachmentDescription];
-        [sharingController setAttachmentTitle:self.attachmentTitle];
-        [sharingController setAttachmentImagePreview:self.attachmentImage];
-        [sharingController showSharingDialog];
-    }];
+    [self.parentViewController dismissViewControllerAnimated:NO completion:nil];
+    SharingController *sharingController = [SharingController sharingControllerForNetworkType:SharingVkontakteNetwork];
+    sharingController.url = self.url;
+    sharingController.rootViewController = self.parentViewController;
+    [sharingController setAttachmentDescription:self.attachmentDescription];
+    [sharingController setAttachmentTitle:self.attachmentTitle];
+    [sharingController setAttachmentImagePreview:self.attachmentImage];
+    [sharingController showSharingDialog];
 }
 
 @end

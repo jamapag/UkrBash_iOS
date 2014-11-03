@@ -212,8 +212,12 @@ NSString *const UBCollectionElementKindSectionFooter = @"UICollectionElementKind
     activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact];
     [vkActivity release];
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
-        [self.ubNavigationController setNeedsStatusBarAppearanceUpdate];
+        [self setNeedsStatusBarAppearanceUpdate];
     }];
+    if (IS_IOS8_AND_LATER) {
+        activityViewController.popoverPresentationController.sourceView = cell;
+        activityViewController.popoverPresentationController.sourceRect = rect;
+    }
     [self presentViewController:activityViewController animated:YES completion:nil];
     [activityViewController release];
 }

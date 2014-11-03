@@ -12,14 +12,12 @@
 @interface UBPictureView : UIScrollView <UIScrollViewDelegate>
 {
     UIImageView *imageView;
-    UBPicturesScrollViewController *scroller;
     
     NSString *imageUrl;
     NSString *thumbnailUrl;
     NSInteger index;
 }
 
-@property (nonatomic, assign) UBPicturesScrollViewController *scroller;
 @property (nonatomic, retain) NSString *imageUrl;
 @property (nonatomic, retain) NSString *thumbnailUrl;
 @property (nonatomic, assign) NSInteger index;

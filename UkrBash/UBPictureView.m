@@ -10,7 +10,6 @@
 
 @implementation UBPictureView
 
-@synthesize scroller;
 @synthesize imageUrl;
 @synthesize thumbnailUrl;
 @synthesize index;

@@ -125,7 +125,6 @@
 		2DD8A0311918E43B00197EC2 /* UBPicturesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD8A0301918E43B00197EC2 /* UBPicturesController.m */; };
 		2DDED39A14A3649D003B315D /* UBQuote.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DDED39914A3649D003B315D /* UBQuote.m */; };
 		2DE25EA417EB6041007F0212 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DE25EA317EB6041007F0212 /* SystemConfiguration.framework */; };
-		2DE4917F15A5C14000002488 /* UBPicturesScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE4917E15A5C14000002488 /* UBPicturesScrollViewController.m */; };
 		2DE51AC116DE17BE0049F9A2 /* UBCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE51AC016DE17BE0049F9A2 /* UBCollectionViewLayout.m */; };
 		2DE54AFF14C83FF800CB04CB /* UBPublishedQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54AFE14C83FF800CB04CB /* UBPublishedQuotesDataSource.m */; };
 		2DE54B0214C8438D00CB04CB /* UBBestQuotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE54B0114C8438D00CB04CB /* UBBestQuotesDataSource.m */; };
@@ -395,8 +394,6 @@
 		2DDED39814A3649D003B315D /* UBQuote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuote.h; sourceTree = "<group>"; };
 		2DDED39914A3649D003B315D /* UBQuote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBQuote.m; sourceTree = "<group>"; };
 		2DE25EA317EB6041007F0212 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		2DE4917D15A5C14000002488 /* UBPicturesScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPicturesScrollViewController.h; sourceTree = "<group>"; };
-		2DE4917E15A5C14000002488 /* UBPicturesScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBPicturesScrollViewController.m; sourceTree = "<group>"; };
 		2DE51ABF16DE17BE0049F9A2 /* UBCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBCollectionViewLayout.h; sourceTree = "<group>"; };
 		2DE51AC016DE17BE0049F9A2 /* UBCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBCollectionViewLayout.m; sourceTree = "<group>"; };
 		2DE54AFB14C83F5500CB04CB /* UBQuotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBQuotesDataSource.h; sourceTree = "<group>"; };
@@ -786,8 +783,6 @@
 		2DB323F11417C9C1001440B7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2DE4917D15A5C14000002488 /* UBPicturesScrollViewController.h */,
-				2DE4917E15A5C14000002488 /* UBPicturesScrollViewController.m */,
 				2D9F6E0C14A158C40012D690 /* UBQuotesContainerController.h */,
 				2D9F6E0D14A158C40012D690 /* UBQuotesContainerController.m */,
 				B0DCA88414BF22C7007132B6 /* UBNavigationController.h */,
@@ -1364,7 +1359,6 @@
 				B0D8FD861524F15400D4A6EB /* UBPictureInfoView.m in Sources */,
 				B09CFA98152C7CD600316B7C /* EGORefreshTableHeaderView.m in Sources */,
 				2D0D814D15A49E0A00AAB0B5 /* UBPictureView.m in Sources */,
-				2DE4917F15A5C14000002488 /* UBPicturesScrollViewController.m in Sources */,
 				2D3D639F1922611700FB9F8B /* UBVkontakteActivity.m in Sources */,
 				B0DA90BA164EDB9A0084D29A /* VKLoginViewController.m in Sources */,
 				B0DA90BB164EDB9A0084D29A /* VKRequest.m in Sources */,
