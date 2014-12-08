@@ -8,10 +8,23 @@
 
 #import "UBDonateViewController.h"
 #import "UBDonateCell.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define UKRBASH_DONATE_SCHEME_1 @"com.lidarudyuk.UkrBash.donate1"
 #define UKRBASH_DONATE_SCHEME_2 @"com.lidarudyuk.UkrBash.donate2"
+
+#define UBDonateViewDescriptionOption_Text @"Допомогти проекту дуже просто. Якщо ви помітили помилку у роботі застосунку, або маєте ідеї чи пропозиції з його покращення, напишіть нам листа. Ви дуже допоможете, якщо розповісте про цей затосунок своїм друзям або просто залишите оцінку і відгук у AppStore. Або ви можете перерахувати кошти на розробку застосунку."
+
+NS_ENUM(NSInteger, _UBDonateViewOptions)
+{
+    UBDonateViewDescriptionOption,
+    UBDonateViewRatingOption,
+    UBDonateViewShareOption,
+    UBDonateViewMailOption,
+    UBDonateViewOptionsCount
+};
 
 @interface UBDonateViewController ()
 
@@ -62,30 +75,39 @@
     UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0., y, 50., self.view.frame.size.height + 20)];
     borderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]];
     [self.view addSubview:borderView];
-    [borderView release];
     
     UIView *headerView = [[self headerViewWithMenuButtonAction:@selector(menuAction:)] retain];
     
     [self.view addSubview:headerView];
-
+    
     tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., headerView.frame.size.height + headerView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - headerView.frame.size.height - headerView.frame.origin.y)];
-    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.backgroundColor = [UIColor clearColor];
     tableView.rowHeight = 52.;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.translatesAutoresizingMaskIntoConstraints = NO;
 
+    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"donate-cell"];
     
     // for starting loading automatically.
     [tableView setContentInset:UIEdgeInsetsMake(1., 0., 0., 0.)];
     
     [self.view addSubview:tableView];
-    [headerView release];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[borderView][tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(borderView, tableView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[headerView][tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(headerView, tableView)]];
+    [borderView release];
     
     activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
+    activityIndicatorView.tintColor = [UIColor whiteColor];
     [activityIndicatorView startAnimating];
+    [headerView addSubview:activityIndicatorView];
+    [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[activityIndicatorView]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(activityIndicatorView)]];
+    [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[activityIndicatorView]-13-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(activityIndicatorView)]];
+    [self hideActivityIndicator];
+    
+    [headerView release];
     
     messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(40., 20., tableView.frame.size.width - 50., 100.)];
     messageLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -97,17 +119,23 @@
     messageLabel.numberOfLines = 0;
 
     
-    if (![SKPaymentQueue canMakePayments]) {
-        messageLabel.text = @"Ця функція тимчасово не працює. Це пов`язано з налаштуваннями вашого акаунту в iTunes Store.";
-        [tableView addSubview:messageLabel];
-    }
-    else {
+    if ([SKPaymentQueue canMakePayments]) {
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         
         if (!products) {
             [self loadProducts];
         }
     }
+}
+
+- (void)showActivityIndicator
+{
+    activityIndicatorView.hidden = NO;
+}
+
+- (void)hideActivityIndicator
+{
+    activityIndicatorView.hidden = YES;
 }
 
 - (NSNumberFormatter *)numberFormatterForLocale:(NSLocale *)locale
@@ -137,7 +165,7 @@
     [request release];
     
     activityIndicatorView.center = CGPointMake(self.view.frame.size.width / 2.,  30.);
-    [tableView addSubview:activityIndicatorView];
+    [self showActivityIndicator];
 }
 
 
@@ -152,14 +180,12 @@
         [products addObject:product];
     }
     [tableView reloadData];
-    [activityIndicatorView removeFromSuperview];
+    [self hideActivityIndicator];
 }
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error
 {
-    [activityIndicatorView removeFromSuperview];
-    messageLabel.text = @"Трапилась помилка. Будьласка, спробуйте пізніше.";
-    [tableView addSubview:messageLabel];
+    [self hideActivityIndicator];
 }
 
 #pragma mark - Table View Datasource/Delegate methods
@@ -172,32 +198,92 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (processing) {
-        return 0;
+        return UBDonateViewOptionsCount;
     }
-    return products.count;
+    return UBDonateViewOptionsCount + products.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UBDonateCell *cell = (UBDonateCell*)[tableView dequeueReusableCellWithIdentifier:@"donate-cell"];
-    if (cell == nil) {
-        cell = [[[UBDonateCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"donate-cell"] autorelease];
-    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"donate-cell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor darkGrayColor];
     
-    SKProduct *product = [products objectAtIndex:indexPath.row];
-    cell.titleLabel.text = product.localizedTitle;
-    cell.valueLabel.text = [[self numberFormatterForLocale:product.priceLocale] stringFromNumber:product.price];
+    if (indexPath.row == UBDonateViewShareOption) {
+        cell.textLabel.text = @"Розповісти друзям";
+        cell.imageView.image = [UIImage imageNamed:@"share"];
+    } else if (indexPath.row == UBDonateViewMailOption) {
+        cell.textLabel.text = @"Написати розробникам";
+        cell.imageView.image = [UIImage imageNamed:@"mail"];
+    } else if (indexPath.row == UBDonateViewRatingOption) {
+        cell.textLabel.text = @"Оцінити застосунок";
+        cell.imageView.image = [UIImage imageNamed:@"favorite"];
+    } else if (indexPath.row == UBDonateViewDescriptionOption) {
+        cell.textLabel.text = UBDonateViewDescriptionOption_Text;
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        cell.textLabel.shadowColor = [UIColor whiteColor];
+        cell.textLabel.shadowOffset = CGSizeMake(0, 1.);
+        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    } else if (indexPath.row >= UBDonateViewOptionsCount) {
+        NSInteger row = indexPath.row - UBDonateViewOptionsCount;
+        SKProduct *product = [products objectAtIndex:row];
+        cell.textLabel.text = [NSString stringWithFormat:@"Профінансувати %@", [[self numberFormatterForLocale:product.priceLocale] stringFromNumber:product.price]];
+        cell.imageView.image = [UIImage imageNamed:@"money"];
+    }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSAssert(products != nil, @"no products to purchase!");
-    NSAssert(products.count != 0, @"no products to purchase!");
-    
-    SKPayment *payment = [SKPayment paymentWithProduct:[products objectAtIndex:indexPath.row]];
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    NSURL *appURL = [NSURL URLWithString:@"http://itunes.apple.com/app/517226573?mt=8"];
+    if (indexPath.row == UBDonateViewShareOption) {
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[appURL] applicationActivities:nil];
+        activityViewController.completionHandler = ^(NSString *activityType, BOOL completed) {
+            if (completed) {
+                [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"sharing"
+                                                                                                    action:@"app"
+                                                                                                     label:@"url"
+                                                                                                     value:@(-1)] build]];
+            }
+        };
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else if (indexPath.row == UBDonateViewMailOption) {
+        if ([MFMailComposeViewController canSendMail]) {
+            MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+            mailComposer.mailComposeDelegate = self;
+            [mailComposer setToRecipients:[NSArray arrayWithObject:@"info@smile2mobile.net"]];
+            [mailComposer setSubject:@"UkrBash iOS feedback"];
+            [self presentViewController:mailComposer animated:YES completion:nil];
+        } else {
+            NSURL *url = [NSURL URLWithString:@"mailto:info@smile2mobile.net?subject=UkrBash%20iOS%20feedback"];
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    } else if (indexPath.row == UBDonateViewRatingOption) {
+        if ([SKStoreProductViewController class]) {
+            SKStoreProductViewController *controller = [[SKStoreProductViewController alloc] init];
+            controller.delegate = self;
+            [controller loadProductWithParameters:@{ SKStoreProductParameterITunesItemIdentifier:@"517226573" }
+                                  completionBlock:NULL];
+            [self presentViewController:controller animated:YES completion:nil];
+            [controller release];
+            return;
+        } else {
+            [[UIApplication sharedApplication] openURL:appURL];
+        }
+    } else if (indexPath.row == UBDonateViewDescriptionOption) {
+        // nothing to do
+    } else if (indexPath.row >= UBDonateViewOptionsCount) {
+        NSAssert(products != nil, @"no products to purchase!");
+        NSAssert(products.count != 0, @"no products to purchase!");
+        
+        NSInteger row = indexPath.row - UBDonateViewOptionsCount;
+        SKPayment *payment = [SKPayment paymentWithProduct:[products objectAtIndex:row]];
+        [[SKPaymentQueue defaultQueue] addPayment:payment];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
@@ -228,6 +314,19 @@
     return [footerView autorelease];
 }
 
+- (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == UBDonateViewDescriptionOption) {
+        NSDictionary *attributes = @{NSFontAttributeName:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]};
+        NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
+        [context setMinimumScaleFactor:1];
+        CGSize constraint = CGSizeMake(tableView.frame.size.width - 70, MAXFLOAT);
+        CGRect rect = [UBDonateViewDescriptionOption_Text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:context];
+        return ceilf(rect.size.height);
+    }
+    return 44.;
+}
+
 #pragma mark - Payment queue observer
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
@@ -244,7 +343,7 @@
                 }
                 
                 processing = NO;
-                [activityIndicatorView removeFromSuperview];
+                [self hideActivityIndicator];
                 [tableView reloadData];
             }
                 break;
@@ -257,7 +356,7 @@
                 [thankYouAlert release];
                 
                 processing = NO;
-                [activityIndicatorView removeFromSuperview];
+                [self hideActivityIndicator];
                 [tableView reloadData];
             }
                 break;
@@ -265,7 +364,7 @@
             {
                 processing = YES;
                 [tableView reloadData];
-                [tableView addSubview:activityIndicatorView];
+                [self showActivityIndicator];
             }
                 break;
                 
@@ -273,6 +372,25 @@
                 break;
         }
     }
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if (!error && result == MFMailComposeResultSent) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Дякуєм!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        [alert release];
+    }
+}
+
+#pragma mark - SKStoreProductViewControllerDelegate
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

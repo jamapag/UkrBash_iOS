@@ -7,6 +7,7 @@
 //
 
 #import <StoreKit/StoreKit.h>
+#import <MessageUI/MessageUI.h>
 #import "UBCenterViewController.h"
 
 @interface UBDonateViewController : UBCenterViewController
@@ -14,7 +15,9 @@
     UITableViewDelegate,
     UITableViewDataSource,
     SKProductsRequestDelegate,
-    SKPaymentTransactionObserver
+    SKPaymentTransactionObserver,
+    SKStoreProductViewControllerDelegate,
+    MFMailComposeViewControllerDelegate
 >
 {
     UITableView * tableView;

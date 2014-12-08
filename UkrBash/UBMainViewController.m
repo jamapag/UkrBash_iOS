@@ -271,7 +271,13 @@
 - (void)donateControllerSelected
 {
     UBDonateViewController *donateViewController = [[[UBDonateViewController alloc] init] autorelease];
-    [self updateCenterViewController:donateViewController];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        donateViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        donateViewController.modal = YES;
+        [self presentViewController:donateViewController animated:YES completion:nil];
+    } else {
+        [self updateCenterViewController:donateViewController];
+    }
 }
 
 @end

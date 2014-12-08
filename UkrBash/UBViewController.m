@@ -67,9 +67,12 @@
 
 - (UIView *)headerViewWithMenuButtonAction:(SEL)menuActionSelector
 {
-    float iOS7offset = 20;
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0., (iOS7offset == 0) ? -20 : 0, self.view.frame.size.width, 64.)];
+    CGFloat headerHeight = 64., statusBarHeight = 20.;
+    if ([self isModal]) {
+        headerHeight = 44.;
+        statusBarHeight = 0;
+    }
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0., 0, self.view.frame.size.width, headerHeight)];
     headerView.userInteractionEnabled = YES;
     headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header.png"]];
     headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -83,7 +86,7 @@
         CGFloat menuButtonWidth = 35., menuButtonX = 0.;
         
         CGFloat x = menuButtonX + menuButtonWidth + 5.;
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, 20., headerView.frame.size.width - x * 2, headerView.frame.size.height - 24.)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, statusBarHeight, headerView.frame.size.width - x * 2, headerView.frame.size.height - statusBarHeight - 4.)];
         titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -95,11 +98,15 @@
         [headerView addSubview:titleLabel];
         [titleLabel release];
         
+        NSString *imageName = @"menu-button";
+        if ([self isModal]) {
+            imageName = @"close";
+        }
         self.menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _menuButton.tag = 1;
         _menuButton.autoresizingMask = UIViewAutoresizingNone;
         _menuButton.imageView.contentMode = UIViewContentModeCenter;
-        [_menuButton setImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
+        [_menuButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         [_menuButton addTarget:self action:menuActionSelector forControlEvents:UIControlEventTouchUpInside];
         [_menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 44.) / 2., menuButtonWidth + 20, 44.)];
         [headerView addSubview:_menuButton];

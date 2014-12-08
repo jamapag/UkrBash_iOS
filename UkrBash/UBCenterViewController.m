@@ -44,6 +44,10 @@
 
 - (void)menuAction:(id)sender
 {
+    if ([self isModal]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
     UIButton *button = sender;
     switch (button.tag) {
         case 0: {

@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) UBNavigationController *ubNavigationController;
 @property (nonatomic, retain) UIButton *menuButton;
+@property (nonatomic, getter=isModal) BOOL modal;
 
 - (UIView *)headerViewWithMenuButtonAction:(SEL)menuActionSelector;
 
