@@ -237,9 +237,9 @@ NS_ENUM(NSInteger, _UBDonateViewOptions)
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSURL *appURL = [NSURL URLWithString:@"http://itunes.apple.com/app/517226573?mt=8"];
+    NSURL *appURL = [NSURL URLWithString:@"https://itunes.apple.com/ua/app/ukrbash/id517226573?mt=8"];
     if (indexPath.row == UBDonateViewShareOption) {
         UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[appURL] applicationActivities:nil];
         activityViewController.completionHandler = ^(NSString *activityType, BOOL completed) {
@@ -250,6 +250,10 @@ NS_ENUM(NSInteger, _UBDonateViewOptions)
                                                                                                      value:@(-1)] build]];
             }
         };
+        if (IS_IOS8_AND_LATER) {
+            UITableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+            activityViewController.popoverPresentationController.sourceView = cell;
+        }
         [self presentViewController:activityViewController animated:YES completion:nil];
     } else if (indexPath.row == UBDonateViewMailOption) {
         if ([MFMailComposeViewController canSendMail]) {

@@ -109,6 +109,9 @@
         [_menuButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         [_menuButton addTarget:self action:menuActionSelector forControlEvents:UIControlEventTouchUpInside];
         [_menuButton setFrame:CGRectMake(menuButtonX, titleLabel.frame.origin.y + (titleLabel.frame.size.height - 44.) / 2., menuButtonWidth + 20, 44.)];
+        if ([self isModal]) {
+            [_menuButton setFrame:CGRectMake(0, 0, menuButtonWidth + 20, headerHeight)];
+        }
         [headerView addSubview:_menuButton];
     }
     
