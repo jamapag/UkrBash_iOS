@@ -166,7 +166,7 @@
         }
         
         // are we more than halfway, if so, show the panel when done dragging by setting this value to YES (1)
-        _showPanel = abs([sender view].center.x - _centerViewController.view.frame.size.width / 2) > (LEFT_PANEL_WIDTH) / 2;
+        _showPanel = fabs([sender view].center.x - _centerViewController.view.frame.size.width / 2) > (LEFT_PANEL_WIDTH) / 2;
         
         // allow dragging only in x coordinates by only updating the x coordinate with translation position
         CGPoint center = CGPointMake([sender view].center.x + translatedPoint.x, [sender view].center.y);

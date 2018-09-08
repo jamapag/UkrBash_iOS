@@ -114,7 +114,7 @@ enum  {
 
 #pragma mark -
 
-@interface VKSharingView ()
+@interface VKSharingView () <CAAnimationDelegate>
 {
     UIView * _backgroundView;
     UITextView * _textView;
